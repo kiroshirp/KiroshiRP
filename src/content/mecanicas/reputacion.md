@@ -4,22 +4,25 @@ description: "Las acciones dejan huella. La confianza no se obtiene con un formu
 category: "Progresión"
 status: "Propuesta"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 5
 related: ["mecanicas/facciones-progresion","mecanicas/liderazgo"]
 ---
 
-## Reputación general
-La filosofía de KiroshiRP sitúa las acciones dentro del rol en el centro del reconocimiento. Cumplir una promesa, resolver un problema o romper un acuerdo puede influir en cómo otros personajes te perciben. No se confirma un marcador numérico implementado.
+## El filtro de la calle
+El diseño propone exigir reputación para acceder a armamento militar, cibernética corporativa y contratos de alto nivel, aunque el personaje tenga dinero suficiente. No se publican umbrales ni fórmulas.
 
-## Reputación con facciones
-Una organización puede confiar en alguien a quien otras rechazan. La reputación propuesta es contextual: las relaciones y los antecedentes importan. No equivale automáticamente a pertenecer a una facción.
+## Contactos y fixers
+La progresión comienza con encargos de intermediarios locales. El acceso a fixers de mayor reputación depende del recorrido del personaje; los documentos utilizan Watson y Heywood como ejemplos. No se anuncian encargos disponibles.
 
-## Méritos internos
-Los méritos representan aportaciones reconocidas dentro de una organización. Se proponen como base para nuevas responsabilidades y para el derecho a reclamar liderazgo. La cantidad necesaria y la forma de validarlos no están fijadas.
+## Méritos y confianza
+La reputación general, la relación con una facción y los méritos internos se documentarán por separado. La conexión concreta entre estos sistemas y sus desbloqueos requiere definición.
 
-## Confianza y lealtad
-La confianza se interpreta en relaciones sostenidas. Compartir objetivos no impide desacuerdos, y una traición puede cerrar puertas sin borrar la historia previa.
+## Persistencia
+Los documentos plantean una filosofía sin wipes programados. Es un objetivo de diseño, no una garantía técnica de conservación de datos.
 
-## Oportunidades y consecuencias
-Como diseño, el reconocimiento puede abrir encargos, contactos y responsabilidades. Los desbloqueos exactos se publicarán tras aprobarlos. No hay garantías de ascenso automático por repetir una acción.
+## Progresión orgánica
+El respeto y el reconocimiento dentro del rol pueden abrir responsabilidades e incluso oportunidades de sucesión, según el diseño. Tener dinero no sustituye ese recorrido.
+
+## Procedencia y estado
+Diseño recogido en los dos documentos facilitados por el equipo de KiroshiRP. No hay evidencia técnica aportada de implementación. Los valores y procedimientos no definidos permanecen pendientes.

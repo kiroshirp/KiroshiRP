@@ -4,7 +4,7 @@ description: "De una primera conversación al reconocimiento de una organizació
 category: "Progresión"
 status: "Propuesta"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 6
 related: ["mecanicas/reputacion","mecanicas/liderazgo","normativas/facciones"]
 ---
@@ -26,3 +26,6 @@ Las pruebas propuestas deben generar escenas con sentido narrativo. Repetir tare
 
 ## Reconocimiento por los miembros
 La organización reconoce aportaciones y confianza. Los criterios definitivos deben ser públicos en lo que afecta al acceso y la progresión, sin revelar contactos secretos ni operaciones internas.
+
+## Excepción de arranque en estudio
+El documento KiroshiRP.txt propone postulaciones en Discord exclusivamente para cargos iniciales y cobertura temporal por staff. Esta excepción no está convocada ni confirmada; debe conciliarse con el acceso orgánico por rol del resto de la progresión.

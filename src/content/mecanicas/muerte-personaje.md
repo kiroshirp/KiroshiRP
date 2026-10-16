@@ -2,21 +2,21 @@
 title: "Muerte de personaje"
 description: "Archivo reservado para documentar alcance, interpretación y reglas cuando el sistema esté aprobado."
 category: "Salud y consecuencias"
-status: "Por documentar"
+status: "Propuesta"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 13
 related: ["normativas/rol"]
 ---
 
-## Estado del sistema
-Esta mecánica está prevista como espacio de documentación. No se confirma su disponibilidad ni su implementación.
+## CK dentro de la narrativa
+Los documentos proponen integrar la muerte definitiva en las consecuencias de las decisiones del personaje, incluyendo contratos contra fixers y desenlaces asociados a la ciberpsicosis.
 
 ## Alcance pendiente
-Antes de publicar la ficha definitiva se deben concretar el propósito del sistema, las acciones permitidas, las limitaciones y la relación con otras mecánicas.
+No se han definido condiciones de autorización, revisión, consentimiento, pruebas ni resolución de disputas. La propuesta no constituye una regla vigente ni autoriza CK automáticos.
 
-## Ejemplos y consecuencias
-Se incorporarán ejemplos revisados de interpretación y consecuencias. No se publican todavía recompensas, costes, ubicaciones ni procedimientos operativos.
+## Relación con el ciclo de vida
+El reemplazo de un cargo o negocio puede generar continuidad narrativa para otros personajes. Los mecanismos concretos de sucesión permanecen pendientes.
 
-## Normativa relacionada
-La versión aprobada deberá enlazar a las normas correspondientes y registrar cualquier modificación relevante.
+## Procedencia y estado
+Diseño recogido en los dos documentos facilitados por el equipo de KiroshiRP. No hay evidencia técnica aportada de implementación. Los valores y procedimientos no definidos permanecen pendientes.

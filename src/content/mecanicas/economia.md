@@ -2,21 +2,25 @@
 title: "Economía"
 description: "Archivo reservado para documentar alcance, interpretación y reglas cuando el sistema esté aprobado."
 category: "Vida cotidiana"
-status: "Por documentar"
+status: "Propuesta"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 9
 related: ["normativas/rol"]
 ---
 
-## Estado del sistema
-Esta mecánica está prevista como espacio de documentación. No se confirma su disponibilidad ni su implementación.
+## Filosofía sin wipes programados
+Los documentos proponen continuidad económica sin reinicios periódicos planificados. No se confirma que esa persistencia esté implementada.
 
-## Alcance pendiente
-Antes de publicar la ficha definitiva se deben concretar el propósito del sistema, las acciones permitidas, las limitaciones y la relación con otras mecánicas.
+## Gastos recurrentes propuestos
+- Mantenimiento y calibración de implantes.
+- Alquiler de apartamentos.
+- Atención médica de Trauma Team.
+- Munición.
+- Licencias e impuestos corporativos.
 
-## Ejemplos y consecuencias
-Se incorporarán ejemplos revisados de interpretación y consecuencias. No se publican todavía recompensas, costes, ubicaciones ni procedimientos operativos.
+## Dinero y reputación
+El diseño limita ciertos accesos por reputación, con independencia del saldo. Precios, periodicidad y equilibrio económico no están definidos.
 
-## Normativa relacionada
-La versión aprobada deberá enlazar a las normas correspondientes y registrar cualquier modificación relevante.
+## Procedencia y estado
+Diseño recogido en los dos documentos facilitados por el equipo de KiroshiRP. No hay evidencia técnica aportada de implementación. Los valores y procedimientos no definidos permanecen pendientes.
