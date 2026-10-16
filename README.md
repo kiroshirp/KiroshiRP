@@ -1,6 +1,6 @@
 # KiroshiRP — portal público
 
-Portal estático en español con Astro, TypeScript, contenido Markdown validado y Pagefind. Sin backend, registro, cuentas ni servicios de búsqueda de pago. Las fuentes se alojan localmente. CSS propio con la paleta de KiroshiRP.
+Portal estático en español con Astro, TypeScript, contenido Markdown validado y Pagefind. El portal público no requiere backend, registro ni cuentas de jugadores. La administración privada del equipo utiliza un servicio separado; consulta ADMIN.md. La búsqueda no utiliza servicios de pago. Las fuentes se alojan localmente. CSS propio con la paleta de KiroshiRP.
 
 ## Instalación
 
@@ -30,7 +30,7 @@ Los borradores de documentación son visibles con aviso explícito. Las actualiz
 
 Los títulos `##` generan índice y anclas estables; Pagefind indexa apartados. El historial inicial registra la preparación editorial; añade revisiones reales al cuerpo de cada ficha al modificarla.
 
-`src/config.ts` centraliza navegación, Discord, contacto, fases de cyberpsicosis y parámetros de liderazgo. No copies umbrales en artículos: las páginas de mecánicas y normativas leen la misma tabla. Valores `null` significan pendiente, nunca cero. Los campos de enlace vacíos muestran un estado informativo, sin URLs inventadas.
+`src/data/portal.json` centraliza navegación, Discord, contacto, fases de cyberpsicosis y parámetros de liderazgo; `src/config.ts` valida y expone esos datos. `src/data/home.json` contiene los textos y tarjetas de la portada; `src/data/legal.json`, las páginas de contacto y avisos. No copies umbrales en artículos: las páginas de mecánicas y normativas leen la misma tabla. Valores `null` significan pendiente, nunca cero. Los campos de enlace vacíos muestran un estado informativo, sin URLs inventadas.
 
 `src/components/Notice.astro` ofrece bloques `warning`, `lore`, `rule`, `development`, `example` y `tip` reutilizables en plantillas. En Markdown, utiliza citas para ejemplos y negrita para advertencias. No conviertas propuestas en reglas vigentes sin revisión del equipo.
 
@@ -67,3 +67,7 @@ Las imágenes opcionales se declaran como image: {path: images/archivo.jpg, alt:
 
 Los artículos Documentado contienen información incorporada de la wiki; no anuncian funciones implementadas. universeScope identifica su época y licensedText activa la atribución CC BY-SA 3.0. Consulta CONTENT-LICENSE.md para distinguir la licencia del texto y la del código.
 
+
+## Panel privado del equipo
+
+Consulta [ADMIN.md](ADMIN.md) para configurar el .env privado, usar /admin localmente o desplegar el administrador en Cloudflare Workers. El panel gestiona los artículos, las imágenes y los archivos de datos del portal sin publicar credenciales.

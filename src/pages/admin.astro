@@ -1,0 +1,6 @@
+---
+import Base from '../layouts/Base.astro';
+import {site} from '../config';
+const adminUrl = site.adminUrl && /^https:\/\//.test(site.adminUrl) ? site.adminUrl : '';
+---
+<Base title="Administración del portal" noindex><section class="section page-heading" data-pagefind-ignore><span class="eyebrow">ACCESO PRIVADO DEL EQUIPO</span><h1>Administración.</h1><p>El portal público se aloja en GitHub Pages. La administración utiliza un servicio privado separado.</p>{adminUrl?<a class="button primary" href={adminUrl} rel="noreferrer">ABRIR EL ADMINISTRADOR ↗</a>:<p>El acceso por Internet está pendiente de configurar. El equipo puede utilizar el administrador local mientras se prepara el servicio privado.</p>}</section></Base>

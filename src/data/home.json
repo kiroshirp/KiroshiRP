@@ -1,0 +1,102 @@
+{
+  "texts": {
+    "etiquetaArchivo": "NC // ARCHIVO PÚBLICO",
+    "estadoUniverso": " UNIVERSO EN CONSTRUCCIÓN",
+    "bienvenida": "BIENVENIDO A KIROSHIRP",
+    "titularCiudad": "NIGHT CITY.",
+    "titularHistorias": "MORE STORIES.",
+    "subtitulo": "LA CIUDAD ES LA MISMA. TU HISTORIA NO.",
+    "descripcion": "Bienvenido a KiroshiRP, una nueva experiencia de roleplay en Night City. Construye tu reputación, descubre sus secretos y decide qué lugar ocuparás en una ciudad donde cada elección tiene consecuencias.",
+    "botonExplorar": "EXPLORAR NIGHT CITY ",
+    "botonMecanicas": "DESCUBRIR MECÁNICAS ",
+    "indicacionScroll": "↓   EXPLORA EL ARCHIVO",
+    "coordenadas": "NC / 07 — KRP",
+    "lemaSecundario": "SAME CITY. DIFFERENT PEOPLE.",
+    "cintaMundo": "UN MUNDO COMPARTIDO",
+    "cintaHistorias": "HISTORIAS PERSISTENTES",
+    "cintaDecisiones": "DECISIONES CON CONSECUENCIAS",
+    "cintaIdentidad": "IDENTIDAD PROPIA",
+    "etiquetaProyecto": "01 / EL PROYECTO",
+    "tituloCiudad": "Una ciudad.",
+    "tituloInfinitas": "Infinitas historias.",
+    "presentacion": "Esto es KiroshiRP. Tu lugar en Night City se construye jugando.",
+    "descripcionProyecto": "Un proyecto de roleplay ambientado en Cyberpunk 2077, concebido para OPEN//77. La interpretación, las decisiones y sus consecuencias son el centro de la experiencia. Tu historia crece con las personas que conoces y la huella que dejas.",
+    "botonProyecto": "CONOCE EL PROYECTO ↗",
+    "etiquetaArchivoAcceso": "02 / ACCESO AL ARCHIVO",
+    "tituloDescubrir": "Descubre Night City",
+    "botonBuscar": "BUSCAR EN LA BASE DE DATOS ↗",
+    "etiquetaRecorrido": "03 / TU HISTORIA COMIENZA AQUÍ",
+    "tituloRecorrido": "Nadie nace leyenda.",
+    "descripcionRecorrido": "No necesitas un formulario para escribir tu destino. La filosofía de KiroshiRP se basa en contactos, méritos y reconocimiento dentro del rol.",
+    "botonProgresion": "DESCUBRE LA PROGRESIÓN ↗",
+    "etiquetaNoticias": "04 / TRANSMISIONES",
+    "tituloNoticias": "Últimas actualizaciones",
+    "botonNoticias": "VER EL REGISTRO →",
+    "tituloSinNoticias": "A la espera de la próxima transmisión.",
+    "descripcionSinNoticias": "Todavía no hay anuncios oficiales publicados. Aquí aparecerán las novedades, los cambios y los eventos confirmados.",
+    "etiquetaCanal": "CANAL OFICIAL",
+    "etiquetaCierre": "TU PRÓXIMO CAPÍTULO",
+    "tituloCierreCiudad": "NIGHT CITY",
+    "tituloCierreAccion": "NO ESPERA A NADIE.",
+    "botonGuia": "CONSULTAR LA GUÍA ↗"
+  },
+  "principles": [
+    [
+      "01",
+      "Progresión por méritos",
+      "Gana oportunidades a través de tus acciones dentro del rol."
+    ],
+    [
+      "02",
+      "Facciones vivas",
+      "Construye vínculos, confianza y una identidad compartida."
+    ],
+    [
+      "03",
+      "Rol inmersivo",
+      "Sistemas diseñados para acompañar la interpretación."
+    ],
+    [
+      "04",
+      "Historias de jugadores",
+      "Cada encuentro puede cambiar el rumbo de tu personaje."
+    ]
+  ],
+  "discovery": [
+    [
+      "lore/",
+      "01",
+      "Lore de Night City",
+      "La ciudad más allá de sus luces.",
+      "ARCHIVO NARRATIVO"
+    ],
+    [
+      "facciones/",
+      "02",
+      "Elige tus lealtades",
+      "Organizaciones, culturas y ambiciones.",
+      "FACCIONES"
+    ],
+    [
+      "mecanicas/cyberpsicosis/",
+      "03",
+      "Al límite de lo humano",
+      "Cyberpsicosis: ficción, interpretación y límites.",
+      "MECÁNICA PROPUESTA"
+    ],
+    [
+      "mecanicas/reputacion/",
+      "04",
+      "Hazte un nombre",
+      "Tu reputación empieza con tus decisiones.",
+      "PROGRESIÓN"
+    ]
+  ],
+  "journey": [
+    "Ciudadano",
+    "Contactos",
+    "Reputación",
+    "Oportunidades",
+    "Tu propia historia"
+  ]
+}

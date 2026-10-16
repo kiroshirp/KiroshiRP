@@ -2,3 +2,11 @@ node_modules/
 dist/
 .astro/
 .env
+.env.*
+!.env.example
+.admin-backups/
+.admin-test-*/
+.admin-build/
+.wrangler/
+.dev.vars
+.dev.vars.*
