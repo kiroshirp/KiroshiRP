@@ -14,6 +14,6 @@ export const leadership = { status: 'Propuesta en desarrollo', minimumMerits: nu
   ['Méritos mínimos','Pendiente de validación.'],['Veteranos habilitados','Criterios de antigüedad y participación pendientes.'],['Quórum y respaldo','Umbrales y resolución de empates pendientes.'],['Límites de desafíos','Intervalo y condiciones de repetición pendientes.'],['Inactividad y sucesión','Plazos, revisión y sustitución pendientes.'],['Protección frente a abusos','Propuesta: un respaldo por persona habilitada; registro revisable por administración. Sin cifras definitivas.']
 ] };
 export const phases = [
- ['Estable','Interpretación habitual; sin síntomas prescritos.'],['Inestabilidad leve','Propuesta: señales sutiles de desconexión y necesidad de descanso.'],['Inestabilidad moderada','Propuesta: dificultades de concentración y búsqueda de apoyo.'],['Estado crítico','Propuesta: atención médica prioritaria y pausa consensuada de la escena.'],['Episodio de cyberpsicosis','Propuesta: escena supervisada con límites acordados; nunca obliga a ejercer violencia.']
+ ['Fase inicial','Propuesta del documento: tics visuales y alteraciones de interfaz.'],['Fase crítica','Propuesta del documento: desorientación y alucinaciones mediante scripts, sin implementación confirmada.'],['Ciberpsicosis total','Propuesta del documento: amenaza pública y desenlaces de captura o CK, sujetos a procedimientos aún pendientes.']
 ];
 export const url = (path = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
