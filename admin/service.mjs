@@ -17,7 +17,7 @@ export function createService({env,store,repo,assets,local=false}){
     if(!['/admin','/admin/app.js','/admin/style.css'].includes(path))return finish(json({error:'No encontrado.'},404));
     return finish(await assets(path==='/admin'?'/index.html':path.slice(6)));
    }
-   if(!env.ADMIN_USERNAME?.trim() || (env.ADMIN_PASSWORD?.length||0)<16)return finish(json({error:'Administrador pendiente de configurar: completa el .env privado y usa una contraseña de al menos 16 caracteres.'},503));
+   if(!env.ADMIN_USERNAME?.trim() || (env.ADMIN_PASSWORD?.length||0)<13)return finish(json({error:'Administrador pendiente de configurar: completa el .env privado y usa una contraseña de al menos 13 caracteres.'},503));
    const mutating=request.method!=='GET';
    if(mutating && (request.headers.get('origin')!==u.origin || !request.headers.get('content-type')?.startsWith('application/json')))return finish(json({error:'Solicitud de otro origen o formato no permitido.'},403));
    const cookieName=local?'krp_admin':'__Host-krp_admin';

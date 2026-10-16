@@ -45,6 +45,6 @@ export async function startLocal({root=project,env=process.env,port=Number(env.A
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{process.loadEnvFile(path.join(project,'.env'));}catch(e){if(e.code!=='ENOENT')throw e;}
- if(!process.env.ADMIN_USERNAME || (process.env.ADMIN_PASSWORD?.length||0)<16){console.error('Completa ADMIN_USERNAME y ADMIN_PASSWORD (mínimo 16 caracteres) en el .env privado.');process.exitCode=1;}
+ if(!process.env.ADMIN_USERNAME || (process.env.ADMIN_PASSWORD?.length||0)<13){console.error('Completa ADMIN_USERNAME y ADMIN_PASSWORD (mínimo 13 caracteres) en el .env privado.');process.exitCode=1;}
  else{const server=await startLocal();console.log(`Administrador privado: http://127.0.0.1:${server.address().port}/admin/`);}
 }

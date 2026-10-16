@@ -9,7 +9,7 @@ Completa `.env` en la raíz de este proyecto. Está excluido de Git; nunca lo su
 Campos:
 
 - `ADMIN_USERNAME`: usuario del equipo.
-- `ADMIN_PASSWORD`: contraseña propia de este administrador, de al menos 16 caracteres. No reutilices la de GitHub o Cloudflare. Para valores con espacios o `#`, utiliza comillas dobles.
+- `ADMIN_PASSWORD`: contraseña propia de este administrador, de al menos 13 caracteres. No reutilices la de GitHub o Cloudflare. Para valores con espacios o `#`, utiliza comillas dobles.
 - `ADMIN_PORT`: puerto local, por defecto 4310.
 - `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta que alojará el Worker.
 - `CLOUDFLARE_API_TOKEN`: token limitado a esa cuenta para desplegar Workers y sus recursos Durable Objects. El despliegue utiliza autenticación mediante token; no requiere compartir la contraseña de Cloudflare.

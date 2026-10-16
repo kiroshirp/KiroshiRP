@@ -6,7 +6,7 @@ try{process.loadEnvFile(path.join(root,'.env'));}catch(e){if(e.code!=='ENOENT')t
 const required=['ADMIN_USERNAME','ADMIN_PASSWORD','GITHUB_TOKEN','CLOUDFLARE_ACCOUNT_ID','CLOUDFLARE_API_TOKEN'];
 const missing=required.filter(key=>!process.env[key]?.trim());
 if(missing.length){console.error('Completa estos campos del .env privado: '+missing.join(', '));process.exitCode=1;}
-else if(process.env.ADMIN_PASSWORD.length<16){console.error('ADMIN_PASSWORD necesita al menos 16 caracteres.');process.exitCode=1;}
+else if(process.env.ADMIN_PASSWORD.length<13){console.error('ADMIN_PASSWORD necesita al menos 13 caracteres.');process.exitCode=1;}
 else{
  const cli=path.join(root,'node_modules/wrangler/bin/wrangler.js');
  async function run(args,input){
