@@ -1,24 +1,44 @@
 ---
 title: "Tyger Claws"
-description: "Identidad documentada en la wiki; disponibilidad en KiroshiRP por confirmar."
+description: "Los Garras de Tygre, también conocidos como Garra del Tigre (Tyger's Claw en inglés), es una de las muchas bandas de Night City en Cyberpunk 2020 y Cyberpunk 2077."
 category: "Organizaciones"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 47
 related: ["mecanicas/facciones-progresion","normativas/facciones","mecanicas/liderazgo"]
 factionStatus: "En desarrollo"
-sources: [{"label":"Cyberpunk Wiki en español · Garras de Tygre","url":"https://cyberpunk.fandom.com/es/wiki/Garras_de_Tygre"}]
+
+universeScope: "Este archivo reúne distintas épocas del universo. Los apartados de 2020 y 2077 se mantienen separados para conservar su contexto."
+sources: [{"label":"Cyberpunk Wiki · Garras de Tygre","url":"https://cyberpunk.fandom.com/es/wiki/Garras_de_Tygre"}]
+licensedText: true
 ---
 
-## Universo Cyberpunk
-La wiki utiliza el nombre Garras de Tygre y distingue sus etapas de 2020 y 2077. Describe el uso de cibertecnología en 2077. Las alusiones al apoyo de Arasaka aparecen como rumores, por lo que no se presentan como una alianza confirmada.
+## Datos del universo
 
-## Estado en KiroshiRP
-La actividad de la banda en la obra no confirma una facción activa en el servidor. El estado de esta ficha sigue siendo En desarrollo.
+| Dato | Información de la fuente |
+| --- | --- |
+| Base en 2020 | Barrio Japonés, Night City |
+| Base en 2077 | Desconocida en la ficha consultada |
 
-## Rangos y aproximación
-Los rangos y requisitos concretos están pendientes de aprobación. Consulta el diseño de progresión por contactos y méritos. No se publican operaciones internas ni contactos secretos.
+Los Garras de Tygre, también conocidos como Garra del Tigre (Tyger's Claw en inglés), es una de las muchas bandas de Night City en Cyberpunk 2020 y Cyberpunk 2077.
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+## Trasfondo
+
+### Cyberpunk 2020
+
+Una banda de combate en la comunidad japonesa en la zona residencial al sur del Barrio Japonés. La banda también protege ocasionalmente a la comunidad japonesa en general (se rumorea que Arasaka los apoya financieramente). Los Tigres usan reflejos potenciados y artes marciales como armas.
+
+### Cyberpunk 2077
+
+En Cyberpunk 2077 los Garras de Tygre ha cambiado bastante poco, aunque se sabe que ahora sus miembros utilizan cibertecnología. También se rumorea que está en una disputa territorial con los Dragones de Acero, una banda originaria de Tokio.
+
+## Miembros destacados
+
+### Cyberpunk 2020
+
+- Desconocido.
+
+### Cyberpunk 2077
+
+- Desconocido.

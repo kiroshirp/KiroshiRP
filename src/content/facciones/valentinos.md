@@ -1,24 +1,44 @@
 ---
 title: "Valentinos"
-description: "Identidad documentada en la wiki; disponibilidad en KiroshiRP por confirmar."
+description: "Los Valentinos (Valentino's en inglés) son una de las muchas bandas de Night City en Cyberpunk 2020 y Cyberpunk 2077."
 category: "Organizaciones"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 44
 related: ["mecanicas/facciones-progresion","normativas/facciones","mecanicas/liderazgo"]
 factionStatus: "En desarrollo"
-sources: [{"label":"Cyberpunk Wiki en español · Valentinos","url":"https://cyberpunk.fandom.com/es/wiki/Valentinos"}]
+
+universeScope: "Este archivo reúne distintas épocas del universo. Los apartados de 2020 y 2077 se mantienen separados para conservar su contexto."
+sources: [{"label":"Cyberpunk Wiki · Valentinos","url":"https://cyberpunk.fandom.com/es/wiki/Valentinos"}]
+licensedText: true
 ---
 
-## Universo Cyberpunk
-La wiki distingue a los Valentinos de 2020 de su versión de 2077, descrita como una banda latina con una estructura diferente. Jackie Welles figura como antiguo miembro en la sección de 2077. No se mezcla la descripción de los posadores de 2020 con esa etapa.
+## Datos del universo
 
-## Estado en KiroshiRP
-La actividad de la banda en la obra no confirma una facción activa en el servidor. El estado de esta ficha sigue siendo En desarrollo.
+| Dato | Información de la fuente |
+| --- | --- |
+| Base de operaciones | Night City |
+| Miembro conocido | Jackie Welles, antiguamente (2077) |
 
-## Rangos y aproximación
-Los rangos y requisitos concretos están pendientes de aprobación. Consulta el diseño de progresión por contactos y méritos. No se publican operaciones internas ni contactos secretos.
+Los Valentinos (Valentino's en inglés) son una de las muchas bandas de Night City en Cyberpunk 2020 y Cyberpunk 2077.
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+## Trasfondo
+
+### Cyberpunk 2020
+
+Es una banda de posadores dedicada a la persecución y la seducción de las mujeres más atractivas de Night City. Expertos en seducción, cuanto más inalcanzable sea una mujer, más tratarán de llevársela a la cama. Los Valentinos sólo se reúnen una vez cada tres meses, para comparar las puntuaciones. El único peligro que los Valentinos suponen es para los hombres cuyas esposas o novias sean muy atractivas, ya que perseguirán a estas mujeres hasta acostarse con ellas o hasta que se les ahuyente.
+
+### Cyberpunk 2077
+
+En Cyberpunk 2077, los Valentinos han cambiado su estructura convirtiéndose en una banda exclusivamente latina y mucho más violenta que en 2020.
+
+## Miembros destacados
+
+### Cyberpunk 2020
+
+- Desconocido.
+
+### Cyberpunk 2077
+
+- Jackie Welles (antiguamente).

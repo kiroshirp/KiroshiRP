@@ -1,29 +1,26 @@
 ---
 title: "Scavengers"
-description: "Dossier público de organización. Su presencia jugable en KiroshiRP está pendiente de confirmación."
+description: "Carroñeros en la relación de bandas del universo. La fuente indicada no desarrolla una ficha propia."
 category: "Organizaciones"
 status: "Por documentar"
-origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+origin: "CANON CYBERPUNK"
+updated: "2026-10-17"
 order: 50
 related: ["mecanicas/facciones-progresion","normativas/facciones","mecanicas/liderazgo"]
 factionStatus: "En desarrollo"
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Valentinos","url":"https://cyberpunk.fandom.com/es/wiki/Valentinos"}]
+licensedText: true
 ---
 
-## Descripción e historia
-Ficha reservada para Scavengers. La descripción canónica, historia e ideología deben verificarse antes de incorporarse. Este dossier no confirma que la organización esté activa en el servidor.
+## Identificación
 
-## Cultura y territorio
-Pendiente de documentar identidad, lugares públicos y contexto territorial. No se mostrarán ubicaciones restringidas.
+Carroñeros aparece en la relación de bandas de Cyberpunk 2077 que acompaña a artículos como el de los Valentinos.
 
-## Actividades y relaciones conocidas
-Pendiente de incorporar información pública contrastada. Se excluyen operaciones clandestinas y contactos secretos.
+## Información disponible
 
-## Rangos y progresión
-La estructura concreta no está aprobada. La filosofía general se basa en contactos, encargos, confianza y méritos dentro del rol.
+La entrada específica Carroñeros de la wiki en español no contiene texto en la consulta del 17 de octubre de 2026. Esa fuente no permite desarrollar aquí su historia, estructura, actividades o territorio sin recurrir a información ajena.
 
-## Cómo aproximarse
-Como orientación narrativa, conoce la organización a través de encuentros y relaciones coherentes con tu personaje. No hay una vía garantizada de ingreso ni un formulario tradicional de postulación.
+## Estado en KiroshiRP
 
-## Normativa y estado
-Ficha en desarrollo; requiere validar disponibilidad, requisitos y rangos antes de anunciar una facción activa. Consulta las normativas de facciones y liderazgo.
+La disponibilidad y los requisitos de esta organización en el servidor no están confirmados.
