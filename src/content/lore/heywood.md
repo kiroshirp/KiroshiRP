@@ -1,29 +1,28 @@
 ---
 title: "Heywood"
-description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
+description: "Heywood es uno de los seis distritos de Night City en Cyberpunk 2077."
 category: "Distritos"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 27
 related: ["lore/historia-night-city","lore/cronologia"]
-sources: [{"label":"Cyberpunk Wiki en español · Heywood","url":"https://cyberpunk.fandom.com/es/wiki/Heywood"}]
+
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Heywood","url":"https://cyberpunk.fandom.com/es/wiki/Heywood"}]
+licensedText: true
 ---
 
-## Contexto del universo
-Heywood combina comercios, restaurantes y mercados al aire libre. La descripción de la wiki resalta la variedad de establecimientos de Vista del Rey.
+Heywood es uno de los seis distritos de Night City en Cyberpunk 2077.
 
-## Zonas y ambiente
-El Glen, Vista del Rey y Wellsprings.
+## Trasfondo
 
-## Puntos de interés
-El ayuntamiento y Reconciliation Park aparecen entre sus lugares destacados.
+Aunque no es la parte de Night City que suele aparecer en las neurodanzas o en la holopublicidad, Heywood tiene un encanto sutil a la par que inconfundible. Ofrece una gran variedad de tiendas y restaurantes, desde boutiques pijas hasta locales especializados en pescado y marisco, todo junto a coloridos mercados al aire libre y puestos de tacos en Vista del Rey.
 
-## En KiroshiRP
-Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
+En Heywood también podréis encontrar el ayuntamiento, una bulliciosa torre rodeada por la relajante superficie de un parque urbano. Mientras se admira su arquitectura, hay que mantener los ojos abiertos ante la presencia de miembros del Consejo que acuden a sus reuniones en el Centro Corporativo o, sencillamente, disfrutan de un paseo para saludar y conocer a sus votantes. Heywood también alberga el Reconciliation Park, que se construyó para conmemorar la limpieza y reconstrucción del Centro Corporativo, y dio el pistoletazo de salida a una nueva era de armonía empresarial. A pesar de los rumores que extienden los descontentos de siempre, no se construyó sobre un vertedero radiactivo que quedó tras la limpieza.
 
-## Alcance de la fuente
-Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+## Subdistritos
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+- El Glen.
+- Vista del Rey.
+- Wellsprings.

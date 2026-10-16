@@ -1,23 +1,65 @@
 ---
 title: "Militech"
-description: "Síntesis documentada del universo Cyberpunk, con referencia a la wiki en español."
+description: "Militech International Armaments Corporation, abreviada como Militech o MTI y fundada como Armatech-Luccessi, es una megacorporación estadounidense con sede en Washington D.C. Se especial…"
 category: "Corporaciones"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 35
 related: ["facciones/corporaciones","normativas/policial-corporativa"]
-sources: [{"label":"Cyberpunk Wiki en español · Militech","url":"https://cyberpunk.fandom.com/es/wiki/Militech"}]
+
+universeScope: "Archivo histórico del universo: este artículo conserva material de Cyberpunk 2020. Sus capacidades y condiciones no se trasladan automáticamente a 2077 ni a las mecánicas de KiroshiRP."
+sources: [{"label":"Cyberpunk Wiki · Militech","url":"https://cyberpunk.fandom.com/es/wiki/Militech"}]
+licensedText: true
 ---
 
-## Descripción
-Militech International Armaments Corporation es una megacorporación estadounidense con sede en Washington D. C., dedicada a fabricar y distribuir armamento. La wiki también describe sus fuerzas mercenarias. Su presencia jugable en KiroshiRP no está confirmada.
+## Datos del universo
 
-## Lectura de la fuente
-Síntesis de la ficha indicada en Cyberpunk Wiki en español. Se omiten cifras o cargos cuya época no se ha establecido para la continuidad del servidor.
+| Dato | Información de la fuente |
+| --- | --- |
+| Industria | Fabricación y distribución de armas |
+| Fundación | 1996 |
+| Fundador | Antonio Luccessi |
+| Sede | Washington D. C. |
 
-## En KiroshiRP
-La enciclopedia describe el universo. La implementación, los rangos y el acceso se documentan por separado como propuestas del servidor.
+Militech International Armaments Corporation, abreviada como Militech o MTI y fundada como Armatech-Luccessi, es una megacorporación estadounidense con sede en Washington D.C. Se especializa en la fabricación y distribución de armas.
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+## Trasfondo
+
+Militech es de los mayores productores y vendedores de armamento militar de todo tipo. Desde revólveres y tanques a cazas. MTI es el principal suministrador militar de los EE.UU. y, por tanto, los EE.UU. son su principal cliente, aunque MTI tratará con cualquiera que tenga dinero.
+
+Las fuerzas mercenarias de MTI y su propio suministro de armamento la convierten en una de las compañías más poderosa del mundo militarmente hablando, aunque no lo es en el plano económico.
+
+## Personas clave
+
+- Antonio Luccessi (fundador).
+- Gral. Donald Lundee (accionista mayoritario).
+- Roland Yee.
+- Anderson Bennett.
+- Margaret Ellen Goldstein.
+- Bradley Parker Jr..
+- Nils Engelsson.
+- Anastasia Luccessi.
+- Carson Dominguez.
+
+## Oficinas
+
+### Centrales
+
+- Washington D.C., EE.UU.
+
+### Regionales
+
+- Nueva York, EE.UU.
+- Miami, EE.UU.
+- Chicago, EE.UU.
+- Montreal, Canadá.
+- Londres, Reino Unido.
+- Roma, Italia.
+- Zurich, Suiza.
+- Night City, EE.UU.
+- Los Angeles, EE.UU.
+- Toronto, Canadá.
+- Tokio, Japón.
+- Pekín, China.
+- Hong Kong, China.

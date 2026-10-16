@@ -1,29 +1,28 @@
 ---
 title: "Westbrook"
-description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
+description: "Westbrook es uno de los seis distritos de Night City en Cyberpunk 2077."
 category: "Distritos"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 25
 related: ["lore/historia-night-city","lore/cronologia"]
-sources: [{"label":"Cyberpunk Wiki en español · Westbrook","url":"https://cyberpunk.fandom.com/es/wiki/Westbrook"}]
+
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Westbrook","url":"https://cyberpunk.fandom.com/es/wiki/Westbrook"}]
+licensedText: true
 ---
 
-## Contexto del universo
-El desplazamiento de capital durante la Cuarta Guerra Corporativa favoreció el desarrollo de Westbrook. La reconstrucción del centro convivió con el crecimiento de sus zonas residenciales.
+Westbrook es uno de los seis distritos de Night City en Cyberpunk 2077.
 
-## Zonas y ambiente
-Charter Hill, Japantown y North Oak.
+## Trasfondo
 
-## Puntos de interés
-Japantown concentra ocio nocturno; la ficha menciona el club Clouds.
+Westbrook llegó a la edad adulta durante los tumultos producidos durante la 4.ª Guerra Corporativa, cuando el capital que salió huyendo de las ruinas radiactivas del Distrito Cero creó las condiciones para una explosión demográfica y de desarrollo en los suburbios interiores. Mientras se reconstruía el Centro Corporativo, los cuarteles generales de las corporaciones encontraron asilo temporal fuera de la península de Coronado y con ellos llegaron oleadas de innovación y actividad que impregnaron todos los aspectos de la vida urbana: desde bloques residenciales hasta hoteles cápsula, pasando por puestos de comida callejera. Apenas a un puente de distancia de las mejores expectativas profesionales de la ciudad, Westbrook es el domicilio soñado tanto por los que están al alza (en Charter Hill) como por los que ya han llegado a la cima (en North Oak).
 
-## En KiroshiRP
-Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
+Incluso aquellos que no pueden permitirse pernoctar en el distrito dormitorio de Westbrook pasan las noches aquí, en Japantown, el centro de entretenimiento favorito de Night City. Cuando el sol se pone, las multitudes se apiñan en sus hoteles del amor, kyabakuras y clubes de compañía, cuyas luces saturan las calles de Japantown. Recomendamos en particular el Clouds, un club donde se puede encontrar lo que sea, desde una neurodanza hasta mucho más, atendiendo a todos los posibles deseos del buscador de placer.
 
-## Alcance de la fuente
-Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+## Subdistritos
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+- Charter Hill.
+- Japantown.
+- North Oak.

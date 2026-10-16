@@ -1,29 +1,28 @@
 ---
 title: "Badlands"
-description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
+description: "Las Badlands, también conocidas como las Afueras, es la gran zona árida e inhóspita que rodea Night City en Cyberpunk 2077."
 category: "Distritos"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 30
 related: ["lore/historia-night-city","lore/cronologia"]
-sources: [{"label":"Cyberpunk Wiki en español · Badlands","url":"https://cyberpunk.fandom.com/es/wiki/Badlands"}]
+
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Badlands","url":"https://cyberpunk.fandom.com/es/wiki/Badlands"}]
+licensedText: true
 ---
 
-## Contexto del universo
-Las Badlands son la zona árida que rodea Night City; no se presentan como un séptimo distrito urbano.
+Las Badlands, también conocidas como las Afueras, es la gran zona árida e inhóspita que rodea Night City en Cyberpunk 2077.
 
-## Zonas y ambiente
-Campos petrolíferos del norte, desierto meridional y tierras baldías del este.
+## Trasfondo
 
-## Puntos de interés
-La wiki menciona las granjas de Biotechnica, Rocky Ridge y una central solar. Rocky Ridge quedó abandonada tras fracasar sus negocios y alberga nómadas.
+Las zonas más allá de los límites de la ciudad son extremadamente peligrosas. Si decidís explorarlas, hay algunos lugares de interés, pero, a ser posible, observadlos de lejos, y a través de las lunas antibalas de un convoy armado.
 
-## En KiroshiRP
-Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
+Merece la pena echar un vistazo a las granjas de Biotechnica. Estas inmensas estructuras parecidas a tiendas de campaña que se ven en las afueras de Night City no son más que algunas de las numerosas granjas que Biotechnica gestiona en todo el mundo, donde producen derivados de proteínas sintéticas a escala industrial. También podéis pasaros por Rocky Ridge, un intento de construir un distrito autosuficiente en el desierto al este de la ciudad. Se trazaron calles y se construyeron casas dispuestas a dar la bienvenida a los empleados de los negocios situados justo al lado. Por desgracia, esos quebraron poco después y el vecindario quedó abandonado. Ahora es una ciudad fantasma y un lugar conocido por albergar nómadas. Por último, la central de energía solar ofrece unas vistas impresionantes debido a sus enormes paneles relucientes, que se pueden ver desde kilómetros de distancia.
 
-## Alcance de la fuente
-Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+## Sublocalizaciones
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+- Campos petrolíferos del norte.
+- Desierto meridional.
+- Tierras baldías del este.

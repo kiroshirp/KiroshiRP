@@ -1,29 +1,27 @@
 ---
 title: "Santo Domingo"
-description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
+description: "Santo Domingo es uno de los seis distritos de Night City en Cyberpunk 2077."
 category: "Distritos"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 28
 related: ["lore/historia-night-city","lore/cronologia"]
-sources: [{"label":"Cyberpunk Wiki en español · Santo Domingo","url":"https://cyberpunk.fandom.com/es/wiki/Santo_Domingo"}]
+
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Santo Domingo","url":"https://cyberpunk.fandom.com/es/wiki/Santo_Domingo"}]
+licensedText: true
 ---
 
-## Contexto del universo
-La ficha contrapone el paisaje industrial de Arroyo con las viviendas de Rancho Coronado. La propiedad corporativa del terreno condiciona el entorno residencial.
+Santo Domingo es uno de los seis distritos de Night City en Cyberpunk 2077.
 
-## Zonas y ambiente
-Arroyo y Rancho Coronado.
+## Trasfondo
 
-## Puntos de interés
-Arroyo concentra fábricas y fundiciones. La ficha cita el restaurante Capitán Caliente entre los servicios de Rancho Coronado.
+En Arroyo, el núcleo industrial de Santo Domingo, el paisaje está salpicado de esqueletos de fábricas que quebraron y que, por desgracia, han atraído a la fauna habitual de criminales oportunistas y degenerados. Sin embargo, en Rancho Coronado, su ciudad dormitorio, vallas de madera blanca e inmaculados céspedes verdes rodean los espaciosos hogares generando un panorama interminable y sobrecogedor. Las calles, flanqueadas por árboles, serpentean por ella como si fueran arroyos que llevan a sus residentes desde su reposo suburbano hasta sus lugares de trabajo en las fábricas y fundiciones de Arroyo.
 
-## En KiroshiRP
-Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
+Cuando vuelven por la noche pueden disfrutar de todas las diversiones de la vida urbana sin tener que aventurarse en la ciudad, incluyendo centros comerciales, escuelas y restaurantes como el Capitán Caliente, donde sirven el "Mejor burrito de la ciudad™". Y todo esto, sin la carga que supone poseer una vivienda, porque aquí el terreno sigue siendo de las corporaciones que lo desarrollaron, de manera que lo pueden asignar según les convenga.
 
-## Alcance de la fuente
-Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+## Subdistritos
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+- Arroyo.
+- Rancho Coronado.

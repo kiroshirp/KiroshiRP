@@ -1,29 +1,27 @@
 ---
 title: "Pacifica"
-description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
+description: "Pacífica es uno de los seis distritos de Night City en Cyberpunk 2077."
 category: "Distritos"
-status: "Borrador"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 29
 related: ["lore/historia-night-city","lore/cronologia"]
-sources: [{"label":"Cyberpunk Wiki en español · Pacífica","url":"https://cyberpunk.fandom.com/es/wiki/Pac%C3%ADfica"}]
+
+universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
+sources: [{"label":"Cyberpunk Wiki · Pacífica","url":"https://cyberpunk.fandom.com/es/wiki/Pac%C3%ADfica"}]
+licensedText: true
 ---
 
-## Contexto del universo
-Pacífica se presenta como un proyecto turístico deteriorado, marcado por pobreza, infraestructuras degradadas y violencia de bandas.
+Pacífica es uno de los seis distritos de Night City en Cyberpunk 2077.
 
-## Zonas y ambiente
-Coastview y Urbanización West Wind.
+## Trasfondo
 
-## Puntos de interés
-La fuente describe el contraste entre las expectativas turísticas y el estado del distrito. No se deducen servicios activos del servidor.
+Antes de poner el pie en Pacífica, cerrad los ojos e imaginad boutiques con productos para cualquier tipo de público, clínicas de ciberware por doquier y, entre todo eso, multitudes de turistas felices gastando los eurodólares que tanto les ha costado ganar y pasándoselo en grande.
 
-## En KiroshiRP
-Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
+Ahora, abrid los ojos. ¿Qué veis? ¿Pobreza extrema? ¿Infraestructuras que se caen a pedazos? ¿Violencia de bandas sin control? ¿Y nada más? Entonces, amigos míos, carecéis de imaginación. Otros observadores más perspicaces ven en Pacífica puro potencial. Con la inversión adecuada y unas estrictas leyes de desahucio, puede volver a convertirse en el principal destino turístico de Night City.
 
-## Alcance de la fuente
-Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+## Subdistritos
 
-## Atribución
-Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
+- Coastview.
+- Urbanización West Wind.

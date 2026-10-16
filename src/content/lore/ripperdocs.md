@@ -1,19 +1,27 @@
 ---
 title: "Ripperdocs"
-description: "Una entrada del vocabulario urbano de Night City, preparada para su revisión editorial."
+description: "Cirugía e instalación de ciberequipo: del término callejero al papel del matasanos en Night City."
 category: "Subculturas"
-status: "Por documentar"
+status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 42
 related: ["guias/primeros-pasos"]
+universeScope: "Este archivo reúne distintas épocas del universo. Los apartados de 2020 y 2077 se mantienen separados para conservar su contexto."
+sources: [{"label":"Cyberpunk Wiki · Matasanos","url":"https://cyberpunk.fandom.com/es/wiki/Matasanos"},{"label":"Cyberpunk Wiki · Ciberequipo de Cyberpunk 2077","url":"https://cyberpunk.fandom.com/es/wiki/Ciberequipo_de_Cyberpunk_2077"}]
+licensedText: true
 ---
 
-## Concepto y contexto
-Esta ficha de Ripperdocs está pendiente de redacción contrastada. Se distinguirán profesión, identidad cultural y uso del término en el universo original.
+## Matasanos
 
-## Relaciones y cultura
-Pendiente de añadir actividades, relaciones y ejemplos respaldados por la wiki en español.
+Un Matasanos en la jerga callejera refiere a un cirujano especializado en ciberequipo ilegal.
 
-## Interpretación en KiroshiRP
-Las posibilidades de juego, requisitos y sistemas relacionados deben confirmarse antes de anunciarse.
+## Terminología y alcance
+
+La definición anterior pertenece a la jerga de Cyberpunk 2020. Describe la especialidad quirúrgica del término, sin establecer que todos los servicios médicos o todos los implantes de 2077 sean ilegales.
+
+## Relación con el ciberequipo
+
+El catálogo de Cyberpunk 2077 permite instalar, intercambiar y mejorar ciberequipo en los matasanos de Night City. Los implantes se organizan por partes del cuerpo y sistemas. Esta descripción corresponde al videojuego, no a un servicio ya implementado en el servidor.
+
+Consulta [ciberware e implantes](/KiroshiRP/mecanicas/ciberware/) para las categorías y su relación con el diseño de KiroshiRP.
