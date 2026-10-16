@@ -4,7 +4,7 @@ description: "Una guía para empezar a construir un personaje, una red de contac
 category: "Primeros pasos"
 status: "Borrador"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 0
 related: ["guias/preguntas-frecuentes","guias/glosario","normativas/general"]
 ---
@@ -38,3 +38,6 @@ Acércate desde la ficción: conversaciones, encargos y relaciones sostenidas. L
 
 ## Normas y asistencia
 Consulta Normativas antes de participar. Las fichas actuales están marcadas como borradores y requieren aprobación. El canal de asistencia se anunciará en Contacto cuando exista un enlace verificado.
+
+## Excepción de arranque en estudio
+El documento KiroshiRP.txt propone postulaciones en Discord exclusivamente para cargos iniciales y cobertura temporal por staff. Esta excepción no está convocada ni confirmada; debe conciliarse con el acceso orgánico por rol del resto de la progresión.

@@ -4,7 +4,7 @@ description: "Las primeras respuestas antes de entrar en la ciudad."
 category: "Ayuda"
 status: "Borrador"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 1
 related: ["guias/primeros-pasos","guias/glosario"]
 ---
@@ -26,3 +26,6 @@ Cada ficha incluye una fecha de revisión editorial y un historial. Los anuncios
 
 ## ¿Por qué hay borradores?
 Para presentar el diseño del proyecto sin confundir propuestas con reglas vigentes. La etiqueta de cada artículo indica su estado.
+
+## Excepción de arranque en estudio
+El documento KiroshiRP.txt propone postulaciones en Discord exclusivamente para cargos iniciales y cobertura temporal por staff. Esta excepción no está convocada ni confirmada; debe conciliarse con el acceso orgánico por rol del resto de la progresión.
