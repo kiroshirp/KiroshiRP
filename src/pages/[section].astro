@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Card from '../components/Card.astro';
+import {sections} from '../config';
+import {getCollection} from 'astro:content';
+export function getStaticPaths(){return sections.map(section=>({params:{section:section.id},props:{section}}))}
+const {section}=Astro.props;
+const entries=(await getCollection(section.id)).filter(e=>section.id!=='actualizaciones'||e.data.published).sort((a,b)=>a.data.order-b.data.order);
+const categories=[...new Set(entries.map(e=>e.data.category))];
+---
+<Base title={section.title} active={section.id}><section class="page-heading section"><span class="eyebrow">{section.code} / {section.label}</span><h1>{section.title}<span class="accent">.</span></h1><p>{section.subtitle}</p><span class="mono">ACCESO PÚBLICO / {entries.length.toString().padStart(2,'0')} ARCHIVOS</span></section><section class="section library"><div class="filter-bar"><label>BUSCAR EN {section.title.toUpperCase()}<input id="filter-search" type="search" placeholder="Título, categoría o concepto…"/></label><label>CATEGORÍA<select id="filter-category"><option value="">Todas las categorías</option>{categories.map(c=><option>{c}</option>)}</select></label></div><p id="result-count" role="status" class="mono">{entries.length} archivos disponibles</p><div class="cards">{entries.map(entry=><Card entry={entry} section={section.id}/>)}</div><p id="no-results" class="empty" hidden>No hay resultados. Prueba otro término o categoría.</p>{!entries.length&&<div class="empty"><h2>Sin publicaciones oficiales todavía.</h2><p>Este canal mostrará noticias, desarrollo, mecánicas, normativas, eventos y mantenimiento cuando existan anuncios confirmados.</p></div>}</section><script>
+const input=document.querySelector<HTMLInputElement>('#filter-search')!;const select=document.querySelector<HTMLSelectElement>('#filter-category')!;const cards=[...document.querySelectorAll<HTMLElement>('[data-card]')];const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filter(){let count=0;cards.forEach(c=>{const visible=normalize(c.dataset.search||'').includes(normalize(input.value))&&(!select.value||c.dataset.category===select.value);c.hidden=!visible;if(visible)count++});document.querySelector('#result-count')!.textContent=`${count} archivos encontrados`;document.querySelector<HTMLElement>('#no-results')!.hidden=count!==0||cards.length===0}input.addEventListener('input',filter);select.addEventListener('change',filter);
+</script></Base>
+
