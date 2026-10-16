@@ -5,5 +5,5 @@ const {entry,section}=Astro.props;
 <a class="card" href={url(`${section}/${entry.id}/`)} data-card data-category={entry.data.category} data-search={`${entry.data.title} ${entry.data.description} ${entry.data.category}`}>
 <div class="card-meta"><span>{entry.data.category}</span><span>↗</span></div>
 {entry.data.image&&<img class="card-image" src={url(entry.data.image.path)} alt={entry.data.image.alt} loading="lazy"/>}<h3>{entry.data.title}</h3><p>{entry.data.description}</p>
-<div class="card-foot"><span class="badge">{entry.data.factionStatus || entry.data.status}</span><span class="mono">ABRIR ARCHIVO →</span></div>
+<div class="card-foot"><span class="badge">{entry.data.status}</span><span class="mono">{entry.data.factionStatus ? `KIROSHIRP: ${entry.data.factionStatus.toUpperCase()}` : 'ABRIR ARCHIVO →'}</span></div>
 </a>
