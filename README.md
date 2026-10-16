@@ -64,3 +64,6 @@ El fondo original facilitado se conserva en `public/images/kiroshi-original.jpg`
 
 El script `scripts/seed-content.mjs` sirvió para preparar las fichas iniciales. No forma parte de la compilación ni sobrescribe archivos existentes.
 Las imágenes opcionales se declaran como image: {path: images/archivo.jpg, alt: Descripción}. El historial admite history: [{date: 2026-10-16, description: Resumen del cambio}]. Guarda las imágenes en public/images/.
+
+Los artículos Documentado contienen información incorporada de la wiki; no anuncian funciones implementadas. universeScope identifica su época y licensedText activa la atribución CC BY-SA 3.0. Consulta CONTENT-LICENSE.md para distinguir la licencia del texto y la del código.
+
