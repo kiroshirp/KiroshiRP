@@ -1,22 +1,29 @@
 ---
 title: "Badlands"
-description: "Ficha de Badlands: contexto, ambiente y lugares para una futura lectura de la ciudad."
+description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
 category: "Distritos"
-status: "Por documentar"
+status: "Borrador"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 30
 related: ["lore/historia-night-city","lore/cronologia"]
+sources: [{"label":"Cyberpunk Wiki en español · Badlands","url":"https://cyberpunk.fandom.com/es/wiki/Badlands"}]
 ---
 
-## Descripción y ambiente
-Ficha editorial pendiente de contrastar con fuentes oficiales. Se documentará la identidad de Badlands, su vida cotidiana y su contexto social sin mezclar hechos del servidor con el universo original.
+## Contexto del universo
+Las Badlands son la zona árida que rodea Night City; no se presentan como un séptimo distrito urbano.
+
+## Zonas y ambiente
+Campos petrolíferos del norte, desierto meridional y tierras baldías del este.
 
 ## Puntos de interés
-Pendiente de incorporar lugares y descripciones verificadas. No se publican ubicaciones restringidas ni información operativa del servidor.
+La wiki menciona las granjas de Biotechnica, Rocky Ridge y una central solar. Rocky Ridge quedó abandonada tras fracasar sus negocios y alberga nómadas.
 
-## Organizaciones relevantes
-Pendiente de documentar presencias y relaciones canónicas con su referencia correspondiente. La presencia de una organización en el universo no confirma que sea jugable en KiroshiRP.
+## En KiroshiRP
+Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
 
-## Historias de KiroshiRP
-No hay acontecimientos propios confirmados para esta ficha. Se incorporarán como LORE KIROSHIRP, separados del canon.
+## Alcance de la fuente
+Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
+
+## Atribución
+Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.

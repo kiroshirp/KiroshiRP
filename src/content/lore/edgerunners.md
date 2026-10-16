@@ -13,7 +13,7 @@ related: ["guias/primeros-pasos"]
 Esta ficha de Edgerunners está pendiente de redacción contrastada. Se distinguirán profesión, identidad cultural y uso del término en el universo original.
 
 ## Relaciones y cultura
-Pendiente de añadir actividades, relaciones y ejemplos respaldados por fuentes.
+Pendiente de añadir actividades, relaciones y ejemplos respaldados por la wiki en español.
 
 ## Interpretación en KiroshiRP
 Las posibilidades de juego, requisitos y sistemas relacionados deben confirmarse antes de anunciarse.

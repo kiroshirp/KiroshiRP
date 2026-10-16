@@ -1,25 +1,29 @@
 ---
 title: "Watson"
-description: "Ficha de Watson: contexto, ambiente y lugares para una futura lectura de la ciudad."
+description: "Contexto y lugares de interés documentados en Cyberpunk Wiki en español."
 category: "Distritos"
 status: "Borrador"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 24
-sources: [{"label":"CD PROJEKT RED · Lugares para comer y beber en Night City","url":"https://www.cyberpunk.net/en/news/50104/your-trip-to-night-city-best-places-to-eat-drink"}]
 related: ["lore/historia-night-city","lore/cronologia"]
+sources: [{"label":"Cyberpunk Wiki en español · Watson","url":"https://cyberpunk.fandom.com/es/wiki/Watson"}]
 ---
 
-## Descripción y ambiente
-Ficha editorial pendiente de contrastar con fuentes oficiales. Se documentará la identidad de Watson, su vida cotidiana y su contexto social sin mezclar hechos del servidor con el universo original.
+## Contexto del universo
+Tras el desastre nuclear de 2023, Watson acogió a población desplazada. La wiki describe su posterior pérdida de centralidad y la actividad comercial de sus barrios.
+
+## Zonas y ambiente
+Distrito Industrial Norte, Kabuki, Little China y Muelles de Arasaka.
 
 ## Puntos de interés
-**Afterlife:** bar de Watson asociado a mercenarios y fixers. Sus cócteles recuerdan a edgerunners fallecidos. Es una referencia del universo original; su funcionamiento en KiroshiRP no está confirmado.
+Kabuki reúne bazares y actividad artística; Little China destaca por su mezcla de restaurantes y escaparates.
 
-Referencia contrastada con la guía oficial de CD PROJEKT RED. El resto de la ficha continúa pendiente de ampliación.
+## En KiroshiRP
+Los lugares descritos pertenecen al universo del juego. Esta ficha no confirma actividades, territorios o servicios implementados en el servidor.
 
-## Organizaciones relevantes
-Pendiente de documentar presencias y relaciones canónicas con su referencia correspondiente. La presencia de una organización en el universo no confirma que sea jugable en KiroshiRP.
+## Alcance de la fuente
+Resumen adaptado de la wiki en español, consultada el 17 de octubre de 2026. La propia fuente señala que su artículo necesita ampliación.
 
-## Historias de KiroshiRP
-No hay acontecimientos propios confirmados para esta ficha. Se incorporarán como LORE KIROSHIRP, separados del canon.
+## Atribución
+Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.

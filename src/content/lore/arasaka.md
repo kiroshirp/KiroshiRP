@@ -1,19 +1,23 @@
 ---
 title: "Arasaka"
-description: "Archivo corporativo preparado para completar con información contrastada."
+description: "Síntesis documentada del universo Cyberpunk, con referencia a la wiki en español."
 category: "Corporaciones"
-status: "Por documentar"
+status: "Borrador"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-16"
+updated: "2026-10-17"
 order: 34
 related: ["facciones/corporaciones","normativas/policial-corporativa"]
+sources: [{"label":"Cyberpunk Wiki en español · Arasaka","url":"https://cyberpunk.fandom.com/es/wiki/Arasaka"}]
 ---
 
-## Identidad e historia
-La información narrativa de Arasaka está pendiente de revisión canónica. No se han incorporado afirmaciones históricas ni operativas sin fuente.
+## Descripción
+Arasaka es una megacorporación de origen japonés especializada en protección y seguridad. La wiki identifica ramas de seguridad, banca y manufacturas. Su historia abarca varias épocas; este resumen no fija dirigentes actuales ni recursos para KiroshiRP.
 
-## Presencia en la ciudad
-Pendiente de describir actividades, influencia y relaciones públicas del universo oficial.
+## Lectura de la fuente
+Síntesis de la ficha indicada en Cyberpunk Wiki en español. Se omiten cifras o cargos cuya época no se ha establecido para la continuidad del servidor.
 
 ## En KiroshiRP
-Presencia jugable, jerarquías y alcance pendientes de confirmar. La inclusión en la enciclopedia no implica disponibilidad como facción.
+La enciclopedia describe el universo. La implementación, los rangos y el acceso se documentan por separado como propuestas del servidor.
+
+## Atribución
+Síntesis adaptada por KiroshiRP a partir de Cyberpunk Wiki en español y sus colaboradores, con cambios de redacción y selección. El texto adaptado se ofrece bajo CC-BY-SA conforme al [aviso de licencia de Fandom](https://www.fandom.com/es/licensing-es). Las marcas y las imágenes conservan sus derechos correspondientes.
