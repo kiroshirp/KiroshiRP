@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+import {url} from '../config';
+---
+<Base title="404 · Archivo no encontrado" noindex><section class="section page-heading"><span class="eyebrow">ERROR DE CONSULTA / 404</span><h1>Señal perdida<span class="accent">.</span></h1><p>Este archivo no existe o ha cambiado de ubicación. La ciudad sigue ahí fuera.</p><div class="actions"><a class="button primary" href={url()}>VOLVER AL INICIO →</a><a class="button" href={url('buscar/')}>BUSCAR EN EL ARCHIVO</a></div></section></Base>
