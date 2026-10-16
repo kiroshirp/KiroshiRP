@@ -7,9 +7,19 @@ origin: "LORE KIROSHIRP"
 updated: "2026-10-16"
 order: 4
 related: ["mecanicas/cyberpsicosis","normativas/rol"]
+sources: [{"label":"Cyberpunk Wiki · Ciberequipo de Cyberpunk 2077","url":"https://cyberpunk.fandom.com/es/wiki/Ciberequipo_de_Cyberpunk_2077"}]
+licensedText: true
 ---
 
-## Categorías de implantes
+## Ciberequipo en Cyberpunk 2077
+
+En el videojuego, los matasanos de Night City permiten instalar o intercambiar ciberequipo y mejorar su rareza con componentes. El catálogo distribuye los implantes en diez grupos: lóbulo frontal, sistema operativo, brazos, rostro, esqueleto, manos, sistema nervioso, sistema circulatorio, sistema integumentario y piernas.
+
+Los sistemas operativos incluyen ciberterminales, Berserk y Sandevistan. Las ciberterminales permiten realizar hackeos rápidos sobre objetivos y dispositivos. Berserk potencia las capacidades ofensivas; Sandevistan altera la percepción del tiempo durante su uso en el juego.
+
+Esta clasificación corresponde a Cyberpunk 2077 y Phantom Liberty. Las ranuras, ventajas, estadísticas y niveles del videojuego no son parámetros aprobados para KiroshiRP.
+
+## Diseño de implantes en KiroshiRP
 La ficha está preparada para organizar implantes por función: sensorial, neural, extremidades, protección y soporte corporal. Es una clasificación editorial provisional; el catálogo permitido y sus efectos deben validarse.
 
 ## Instalación y ripperdocs
