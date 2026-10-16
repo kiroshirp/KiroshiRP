@@ -1,0 +1,5 @@
+---
+interface Props {kind?: 'warning'|'lore'|'rule'|'development'|'example'|'tip'; title?:string;}
+const {kind='development',title='Contenido en desarrollo'}=Astro.props;
+---
+<aside class={`notice ${kind}`}><strong>{title}</strong><div><slot /></div></aside>
