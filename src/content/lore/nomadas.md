@@ -6,7 +6,7 @@ status: "Documentado"
 origin: "CANON CYBERPUNK"
 updated: "2026-10-17"
 order: 43
-related: ["guias/primeros-pasos"]
+related: ["facciones/nomadas","guias/primeros-pasos"]
 
 universeScope: "Archivo histórico del universo: este artículo conserva material de Cyberpunk 2020. Sus capacidades y condiciones no se trasladan automáticamente a 2077 ni a las mecánicas de KiroshiRP."
 sources: [{"label":"Cyberpunk Wiki · Nómada","url":"https://cyberpunk.fandom.com/es/wiki/N%C3%B3mada"}]
