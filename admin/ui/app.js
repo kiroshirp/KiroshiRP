@@ -22,7 +22,7 @@ function renderFiles(){
 }
 async function refresh(){files=(await api('files')).files;files.sort((a,b)=>a.path.localeCompare(b.path));renderFiles();}
 async function enter(session){
- csrf=session.csrf;mode=session.mode;$('login-form').reset();$('login').hidden=true;$('workspace').hidden=false;$('logout').hidden=false;
+ csrf=session.csrf;mode=session.mode;$('login-form').reset();$('login-error').hidden=true;$('login-password').type='password';$('toggle-password').textContent='Mostrar contraseña';$('toggle-password').setAttribute('aria-pressed','false');$('caps-lock').hidden=true;$('login').hidden=true;$('workspace').hidden=false;$('logout').hidden=false;
  $('mode').textContent=mode==='github'?'CONECTADO A GITHUB':'EDICIÓN LOCAL';
  $('save-note').textContent=mode==='github'?'Cada guardado crea una revisión en GitHub e inicia la publicación. La web se actualizará cuando termine su comprobación. El historial del repositorio permite recuperar versiones anteriores.':'Los cambios se guardan en este ordenador, con copia de seguridad local. Para verlos en Internet hace falta publicarlos. No se modificará la web pública desde este modo.';
  $('save').textContent=mode==='github'?'Guardar y publicar':'Guardar cambios';await refresh();
@@ -43,7 +43,10 @@ function openEditor(file){
  else $('settings').value=file.content;
  renderFiles();
 }
-$('login-form').addEventListener('submit',async event=>{event.preventDefault();const button=event.submitter;button.disabled=true;show('');try{const data=Object.fromEntries(new FormData(event.target));await enter(await api('login','POST',data));show('Acceso autorizado.');}catch(e){fail(e);}finally{button.disabled=false;}});
+$('toggle-password').addEventListener('click',()=>{const visible=$('login-password').type==='password';$('login-password').type=visible?'text':'password';$('toggle-password').textContent=visible?'Ocultar contraseña':'Mostrar contraseña';$('toggle-password').setAttribute('aria-pressed',String(visible));});
+for(const event of ['keydown','keyup'])$('login-password').addEventListener(event,e=>{$('caps-lock').hidden=!e.getModifierState('CapsLock');});
+$('login-password').addEventListener('blur',()=>{$('caps-lock').hidden=true;});
+$('login-form').addEventListener('submit',async event=>{event.preventDefault();const button=event.submitter;button.disabled=true;show('');$('login-error').hidden=true;try{const data=Object.fromEntries(new FormData(event.target));data.username=data.username.trim();await enter(await api('login','POST',data));show('Acceso autorizado.');}catch(e){$('login-error').textContent=e.message==='Usuario o contraseña incorrectos.'?'Usuario o contraseña incorrectos. Comprueba las mayúsculas y los espacios. Puedes usar «Mostrar contraseña» para revisar lo introducido.':e.message;$('login-error').hidden=false;}finally{button.disabled=false;}});
 $('logout').addEventListener('click',async()=>{if(!discardOK())return;try{await api('logout','POST',{});resetSession();show('Sesión cerrada.');}catch(e){fail(e);}});
 $('search').addEventListener('input',renderFiles);$('filter').addEventListener('change',renderFiles);
 $('reload').addEventListener('click',async()=>{if(!discardOK())return;try{await refresh();if(current)await loadFile(current.path);show('Archivo actualizado.');}catch(e){fail(e);}});
