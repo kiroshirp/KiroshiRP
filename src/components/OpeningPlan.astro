@@ -1,0 +1,16 @@
+---
+import data from '../data/home.json';
+import {homeSchema} from '../../admin/schema.mjs';
+import {url} from '../config';
+interface Props { article?: boolean }
+const {article=false}=Astro.props;
+const plan=homeSchema.parse(data).opening;
+---
+{plan&&<section id={article?'fases-de-apertura':'protocolo-umbral'} class:list={['opening-plan',{'section':!article}]} aria-labelledby={article?'opening-article-title':'opening-home-title'}>
+  <div class="section-heading"><div><span class="eyebrow">{plan.label}</span><h2 id={article?'opening-article-title':'opening-home-title'}>{article?'Fases de apertura':plan.title}</h2></div>{!article&&<a class="text-link" href={url(plan.href)}>{plan.linkLabel} ↗</a>}</div>
+  <p class="opening-intro">{plan.description}</p>
+  <ol class:list={['opening-phases',{'opening-phases-article':article}]}>
+    {plan.phases.map((phase,i)=><li><div class="opening-phase-top"><span class="mono">FASE {String(i+1).padStart(2,'0')}</span><span class="badge">{phase.state}</span></div><h3>{phase.title}</h3><p class="opening-area">{phase.area}</p><p>{phase.description}</p></li>)}
+  </ol>
+  <p class="opening-note">{plan.note}</p>
+</section>}

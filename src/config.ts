@@ -1,5 +1,8 @@
 import data from './data/portal.json';
-import {settingsSchema} from '../admin/schema.mjs';
+import {settingsSchema,homeSchema} from '../admin/schema.mjs';
+import homeData from './data/home.json';
+const home=homeSchema.parse(homeData);
+export const brand={primary:home.texts.titularCiudad+' '+home.texts.titularHistorias,secondary:home.texts.lemaSecundario};
 const validated = settingsSchema.parse(data);
 export const {site, leadership, phases} = validated;
 type SectionID = 'lore'|'mecanicas'|'normativas'|'facciones'|'guias'|'actualizaciones';

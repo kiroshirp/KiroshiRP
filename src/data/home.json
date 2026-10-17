@@ -4,14 +4,14 @@
     "estadoUniverso": " UNIVERSO EN CONSTRUCCIÓN",
     "bienvenida": "BIENVENIDO A KIROSHIRP",
     "titularCiudad": "NIGHT CITY.",
-    "titularHistorias": "MORE STORIES.",
+    "titularHistorias": "MÁS HISTORIAS.",
     "subtitulo": "LA CIUDAD ES LA MISMA. TU HISTORIA NO.",
-    "descripcion": "Bienvenido a KiroshiRP, una nueva experiencia de roleplay en Night City. Construye tu reputación, descubre sus secretos y decide qué lugar ocuparás en una ciudad donde cada elección tiene consecuencias.",
+    "descripcion": "Tu historia comienza a las puertas de Night City. Construye tu reputación, encuentra tus primeros contactos y hazte un lugar en las Badlands del este, mientras la ciudad prepara la apertura de sus accesos por fases.",
     "botonExplorar": "EXPLORAR NIGHT CITY ",
     "botonMecanicas": "DESCUBRIR MECÁNICAS ",
     "indicacionScroll": "↓   EXPLORA EL ARCHIVO",
     "coordenadas": "NC / 07 — KRP",
-    "lemaSecundario": "SAME CITY. DIFFERENT PEOPLE.",
+    "lemaSecundario": "LA MISMA CIUDAD. DISTINTAS PERSONAS.",
     "cintaMundo": "UN MUNDO COMPARTIDO",
     "cintaHistorias": "HISTORIAS PERSISTENTES",
     "cintaDecisiones": "DECISIONES CON CONSECUENCIAS",
@@ -98,5 +98,39 @@
     "Reputación",
     "Oportunidades",
     "Tu propia historia"
-  ]
+  ],
+  "opening": {
+    "label": "LORE KIROSHIRP / PROTOCOLO UMBRAL",
+    "title": "Tu historia comienza en el este.",
+    "description": "Tras una cadena de sabotajes, Night City restringe sus accesos. El entorno del Sunset Motel será nuestro punto de partida: una comunidad que empieza a construir su futuro a las puertas de la ciudad.",
+    "linkLabel": "DESCUBRIR EL PROTOCOLO",
+    "href": "lore/protocolo-umbral/",
+    "note": "Plan de apertura, sin fechas anunciadas. Cada fase se habilitará para toda la comunidad cuando sus sistemas estén preparados y un acontecimiento de rol explique el cambio.",
+    "phases": [
+      {
+        "title": "El punto de llegada",
+        "area": "Sunset Motel y entorno reducido",
+        "description": "Preparar alojamiento, asistencia básica, taller, comercio y primeros contactos.",
+        "state": "Planificada"
+      },
+      {
+        "title": "Las rutas del este",
+        "area": "Badlands orientales y Rocky Ridge",
+        "description": "Ampliar las rutas, los transportes, la recuperación de materiales y los encargos.",
+        "state": "Planificada"
+      },
+      {
+        "title": "El primer corredor",
+        "area": "Sector urbano previsto en Santo Domingo",
+        "description": "Abrir un primer acceso urbano con servicios, negocios y presencia institucional. Perímetro por concretar.",
+        "state": "Planificada"
+      },
+      {
+        "title": "La ciudad se abre",
+        "area": "Nuevos distritos de Night City",
+        "description": "Incorporar progresivamente más organizaciones, servicios y oportunidades.",
+        "state": "Planificada"
+      }
+    ]
+  }
 }

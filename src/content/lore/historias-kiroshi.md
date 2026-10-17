@@ -1,15 +1,21 @@
 ---
 title: "Historias de KiroshiRP"
-description: "El espacio reservado para las decisiones que transformen nuestra Night City."
+description: "El Protocolo Umbral como punto de partida, junto a las propuestas que darán forma a las historias del servidor."
 category: "Lore del servidor"
 status: "Propuesta"
 origin: "LORE KIROSHIRP"
 updated: "2026-10-17"
 order: 33
-related: ["lore/cronologia"]
+related: ["lore/protocolo-umbral","lore/cronologia","guias/primeros-pasos"]
 ---
 
-## Punto de partida propuesto
+## Protocolo Umbral: el comienzo aprobado
+
+El marco narrativo de apertura sitúa la llegada de los personajes en las Badlands orientales, alrededor del Sunset Motel. Una cadena de sabotajes provoca restricciones de acceso a Night City; la habilitación de nuevas zonas avanzará por fases, cuando los sistemas estén preparados y los acontecimientos de rol expliquen cada cambio.
+
+Este punto de partida está aprobado como lore original de KiroshiRP. La ficha Protocolo Umbral y el plan de la portada recogen sus detalles. No anuncian una fecha de apertura ni servicios ya implementados.
+
+## Propuestas para los cargos iniciales
 Los documentos del equipo sitúan a los cargos iniciales en niveles medios o bajos. Los primeros corpos serían analistas, instructores o responsables de seguridad de campo; los primeros fixers, intermediarios locales con negocios y contactos.
 
 ## La cantera

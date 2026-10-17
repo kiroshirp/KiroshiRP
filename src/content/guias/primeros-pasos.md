@@ -6,7 +6,7 @@ status: "Borrador"
 origin: "LORE KIROSHIRP"
 updated: "2026-10-17"
 order: 0
-related: ["guias/preguntas-frecuentes","guias/glosario","normativas/general"]
+related: ["lore/protocolo-umbral","guias/preguntas-frecuentes","guias/glosario","normativas/general"]
 ---
 
 ## Qué es KiroshiRP
@@ -24,6 +24,14 @@ Estos requisitos corresponden a OPEN//77; KiroshiRP todavía debe confirmar y pr
 
 ## Cómo acceder al servidor
 El acceso y los pasos de conexión se publicarán cuando estén comprobados. No existe en este portal una fecha de apertura confirmada. El enlace de Discord también está pendiente de configuración.
+
+## Dónde comenzará tu historia
+
+El inicio jugable previsto está en las **Badlands del este**, en un núcleo reducido alrededor del **Sunset Motel**. El Protocolo Umbral, lore original del servidor, explica las restricciones de acceso a Night City tras una cadena de sabotajes.
+
+Podrás llegar buscando trabajo, acompañando mercancías, cumpliendo un encargo o intentando regresar a casa. No necesitas interpretar a un nómada: la zona de llegada reúne personajes de distintas procedencias. El lugar exacto de aparición y los servicios disponibles se concretarán antes de la apertura.
+
+La ampliación del mapa será global, por fases. Cada nueva zona requerirá sistemas preparados y un acontecimiento de rol que justifique su habilitación. Consulta Protocolo Umbral entre los archivos relacionados para leer el plan compartido y el estado de sus etapas.
 
 ## Crea un personaje que pueda crecer
 Empieza por una motivación, una necesidad y un límite. Piensa qué busca tu personaje hoy, qué está dispuesto a hacer y qué le haría cambiar de opinión. Una historia inicial abierta deja espacio a las relaciones que nazcan jugando.

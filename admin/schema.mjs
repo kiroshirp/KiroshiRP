@@ -25,7 +25,12 @@ export const homeSchema = z.object({
  texts:z.record(z.string(),z.string()),
  principles:z.array(z.tuple([z.string(),z.string(),z.string()])),
  discovery:z.array(z.tuple([z.string().regex(/^(lore|mecanicas|normativas|facciones|guias|actualizaciones)\/[a-z0-9/-]*$/),z.string(),z.string(),z.string(),z.string()])),
- journey:z.array(z.string())
+ journey:z.array(z.string()),
+ opening:z.object({
+  label:z.string(),title:z.string(),description:z.string(),linkLabel:z.string(),
+  href:z.string().regex(/^lore\/[a-z0-9/-]+\/$/),note:z.string(),
+  phases:z.array(z.object({title:z.string(),area:z.string(),description:z.string(),state:z.enum(['Planificada','En preparación','Abierta'])}).strict()).min(1).max(12)
+ }).strict().optional()
 }).strict();
 const infoPage=z.object({title:z.string().min(1),sections:z.array(z.object({title:z.string().min(1),paragraphs:z.array(z.string())}).strict())}).strict();
 export const legalSchema=z.object({contacto:infoPage,'aviso-legal':infoPage,privacidad:infoPage}).strict();
