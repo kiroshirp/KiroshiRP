@@ -10,3 +10,5 @@ dist/
 .wrangler/
 .dev.vars
 .dev.vars.*
+
+.admin-drafts/

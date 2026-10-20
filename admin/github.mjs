@@ -8,6 +8,7 @@ export function githubRepository(env,fetcher=fetch){
   return raw?Buffer.from(await r.arrayBuffer()):r.status===204?{}:r.json();
  };
  return {
+  async publication(){const r=await fetcher(base+'/actions/runs?per_page=1',{headers:{Accept:'application/vnd.github+json','User-Agent':'KiroshiRP-Admin'}});if(!r.ok)throw new Error('Estado no disponible.');const run=(await r.json()).workflow_runs?.[0];return run?{mode:'github',status:run.status,conclusion:run.conclusion,id:run.id}:{mode:'github',status:'completed',conclusion:null};},
   async list(){const result=await api('/git/trees/main?recursive=1');if(!result||result.truncated)throw new Error('No se pudo leer el árbol completo.');return result.tree.filter(f=>f.type==='blob'&&f.mode!=='120000'&&allowedPath(f.path)).map(f=>({path:f.path,version:f.sha}));},
   async read(path){const endpoint='/contents/'+path+'?ref=main';const f=await api(endpoint);if(!f)return null;if(f.type!=='file')throw new Error('Archivo no compatible.');return {version:f.sha,bytes:f.encoding==='none'?await api(endpoint,{},true):Buffer.from((f.content||'').replace(/\s/g,''),'base64')};},
   async write(path,bytes,version){const r=await api('/contents/'+path,{method:'PUT',body:JSON.stringify({message:`Portal: ${version?'actualizar':'crear'} ${path}`,content:bytes.toString('base64'),sha:version,branch:'main'})});if(!r)throw new Error();return {version:r.content.sha,commit:r.commit.sha};},

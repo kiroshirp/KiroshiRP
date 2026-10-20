@@ -1,6 +1,7 @@
 import {randomBytes,createHash,timingSafeEqual} from 'node:crypto';
 import {allowedPath,validateContent} from './content.mjs';
 import {parse,stringify} from 'yaml';
+import {editorialOperation,clearPublishedDraft} from './editorial.mjs';
 const json=(data,status=200,extra={})=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8',...extra}});
 const hash=v=>createHash('sha256').update(String(v)).digest();
 const equal=(a,b)=>timingSafeEqual(hash(a),hash(b));
@@ -14,7 +15,7 @@ export function createService({env,store,repo,assets,local=false}){
    if(!['GET','POST','PUT','DELETE'].includes(request.method))return finish(json({error:'Método no permitido.'},405));
    if(!path.startsWith('/admin'))return finish(new Response(null,{status:302,headers:{Location:'/admin/'}}));
    if(!path.startsWith('/admin/api/')){
-    if(!['/admin','/admin/app.js','/admin/style.css'].includes(path))return finish(json({error:'No encontrado.'},404));
+    if(!['/admin','/admin/app.js','/admin/editor.js','/admin/preview.js','/admin/style.css'].includes(path))return finish(json({error:'No encontrado.'},404));
     return finish(await assets(path==='/admin'?'/index.html':path.slice(6)));
    }
    if(!env.ADMIN_USERNAME?.trim() || (env.ADMIN_PASSWORD?.length||0)<13)return finish(json({error:'Administrador pendiente de configurar: completa el .env privado y usa una contraseña de al menos 13 caracteres.'},503));
@@ -45,10 +46,12 @@ export function createService({env,store,repo,assets,local=false}){
    }
    if(!valid)return finish(json({error:'Inicia sesión para acceder.'},401));
    if(mutating&&!equal(request.headers.get('x-csrf-token')||'',session.csrf))return finish(json({error:'La sesión no autoriza esta solicitud.'},403));
+   const editorial=await editorialOperation({route:path,url:u,method:request.method,data,repo,store});if(editorial!==null)return finish(json(editorial));
    if(path==='/admin/api/logout'&&request.method==='POST'){
     await store.delete('session:'+hash(cookie).toString('hex'));
     response=json({ok:true},200,{'Set-Cookie':`${cookieName}=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0${local?'':'; Secure'}`});
    }else if(path==='/admin/api/session'&&request.method==='GET')response=json({csrf:session.csrf,mode:local?'local':'github'});
+   else if(path==='/admin/api/publication'&&request.method==='GET')response=json(local?{mode:'local'}:await repo.publication());
    else if(path==='/admin/api/files'&&request.method==='GET')response=json({files:await repo.list()});
    else if(path==='/admin/api/file'){
     const p=mutating?data.path:u.searchParams.get('path');if(!allowedPath(p))return finish(json({error:'Ruta no permitida.'},400));
@@ -71,7 +74,7 @@ export function createService({env,store,repo,assets,local=false}){
       }
       if(typeof data.content!=='string')return finish(json({error:'Falta el contenido.'},400));
       const bytes=Buffer.from(data.content,p.startsWith('public/')?'base64':'utf8');
-      validateContent(p,bytes,old?.bytes);const result=await repo.write(p,bytes,old?.version);response=json({ok:true,...result});
+      validateContent(p,bytes,old?.bytes);const result=await repo.write(p,bytes,old?.version);await clearPublishedDraft(store,p,data.draftRevision);response=json({ok:true,...result});
      }
     }else response=json({error:'Método no permitido.'},405);
    }else response=json({error:'No encontrado.'},404);

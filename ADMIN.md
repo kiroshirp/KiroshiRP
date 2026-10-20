@@ -75,3 +75,15 @@ npm run admin:check
 Las pruebas cubren acceso anónimo, límite de intentos, sesiones, CSRF, rutas, validación, conflictos de versión, copias de seguridad, eliminación confirmada, atribución y peticiones a GitHub. `admin:check` empaqueta el Worker sin publicarlo ni transmitir credenciales.
 
 Referencias de la arquitectura: [GitHub Pages estático](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [API de contenidos de GitHub](https://docs.github.com/en/rest/repos/contents), [recursos estáticos de Workers](https://developers.cloudflare.com/workers/static-assets/binding/).
+
+## Estudio editorial y borradores privados
+
+El resumen muestra artículos, imágenes y contenido pendiente de revisión. El catálogo se carga por lotes y permite buscar por título, categoría y ruta; los estados editoriales y los borradores privados se filtran por separado.
+
+«Guardar borrador privado» conserva el contenido en el servicio sin modificar GitHub ni la web. En Cloudflare se guarda en el Durable Object; en local, en .admin-drafts/, excluido de Git. Al volver a abrir el archivo se recupera el borrador guardado. Las sesiones y las credenciales no se guardan en el navegador. Ctrl+S guarda el borrador privado.
+
+«Validar» comprueba estructura y conflictos. «Revisar publicación» abre un resumen y requiere confirmar el envío. En modo GitHub, la confirmación actualiza el repositorio e inicia la publicación; en local, solo modifica los archivos del ordenador con copia de seguridad. El estado editorial Borrador de documentación no oculta un artículo publicado; las noticias dependen además de su opción de visibilidad.
+
+Las fuentes, los artículos relacionados y la imagen se gestionan con formularios. La configuración de portada, fases, enlaces y avisos dispone de formularios y mantiene una alternativa avanzada en JSON. La vista previa es orientativa y no ejecuta HTML. Las imágenes y las eliminaciones de archivos requieren confirmación porque modifican los recursos publicados.
+
+Los borradores se protegen frente a escrituras concurrentes. Si cambia la versión publicada, la publicación se bloquea hasta revisar el conflicto. Los borradores no caducan automáticamente; pueden eliminarse explícitamente desde el panel. La publicación conserva el historial de GitHub o las copias locales.

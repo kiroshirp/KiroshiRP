@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash,randomUUID} from 'node:crypto';
 import {createService} from './service.mjs';
 import {allowedPath} from './content.mjs';
+import {localStore} from './local-store.mjs';
 export const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export function localRepository(root){
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -24,7 +25,7 @@ export function localRepository(root){
  };return repo;
 }
 export async function startLocal({root=project,env=process.env,port=Number(env.ADMIN_PORT||4310)}={}){
- const values=new Map();const store={async get(k){return values.get(k)},async put(k,v){values.set(k,v)},async delete(k){values.delete(k)}};
+ const store=localStore(root);
  const service=createService({env,store,repo:localRepository(root),local:true,assets:async p=>{
   const bytes=await fs.readFile(path.join(project,'admin/ui',p.slice(1)));
   return new Response(bytes,{headers:{'Content-Type':p.endsWith('.js')?'text/javascript; charset=utf-8':p.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8'}});
