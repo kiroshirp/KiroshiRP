@@ -4,16 +4,35 @@ description: "Santo Domingo es uno de los seis distritos de Night City en Cyberp
 category: "Distritos"
 status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 28
 related: ["lore/historia-night-city","lore/cronologia"]
 
 universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
 sources: [{"label":"Cyberpunk Wiki · Santo Domingo","url":"https://cyberpunk.fandom.com/es/wiki/Santo_Domingo"}]
 licensedText: true
+history:
+  - date: "2026-10-20"
+    description: "Resumen visual incorporado al explorador de zonas, con referencias al contenido ya documentado."
 ---
 
 Santo Domingo es uno de los seis distritos de Night City en Cyberpunk 2077.
+
+## Vista rápida
+
+### Ambiente
+
+Santo Domingo combina el paisaje industrial de Arroyo con las viviendas de Rancho Coronado. Las fábricas y la vida residencial definen su contraste.
+
+### Lugares de referencia
+
+- **Arroyo:** núcleo industrial con fábricas y fundiciones.
+- **Rancho Coronado:** zona residencial desarrollada por corporaciones.
+- **Capitán Caliente:** restaurante mencionado en el trasfondo del distrito.
+
+### Organizaciones relacionadas
+
+La ficha describe la propiedad corporativa de Rancho Coronado, pero este resumen no identifica una empresa concreta como propietaria.
 
 ## Trasfondo
 

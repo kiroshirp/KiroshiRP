@@ -4,16 +4,35 @@ description: "Heywood es uno de los seis distritos de Night City en Cyberpunk 20
 category: "Distritos"
 status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 27
 related: ["lore/historia-night-city","lore/cronologia"]
 
 universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
 sources: [{"label":"Cyberpunk Wiki · Heywood","url":"https://cyberpunk.fandom.com/es/wiki/Heywood"}]
 licensedText: true
+history:
+  - date: "2026-10-20"
+    description: "Resumen visual incorporado al explorador de zonas, con referencias al contenido ya documentado."
 ---
 
 Heywood es uno de los seis distritos de Night City en Cyberpunk 2077.
+
+## Vista rápida
+
+### Ambiente
+
+Mercados, restaurantes y espacios cívicos dan forma a Heywood. La vida cotidiana comparte espacio con el ayuntamiento y sus parques.
+
+### Lugares de referencia
+
+- **Vista del Rey:** mercados al aire libre y puestos de comida.
+- **Ayuntamiento:** torre rodeada de un parque urbano.
+- **Reconciliation Park:** parque que conmemora la limpieza y reconstrucción del Centro Corporativo.
+
+### Organizaciones relacionadas
+
+Este resumen no atribuye territorios a organizaciones sin una relación confirmada en las fichas consultadas.
 
 ## Trasfondo
 

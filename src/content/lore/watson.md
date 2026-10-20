@@ -4,16 +4,36 @@ description: "Watson es uno de los seis distritos de Night City en Cyberpunk 207
 category: "Distritos"
 status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 24
 related: ["lore/historia-night-city","lore/cronologia"]
 
 universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
 sources: [{"label":"Cyberpunk Wiki · Watson","url":"https://cyberpunk.fandom.com/es/wiki/Watson"}]
 licensedText: true
+history:
+  - date: "2026-10-20"
+    description: "Resumen visual incorporado al explorador de zonas, con referencias al contenido ya documentado."
 ---
 
 Watson es uno de los seis distritos de Night City en Cyberpunk 2077.
+
+## Vista rápida
+
+### Ambiente
+
+Mercados, callejones y fábricas conviven en un distrito marcado por el declive industrial y la llegada de nuevos emprendedores.
+
+### Lugares de referencia
+
+- **Kabuki:** un bazar de callejones, artistas y comercios junto al antiguo Centro Médico.
+- **Distrito Industrial Norte:** fábricas y apartamentos vinculados a la actividad industrial.
+- **Little China:** restaurantes, escaparates de neón y una mezcla de culturas.
+
+### Organizaciones relacionadas
+
+- [Maelstrom](../../facciones/maelstrom/) — Su ficha identifica Watson como base en 2077.
+- [Moxes](../../facciones/moxes/) — Su ficha señala presencia en Kabuki, cerca de Lizzie’s Bar, sin territorio propio.
 
 ## Trasfondo
 

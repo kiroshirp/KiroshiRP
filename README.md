@@ -71,3 +71,11 @@ Los artículos Documentado contienen información incorporada de la wiki; no anu
 ## Panel privado del equipo
 
 Consulta [ADMIN.md](ADMIN.md) para configurar el .env privado, usar /admin localmente o desplegar el administrador en Cloudflare Workers. El panel gestiona los artículos, las imágenes y los archivos de datos del portal sin publicar credenciales.
+
+## Explorador visual de zonas
+
+La página /explorar/ reúne los seis distritos y las Badlands. No utiliza cuentas, servicios de mapas ni imágenes de Piggyback; sus dos recursos se enlazan como consultas externas.
+
+Los datos se editan en las fichas originales de src/content/lore, dentro de «## Vista rápida», conservando los subtítulos «### Ambiente», «### Lugares de referencia» y «### Organizaciones relacionadas». Los lugares usan listas con el formato **Nombre:** descripción; las organizaciones, un enlace relativo a su ficha seguido de una raya y su contexto. Si no hay relaciones verificadas, se conserva una explicación sin atribuir territorios. No añadas fórmulas internas, localizaciones privadas ni estados de apertura supuestos. El aviso de disponibilidad remite al Protocolo Umbral.
+
+La extracción compartida está en src/lib/explorer.mjs y las comprobaciones se ejecutan con node --test tests/explorer.test.mjs. El explorador admite enlaces como /explorar/?zona=watson#explorador; sin JavaScript muestra las siete fichas y sus enlaces. El texto adaptado de la wiki conserva sus fuentes y CC BY-SA 3.0.

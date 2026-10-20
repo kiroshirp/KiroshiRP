@@ -4,16 +4,35 @@ description: "El Distrito Cero (City Center en inglés) es uno de los seis distr
 category: "Distritos"
 status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 26
 related: ["lore/historia-night-city","lore/cronologia"]
 
 universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
 sources: [{"label":"Cyberpunk Wiki · Distrito Cero","url":"https://cyberpunk.fandom.com/es/wiki/Distrito_Cero"}]
 licensedText: true
+history:
+  - date: "2026-10-20"
+    description: "Resumen visual incorporado al explorador de zonas, con referencias al contenido ya documentado."
 ---
 
 El Distrito Cero (City Center en inglés) es uno de los seis distritos de Night City en Cyberpunk 2077.
+
+## Vista rápida
+
+### Ambiente
+
+El Distrito Cero reúne rascacielos, actividad corporativa y establecimientos de lujo. El Centro Corporativo concentra el poder de las grandes empresas.
+
+### Lugares de referencia
+
+- **Centro Corporativo:** área donde las corporaciones se regulan sin interferencia del exterior, según el trasfondo del distrito.
+- **Centro:** hoteles, restaurantes y clubes exclusivos.
+- **7th Hell:** bar fundado por un antiguo mercenario.
+
+### Organizaciones relacionadas
+
+No se asigna una sede concreta a una corporación únicamente por la descripción general de este distrito.
 
 ## Trasfondo
 

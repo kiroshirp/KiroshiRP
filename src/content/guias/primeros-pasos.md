@@ -4,7 +4,7 @@ description: "Una guía para empezar a construir un personaje, una red de contac
 category: "Primeros pasos"
 status: "Borrador"
 origin: "LORE KIROSHIRP"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 0
 related: ["lore/protocolo-umbral","guias/preguntas-frecuentes","guias/glosario","normativas/general"]
 ---
@@ -32,6 +32,8 @@ El inicio jugable previsto está en las **Badlands del este**, en un núcleo red
 Podrás llegar buscando trabajo, acompañando mercancías, cumpliendo un encargo o intentando regresar a casa. No necesitas interpretar a un nómada: la zona de llegada reúne personajes de distintas procedencias. El lugar exacto de aparición y los servicios disponibles se concretarán antes de la apertura.
 
 La ampliación del mapa será global, por fases. Cada nueva zona requerirá sistemas preparados y un acontecimiento de rol que justifique su habilitación. Consulta Protocolo Umbral entre los archivos relacionados para leer el plan compartido y el estado de sus etapas.
+
+Consulta el [explorador visual de Night City](../../explorar/) para conocer el ambiente, los lugares y las organizaciones documentadas de cada zona. Describe el universo del juego; la apertura de KiroshiRP se comunica por separado.
 
 ## Crea un personaje que pueda crecer
 Empieza por una motivación, una necesidad y un límite. Piensa qué busca tu personaje hoy, qué está dispuesto a hacer y qué le haría cambiar de opinión. Una historia inicial abierta deja espacio a las relaciones que nazcan jugando.

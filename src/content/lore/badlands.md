@@ -4,16 +4,35 @@ description: "Las Badlands, también conocidas como las Afueras, es la gran zona
 category: "Distritos"
 status: "Documentado"
 origin: "CANON CYBERPUNK"
-updated: "2026-10-17"
+updated: "2026-10-20"
 order: 30
 related: ["lore/historia-night-city","lore/cronologia"]
 
 universeScope: "Ambientación de Cyberpunk 2077. Describe el universo del juego; la disponibilidad de organizaciones y sistemas en KiroshiRP se define por separado."
 sources: [{"label":"Cyberpunk Wiki · Badlands","url":"https://cyberpunk.fandom.com/es/wiki/Badlands"}]
 licensedText: true
+history:
+  - date: "2026-10-20"
+    description: "Resumen visual incorporado al explorador de zonas, con referencias al contenido ya documentado."
 ---
 
 Las Badlands, también conocidas como las Afueras, es la gran zona árida e inhóspita que rodea Night City en Cyberpunk 2077.
+
+## Vista rápida
+
+### Ambiente
+
+Las Afueras rodean Night City con un entorno árido. Instalaciones industriales, carreteras y asentamientos abandonados aparecen en su trasfondo.
+
+### Lugares de referencia
+
+- **Granjas de Biotechnica:** instalaciones de producción industrial de derivados de proteínas sintéticas.
+- **Rocky Ridge:** proyecto de distrito autosuficiente abandonado tras la quiebra de los negocios que debía sostener.
+- **Central de energía solar:** instalación reconocible por sus grandes paneles.
+
+### Organizaciones relacionadas
+
+- [Nómadas](../../facciones/nomadas/) — La ficha de las Badlands describe presencia nómada en Rocky Ridge; Nómadas reúne comunidades distintas, no una organización única.
 
 ## Trasfondo
 
