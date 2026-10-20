@@ -6,3 +6,7 @@
 
 @media(min-width:761px){.atlas-index{max-height:calc(100svh - 130px);overflow:auto;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}}
 @media(max-width:760px){.atlas-types{display:grid;grid-template-columns:1fr 1fr;width:100%}}
+
+.site-header nav .explore-nav{display:inline-flex;align-items:center;gap:7px;color:var(--yellow)}.explore-nav svg{flex-shrink:0}.start-card:first-child{border-color:#e8c96c66}.start-card:first-child .start-art{background:radial-gradient(ellipse at 50% 90%,#246a9a88,transparent 75%)}.start-card:first-child .text-link{color:var(--yellow)}
+@media(min-width:1181px){.site-header nav{gap:16px}}
+@media(max-width:1180px){.site-header{height:72px}.menu-toggle{display:block;background:none;border:1px solid var(--line);color:var(--ice);padding:10px 15px;margin-left:auto;font-family:Rajdhani}.site-header nav{display:none;position:absolute;top:72px;left:0;right:0;background:#071525fa;padding:20px 6%;max-height:calc(100svh - 72px);overflow:auto;align-items:stretch}.site-header nav.open{display:flex;flex-direction:column;gap:0}.site-header nav>a{padding:13px 0}.site-header nav .button{margin-top:14px;align-self:start;font-size:.8rem}}
