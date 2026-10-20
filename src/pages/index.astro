@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import StartPaths from '../components/StartPaths.astro';
+import CityExplorer from '../components/CityExplorer.astro';
 import OpeningPlan from '../components/OpeningPlan.astro';
 import homeData from '../data/home.json';
 import {homeSchema} from '../../admin/schema.mjs';
@@ -12,8 +14,10 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
 ---
 <Base active="inicio"><section class="hero"><img class="hero-image" src={url('images/kiroshi-original.jpg')} alt="Night City bajo una luz azul, con el emblema original de Kiroshi Roleplay" width="1024" height="571" fetchpriority="high"/><div class="hero-shade"></div><div class="hero-top mono"><span>{home.texts.etiquetaArchivo}</span><span><i></i>{home.texts.estadoUniverso}</span></div><div class="hero-copy"><span class="eyebrow">{home.texts.bienvenida}</span><h1>{home.texts.titularCiudad}<br/><em>{home.texts.titularHistorias}</em></h1><h2>{home.texts.subtitulo}</h2><p>{home.texts.descripcion}</p><div class="actions"><a class="button primary" href={url('lore/')}>{home.texts.botonExplorar}<span>↗</span></a><a class="button" href={url('mecanicas/')}>{home.texts.botonMecanicas}<span>→</span></a></div></div><a class="scroll-cue mono" href="#proyecto">{home.texts.indicacionScroll}</a><span class="hero-coordinate mono" aria-hidden="true">{home.texts.coordenadas}<br/>{home.texts.lemaSecundario}</span></section>
 <div class="ticker mono"><span>{home.texts.cintaMundo}</span><span>{home.texts.cintaHistorias}</span><span>{home.texts.cintaDecisiones}</span><span>{home.texts.cintaIdentidad}</span></div>
+<StartPaths/>
 <section id="proyecto" class="section intro"><div><span class="eyebrow">{home.texts.etiquetaProyecto}</span><h2>{home.texts.tituloCiudad}<br/><span class="muted">{home.texts.tituloInfinitas}</span></h2></div><div><p class="lead">{home.texts.presentacion}</p><p>{home.texts.descripcionProyecto}</p><a class="text-link" href={url('guias/primeros-pasos/')}>{home.texts.botonProyecto}</a></div><div class="principles">{home.principles.map(([n,t,d])=><div><span class="mono">{n} /</span><h3>{t}</h3><p>{d}</p></div>)}</div></section>
 <OpeningPlan/>
+<CityExplorer/>
 <section class="section archive"><div class="section-heading"><div><span class="eyebrow">{home.texts.etiquetaArchivoAcceso}</span><h2>{home.texts.tituloDescubrir}</h2></div><a class="text-link" href={url('buscar/')}>{home.texts.botonBuscar}</a></div><div class="discovery-grid">{home.discovery.map(([href,n,t,d,c])=><a class={`discovery tile-${n}`} href={url(href)}><span class="mono">{n} / {c}</span><span class="tile-symbol" aria-hidden="true">{n==='01'?'◈':n==='02'?'⌘':n==='03'?'◎':'↗'}</span><div><h3>{t}</h3><p>{d}</p></div><span class="tile-arrow">↗</span></a>)}</div></section>
 <section class="section journey"><span class="eyebrow">{home.texts.etiquetaRecorrido}</span><h2>{home.texts.tituloRecorrido}</h2><p>{home.texts.descripcionRecorrido}</p><ol>{home.journey.map((s,i)=><li><span class="mono">0{i+1}</span><h3>{s}</h3></li>)}</ol><a class="text-link" href={url('mecanicas/facciones-progresion/')}>{home.texts.botonProgresion}</a></section>
 <section class="section"><div class="section-heading"><div><span class="eyebrow">{home.texts.etiquetaNoticias}</span><h2>{home.texts.tituloNoticias}</h2></div><a class="text-link" href={url('actualizaciones/')}>{home.texts.botonNoticias}</a></div>{news.length?<div class="cards">{news.map(entry=><Card entry={entry} section="actualizaciones"/>)}</div>:<div class="empty"><span class="signal" aria-hidden="true">⌁</span><div><h3>{home.texts.tituloSinNoticias}</h3><p>{home.texts.descripcionSinNoticias}</p></div><span class="badge">{home.texts.etiquetaCanal}</span></div>}</section>

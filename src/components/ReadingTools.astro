@@ -1,0 +1,16 @@
+<div class="reading-toolbar" data-pagefind-ignore hidden data-reading-tools><span class="mono">LEE A TU RITMO</span><button type="button" data-reading-toggle aria-pressed="false">Leer por apartados <span aria-hidden="true">↕</span></button></div>
+<script>
+const container=document.querySelector<HTMLElement>('[data-chapter-content]');const toolbar=document.querySelector<HTMLElement>('[data-reading-tools]');const button=document.querySelector<HTMLButtonElement>('[data-reading-toggle]');
+if(container&&toolbar&&button){
+ const chapters:HTMLDetailsElement[]=[];let active:HTMLDetailsElement|undefined;
+ for(const node of Array.from(container.childNodes)){
+  if(node instanceof HTMLElement&&node.tagName==='H2'){
+   active=document.createElement('details');active.className='reading-chapter';active.open=true;const summary=document.createElement('summary');const number=document.createElement('span');number.className='chapter-number mono';number.textContent=String(chapters.length+1).padStart(2,'0');summary.append(number,node);active.append(summary);container.append(active);chapters.push(active);
+  }else if(active){active.append(node);}
+ }
+ if(chapters.length>1){toolbar.hidden=false;button.addEventListener('click',()=>{const guided=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(guided));button.innerHTML=guided?'Mostrar todos los apartados <span aria-hidden="true">↕</span>':'Leer por apartados <span aria-hidden="true">↕</span>';chapters.forEach((chapter,i)=>chapter.open=!guided||i===0);if(guided)openHash();});}
+ function openHash(){if(!location.hash)return;let id;try{id=decodeURIComponent(location.hash.slice(1));}catch{return}const target=document.getElementById(id);const parent=target?.closest('details');if(parent instanceof HTMLDetailsElement&&!parent.open){parent.open=true;requestAnimationFrame(()=>target?.scrollIntoView({block:'start'}));}}
+ window.addEventListener('hashchange',openHash);document.querySelectorAll('.toc nav a').forEach(link=>link.addEventListener('click',()=>{const hash=link.getAttribute('href');if(hash===location.hash)openHash();}));openHash();
+ if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){const id=(e.target as HTMLElement).id;document.querySelectorAll('.toc nav a').forEach(a=>{a.classList.toggle('is-reading',a.getAttribute('href')==='#'+id);});}}},{rootMargin:'-110px 0px -55% 0px'});container.querySelectorAll('h2[id]').forEach(h=>observer.observe(h));}
+}
+</script>

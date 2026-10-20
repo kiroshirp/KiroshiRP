@@ -1,0 +1,13 @@
+---
+interface Props { kind?: string; compact?: boolean }
+const {kind='city',compact=false}=Astro.props;
+const network=['facciones','community','reputacion','facciones-progresion'].includes(kind);
+const circuit=['mecanicas','cyberpsicosis','ciberware'].includes(kind);
+const route=['guias','route','protocolo-umbral','primeros-pasos'].includes(kind);
+---
+<svg class:list={['portal-art',{'art-compact':compact}]} viewBox="0 0 480 280" fill="none" aria-hidden="true">
+ <path class="art-grid" d="M0 70H480M0 140H480M0 210H480M80 0V280M160 0V280M240 0V280M320 0V280M400 0V280"/>
+ <path class="art-frame" d="M16 48V16H68M412 16H464V48M16 232V264H68M412 264H464V232"/>
+ {network?<g class="art-network"><path d="M240 55L105 140L240 225L375 140L240 55V225M105 140H375M240 140L170 70M240 140L310 210"/><circle cx="240" cy="140" r="43"/><circle cx="240" cy="140" r="25"/><circle cx="105" cy="140" r="13"/><circle cx="375" cy="140" r="13"/><circle cx="240" cy="55" r="13"/><circle cx="240" cy="225" r="13"/><path class="art-accent" d="M224 140L236 152L260 126"/></g>:circuit?<g class="art-circuit"><path d="M180 80H300V200H180ZM200 100H280V180H200ZM180 110H140L115 85H60M180 140H55M180 170H140L110 210H55M300 110H340L370 75H425M300 140H425M300 170H345L375 210H425M210 80V40M240 80V25M270 80V40M210 200V240M240 200V255M270 200V240"/><path class="art-accent" d="M218 145H232L242 117L253 161L264 136"/><circle cx="60" cy="85" r="5"/><circle cx="425" cy="210" r="5"/></g>:route?<g class="art-route"><path d="M65 215H165L225 140H310L380 65H425"/><path d="M65 230H173L233 155H318L388 80H425"/><circle cx="65" cy="215" r="15"/><circle cx="225" cy="140" r="15"/><circle cx="380" cy="65" r="15"/><path class="art-accent" d="M55 215H75M65 205V225M216 140H234M371 65H389"/><path d="M65 180V130H130M225 105V55H295M380 100V155H430" stroke-dasharray="4 7"/></g>:<g class="art-city"><path d="M35 230V160H80V115H110V80H150V230M150 190H175V125H210V40H250V85H280V230M280 160H305V110H330V65H360V145H400V180H445V230M20 230H460M110 100H150M210 65H250M330 90H360"/><path class="art-accent" d="M223 98V165M237 112V180M121 130V155M341 120V175M186 153V185"/><path d="M25 247H455M70 260L155 230M190 260L225 230M360 260L320 230M445 260L385 230"/></g>}
+ <path class="art-scan" d="M38 250H110M370 30H442"/>
+</svg>

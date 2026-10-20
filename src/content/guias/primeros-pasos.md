@@ -23,7 +23,7 @@ OPEN//77 es una plataforma multijugador independiente para Cyberpunk 2077: cada 
 Estos requisitos corresponden a OPEN//77; KiroshiRP todavía debe confirmar y probar su configuración antes de abrir el acceso. Revisa la fuente oficial antes de instalar: puede cambiar.
 
 ## Cómo acceder al servidor
-El acceso y los pasos de conexión se publicarán cuando estén comprobados. No existe en este portal una fecha de apertura confirmada. El enlace de Discord también está pendiente de configuración.
+El acceso y los pasos de conexión se publicarán cuando estén comprobados. No existe en este portal una fecha de apertura confirmada. El Discord oficial está disponible desde la cabecera y la página de Contacto.
 
 ## Dónde comenzará tu historia
 
@@ -45,7 +45,7 @@ Escucha, pregunta y participa en escenas cotidianas. Ofrece servicios coherentes
 Acércate desde la ficción: conversaciones, encargos y relaciones sostenidas. La filosofía del proyecto evita formularios de postulación tradicionales; la pertenencia se construye por méritos y reconocimiento. No des por hecho que una organización está disponible: comprueba su estado público.
 
 ## Normas y asistencia
-Consulta Normativas antes de participar. Las fichas actuales están marcadas como borradores y requieren aprobación. El canal de asistencia se anunciará en Contacto cuando exista un enlace verificado.
+Consulta Normativas antes de participar. Las fichas actuales están marcadas como borradores y requieren aprobación. Puedes acceder al Discord oficial desde Contacto para seguir las comunicaciones del equipo. Los procedimientos específicos de asistencia se publicarán cuando estén definidos.
 
 ## Excepción de arranque en estudio
 El documento KiroshiRP.txt propone postulaciones en Discord exclusivamente para cargos iniciales y cobertura temporal por staff. Esta excepción no está convocada ni confirmada; debe conciliarse con el acceso orgánico por rol del resto de la progresión.
