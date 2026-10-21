@@ -1,0 +1,12 @@
+---
+import {url} from '../config';
+const {home=false}=Astro.props;
+---
+<div class="optic-world" style={`--world-image:url('${url('images/kiroshi-original.jpg')}')`} aria-hidden="true"></div>
+<div class="optic-frame" aria-hidden="true"><span>KIROSHIRP / VISTA DEL MUNDO</span><span>ARCHIVO PÚBLICO</span><i></i></div>
+{!home&&<div class="direct-panel-bar"><span class="mono">ARCHIVO / KIROSHIRP</span><a href={url()}>Volver al inicio <span aria-hidden="true">×</span></a></div>}
+<nav class="optic-dock" aria-label="Acceso rápido"><a href={url()} aria-current={home?'page':undefined}><span aria-hidden="true">⌂</span>Inicio</a><a href={url('explorar/')}><span aria-hidden="true">◇</span>Explorar</a><a href={url('lore/')}><span aria-hidden="true">▤</span>Archivo</a><a href={url('buscar/')}><span aria-hidden="true">⌕</span>Buscar</a></nav>
+<dialog class="optic-dialog" aria-label="Panel de información"><div class="optic-panel-bar"><button type="button" data-panel-back aria-label="Volver al panel anterior">← Atrás</button><span class="mono" data-panel-title>ARCHIVO KIROSHIRP</span><button type="button" data-panel-size aria-pressed="false">Ampliar</button><button type="button" data-panel-close aria-label="Cerrar panel">Cerrar ×</button></div><iframe title="Contenido del archivo KiroshiRP"></iframe></dialog>
+<script>
+ import '../scripts/optics';
+</script>

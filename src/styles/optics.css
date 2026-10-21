@@ -1,0 +1,43 @@
+/* Optical interface: real routes remain usable without the panel enhancement. */
+html{background:#071525}
+body{background:transparent;padding-bottom:100px}
+.optic-world{position:fixed;inset:0;z-index:-2;background:linear-gradient(90deg,#071525b8,#07152536 65%,#07152566),var(--world-image) center/cover no-repeat}
+.optic-world:after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#020b17d9 100%)}
+.optic-frame{position:fixed;inset:100px 25px 100px;pointer-events:none;z-index:-1;border:1px solid #ddf8f31c;clip-path:polygon(0 0,24% 0,24% 1px,76% 1px,76% 0,100% 0,100% 100%,76% 100%,76% calc(100% - 1px),24% calc(100% - 1px),24% 100%,0 100%);display:flex;justify-content:space-between;padding:15px;font:10px 'Share Tech Mono';letter-spacing:.12em;color:#ddf8f388}
+.site-header{inset:16px 28px auto;height:64px;border:1px solid #ddf8f333;border-radius:16px;background:#071525b8;box-shadow:0 8px 36px #0003;padding-inline:24px;backdrop-filter:blur(22px)}
+.site-header .wordmark{font-size:1.4rem}.site-header .eye{font-size:1.9rem}.site-header nav>a{padding-block:18px}.site-header nav .button{font-size:.75rem;padding:11px 14px}.nav-dropdown{border-radius:12px;background:#0a1c30f5;backdrop-filter:blur(24px)}
+body>main{max-width:1360px;margin:auto}
+body.optic-home>main{max-width:none}
+.optic-home .hero{background:transparent;min-height:calc(100svh - 70px);padding-top:105px;padding-bottom:100px;overflow:visible}
+.optic-home .hero-image,.optic-home .hero-shade{display:none}
+.optic-home .hero-top{padding:16px 7%;color:var(--ice)}
+.optic-home .hero-copy{margin:clamp(55px,9vh,110px) 0 20px 7%;max-width:650px;padding:32px;border:1px solid #ddf8f326;border-radius:4px 30px 4px 30px;background:linear-gradient(115deg,#071525ce,#102c494d);box-shadow:0 24px 70px #0003;backdrop-filter:blur(16px);position:relative}
+.optic-home .hero-copy:before{content:'';position:absolute;left:-1px;top:28px;width:3px;height:54px;background:var(--yellow);box-shadow:0 0 18px #e8c96c44}
+.optic-home .hero-copy h1{font-size:clamp(3.5rem,5.6vw,5.8rem)}
+.optic-home .hero-copy h2{font-size:.9rem}.optic-home .hero-copy p{font-size:.95rem}.optic-home .hero-coordinate{bottom:45px}.optic-home .scroll-cue{bottom:45px}
+.optic-home .ticker{background:#071525b3;backdrop-filter:blur(15px);margin:0 5%;border-radius:14px;border:1px solid var(--line)}
+.optic-home main>.section{margin:28px 5%;padding:50px 4%;border:1px solid #ddf8f32b;border-radius:22px;background:#071525e0;backdrop-filter:blur(22px);box-shadow:0 20px 60px #0003}
+.optic-home .start-card,.visual-card{border-radius:14px;background:#102c49a6;box-shadow:0 12px 30px #0002}
+.start-card:hover,.card:hover{border-color:#e8c96caa;box-shadow:0 12px 38px #0004}
+.optic-home footer,body>footer{margin:24px 5%;border-radius:20px;background:#071525ec;border:1px solid var(--line);padding:36px 4%}
+.optic-dock{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:55;display:flex;gap:6px;padding:8px;border:1px solid #ddf8f344;border-radius:20px;background:#071525d9;backdrop-filter:blur(24px);box-shadow:0 14px 50px #0008}
+.optic-dock a{display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:12px;font-size:1rem;font-weight:700;min-height:48px}.optic-dock a span{font:1.4rem 'Share Tech Mono';color:var(--ice)}.optic-dock a:hover,.optic-dock a[aria-current=page]{background:#ddf8f312;color:var(--yellow)}
+body:not(.optic-home)>main{margin:150px auto 30px;width:calc(100% - 100px);border:1px solid #ddf8f333;border-radius:0 0 20px 20px;background:#071525f5;box-shadow:0 25px 90px #0006;overflow:clip}
+.direct-panel-bar{position:absolute;top:110px;left:50%;transform:translateX(-50%);max-width:1360px;width:calc(100% - 100px);height:40px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:#102c49eb;border:1px solid var(--line);border-radius:14px 14px 0 0;font-size:.8rem}.direct-panel-bar a{padding:10px}.direct-panel-bar a span{margin-left:20px}
+body:not(.optic-home) .page-heading,body:not(.optic-home) .article-shell{padding-top:48px}
+.panel-is-open{overflow:hidden}
+.optic-dialog{padding:0;width:min(1160px,calc(100vw - 96px));height:calc(100svh - 80px);max-width:none;max-height:none;border:1px solid #ddf8f35c;border-radius:18px;background:#071525f7;color:var(--text);box-shadow:0 30px 130px #000b;overflow:hidden}
+.optic-dialog[open]{display:flex;flex-direction:column;animation:optic-focus .22s ease-out}
+.optic-dialog::backdrop{background:#020b1759;backdrop-filter:blur(8px)}
+.optic-panel-bar{height:58px;flex-shrink:0;display:flex;align-items:center;gap:12px;padding:8px 14px;border-bottom:1px solid var(--line);background:#102c49d9}.optic-panel-bar .mono{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.75rem;color:var(--ice)}.optic-panel-bar button{min-height:40px;background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:8px 12px;cursor:pointer;font:600 1rem Rajdhani}.optic-panel-bar button:hover{border-color:var(--yellow);color:var(--yellow)}
+.optic-dialog iframe{width:100%;flex:1;border:0;min-height:0;background:#071525}.optic-dialog.is-expanded{width:calc(100vw - 24px);height:calc(100svh - 24px)}
+.optic-embedded body{padding:0;background:#071525}.optic-embedded .site-header,.optic-embedded .optic-world,.optic-embedded .optic-frame,.optic-embedded .optic-dock,.optic-embedded .direct-panel-bar,.optic-embedded body>footer{display:none}
+.optic-embedded body>main{width:100%;margin:0;border:0;border-radius:0;box-shadow:none}.optic-embedded .toc{top:24px;max-height:calc(100svh - 48px)}.optic-embedded{scroll-padding-top:24px}.optic-embedded .prose h2{scroll-margin-top:24px}
+@keyframes optic-focus{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.optic-embedded h1[tabindex='-1']:focus{outline:none}
+.optic-frame>span{visibility:hidden}
+@media(min-width:981px){.optic-world{background-color:#071525;background-position:center,calc(50% + 180px) center}}
+@media(max-width:980px){.site-header{inset:12px 16px auto;height:64px}.site-header nav{top:72px;border:1px solid var(--line);border-radius:14px;background:#071525f7}.optic-home .hero-copy{max-width:610px;margin-right:7%}.optic-dock a{padding:12px 18px}}
+@media(max-width:640px){body{padding-bottom:92px}.site-header{inset:8px 10px auto;padding:0 14px;gap:10px;border-radius:12px;height:60px}.site-header .wordmark{font-size:1.2rem}.site-header .eye{display:none}.site-header nav{top:68px}.site-header .search-toggle{font-size:.9rem}.site-header .menu-toggle{padding:8px 10px}.optic-frame{inset:85px 10px 90px}.optic-frame span{display:none}.optic-home .hero{padding-top:90px;min-height:0;padding-bottom:65px}.optic-home .hero-top{font-size:.6rem;padding-inline:7%;line-height:1.8}.optic-home .hero-copy{margin:90px 5% 20px;padding:24px 20px;max-width:none;border-radius:4px 22px 4px 22px}.optic-home .hero-copy h1{font-size:clamp(2.7rem,11vw,4rem)}.optic-home .hero-copy h2{font-size:.8rem}.optic-home .hero-copy p{font-size:.9rem}.optic-home .scroll-cue{bottom:24px}.optic-home main>.section{margin:18px 4%;padding:32px 6%;border-radius:16px}.optic-home .ticker{margin-inline:4%;font-size:.6rem}.optic-home .section-heading h2{font-size:2.25rem}.optic-dock{bottom:10px;padding:5px;gap:2px;border-radius:16px;width:calc(100% - 28px);justify-content:space-around}.optic-dock a{flex-direction:column;gap:4px;padding:7px 12px;font-size:.82rem}.optic-dock a span{font-size:1.2rem}body:not(.optic-home)>main{margin-top:124px;width:calc(100% - 20px)}.direct-panel-bar{top:84px;width:calc(100% - 20px);padding-inline:12px}.direct-panel-bar>.mono{font-size:.65rem}.optic-dialog,.optic-dialog.is-expanded{width:100%;height:100svh;margin:0;border:0;border-radius:0}.optic-panel-bar{gap:6px;padding:8px}.optic-panel-bar .mono{font-size:.65rem}.optic-panel-bar button{padding:8px;font-size:.9rem}.optic-panel-bar [data-panel-size]{display:none}.optic-embedded body>main{margin:0;width:100%}.optic-embedded .section{padding-inline:6%}.optic-home footer,body>footer{margin-inline:4%;padding:30px 6%}}
+@media(prefers-reduced-motion:reduce){.optic-dialog[open]{animation:none}}
+@media print{.optic-world,.optic-frame,.optic-dock,.direct-panel-bar,.site-header{display:none}body:not(.optic-home)>main{margin:0;width:100%;border:0}}
