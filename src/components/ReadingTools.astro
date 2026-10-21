@@ -1,5 +1,7 @@
 <div class="reading-toolbar" data-pagefind-ignore hidden data-reading-tools><span class="mono">LEE A TU RITMO</span><button type="button" data-reading-toggle aria-pressed="false">Leer por apartados <span aria-hidden="true">↕</span></button></div>
 <script>
+const toc=document.querySelector<HTMLDetailsElement>('.toc details');
+if(toc&&matchMedia('(max-width: 760px)').matches)toc.open=false;
 const container=document.querySelector<HTMLElement>('[data-chapter-content]');const toolbar=document.querySelector<HTMLElement>('[data-reading-tools]');const button=document.querySelector<HTMLButtonElement>('[data-reading-toggle]');
 if(container&&toolbar&&button){
  const chapters:HTMLDetailsElement[]=[];let active:HTMLDetailsElement|undefined;
