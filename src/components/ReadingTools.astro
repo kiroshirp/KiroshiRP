@@ -7,7 +7,7 @@ if(container&&toolbar&&button){
  const chapters:HTMLDetailsElement[]=[];let active:HTMLDetailsElement|undefined;
  for(const node of Array.from(container.childNodes)){
   if(node instanceof HTMLElement&&node.tagName==='H2'){
-   active=document.createElement('details');active.className='reading-chapter';active.open=true;const summary=document.createElement('summary');const number=document.createElement('span');number.className='chapter-number mono';number.textContent=String(chapters.length+1).padStart(2,'0');summary.append(number,node);active.append(summary);container.append(active);chapters.push(active);
+   active=document.createElement('details');active.className='reading-chapter';active.open=true;const summary=document.createElement('summary');const number=document.createElement('span');number.className='chapter-number mono';number.textContent=String(chapters.length+1).padStart(2,'0');if(!/^\d+\s*\//.test(node.textContent||''))summary.append(number);summary.append(node);active.append(summary);container.append(active);chapters.push(active);
   }else if(active){active.append(node);}
  }
  if(chapters.length>1){toolbar.hidden=false;button.addEventListener('click',()=>{const guided=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(guided));button.innerHTML=guided?'Mostrar todos los apartados <span aria-hidden="true">↕</span>':'Leer por apartados <span aria-hidden="true">↕</span>';chapters.forEach((chapter,i)=>chapter.open=!guided||i===0);if(guided)openHash();});}
