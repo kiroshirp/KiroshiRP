@@ -1,11 +1,13 @@
 ---
 import {url} from '../config';
 import PortalArt from './PortalArt.astro';
+import documents from '../data/regulation-documents.json';
 const {entry,section}=Astro.props;
+const document=section==='normativas'?documents[entry.id as keyof typeof documents]:undefined;
 const pending=entry.data.status==='Por documentar';
 const initials=entry.data.title.split(/\s+/).filter((w:string)=>w.length>2).slice(0,2).map((w:string)=>w[0]).join('');
 ---
 <a class:list={['card','visual-card',{'card-pending':pending}]} href={url(section+'/'+entry.id+'/')} data-section={section} data-card data-category={entry.data.category} data-search={entry.data.title+' '+entry.data.description+' '+entry.data.category}>
 <div class="card-visual" data-visual={section}>{entry.data.image?<img src={url(entry.data.image.path)} alt={entry.data.image.alt} loading="lazy"/>:<><PortalArt kind={section==='mecanicas'?entry.id:section} compact/>{section==='facciones'&&<span class="faction-monogram" aria-hidden="true">{initials}</span>}</>}<span class="visual-category mono">{entry.data.category}</span><span class="visual-arrow" aria-hidden="true">↗</span></div>
-<div class="card-copy"><div class="card-meta">{section==='normativas'&&<span class="regulation-number mono">{String(entry.data.order).padStart(2,'0')}</span>}<span>{entry.data.origin==='CANON CYBERPUNK'?'UNIVERSO CYBERPUNK':'KIROSHIRP'}</span><span class="mono">{pending?'EN PREPARACIÓN':section==='actualizaciones'?entry.data.updated.toLocaleDateString('es-ES',{timeZone:'UTC'}):'LECTURA PÚBLICA'}</span></div><h3>{entry.data.title}</h3>{section==='normativas'&&<span class="regulation-progress">{entry.id==='rol'?'Desarrollada · Borrador V0.3':'En desarrollo'}</span>}<p>{entry.data.description}</p><div class="card-foot"><span class="badge">{entry.data.status}</span><span class="mono">{entry.data.factionStatus?'KIROSHIRP: '+entry.data.factionStatus.toUpperCase():pending?'VER QUÉ FALTA →':'DESCUBRIR →'}</span></div></div>
+<div class="card-copy"><div class="card-meta">{section==='normativas'&&<span class="regulation-number mono">{String(entry.data.order).padStart(2,'0')}</span>}<span>{entry.data.origin==='CANON CYBERPUNK'?'UNIVERSO CYBERPUNK':'KIROSHIRP'}</span><span class="mono">{pending?'EN PREPARACIÓN':section==='actualizaciones'?entry.data.updated.toLocaleDateString('es-ES',{timeZone:'UTC'}):'LECTURA PÚBLICA'}</span></div><h3>{entry.data.title}</h3>{section==='normativas'&&<span class="regulation-progress">{document?'Desarrollada · Borrador '+document.version:'En desarrollo'}</span>}<p>{entry.data.description}</p><div class="card-foot"><span class="badge">{entry.data.status}</span><span class="mono">{entry.data.factionStatus?'KIROSHIRP: '+entry.data.factionStatus.toUpperCase():pending?'VER QUÉ FALTA →':'DESCUBRIR →'}</span></div></div>
 </a>

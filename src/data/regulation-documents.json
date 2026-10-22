@@ -1,0 +1,12 @@
+{
+  "general": {
+    "version": "V0.2",
+    "pdf": "documents/normativa-general-convivencia-v0.2.pdf",
+    "note": "Texto del PDF aportado, de octubre de 2026. Borrador consolidado para aprobación y posterior publicación; requiere revisión antes de anunciarse como normativa vigente."
+  },
+  "rol": {
+    "version": "V0.3",
+    "pdf": "documents/normativa-interpretacion-violencia-ck-v0.3.pdf",
+    "note": "Texto del PDF aportado, de octubre de 2026. Conserva sus aspectos pendientes y su condición de borrador."
+  }
+}
