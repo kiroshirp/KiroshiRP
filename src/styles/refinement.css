@@ -87,6 +87,13 @@
 .search-page{padding-top:35px}
 .search-result{padding:28px}
 .search-result p{font-size:.95rem}
+.regulation-number{font-size:1.2rem!important;color:var(--yellow);min-width:2rem}
+.regulation-progress{display:block;font-family:'Share Tech Mono';font-size:.8rem;color:var(--ice);margin-bottom:16px;line-height:1.6}
+.regulation-context{border:1px solid var(--line);border-left:3px solid var(--yellow);padding:24px;margin-bottom:24px;background:#102c4966}
+.regulation-context .eyebrow{margin-bottom:12px}
+.regulation-context>strong{font-family:Rajdhani;font-size:1.6rem}
+.prose .regulation-context p{font-size:.9rem}
+.prose .regulation-context .button{font-size:.85rem;text-decoration:none;color:var(--ice)}
 .atlas-index-note,.atlas-availability{font-size:.85rem;line-height:1.8}
 .atlas-result,.atlas-index-heading>.mono,.atlas-controls label>.mono{font-size:.75rem;line-height:1.6}
 .atlas-index .atlas-plan-link,.atlas-resource-grid .text-link{font-size:.75rem}

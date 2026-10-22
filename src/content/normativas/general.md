@@ -1,13 +1,23 @@
 ---
-title: "Normativa general"
-description: "Borrador para revisión de la administración. No constituye normativa vigente."
-category: "Convivencia"
-status: "Borrador"
-origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
-order: 18
-related: ["guias/glosario"]
+title: Normativa general y convivencia
+description: Respeto, comportamiento OOC, metagaming, powergaming, exploits y
+  principios generales.
+category: Convivencia
+status: Borrador
+origin: LORE KIROSHIRP
+updated: 2026-10-22
+order: 1
+related:
+  - guias/glosario
+universeScope: Propuesta de estructura V0.2. Este apartado está en desarrollo y
+  no se presenta como normativa vigente.
 ---
+
+## Alcance propuesto
+
+Respeto, comportamiento OOC, metagaming, powergaming, exploits y principios generales.
+
+> Los apartados siguientes conservan el borrador previo. Queda pendiente completarlos y revisarlos conforme a la nueva distribución.
 
 ## Respeto y convivencia
 Propuesta: preservar un trato respetuoso fuera de personaje. Un conflicto ficticio no justifica hostilidad personal.

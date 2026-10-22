@@ -1,13 +1,22 @@
 ---
-title: "Normativa de liderazgo"
-description: "Borrador para revisión de la administración. No constituye normativa vigente."
-category: "Liderazgo"
-status: "Borrador"
-origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
-order: 21
-related: ["mecanicas/liderazgo"]
+title: Normativa de liderazgo
+description: Ascensos, sucesiones, disputas internas, destituciones y pérdida de autoridad.
+category: Liderazgo
+status: Borrador
+origin: LORE KIROSHIRP
+updated: 2026-10-22
+order: 6
+related:
+  - mecanicas/liderazgo
+universeScope: Propuesta de estructura V0.2. Este apartado está en desarrollo y
+  no se presenta como normativa vigente.
 ---
+
+## Alcance propuesto
+
+Ascensos, sucesiones, disputas internas, destituciones y pérdida de autoridad.
+
+> Los apartados siguientes conservan el borrador previo. Queda pendiente completarlos y revisarlos conforme a la nueva distribución.
 
 ## Méritos y derecho a reclamar
 Borrador: la reclamación se vincula a méritos reconocidos. Los umbrales deben aprobarse antes de aplicarse.

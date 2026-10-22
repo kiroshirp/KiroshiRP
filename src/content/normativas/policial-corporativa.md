@@ -1,13 +1,23 @@
 ---
-title: "Normativa policial y corporativa"
-description: "Borrador para revisión de la administración. No constituye normativa vigente."
-category: "Instituciones"
-status: "Borrador"
-origin: "LORE KIROSHIRP"
-updated: "2026-10-16"
-order: 23
-related: ["guias/glosario"]
+title: Normativa institucional
+description: NCPD, servicios de seguridad, corporaciones, procedimientos y
+  ejercicio de autoridad.
+category: Instituciones
+status: Borrador
+origin: LORE KIROSHIRP
+updated: 2026-10-22
+order: 9
+related:
+  - guias/glosario
+universeScope: Propuesta de estructura V0.2. Este apartado está en desarrollo y
+  no se presenta como normativa vigente.
 ---
+
+## Alcance propuesto
+
+NCPD, servicios de seguridad, corporaciones, procedimientos y ejercicio de autoridad.
+
+> Los apartados siguientes conservan el borrador previo. Queda pendiente completarlos y revisarlos conforme a la nueva distribución.
 
 ## Jerarquías
 Pendiente: estructura de rangos, acceso y competencias.

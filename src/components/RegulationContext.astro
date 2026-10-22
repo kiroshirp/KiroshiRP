@@ -1,0 +1,8 @@
+---
+import {url} from '../config';
+const {id}=Astro.props;
+---
+<section class="regulation-context" aria-label="Estado de elaboración">
+  <span class="eyebrow">PROPUESTA DE ESTRUCTURA V0.2</span>
+  {id==='rol'?<><strong>Desarrollada · Borrador V0.3</strong><p>Texto del PDF aportado, de octubre de 2026. Conserva sus aspectos pendientes y su condición de borrador.</p><a class="button" href={url('documents/normativa-interpretacion-violencia-ck-v0.3.pdf')} target="_blank" rel="noopener noreferrer">CONSULTAR PDF ORIGINAL ↗</a></>:<><strong>En desarrollo</strong><p>El alcance de este apartado pertenece a la nueva distribución propuesta. Su inclusión no confirma una normativa definitiva.</p></>}
+</section>
