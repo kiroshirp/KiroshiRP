@@ -9,11 +9,9 @@ updated: 2026-10-22
 order: 2
 related:
   - guias/glosario
-universeScope: Documento desarrollado. Borrador V0.3 · octubre de 2026. El PDF
-  lo identifica como borrador consolidado y mantiene aspectos pendientes antes
-  de su publicación definitiva. No presupone mecánicas ni scripts implementados.
+universeScope: Borrador pendiente de revisión y aprobación. No se presenta como
+  normativa vigente.
 ---
-
 ## Alcance del documento
 
 Este PDF contiene exclusivamente la normativa de interpretación, violencia y muerte permanente del personaje (CK) de KiroshiRP. Regula coherencia de personaje, metagaming y powergaming, conflictos y uso de fuerza letal, valoración de vida, heridas, incapacitación, rendición y el procedimiento de CK con garantías.

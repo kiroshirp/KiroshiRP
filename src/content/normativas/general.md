@@ -11,11 +11,9 @@ related:
   - normativas/rol
   - normativas/administrativa
   - guias/glosario
-universeScope: Documento desarrollado. Versión 0.2 · Borrador consolidado ·
-  octubre de 2026. El PDF requiere revisión antes de anunciarse como normativa
-  vigente y conserva aspectos pendientes.
+universeScope: Borrador pendiente de revisión y aprobación. No se presenta como
+  normativa vigente.
 ---
-
 ## 00 / Ámbito y principios
 
 KiroshiRP es un servidor de rol serio ambientado en el universo de Cyberpunk 2077. Busca historias compartidas, libertad contextual y consecuencias coherentes. Los sistemas del mundo pueden registrar acciones y generar oportunidades, pero ninguna mecánica legitima abusos entre jugadores.
@@ -163,4 +161,4 @@ Pendiente de desarrollo: tabla de sanciones, plazos de reclamación, canales ofi
 
 > KIROSHIRP / PRINCIPIO FINAL: «En KiroshiRP, perder forma parte del rol. Abusar de otros jugadores, no.»
 
-Documento 01 · V0.2 · Borrador para aprobación y posterior publicación. Este texto consolida las decisiones adoptadas para KiroshiRP y debe revisarse antes de anunciarse como normativa vigente.
+Documento 01 · Borrador para aprobación y posterior publicación. Este texto consolida las decisiones adoptadas para KiroshiRP y debe revisarse antes de anunciarse como normativa vigente.

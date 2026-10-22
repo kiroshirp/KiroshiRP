@@ -1,10 +1,9 @@
 ---
-import {url} from '../config';
 import documents from '../data/regulation-documents.json';
 const {id}=Astro.props;
 const document=documents[id as keyof typeof documents];
 ---
 <section class="regulation-context" aria-label="Estado de elaboración">
-  <span class="eyebrow">PROPUESTA DE ESTRUCTURA V0.2</span>
-  {document?<><strong>Desarrollada · Borrador {document.version}</strong><p>{document.note}</p><a class="button" href={url(document.pdf)} target="_blank" rel="noopener noreferrer">CONSULTAR PDF ORIGINAL ↗</a></>:<><strong>En desarrollo</strong><p>El alcance de este apartado pertenece a la nueva distribución propuesta. Su inclusión no confirma una normativa definitiva.</p></>}
+  <span class="eyebrow">ESTADO DEL DOCUMENTO</span>
+  {document?<><strong>Borrador</strong><p>{document.note}</p></>:<><strong>En desarrollo</strong><p>El alcance de este apartado pertenece a la nueva distribución propuesta. Su inclusión no confirma una normativa definitiva.</p></>}
 </section>
