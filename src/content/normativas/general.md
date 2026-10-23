@@ -5,160 +5,87 @@ description: Respeto, comportamiento OOC, metagaming, powergaming, exploits y
 category: Convivencia
 status: Borrador
 origin: LORE KIROSHIRP
-updated: 2026-10-22
+updated: 2026-10-23
 order: 1
 related:
   - normativas/rol
   - normativas/administrativa
   - guias/glosario
-universeScope: Borrador pendiente de revisión y aprobación. No se presenta como
-  normativa vigente.
+universeScope: Borrador para pruebas, pendiente de validación. El contenido
+  previsto no confirma funciones ya implementadas.
 ---
-## 00 / Ámbito y principios
 
-KiroshiRP es un servidor de rol serio ambientado en el universo de Cyberpunk 2077. Busca historias compartidas, libertad contextual y consecuencias coherentes. Los sistemas del mundo pueden registrar acciones y generar oportunidades, pero ninguna mecánica legitima abusos entre jugadores.
+> Los personajes pueden ser enemigos. Los jugadores deben respetarse. Perder forma parte del rol; abusar de otros jugadores, no.
 
-> Regla matriz: los personajes pueden ser rivales, crueles o traidores; los jugadores deben respetarse. Perder forma parte del rol. Abusar de otros jugadores, no.
 
-La presente normativa regula convivencia y conducta OOC, separación entre información del jugador y del personaje, trampas, respeto a las mecánicas y gestión de incidencias durante escenas. La violencia, rendición y CK se regulan específicamente en el documento 02.
+Ámbito. Regula la conducta entre jugadores, el uso de información y las incidencias OOC. Los conflictos violentos, la incapacitación y el CK se regulan en la Normativa 02.
+
 
 ## 01 / Respeto y convivencia
 
-Todos los participantes deben mantener un trato respetuoso fuera del personaje. Quedan prohibidos el acoso, amenazas reales, intimidación, difusión no consentida de datos personales, discriminación y campañas de hostigamiento.
+Está prohibido el acoso, las amenazas reales, la intimidación OOC, la discriminación dirigida a personas y la difusión de datos privados. Las rivalidades entre personajes nunca justifican represalias contra jugadores.
 
-Las enemistades IC no autorizan represalias OOC. El rol puede incluir personajes desagradables y conflictos duros, pero nunca puede usarse como excusa para perseguir o incomodar deliberadamente a una persona real.
 
-## 02 / Separación IC y OOC
+## 02 / Información IC y OOC
 
-IC (In Character) es lo que el personaje sabe, hace o percibe dentro del mundo. OOC (Out of Character) es lo que conoce o comunica la persona fuera de la ficción. Está prohibido trasladar conocimiento OOC al personaje sin una vía legítima dentro del rol.
+IC es lo que conoce el personaje dentro de la historia; OOC es lo que conoce su jugador. No se puede utilizar información externa como si el personaje la hubiera obtenido. Discord, retransmisiones, nombres de interfaz o datos internos del Archivo Umbral no son conocimiento IC por defecto.
 
-Ejemplo: conocer por Discord la ruta de un convoy no permite organizar una emboscada IC si el personaje no obtuvo esa información en el juego.
 
 ## 03 / Metagaming (MG)
 
-Constituye MG usar información ajena al personaje para obtener ventaja IC: streams, conversaciones externas, información administrativa, indicadores no accesibles narrativamente o identidades reveladas solo por interfaz.
+Está prohibido obtener ventajas dentro del rol mediante información de streams, conversaciones OOC, mensajes privados o herramientas administrativas. Ejemplo: descubrir por Discord la ruta de un convoy no autoriza a emboscarlo.
 
-Los datos internos del Archivo Umbral —como seguridad, suministros e influencia— no son conocimiento IC por defecto. Podrán usarse cuando se comuniquen mediante noticias, terminales, NPC u otros medios expresamente accesibles al personaje.
 
 ## 04 / Powergaming (PG)
 
-Constituye PG inventar capacidades, ignorar límites efectivos o imponer resultados sobre otros personajes sin un procedimiento válido. Las acciones deben respetar habilidades, implantes, estados físicos y oportunidades legítimas de reacción.
+Está prohibido inventar capacidades, ignorar limitaciones reales del personaje o imponer acciones y resultados a otra persona sin una posibilidad legítima de respuesta. Ningún implante, habilidad o narración permite forzar confesiones, heridas permanentes o rendiciones.
 
-- No atribuir a un implante funciones no disponibles.
 
-- No obligar narrativamente a otro personaje a confesar, rendirse o sufrir lesiones irreversibles.
+## 05 / Trampas, errores y modificaciones
 
-- No fingir invulnerabilidad ni ignorar condiciones impuestas por mecánicas válidas.
+Se prohíben trampas, automatizaciones no autorizadas, modificaciones que den ventaja, abusos del mapa y explotación de fallos. No se pueden duplicar objetos, dinero, contratos ni recompensas. Los errores deben comunicarse; que algo sea posible por un fallo no lo convierte en válido.
 
-## 05 / Juego limpio, exploits y modificaciones
 
-Está prohibido obtener ventajas injustas mediante cheats, automatización no autorizada, clientes alterados, fallos de mapa, desincronización o explotación de scripts.
+## 06 / Continuidad de las escenas
 
-- No duplicar eddies, objetos, mercancía, recompensas o entregas.
+Las escenas deben continuar normalmente hasta una conclusión razonable. Una discrepancia ordinaria por MG, PG o un resultado desfavorable se reclama después. Desconectarse a propósito para evitar una consecuencia constituye una infracción. Los fallos reales de conexión se revisan de buena fe.
 
-- No repetir fraudulentamente contratos ni manipular sus comprobaciones.
 
-- No usar fallos técnicos como recurso legítimo de rol.
+## 07 / Pausas OOC: casos excepcionales
 
-- Comunicar los fallos detectados al equipo; no difundir métodos de explotación.
+Se puede detener o abandonar una escena por acoso o amenazas reales, límites personales, contenido sensible no aceptado, fallos técnicos graves, explotación evidente de un error o indicación administrativa. Nadie debe exponer públicamente motivos íntimos.
 
-Las modificaciones cosméticas o de accesibilidad deberán ajustarse a los criterios técnicos que publique el equipo. Una función posible por error no es necesariamente una acción permitida.
+- Comunicar brevemente la pausa, detener la interacción afectada y contactar con el equipo si es necesario.
+- La pausa no puede usarse para escapar de una derrota, pedir refuerzos IC ni presionar por un resultado.
 
-## 06 / Continuidad del rol
+## 08 / Contenido sensible
 
-Como norma general, las escenas deben continuar hasta una resolución razonable. Las discrepancias ordinarias sobre MG, PG, valoración de vida o resultados desfavorables deben reclamarse después, sin detener arbitrariamente el rol.
+Quedan prohibidas las escenas de violencia sexual y de actos sexuales no consentidos, así como el acoso sexual OOC. Cualquier persona puede solicitar omitir o cerrar una escena sensible sin represalias y sin justificar públicamente sus límites.
 
-Se prohíbe desconectarse deliberadamente para evitar robos, arrestos, derrotas, persecuciones u otras consecuencias válidas. Las desconexiones involuntarias y errores reales se revisarán de buena fe.
 
-> Continuar el rol no implica renunciar a reclamar. Una escena puede concluir y revisarse después si hubo una infracción.
+## 09 / Comunicaciones y presión OOC
 
-## 07 / Pausas OOC: excepciones y procedimiento
+No se permite usar Discord u otros canales externos para comunicar posiciones o pedir refuerzos que el personaje no haya transmitido legítimamente. También se prohíbe amenazar con denuncias, inventar permisos del equipo o discutir de forma intimidatoria durante una escena.
 
-Se acepta la opción B acordada: seguir la escena salvo casos graves, fallos determinantes o vulneración de límites personales. Nadie está obligado a permanecer en contenido que vulnera sus límites o ante acoso o amenazas reales.
 
-### Motivos legítimos de pausa
+## 10 / Progreso y mecánicas
 
-- Acoso, amenazas personales o intimidación real.
+Los encargos, recompensas, habilidades e interacciones se rigen por los sistemas habilitados. Se prohíben intercambios ficticios y actividades simuladas para generar dinero o reputación artificialmente. Los scripts previstos no se consideran disponibles hasta su aprobación.
 
-- Vulneración de límites personales o contenido sensible no aceptado.
 
-- Fallo técnico grave que impide participar o distorsiona sustancialmente la escena.
+## 11 / Reclamaciones
 
-- Explotación grave y manifiesta que exige evitar daños adicionales.
+Las incidencias se comunican por canales oficiales con los datos y pruebas disponibles. No es obligatorio haber grabado toda la escena para reclamar. Se prohíben las acusaciones públicas para presionar, la difusión de información privada y las represalias por denuncias de buena fe.
 
-- Instrucción expresa de administración autorizada.
 
-### Cómo actuar
+## 12 / Actuación administrativa
 
-1. Comunicar la pausa de forma breve, sin necesidad de exponer datos íntimos.
-2. Detener la interacción afectada en cuanto sea posible.
-3. Evitar discusiones o presiones OOC.
-4. Contactar con administración si hace falta.
-5. Reanudar, modificar o cerrar la escena según proceda.
+El equipo revisará los hechos con imparcialidad, proporcionalidad y discreción. Quien tenga un interés directo en una disputa no deberá resolverla. La lista de sanciones, los plazos y las apelaciones se detallarán en la Normativa 12.
 
-Ejemplo de mensaje: «OOC: necesito detener esta escena por un motivo personal. Voy a contactar con administración».
 
-Ante vulneración de límites personales, el afectado puede abandonar la escena sin esperar permiso. Una pausa no puede utilizarse intencionalmente para eludir una derrota o comunicar información IC a terceros.
+> Regla rápida: continúa el rol ante desacuerdos ordinarios. Detén la escena cuando haya un motivo grave o un límite personal.
 
-## 08 / Límites personales y contenido sensible
 
-Night City puede ser brutal, pero las personas no tienen por qué soportar cualquier contenido. Quedan prohibidas las escenas de violencia sexual o actos sexuales no consentidos y el acoso sexual OOC.
+Estado: borrador para pruebas. Los canales de reclamación, sanciones y herramientas de recuperación de escenas siguen pendientes de validación.
 
-Cualquier jugador puede solicitar omitir, resumir o cerrar una escena sensible. No está obligado a justificar públicamente sus límites, y no podrán existir represalias por establecerlos de buena fe.
 
-El equipo priorizará las incidencias que impliquen acoso, amenazas reales o límites personales. Estas garantías son independientes de la coherencia del lore.
-
-## 09 / Comunicaciones externas y conducta OOC
-
-Discord y otras plataformas sirven para la comunidad, pero no deben utilizarse para transmitir información IC que el personaje no pueda enviar legítimamente. Esto incluye posiciones, peticiones de refuerzos y datos de operaciones en curso.
-
-Queda prohibido amenazar con reportes para forzar rendiciones, inventar autorizaciones administrativas, debatir agresivamente durante una escena o aprovechar datos obtenidos en reclamaciones para actuar IC.
-
-## 10 / Respeto a mecánicas y progresión
-
-Las acciones y recompensas se sujetarán a las mecánicas aprobadas. Los orígenes, especializaciones y reputaciones tienen funciones diferenciadas: el origen describe el pasado, la especialización limita capacidades y el Street Cred no otorga liderazgo automático.
-
-Se prohíben transacciones ficticias para inflar reputación, acuerdos simulados para multiplicar premios, y cualquier abuso de contratos o economía. La actividad cotidiana podrá hacerse mediante NPC cuando estén disponibles; el contenido previsto en documentos de desarrollo no se presume implementado.
-
-Los scripts pueden validar operaciones y actualizar estados del mundo, pero no sustituyen las decisiones humanas sobre sanciones o consecuencias irreversibles.
-
-## 11 / Reclamaciones y conflictos OOC
-
-Los desacuerdos se remitirán a los canales adecuados, aportando contexto y pruebas disponibles. No será obligatorio grabar toda escena para poder reclamar. Quedan prohibidas acusaciones públicas intimidatorias, campañas de presión y represalias por reportes de buena fe.
-
-Ante una pausa o un fallo relevante, administración valorará cómo preservar el estado de la escena, si resulta viable técnicamente. Puede revisar hechos, corregir errores, ordenar una reanudación o disponer otra solución proporcionada; ninguna restauración automática se presume disponible.
-
-## 12 / Responsabilidad administrativa
-
-El staff debe actuar con imparcialidad, proporcionalidad, discreción y respeto a las historias compartidas. Diferenciará errores ocasionales, discrepancias interpretativas y abusos deliberados. Ningún participante deberá decidir una reclamación en la que tenga interés directo.
-
-Las sanciones específicas, los plazos de reclamación y los recursos se establecerán en la futura Normativa 12 — Administrativa. Las normas de combate, rendición, incapacitación y CK constan en la Normativa 02 — Interpretación, violencia y CK.
-
-## 13 / Casos prácticos
-
-| Caso | Criterio |
-| --- | --- |
-| Atraco discutido por un supuesto PG ordinario | Continuar si es seguro y reclamar después. |
-| Amenazas reales durante una escena | Se permite detener la participación y pedir intervención. |
-| Exploit evidente en un cargamento | Puede pausarse la interacción para conservar pruebas y evitar daños. |
-| Contenido que vulnera límites personales | Pausa inmediata protegida; sin obligación de revelar detalles íntimos. |
-| Pérdida de mercancía en emboscada válida | La pérdida por sí sola no permite interrumpir la escena. |
-| Discord informa una ruta desconocida IC | Utilizarla para atacar constituye metagaming. |
-
-## 14 / Relación con otras normativas
-
-| Documento | Ámbito |
-| --- | --- |
-| 01 – General y convivencia | Respeto, conducta OOC, MG/PG, exploits, pausas y reclamaciones iniciales. |
-| 02 – Interpretación, violencia y CK | Valoración de vida, fuerza letal contextual, rendición, incapacitación y CK con autorización previa obligatoria. |
-| 12 – Administrativa (pendiente) | Sanciones, plazos, apelaciones, investigación y procedimientos de revisión. |
-
-## 15 / Estado y límites del documento
-
-Definido en este borrador: respeto y separación IC/OOC; prohibición de MG, PG, trampas y exploits; continuidad ordinaria de escenas; pausas ante casos graves o límites personales; protección del jugador; principio de imparcialidad.
-
-Pendiente de desarrollo: tabla de sanciones, plazos de reclamación, canales oficiales de tickets, compatibilidad concreta de modificaciones y capacidades técnicas de restauración o registro. Estos extremos no se presentan como funciones ya disponibles.
-
-> KIROSHIRP / PRINCIPIO FINAL: «En KiroshiRP, perder forma parte del rol. Abusar de otros jugadores, no.»
-
-Documento 01 · Borrador para aprobación y posterior publicación. Este texto consolida las decisiones adoptadas para KiroshiRP y debe revisarse antes de anunciarse como normativa vigente.

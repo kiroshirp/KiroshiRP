@@ -1,12 +1,14 @@
 {
   "general": {
-    "version": "V0.2",
-    "pdf": "documents/normativa-general-convivencia-v0.2.pdf",
-    "note": "Documento pendiente de revisión y aprobación."
+    "version": "0.2",
+    "note": "Borrador para pruebas, pendiente de validación."
   },
   "rol": {
-    "version": "V0.3",
-    "pdf": "documents/normativa-interpretacion-violencia-ck-v0.3.pdf",
-    "note": "Documento pendiente de revisión y aprobación."
+    "version": "0.2",
+    "note": "Borrador para pruebas, pendiente de validación."
+  },
+  "personajes-progresion": {
+    "version": "0.2",
+    "note": "Borrador para pruebas, pendiente de validación."
   }
 }

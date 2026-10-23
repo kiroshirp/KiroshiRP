@@ -5,5 +5,5 @@ const document=documents[id as keyof typeof documents];
 ---
 <section class="regulation-context" aria-label="Estado de elaboración">
   <span class="eyebrow">ESTADO DEL DOCUMENTO</span>
-  {document?<><strong>Borrador</strong><p>{document.note}</p></>:<><strong>En desarrollo</strong><p>El alcance de este apartado pertenece a la nueva distribución propuesta. Su inclusión no confirma una normativa definitiva.</p></>}
+  {document?<><strong>Borrador · Versión {document.version}</strong><p>{document.note}</p></>:<><strong>En desarrollo</strong><p>El alcance de este apartado pertenece a la nueva distribución propuesta. Su inclusión no confirma una normativa definitiva.</p></>}
 </section>
