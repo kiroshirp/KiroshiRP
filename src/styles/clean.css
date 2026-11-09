@@ -3,7 +3,6 @@ html{scroll-padding-top:90px}
 body{padding-bottom:0;background:#071525}
 .optic-world{opacity:.12;background-position:center;background-size:cover}
 .optic-world:after{background:#07152599}
-.optic-home .optic-world{display:none}
 .site-header,.site-header.scrolled{inset:0 0 auto;height:76px;padding:0 max(4%,calc((100vw - 1320px)/2));border:0;border-bottom:1px solid #ddf8f326;border-radius:0;background:#071525f2;box-shadow:none;backdrop-filter:blur(16px)}
 .site-header nav{gap:clamp(12px,2vw,30px)}
 .site-header nav>a{padding:24px 0;font-size:.94rem}
