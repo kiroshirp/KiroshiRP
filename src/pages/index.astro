@@ -12,7 +12,7 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
   <section class="clean-hero" aria-labelledby="home-title">
     <div class="clean-hero-copy">
       <div class="clean-hero-brand"><img src={url('images/kiroshi-logo.webp')} alt="" width="72" height="72"/><span class="eyebrow">{home.texts.bienvenida}</span></div>
-      <h1 id="home-title">{home.texts.titularCiudad}<br/><em>{home.texts.titularHistorias}</em></h1>
+      <h1 id="home-title" class="discord-intro" aria-label={`${home.texts.titularCiudad} ${home.texts.titularHistorias}`}><span class="discord-glitch-line" data-text={home.texts.titularCiudad} aria-hidden="true">{home.texts.titularCiudad}</span><em class="discord-glitch-line" data-text={home.texts.titularHistorias} aria-hidden="true">{home.texts.titularHistorias}</em></h1>
       <p class="clean-hero-lead">{home.texts.subtitulo}</p>
       <p>{home.texts.descripcion}</p>
       <div class="actions"><a class="button primary" href={url('guias/primeros-pasos/')}>Empieza aquí <span aria-hidden="true">↗</span></a><a class="button" href={url('explorar/')}>Explorar Night City</a></div>
@@ -43,6 +43,10 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
 </Base>
 
 <script>
+  const title=document.querySelector<HTMLElement>('#home-title');
+  title?.addEventListener('animationend',event=>{
+    if (event.animationName==='discord-text-skew') title.classList.remove('discord-intro');
+  });
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -56,6 +60,16 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
     });
   }
   if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lines=title?.querySelectorAll<HTMLElement>('.discord-glitch-line');
+    title?.addEventListener('pointermove',event=>{
+      lines?.forEach(line=>{
+        const bounds=line.getBoundingClientRect();
+        line.style.setProperty('--glitch-x',`${event.clientX-bounds.left}px`);
+        line.style.setProperty('--glitch-y',`${event.clientY-bounds.top}px`);
+      });
+      title.classList.add('has-pointer');
+    });
+    title?.addEventListener('pointerleave',()=>title.classList.remove('has-pointer'));
     const hero = document.querySelector<HTMLElement>('.clean-hero');
     hero?.addEventListener('pointermove', event => {
       const bounds = hero.getBoundingClientRect();
