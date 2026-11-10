@@ -1,0 +1,6 @@
+---
+import Base from '../layouts/Base.astro';
+import DiscordAccess from '../components/DiscordAccess.astro';
+import {site} from '../config';
+---
+<Base title="Discord oficial" description="Acceso al Discord oficial de KiroshiRP."><section class="section page-heading"><span class="eyebrow">COMUNIDAD</span><h1>Discord oficial</h1><p>Un lugar para seguir las comunicaciones del equipo y contactar con la comunidad.</p></section><section class="section discord-page">{site.discord ? <DiscordAccess direct/> : <p>El acceso al Discord aún no está disponible.</p>}</section></Base>

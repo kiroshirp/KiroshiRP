@@ -1,4 +1,4 @@
 ---
-import {site} from '../config';
+import {site,url} from '../config';
 ---
-{site.discord ? <a class="button primary" href={site.discord} target="_blank" rel="noopener noreferrer">UNIRSE A DISCORD ↗</a> : <span class="button unavailable" aria-label="Discord: enlace pendiente de confirmación">DISCORD · PRÓXIMAMENTE</span>}
+{site.discord ? <a class="button primary" href={url('discord/')}>DISCORD ↗</a> : <span class="button unavailable" aria-label="Discord: enlace pendiente de confirmación">DISCORD · PRÓXIMAMENTE</span>}
