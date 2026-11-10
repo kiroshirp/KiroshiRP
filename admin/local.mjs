@@ -28,7 +28,8 @@ export async function startLocal({root=project,env=process.env,port=Number(env.A
  const store=localStore(root);
  const service=createService({env,store,repo:localRepository(root),local:true,assets:async p=>{
   const bytes=await fs.readFile(path.join(project,'admin/ui',p.slice(1)));
-  return new Response(bytes,{headers:{'Content-Type':p.endsWith('.js')?'text/javascript; charset=utf-8':p.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8'}});
+  const type=p.endsWith('.js')?'text/javascript; charset=utf-8':p.endsWith('.css')?'text/css; charset=utf-8':p.endsWith('.webp')?'image/webp':p.endsWith('.png')?'image/png':'text/html; charset=utf-8';
+  return new Response(bytes,{headers:{'Content-Type':type}});
  }});
  let pending=Promise.resolve();
  const server=http.createServer((req,res)=>{

@@ -15,7 +15,7 @@ export function createService({env,store,repo,assets,local=false}){
    if(!['GET','POST','PUT','DELETE'].includes(request.method))return finish(json({error:'Método no permitido.'},405));
    if(!path.startsWith('/admin'))return finish(new Response(null,{status:302,headers:{Location:'/admin/'}}));
    if(!path.startsWith('/admin/api/')){
-    if(!['/admin','/admin/app.js','/admin/editor.js','/admin/preview.js','/admin/style.css'].includes(path))return finish(json({error:'No encontrado.'},404));
+    if(!['/admin','/admin/app.js','/admin/editor.js','/admin/preview.js','/admin/style.css','/admin/brand.webp','/admin/city.webp','/admin/favicon.png'].includes(path))return finish(json({error:'No encontrado.'},404));
     return finish(await assets(path==='/admin'?'/index.html':path.slice(6)));
    }
    if(!env.ADMIN_USERNAME?.trim() || (env.ADMIN_PASSWORD?.length||0)<13)return finish(json({error:'Administrador pendiente de configurar: completa el .env privado y usa una contraseña de al menos 13 caracteres.'},503));
