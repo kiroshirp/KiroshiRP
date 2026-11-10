@@ -1,6 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
-import DiscordAccess from '../components/DiscordAccess.astro';
-import {site} from '../config';
+import {site,url} from '../config';
 ---
-<Base title="Discord oficial" description="Acceso al Discord oficial de KiroshiRP."><section class="section page-heading"><span class="eyebrow">COMUNIDAD</span><h1>Discord oficial</h1><p>Un lugar para seguir las comunicaciones del equipo y contactar con la comunidad.</p></section><section class="section discord-page">{site.discord ? <DiscordAccess direct/> : <p>El acceso al Discord aún no está disponible.</p>}</section></Base>
+<Base title="Acceso a la comunidad" description="Entra en el Discord oficial de KiroshiRP y descubre el proyecto antes de participar.">
+  <section class="discord-gate" aria-labelledby="discord-title">
+    <div class="discord-gate-scene" aria-hidden="true"><img src={url('images/landing-project.webp')} alt="" width="1280" height="720" fetchpriority="high"/></div>
+    <div class="discord-gate-top mono"><span>KIROSHIRP <b>/</b> COMUNIDAD</span><span>ACCESO OFICIAL · DISCORD</span></div>
+    <div class="discord-gate-content">
+      <div class="discord-gate-identity"><img src={url('images/kiroshi-logo.webp')} alt="" width="86" height="86"/><span class="mono">KIROSHI<br/>ROLEPLAY</span></div>
+      <span class="discord-gate-kicker mono">TU PUNTO DE ENTRADA</span>
+      <h1 id="discord-title">NIGHT CITY.<br/><em>MÁS HISTORIAS.</em></h1>
+      <p class="discord-gate-lead">La ciudad es la misma. Tu historia no.</p>
+      {site.discord ? <><a class="discord-gate-cta" href={site.discord} target="_blank" rel="noopener noreferrer"><span>Entrar al Discord oficial</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Se abrirá Discord en una pestaña nueva.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
+    </div>
+    <div class="discord-gate-bottom mono"><span>KIROSHIRP / NIGHT CITY</span><a href="#antes-de-entrar">CONOCE EL PROYECTO <span aria-hidden="true">↓</span></a></div>
+  </section>
+  <section class="discord-gate-next" id="antes-de-entrar" aria-labelledby="discord-next-title"><div><span class="eyebrow">ANTES DE ENTRAR</span><h2 id="discord-next-title">Conoce KiroshiRP.</h2><p>Explora la guía de inicio y consulta las normativas publicadas como borradores.</p></div><nav aria-label="Lecturas recomendadas"><a href={url('guias/primeros-pasos/')}>Guía de inicio <span aria-hidden="true">↗</span></a><a href={url('normativas/')}>Normativas <span aria-hidden="true">↗</span></a></nav></section>
+</Base>
