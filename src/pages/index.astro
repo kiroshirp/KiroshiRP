@@ -11,7 +11,7 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
 <Base active="inicio">
   <section class="clean-hero" aria-labelledby="home-title">
     <div class="clean-hero-copy">
-      <span class="eyebrow">{home.texts.bienvenida}</span>
+      <div class="clean-hero-brand"><img src={url('images/kiroshi-logo.webp')} alt="" width="72" height="72"/><span class="eyebrow">{home.texts.bienvenida}</span></div>
       <h1 id="home-title">{home.texts.titularCiudad}<br/><em>{home.texts.titularHistorias}</em></h1>
       <p class="clean-hero-lead">{home.texts.subtitulo}</p>
       <p>{home.texts.descripcion}</p>
