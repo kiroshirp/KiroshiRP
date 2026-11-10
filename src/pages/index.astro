@@ -4,7 +4,6 @@ import homeData from '../data/home.json';
 import {homeSchema} from '../../admin/schema.mjs';
 import {url} from '../config';
 import {getCollection} from 'astro:content';
-import PortalArt from '../components/PortalArt.astro';
 const home=homeSchema.parse(homeData);
 const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).sort((a,b)=>b.data.updated.valueOf()-a.data.updated.valueOf()).slice(0,3);
 ---
@@ -21,17 +20,17 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
     <div class="clean-hero-media"><img src={url('images/kiroshi-background.svg')} alt="Vista azul de Night City con el emblema de Kiroshi Roleplay" width="1024" height="571" fetchpriority="high"/></div>
   </section>
 
-  <section class="clean-section clean-intro" aria-labelledby="project-title">
-    <div><span class="eyebrow">{home.texts.etiquetaProyecto}</span><h2 id="project-title">{home.texts.tituloCiudad}<br/><em>{home.texts.tituloInfinitas}</em></h2></div>
-    <div><p class="lead">{home.texts.presentacion}</p><p>{home.texts.descripcionProyecto}</p></div>
+  <section class="clean-section clean-intro clean-reveal" aria-labelledby="project-title">
+    <div class="clean-intro-media" aria-hidden="true"><img src={url('images/landing-project.webp')} alt="" width="1280" height="720" loading="lazy"/></div>
+    <div class="clean-intro-content"><span class="eyebrow">{home.texts.etiquetaProyecto}</span><h2 id="project-title">{home.texts.tituloCiudad}<br/><em>{home.texts.tituloInfinitas}</em></h2><p class="lead">{home.texts.presentacion}</p><p>{home.texts.descripcionProyecto}</p></div>
   </section>
 
   <section class="clean-section clean-paths" aria-labelledby="paths-title">
-    <div class="clean-section-head"><div><span class="eyebrow">TU PUNTO DE ENTRADA</span><h2 id="paths-title">Elige por dónde empezar.</h2></div></div>
+    <div class="clean-section-head clean-reveal"><div><span class="eyebrow">TU PUNTO DE ENTRADA</span><h2 id="paths-title">Elige por dónde empezar.</h2></div></div>
     <div class="clean-path-grid">
-      <a class="clean-path-card" href={url('guias/primeros-pasos/')}><span class="clean-path-art"><PortalArt kind="route"/></span><span class="mono">01 / TU PRIMER PASO</span><strong>Primeros pasos</strong><small>El punto de llegada y tus primeros contactos.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
-      <a class="clean-path-card" href={url('lore/protocolo-umbral/')}><span class="clean-path-art"><PortalArt kind="city"/></span><span class="mono">02 / EL COMIENZO</span><strong>Protocolo Umbral</strong><small>El inicio en el este y el plan de apertura.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
-      <a class="clean-path-card" href={url('normativas/')}><span class="clean-path-art"><PortalArt kind="community"/></span><span class="mono">03 / DOCUMENTOS</span><strong>Normativas</strong><small>Consulta los borradores y su estado.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
+      <a class="clean-path-card clean-reveal" href={url('guias/primeros-pasos/')}><span class="clean-path-art"><img src={url('images/landing-first-steps.webp')} alt="" width="724" height="600" loading="lazy"/></span><span class="mono">01 / TU PRIMER PASO</span><strong>Primeros pasos</strong><small>El punto de llegada y tus primeros contactos.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
+      <a class="clean-path-card clean-reveal" href={url('lore/protocolo-umbral/')}><span class="clean-path-art"><img src={url('images/landing-threshold.webp')} alt="" width="724" height="600" loading="lazy"/></span><span class="mono">02 / EL COMIENZO</span><strong>Protocolo Umbral</strong><small>El inicio en el este y el plan de apertura.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
+      <a class="clean-path-card clean-reveal" href={url('normativas/')}><span class="clean-path-art"><img src={url('images/landing-regulations.webp')} alt="" width="724" height="600" loading="lazy"/></span><span class="mono">03 / DOCUMENTOS</span><strong>Normativas</strong><small>Consulta los borradores y su estado.</small><span class="clean-path-arrow" aria-hidden="true">↗</span></a>
     </div>
     <a class="clean-path-search text-link" href={url('buscar/')}>¿Buscas algo concreto? Consulta el archivo ↗</a>
   </section>
@@ -41,6 +40,18 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
 </Base>
 
 <script>
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    }), {threshold:0.08});
+    document.querySelectorAll<HTMLElement>('.clean-reveal').forEach(element => {
+      if (element.getBoundingClientRect().top > innerHeight) element.classList.add('will-reveal');
+      observer.observe(element);
+    });
+  }
   if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const hero = document.querySelector<HTMLElement>('.clean-hero');
     hero?.addEventListener('pointermove', event => {
