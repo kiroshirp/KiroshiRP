@@ -8,8 +8,34 @@ body{padding-bottom:0;background:#071525}
 .site-header nav>a{padding:24px 0;font-size:.94rem}
 .site-header nav>a[aria-current=page]:after{bottom:17px}
 .site-header nav .button{font-size:.74rem;padding:10px 14px}
+.site-header nav .button.primary{background:transparent;border-color:transparent;clip-path:none;color:var(--ice);box-shadow:none}
+.site-header nav .button.primary:hover{color:var(--yellow);transform:none}
 body:not(.optic-home)>main{width:min(100% - 48px,1240px);margin:102px auto 44px;border:0;border-radius:0;background:#071525ed;box-shadow:none;overflow:visible}
-body:not(.optic-home) .page-heading,body:not(.optic-home) .article-shell{padding-top:52px}
+body:not(.optic-home) .page-heading{display:block;padding:42px 5% 32px;background:#0a1c30;border-bottom:1px solid var(--line)}
+body:not(.optic-home) .page-heading h1{font-size:clamp(2.6rem,4.5vw,4rem);margin:0 0 14px}
+body:not(.optic-home) .page-heading p{font-size:1rem;line-height:1.6;margin:0}
+body:not(.optic-home) .page-heading .eyebrow{margin-bottom:14px}
+body:not(.optic-home) .page-heading .cover-art{display:none}
+body:not(.optic-home) .article-shell{padding-top:52px}
+.library{padding-top:32px}
+.regulation-list{border-top:1px solid var(--line)}
+.regulation-card{display:grid;grid-template-columns:42px minmax(0,1fr) auto 20px;align-items:center;gap:18px;padding:18px 10px;border-bottom:1px solid var(--line)}
+.regulation-card:hover{background:#102c4970}
+.regulation-card-number,.regulation-card-arrow{color:var(--yellow)}
+.regulation-card-content strong{display:block;font:700 1.45rem Rajdhani,sans-serif;line-height:1.2}
+.regulation-card-content small{display:block;margin-top:4px;color:var(--muted);font-size:.83rem;line-height:1.5}
+.regulation-card-status{color:var(--ice);font-family:'Share Tech Mono',monospace;font-size:.7rem;white-space:nowrap}
+.regulation-more{margin-top:24px}
+.regulation-more>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:54px;padding:12px 10px;cursor:pointer;color:var(--text);font:700 1.35rem Rajdhani,sans-serif;border-bottom:1px solid var(--line)}
+.regulation-more>summary .mono{font-size:.7rem;color:var(--muted)}
+.regulation-more .regulation-list{border-top:0}
+.atlas{padding-top:24px}
+.atlas-advanced{margin:0 0 24px;border-bottom:1px solid var(--line)}
+.atlas-advanced>summary{min-height:48px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--ice);font:700 1.15rem Rajdhani,sans-serif}
+.atlas-advanced>summary>span{color:var(--yellow)}
+.atlas-advanced[open]>summary>span{transform:rotate(180deg)}
+.atlas-advanced .atlas-controls{padding:12px 0 24px;margin:0;border:0}
+.atlas-index{top:90px}
 .optic-home main{max-width:1320px;margin:0 auto}
 .clean-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);align-items:center;gap:clamp(24px,4vw,70px);min-height:min(760px,100svh);padding:120px 4% 72px}
 .clean-hero-copy{max-width:580px}
@@ -41,7 +67,7 @@ body:not(.optic-home) .page-heading,body:not(.optic-home) .article-shell{padding
 body>footer{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:#040e19;padding:48px max(4%,calc((100vw - 1240px)/2)) 30px}
 .footer-links{gap:12px 25px}
 @media(max-width:980px){.site-header{padding-inline:4%}.site-header nav{top:76px;left:4%;right:4%;padding:20px 24px;border:1px solid var(--line);border-radius:0;background:#071525fa}.site-header nav>a{padding:12px 0}.site-header nav>a[aria-current=page]:after{bottom:5px}.site-header nav .button{align-self:start;margin:12px 0 0}.clean-hero{min-height:0;padding-top:124px}.clean-hero h1{font-size:clamp(3rem,6vw,4.7rem)}}
-@media(max-width:760px){.clean-hero{grid-template-columns:1fr;gap:30px;padding-top:112px;padding-bottom:50px}.clean-hero-copy{max-width:none}.clean-hero-media{max-width:650px}.clean-intro{grid-template-columns:1fr;gap:26px}.clean-section{padding:54px 6%}.clean-section-head{display:block}.clean-section-head>p{margin-top:18px;max-width:none}.clean-close{display:block}.clean-close .button{margin-top:30px}body:not(.optic-home)>main{width:calc(100% - 24px);margin-top:88px}body:not(.optic-home) .page-heading,body:not(.optic-home) .article-shell{padding-top:36px}}
+@media(max-width:760px){.clean-hero{grid-template-columns:1fr;gap:30px;padding-top:112px;padding-bottom:50px}.clean-hero-copy{max-width:none}.clean-hero-media{max-width:650px}.clean-intro{grid-template-columns:1fr;gap:26px}.clean-section{padding:54px 6%}.clean-section-head{display:block}.clean-section-head>p{margin-top:18px;max-width:none}.clean-close{display:block}.clean-close .button{margin-top:30px}body:not(.optic-home)>main{width:calc(100% - 24px);margin-top:88px}body:not(.optic-home) .page-heading{padding:30px 6% 25px}body:not(.optic-home) .article-shell{padding-top:36px}.regulation-card{grid-template-columns:30px minmax(0,1fr) 18px;gap:10px}.regulation-card-status{grid-column:2;white-space:normal}.regulation-card-arrow{grid-column:3;grid-row:1}.regulation-card-content small{font-size:.78rem}}
 @media(max-width:640px){.site-header{height:68px;padding-inline:5%}.site-header nav{top:68px;left:0;right:0}.clean-hero{padding:100px 6% 45px}.clean-hero h1{font-size:clamp(3.15rem,12vw,4.7rem)}.clean-hero .actions{flex-direction:row;align-items:stretch}.clean-hero .button{font-size:.82rem;padding:13px}.clean-link-list>a{grid-template-columns:30px 1fr 20px;gap:10px;padding-inline:0}.clean-link-list strong{font-size:1.4rem}.clean-link-list small{font-size:.8rem}.clean-status{margin-top:22px}body>footer{margin:0;padding:42px 6% 30px}}
 @media(max-width:380px){.clean-hero .actions{flex-direction:column}}
 @media print{.optic-world{display:none}.clean-hero{min-height:0;padding-top:0}}
