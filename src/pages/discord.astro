@@ -4,12 +4,12 @@ import {site,url} from '../config';
 ---
 <Base title="Acceso a la comunidad" description="Entra en el Discord oficial de KiroshiRP y descubre el proyecto antes de participar.">
   <section class="discord-gate" aria-labelledby="discord-title">
-    <div class="discord-gate-scene" aria-hidden="true"><img src={url('images/landing-project.webp')} alt="" width="1280" height="720" fetchpriority="high"/><img class="discord-gate-glitch" src={url('images/landing-project.webp')} alt="" width="1280" height="720"/></div>
+    <div class="discord-gate-scene" aria-hidden="true"><img src={url('images/landing-project.webp')} alt="" width="1280" height="720" fetchpriority="high"/></div>
     <div class="discord-gate-top mono"><span>KIROSHIRP <b>/</b> COMUNIDAD</span><span>ACCESO OFICIAL · DISCORD</span></div>
     <div class="discord-gate-content">
       <div class="discord-gate-identity"><img src={url('images/kiroshi-logo.webp')} alt="" width="86" height="86"/><span class="mono">KIROSHI<br/>ROLEPLAY</span></div>
       <span class="discord-gate-kicker mono">TU PUNTO DE ENTRADA</span>
-      <h1 id="discord-title" aria-label="Night City. Más historias."><span class="discord-glitch-line" data-text="NIGHT CITY." aria-hidden="true">NIGHT CITY.</span><em class="discord-glitch-line" data-text="MÁS HISTORIAS." aria-hidden="true">MÁS HISTORIAS.</em></h1>
+      <h1 id="discord-title" class="discord-intro" aria-label="Night City. Más historias."><span class="discord-glitch-line" data-text="NIGHT CITY." aria-hidden="true">NIGHT CITY.</span><em class="discord-glitch-line" data-text="MÁS HISTORIAS." aria-hidden="true">MÁS HISTORIAS.</em></h1>
       <p class="discord-gate-lead">La ciudad es la misma. Tu historia no.</p>
       {site.discord ? <><a class="discord-gate-cta" href={site.discord} target="_blank" rel="noopener noreferrer"><span>Entrar al Discord oficial</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Se abrirá Discord en una pestaña nueva.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
     </div>
@@ -19,14 +19,20 @@ import {site,url} from '../config';
 </Base>
 
 <script>
+  const title=document.querySelector<HTMLElement>('#discord-title');
+  title?.addEventListener('animationend',event=>{
+    if (event.animationName==='discord-text-skew') title.classList.remove('discord-intro');
+  });
   if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const gate=document.querySelector<HTMLElement>('.discord-gate');
-    gate?.addEventListener('pointermove',event=>{
-      const bounds=gate.getBoundingClientRect();
-      gate.style.setProperty('--glitch-x',`${event.clientX-bounds.left}px`);
-      gate.style.setProperty('--glitch-y',`${event.clientY-bounds.top}px`);
-      gate.classList.add('has-pointer');
+    const lines=title?.querySelectorAll<HTMLElement>('.discord-glitch-line');
+    title?.addEventListener('pointermove',event=>{
+      lines?.forEach(line=>{
+        const bounds=line.getBoundingClientRect();
+        line.style.setProperty('--glitch-x',`${event.clientX-bounds.left}px`);
+        line.style.setProperty('--glitch-y',`${event.clientY-bounds.top}px`);
+      });
+      title.classList.add('has-pointer');
     });
-    gate?.addEventListener('pointerleave',()=>gate.classList.remove('has-pointer'));
+    title?.addEventListener('pointerleave',()=>title.classList.remove('has-pointer'));
   }
 </script>
