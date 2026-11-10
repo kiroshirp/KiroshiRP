@@ -9,7 +9,7 @@ import {site,url} from '../config';
     <div class="discord-gate-content">
       <div class="discord-gate-identity"><img src={url('images/kiroshi-logo.webp')} alt="" width="86" height="86"/><span class="mono">KIROSHI<br/>ROLEPLAY</span></div>
       <span class="discord-gate-kicker mono">TU PUNTO DE ENTRADA</span>
-      <h1 id="discord-title">NIGHT CITY.<br/><em>MÁS HISTORIAS.</em></h1>
+      <h1 id="discord-title" aria-label="Night City. Más historias."><span class="discord-glitch-line" data-text="NIGHT CITY." aria-hidden="true">NIGHT CITY.</span><em class="discord-glitch-line" data-text="MÁS HISTORIAS." aria-hidden="true">MÁS HISTORIAS.</em></h1>
       <p class="discord-gate-lead">La ciudad es la misma. Tu historia no.</p>
       {site.discord ? <><a class="discord-gate-cta" href={site.discord} target="_blank" rel="noopener noreferrer"><span>Entrar al Discord oficial</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Se abrirá Discord en una pestaña nueva.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
     </div>
