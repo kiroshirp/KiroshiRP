@@ -26,6 +26,10 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
 <script>
  const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle'); const nav=document.querySelector('#navigation');
  toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav?.classList.toggle('open',open)});
- document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle?.getAttribute('aria-expanded')==='true'){toggle.setAttribute('aria-expanded','false');nav?.classList.remove('open');toggle.focus();}});
+ const groups=Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
+ const closeGroups=()=>groups.forEach(group=>group.open=false);
+ groups.forEach(group=>group.addEventListener('toggle',()=>{if(group.open)groups.filter(other=>other!==group).forEach(other=>other.open=false);}));
+ document.addEventListener('click',event=>{if(event.target instanceof Node&&!nav?.contains(event.target))closeGroups();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const opened=groups.find(group=>group.open);closeGroups();opened?.querySelector('summary')?.focus();if(toggle?.getAttribute('aria-expanded')==='true'){toggle.setAttribute('aria-expanded','false');nav?.classList.remove('open');toggle.focus();}}});
  window.addEventListener('scroll',()=>document.querySelector('.site-header')?.classList.toggle('scrolled',window.scrollY>30),{passive:true});
 </script></body></html>
