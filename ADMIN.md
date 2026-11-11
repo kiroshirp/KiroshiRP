@@ -46,7 +46,7 @@ npm run admin:deploy
 
 El último comando despliega el Worker y carga mediante entrada estándar las credenciales del administrador, GitHub y Discord como secretos, sin imprimir sus valores ni crear archivos temporales con ellos. La configuración pública está en `wrangler.jsonc`; el código del Worker está en `admin/worker.mjs`. Solo `admin/ui/` se sube como recursos del administrador, nunca la raíz del proyecto ni `.env`. Hasta tener los secretos configurados, la API devuelve «pendiente de configurar».
 
-El comando muestra la dirección real de `workers.dev` devuelta por Cloudflare. Comprueba allí `/admin/`. Después completa `site.adminUrl` en `src/data/portal.json` con esa URL HTTPS verificada y publica los cambios del portal en GitHub. Su ruta `/KiroshiRP/admin/` ofrecerá el acceso al administrador privado. La ruta no puede ejecutar el servicio dentro de GitHub Pages; abre el servicio de Cloudflare, que valida el acceso en su propio origen. Un dominio personalizado requeriría configurar y verificar su ruta por separado.
+El comando muestra la dirección real de `workers.dev` devuelta por Cloudflare. Comprueba allí `/admin/`. `site.adminUrl` en `src/data/portal.json` debe contener esa URL HTTPS verificada. La ruta `/admin/` de la web oficial abre el Worker privado de Cloudflare, que valida el acceso en su propio origen.
 
 El contenido inicial, los esquemas compartidos y la configuración JSON deben estar también en `main` antes de editar mediante el Worker. `npm run admin:publish-source` publica exclusivamente una lista revisada de los archivos de esta implementación, en un único commit sin forzar la rama; incluye una comprobación para impedir subir valores privados. No publiques únicamente el Worker sin publicar estos archivos del proyecto.
 
@@ -58,7 +58,7 @@ El panel permite buscar, crear, editar y eliminar artículos de Lore, Mecánicas
 
 **Los borradores de documentación son visibles en el portal** con su aviso editorial. Solo las noticias con `published: false` están excluidas de la generación pública. Cambiar «Borrador» por «Confirmado» no demuestra que una mecánica esté implementada: requiere revisión del equipo. Se rechaza retirar la marca de licencia a un artículo previamente adaptado; conserva siempre sus fuentes y atribuciones.
 
-En Cloudflare, cada guardado o eliminación crea un commit real en `main`. GitHub Actions comprobará y publicará el portal; revisa el resultado en `https://github.com/kiroshirp/KiroshiRP/actions`. Un guardado correcto significa que GitHub recibió el contenido, no que el despliegue haya terminado. Las ediciones que parten de una versión antigua se rechazan para evitar sobrescribir cambios ajenos. Evita ediciones simultáneas desde el modo local y Cloudflare sin sincronizar primero el repositorio.
+En Cloudflare, cada guardado o eliminación crea un commit real en `main`. Cloudflare Pages compila y publica automáticamente `https://kiroshirp.pages.dev/`; comprueba el despliegue en el panel de Pages. Un guardado correcto significa que GitHub recibió el contenido, no que el despliegue haya terminado. Las ediciones que parten de una versión antigua se rechazan para evitar sobrescribir cambios ajenos. Evita ediciones simultáneas desde el modo local y Cloudflare sin sincronizar primero el repositorio.
 
 Antes de eliminar, revisa enlaces e imágenes relacionados. La eliminación exige escribir la ruta exacta. Si una referencia queda rota, corrígela antes de publicar. El panel no inventa nuevos destinos para sustituir contenidos eliminados.
 

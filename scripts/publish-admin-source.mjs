@@ -32,6 +32,6 @@ else try{
   const next=await api('/git/commits','POST',{message:'Añadir administración privada del portal en Cloudflare Workers',tree:newTree.sha,parents:[parent]});
   await api('/git/refs/heads/main','PATCH',{sha:next.sha,force:false});
   console.log('Código publicado: https://github.com/kiroshirp/KiroshiRP/commit/'+next.sha);
-  console.log('Comprueba el despliegue del portal en https://github.com/kiroshirp/KiroshiRP/actions');
+  console.log('Comprueba el despliegue del portal en Cloudflare Pages: https://dash.cloudflare.com/ca2b88d8bcef6c65609370d364bd0c35/pages/view/kiroshirp');
  }
 }catch(error){console.error(error.message);process.exitCode=1;}

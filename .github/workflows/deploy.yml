@@ -25,6 +25,7 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://kiroshirp.github.io' }}
           BASE_PATH: ${{ vars.BASE_PATH || '/KiroshiRP' }}
+      - run: node scripts/redirect-legacy-pages.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Desarrollo: `http://127.0.0.1:4321/KiroshiRP/`. La búsqueda requiere el índice de producción:
+Desarrollo: `http://127.0.0.1:4321/`. La búsqueda requiere el índice de producción:
 
 ```sh
 npm run build
@@ -34,13 +34,13 @@ Los títulos `##` generan índice y anclas estables; Pagefind indexa apartados. 
 
 `src/components/Notice.astro` ofrece bloques `warning`, `lore`, `rule`, `development`, `example` y `tip` reutilizables en plantillas. En Markdown, utiliza citas para ejemplos y negrita para advertencias. No conviertas propuestas en reglas vigentes sin revisión del equipo.
 
-## Publicar en GitHub Pages
+## Publicar en Cloudflare Pages
 
-Repositorio objetivo: `kiroshirp/KiroshiRP`. En Settings → Pages → Source selecciona **GitHub Actions**. Cada subida a `main` ejecuta `.github/workflows/deploy.yml`: instalación reproducible, validación, compilación, índice y despliegue.
+La web oficial es `https://kiroshirp.pages.dev/`. Cloudflare Pages está conectado a `kiroshirp/KiroshiRP`: cada cambio en `main` compila con `npm run build` y publica `dist` automáticamente. Usa Node 22.
 
-Configuración por defecto: `https://kiroshirp.github.io/KiroshiRP/`. Para un dominio personalizado, define las variables de repositorio `SITE_URL` (origen HTTPS del dominio) y `BASE_PATH` (`/` para raíz), configura ese dominio en GitHub Pages y sus DNS. No añadas un dominio o registros DNS sin verificarlos. Cloudflare puede gestionar DNS, pero no es necesario para este despliegue y no se presupone ninguna vinculación.
+La dirección antigua de GitHub Pages redirige a Cloudflare Pages mediante `.github/workflows/deploy.yml`. Para un futuro dominio propio, actualiza `SITE_URL`, la configuración del proyecto Pages y sus DNS tras verificar el dominio.
 
-Los recursos y enlaces internos respetan `BASE_PATH`. El sitemap y Open Graph utilizan `SITE_URL`. Para volver atrás, revierte el commit correspondiente y permite que Actions publique de nuevo. Nunca guardes tokens o credenciales en el repositorio.
+Los recursos y enlaces internos respetan `BASE_PATH`. El sitemap y Open Graph utilizan `SITE_URL`. Para volver atrás, revierte el commit correspondiente y comprueba el nuevo despliegue en Cloudflare Pages. Nunca guardes tokens o credenciales en el repositorio.
 
 ## Comprobaciones
 
