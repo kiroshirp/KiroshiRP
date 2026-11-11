@@ -28,6 +28,7 @@ const canonical=new URL(Astro.url.pathname,Astro.site);
  const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle'); const nav=document.querySelector('#navigation');
  toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav?.classList.toggle('open',open)});
  const groups=Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
+ if(matchMedia('(max-width:760px)').matches)document.querySelector('.toc details')?.removeAttribute('open');
  const closeGroups=()=>groups.forEach(group=>group.open=false);
  groups.forEach(group=>group.addEventListener('toggle',()=>{if(group.open)groups.filter(other=>other!==group).forEach(other=>other.open=false);}));
  document.addEventListener('click',event=>{if(event.target instanceof Node&&!nav?.contains(event.target))closeGroups();});
