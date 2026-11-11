@@ -5,7 +5,7 @@
       {
         "title": "Canales oficiales",
         "paragraphs": [
-          "Únete al Discord oficial de KiroshiRP para seguir las novedades y contactar con la comunidad.",
+          "Solicita acceso al Discord oficial de KiroshiRP para seguir las novedades y contactar con la comunidad.",
           "También puedes consultar la guía de inicio y las preguntas frecuentes."
         ]
       }
@@ -35,7 +35,7 @@
       {
         "title": "Información pendiente",
         "paragraphs": [
-          "Este aviso es provisional. El equipo debe completar la identificación del responsable, un contacto verificado y las atribuciones específicas de los recursos antes de considerar definitiva esta sección."
+          "Responsable indicado por el proyecto: White, fundador de KiroshiRP. Contacto: kiroshirp@gmail.com. Este aviso es provisional: quedan por completar la identificación legal del responsable y las atribuciones específicas de los recursos antes de considerar definitiva esta sección."
         ]
       }
     ]
@@ -46,7 +46,10 @@
       {
         "title": "Un portal público",
         "paragraphs": [
-          "La web pública no incluye cuentas de jugadores, formularios de registro, perfiles ni estadísticas de personajes. No incorpora analítica, publicidad ni cookies propias.",
+          "El acceso a Discord requiere identificarte con tu cuenta de Discord y declarar tu SteamID64. Se guardan tu identificador y nombre de Discord, el SteamID declarado, la fecha y el resultado de la solicitud en el servicio privado de Cloudflare Workers. El SteamID no se verifica con Steam. Estos datos se eliminan a los 90 días o antes si el equipo borra la solicitud desde el administrador. No se publican en el repositorio.",
+          "La base jurídica de esta solicitud voluntaria es el consentimiento que das al enviar el formulario. Puedes retirarlo y eliminar tu solicitud al volver a identificarte con Discord en la misma página de acceso, o escribir a kiroshirp@gmail.com. Retirar el consentimiento no deshace el tratamiento anterior ni elimina automáticamente tu pertenencia al servidor de Discord.",
+          "El servicio de acceso utiliza cookies temporales para completar la identificación y mantener la sesión durante 15 minutos. No incorpora analítica ni publicidad.",
+          "Responsable indicado por el proyecto: White, fundador de KiroshiRP. Para consultas sobre estos datos, escribe a kiroshirp@gmail.com.",
           "La administración del equipo utiliza un servicio privado separado. Su cookie de sesión se emplea exclusivamente para autenticar al administrador y caduca a las dos horas. Las credenciales y los tokens se procesan en ese servicio y no se incluyen en el portal público."
         ]
       },
@@ -65,7 +68,7 @@
       {
         "title": "Revisión pendiente",
         "paragraphs": [
-          "El equipo debe completar el contacto del responsable y verificar los detalles del alojamiento y los plazos aplicables. Este texto describe la implementación actual y no sustituye esa revisión."
+          "La identificación legal del responsable y la base jurídica del tratamiento requieren revisión. La solicitud de acceso no verifica la titularidad de Steam."
         ]
       }
     ]

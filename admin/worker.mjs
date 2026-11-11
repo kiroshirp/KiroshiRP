@@ -1,5 +1,6 @@
 import {createService} from './service.mjs';
 import {githubRepository} from './github.mjs';
+import {createAccessService} from './access.mjs';
 
 export default {
  async fetch(request,env){
@@ -14,7 +15,10 @@ export default {
 export class AdminState {
  constructor(state,env){
   this.state=state;
-  this.handle=createService({env,store:state.storage,repo:githubRepository(env),assets:async path=>env.ASSETS.fetch(new Request('https://assets.internal'+path))});
+  const assets=async path=>env.ASSETS.fetch(new Request('https://assets.internal'+path));
+  const access=createAccessService({env,store:state.storage,assets});
+  const admin=createService({env,store:state.storage,repo:githubRepository(env),assets});
+  this.handle=async request=>await access(request)||admin(request);
  }
  async fetch(request){
   // Serializar las escrituras evita conflictos entre ediciones y eliminaciones en GitHub.
@@ -25,7 +29,12 @@ export class AdminState {
  }
  async alarm(){
   const records=await this.state.storage.list();
-  for(const [key,value] of records)if(value.expires<Date.now())await this.state.storage.delete(key);
+  const expired=[];
+  for(const [key,value] of records)if(value.expires<Date.now()){
+   await this.state.storage.delete(key);
+   if(key.startsWith('access-application:')){await this.state.storage.delete('access-steam:'+value.steamId);expired.push(value.discordId);}
+  }
+  if(expired.length){const index=await this.state.storage.get('access-index')||[];await this.state.storage.put('access-index',index.filter(id=>!expired.includes(id)));}
   await this.state.storage.setAlarm(Date.now()+3600000);
  }
 }

@@ -15,8 +15,8 @@ export function createService({env,store,repo,assets,local=false}){
    if(!['GET','POST','PUT','DELETE'].includes(request.method))return finish(json({error:'Método no permitido.'},405));
    if(!path.startsWith('/admin'))return finish(new Response(null,{status:302,headers:{Location:'/admin/'}}));
    if(!path.startsWith('/admin/api/')){
-    if(!['/admin','/admin/app.js','/admin/editor.js','/admin/preview.js','/admin/style.css','/admin/brand.webp','/admin/city.webp','/admin/favicon.png'].includes(path))return finish(json({error:'No encontrado.'},404));
-    return finish(await assets(path==='/admin'?'/index.html':path.slice(6)));
+    if(!['/admin','/admin/app.js','/admin/editor.js','/admin/preview.js','/admin/style.css','/admin/brand.webp','/admin/city.webp','/admin/favicon.png','/admin/solicitudes','/admin/solicitudes.js'].includes(path))return finish(json({error:'No encontrado.'},404));
+    return finish(await assets(path==='/admin'?'/index.html':path==='/admin/solicitudes'?'/solicitudes.html':path.slice(6)));
    }
    if(!env.ADMIN_USERNAME?.trim() || (env.ADMIN_PASSWORD?.length||0)<13)return finish(json({error:'Administrador pendiente de configurar: completa el .env privado y usa una contraseña de al menos 13 caracteres.'},503));
    const mutating=request.method!=='GET';
@@ -46,6 +46,21 @@ export function createService({env,store,repo,assets,local=false}){
    }
    if(!valid)return finish(json({error:'Inicia sesión para acceder.'},401));
    if(mutating&&!equal(request.headers.get('x-csrf-token')||'',session.csrf))return finish(json({error:'La sesión no autoriza esta solicitud.'},403));
+   if(path==='/admin/api/solicitudes'){
+    if(request.method==='GET'){
+     const ids=await store.get('access-index')||[];const items=[];
+     for(const id of ids){const record=await store.get('access-application:'+id);if(record)items.push(record);}
+     return finish(json({items}));
+    }
+    if(request.method==='DELETE'&&/^\d{17,20}$/.test(data.discordId||'')){
+     const record=await store.get('access-application:'+data.discordId);
+     if(!record)return finish(json({error:'Solicitud no encontrada.'},404));
+     await store.delete('access-application:'+data.discordId);await store.delete('access-steam:'+record.steamId);
+     const ids=await store.get('access-index')||[];await store.put('access-index',ids.filter(id=>id!==data.discordId));
+     return finish(json({ok:true}));
+    }
+    return finish(json({error:'Solicitud no válida.'},400));
+   }
    const editorial=await editorialOperation({route:path,url:u,method:request.method,data,repo,store});if(editorial!==null)return finish(json(editorial));
    if(path==='/admin/api/logout'&&request.method==='POST'){
     await store.delete('session:'+hash(cookie).toString('hex'));

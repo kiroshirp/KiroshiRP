@@ -6,6 +6,7 @@ import {createHash,randomUUID} from 'node:crypto';
 import {createService} from './service.mjs';
 import {allowedPath} from './content.mjs';
 import {localStore} from './local-store.mjs';
+import {createAccessService} from './access.mjs';
 export const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export function localRepository(root){
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -26,11 +27,14 @@ export function localRepository(root){
 }
 export async function startLocal({root=project,env=process.env,port=Number(env.ADMIN_PORT||4310)}={}){
  const store=localStore(root);
- const service=createService({env,store,repo:localRepository(root),local:true,assets:async p=>{
+ const assets=async p=>{
   const bytes=await fs.readFile(path.join(project,'admin/ui',p.slice(1)));
   const type=p.endsWith('.js')?'text/javascript; charset=utf-8':p.endsWith('.css')?'text/css; charset=utf-8':p.endsWith('.webp')?'image/webp':p.endsWith('.png')?'image/png':'text/html; charset=utf-8';
   return new Response(bytes,{headers:{'Content-Type':type}});
- }});
+ };
+ const access=createAccessService({env,store,assets,local:true});
+ const admin=createService({env,store,repo:localRepository(root),local:true,assets});
+ const service=async request=>await access(request)||admin(request);
  let pending=Promise.resolve();
  const server=http.createServer((req,res)=>{
   const run=async()=>{

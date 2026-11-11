@@ -6,9 +6,9 @@ try{process.loadEnvFile(path.join(root,'.env'));}catch(e){if(e.code!=='ENOENT')t
 // Lista explícita: nunca recorrer la raíz ni incluir .env, copias o capturas.
 const files=[
  '.gitignore','.env.example','ADMIN.md','README.md','package.json','package-lock.json','astro.config.mjs','wrangler.jsonc',
- 'admin/schema.mjs','admin/content.mjs','admin/service.mjs','admin/github.mjs','admin/worker.mjs','admin/local.mjs',
+ 'admin/schema.mjs','admin/content.mjs','admin/service.mjs','admin/github.mjs','admin/worker.mjs','admin/local.mjs','admin/access.mjs',
  'admin/ui/index.html','admin/ui/style.css','admin/ui/app.js','admin/ui/editor.js','admin/ui/preview.js',
- 'admin/ui/brand.webp','admin/ui/city.webp','admin/ui/favicon.png','admin/tests/security.test.mjs',
+ 'admin/ui/brand.webp','admin/ui/city.webp','admin/ui/favicon.png','admin/ui/access.html','admin/ui/access.css','admin/ui/access.js','admin/ui/solicitudes.html','admin/ui/solicitudes.js','admin/tests/security.test.mjs','admin/tests/access.test.mjs',
  'scripts/deploy-admin.mjs','scripts/publish-admin-source.mjs',
  'src/config.ts','src/content.config.ts','src/data/portal.json','src/data/home.json','src/data/legal.json',
  'src/pages/admin.astro','src/pages/index.astro','src/pages/[info].astro'
@@ -21,7 +21,7 @@ async function api(endpoint,method='GET',body){
 }
 if(!process.env.GITHUB_TOKEN?.trim()){console.error('Completa GITHUB_TOKEN en el .env privado.');process.exitCode=1;}
 else try{
- const secrets=['ADMIN_PASSWORD','GITHUB_TOKEN','CLOUDFLARE_API_TOKEN'].map(k=>process.env[k]).filter(v=>v&&v.length>=8);
+ const secrets=['ADMIN_PASSWORD','GITHUB_TOKEN','CLOUDFLARE_API_TOKEN','DISCORD_CLIENT_SECRET','DISCORD_BOT_TOKEN'].map(k=>process.env[k]).filter(v=>v&&v.length>=8);
  const tree=[];
  for(const file of files){const bytes=await fs.readFile(path.join(root,file));if(/\.(png|webp)$/.test(file)){const blob=await api('/git/blobs','POST',{content:bytes.toString('base64'),encoding:'base64'});tree.push({path:file,mode:'100644',type:'blob',sha:blob.sha});}else{const content=bytes.toString('utf8');if(secrets.some(s=>content.includes(s)))throw new Error('Publicación detenida: se detectó un valor privado en un archivo de origen.');tree.push({path:file,mode:'100644',type:'blob',content});}}
  const reference=await api('/git/ref/heads/main');const parent=reference.object.sha;

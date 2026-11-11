@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import {site,url} from '../config';
+const accessUrl=site.adminUrl ? new URL('/acceso/',site.adminUrl).href : '';
 ---
 <Base title="Acceso a la comunidad" description="Entra en el Discord oficial de KiroshiRP y descubre el proyecto antes de participar.">
   <section class="discord-gate" aria-labelledby="discord-title">
@@ -11,7 +12,7 @@ import {site,url} from '../config';
       <span class="discord-gate-kicker mono">TU PUNTO DE ENTRADA</span>
       <h1 id="discord-title" class="discord-intro" aria-label="Night City. Más historias."><span class="discord-glitch-line" data-text="NIGHT CITY." aria-hidden="true">NIGHT CITY.</span><em class="discord-glitch-line" data-text="MÁS HISTORIAS." aria-hidden="true">MÁS HISTORIAS.</em></h1>
       <p class="discord-gate-lead">La ciudad es la misma. Tu historia no.</p>
-      {site.discord ? <><a class="discord-gate-cta" href={site.discord} target="_blank" rel="noopener noreferrer"><span>Entrar al Discord oficial</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Se abrirá Discord en una pestaña nueva.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
+      {accessUrl ? <><a class="discord-gate-cta" href={accessUrl}><span>Solicitar acceso con Discord</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Identifícate con Discord, declara tu SteamID y recibe una invitación individual.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
     </div>
     <div class="discord-gate-bottom mono"><span>KIROSHIRP / NIGHT CITY</span><a href="#antes-de-entrar">CONOCE EL PROYECTO <span aria-hidden="true">↓</span></a></div>
   </section>

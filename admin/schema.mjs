@@ -16,7 +16,7 @@ export const articleSchema = z.object({
   if(data.licensedText && !data.sources.length)ctx.addIssue({code:'custom',message:'El texto con licencia debe conservar sus fuentes.',path:['sources']});
 });
 export const settingsSchema = z.object({
-  site:z.object({name:z.string().min(1),discord:z.union([publicURL,z.literal('')]),contact:z.union([publicURL,z.email().transform(v=>'mailto:'+v),z.literal(''),z.string().regex(/^mailto:[^\s]+@[^\s]+$/)]),description:z.string().min(1),adminUrl:z.union([z.url().refine(v=>v.startsWith('https://')),z.literal('')])}).strict(),
+  site:z.object({name:z.string().min(1),discord:z.union([publicURL,z.literal('')]).optional(),contact:z.union([publicURL,z.email().transform(v=>'mailto:'+v),z.literal(''),z.string().regex(/^mailto:[^\s]+@[^\s]+$/)]),description:z.string().min(1),adminUrl:z.union([z.url().refine(v=>v.startsWith('https://')),z.literal('')])}).strict(),
   sections:z.array(z.object({id:z.enum(sections),title:z.string().min(1),subtitle:z.string(),code:z.string(),label:z.string()}).strict()).length(6).refine(v=>new Set(v.map(s=>s.id)).size===6,'Debe aparecer cada sección una sola vez.'),
   leadership:z.object({status:z.string(),minimumMerits:z.number().nonnegative().nullable(),veteranEligibility:z.string().nullable(),quorum:z.number().nonnegative().nullable(),challengeCooldown:z.number().nonnegative().nullable(),inactivityDays:z.number().nonnegative().nullable(),rules:z.array(z.tuple([z.string(),z.string()]))}).strict(),
   phases:z.array(z.tuple([z.string(),z.string()]))

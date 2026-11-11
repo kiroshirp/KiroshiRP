@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 try{process.loadEnvFile(path.join(root,'.env'));}catch(e){if(e.code!=='ENOENT')throw e;}
-const required=['ADMIN_USERNAME','ADMIN_PASSWORD','GITHUB_TOKEN','CLOUDFLARE_ACCOUNT_ID','CLOUDFLARE_API_TOKEN'];
+const required=['ADMIN_USERNAME','ADMIN_PASSWORD','GITHUB_TOKEN','CLOUDFLARE_ACCOUNT_ID','CLOUDFLARE_API_TOKEN','DISCORD_CLIENT_ID','DISCORD_CLIENT_SECRET','DISCORD_BOT_TOKEN','DISCORD_INVITE_CHANNEL_ID'];
 const missing=required.filter(key=>!process.env[key]?.trim());
 if(missing.length){console.error('Completa estos campos del .env privado: '+missing.join(', '));process.exitCode=1;}
 else if(process.env.ADMIN_PASSWORD.length<13){console.error('ADMIN_PASSWORD necesita al menos 13 caracteres.');process.exitCode=1;}
@@ -20,7 +20,7 @@ else{
  try{
   console.log('Publicando el servicio privado…');
   const output=await run(['deploy']);
-  await run(['secret','bulk'],JSON.stringify(Object.fromEntries(['ADMIN_USERNAME','ADMIN_PASSWORD','GITHUB_TOKEN'].map(k=>[k,process.env[k]]))));
+  await run(['secret','bulk'],JSON.stringify(Object.fromEntries(['ADMIN_USERNAME','ADMIN_PASSWORD','GITHUB_TOKEN','DISCORD_CLIENT_ID','DISCORD_CLIENT_SECRET','DISCORD_BOT_TOKEN','DISCORD_INVITE_CHANNEL_ID'].map(k=>[k,process.env[k]]))));
   const address=output.match(/https:\/\/[a-z0-9.-]+\.workers\.dev/gi)?.at(-1);
   console.log('Administrador desplegado. '+(address?'Dirección: '+address+'/admin/':'Consulta su dirección en Cloudflare Workers.'));
   console.log('Configura site.adminUrl en src/data/portal.json con esa dirección verificada y publica el portal.');

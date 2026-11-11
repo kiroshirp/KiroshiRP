@@ -1,6 +1,7 @@
 import {normalize,slugify,settingsEditor} from './editor.js';
 import {renderPreview} from './preview.js';
 const $=id=>document.getElementById(id);const known=['title','description','category','status','origin','updated'];const labels={lore:'Lore',mecanicas:'Mecánicas',normativas:'Normativas',facciones:'Facciones',guias:'Guías',actualizaciones:'Actualizaciones',settings:'Configuración',media:'Imágenes'};
+document.querySelector('.workspace-heading .actions').insertAdjacentHTML('afterbegin','<a class="button" href="/admin/solicitudes/">Solicitudes</a>');
 let csrf='',mode='local',files=[],drafts=[],current=null,dirty=false,working=false,extra={},settingsValue={},metadataRaw=false,settingsRaw=false,pending=null,catalogGeneration=0;const metadataCache=new Map();
 function show(text){$('message').textContent=text;}
 function fail(error){const message=error.message||'No se pudo completar la operación.';show(message);if(!$('editor-form').hidden){$('editor-error').textContent=message;$('editor-error').hidden=false;}}

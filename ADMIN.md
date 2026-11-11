@@ -14,8 +14,16 @@ Campos:
 - `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta que alojará el Worker.
 - `CLOUDFLARE_API_TOKEN`: token limitado a esa cuenta para desplegar Workers y sus recursos Durable Objects. El despliegue utiliza autenticación mediante token; no requiere compartir la contraseña de Cloudflare.
 - `GITHUB_TOKEN`: token granular con acceso exclusivamente a `kiroshirp/KiroshiRP`, permiso **Contents: read and write**. El administrador no necesita permisos para gestionar otros repositorios ni modificar workflows. Respeta las restricciones de rama de GitHub; no las desactives para el panel.
+- `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` y `DISCORD_BOT_TOKEN`: identificadores y secretos de una aplicación Discord del proyecto. Configura `https://kiroshirp-admin.kiroshirp.workers.dev/acceso/callback` como URL de retorno OAuth2 y añade el bot al servidor con permiso para crear invitaciones.
+- `DISCORD_INVITE_CHANNEL_ID`: identificador del canal del servidor donde el bot puede crear invitaciones.
 
-No envíes estos valores por chat. No se incluyen en el HTML, los recursos estáticos ni las respuestas del administrador. Las credenciales de acceso y el token de GitHub se cargan como secretos de Cloudflare al desplegar; el token de despliegue de Cloudflare se queda en el entorno local.
+No envíes estos valores por chat. No se incluyen en el HTML, los recursos estáticos ni las respuestas del administrador. Las credenciales de acceso, el token de GitHub y los datos privados de la aplicación Discord se cargan como secretos de Cloudflare al desplegar; el token de despliegue de Cloudflare se queda en el entorno local.
+
+## Solicitudes de acceso a Discord
+
+La ruta pública `/acceso/` del Worker identifica al visitante mediante Discord OAuth2 (`identify`), recibe un SteamID64 **declarado** y crea una invitación individual de un uso y 15 minutos. El formulario requiere una aceptación expresa del tratamiento de esos identificadores, verifica formato y duplicados; no verifica la titularidad de Steam ni evalúa normativas. Las solicitudes aparecen en `/admin/solicitudes/` con Discord, SteamID, fecha y resultado. El solicitante puede eliminarlas tras volver a iniciar sesión con Discord; el panel también puede eliminarlas y caducan automáticamente a los 90 días. El bot no asigna roles.
+
+Antes de activar este flujo, retira y revoca la invitación pública anterior en Discord, configura la aplicación y el bot, completa los secretos en `.env` y publica conjuntamente el Worker y la web. El enlace que hoy figura en el historial público del repositorio seguirá siendo utilizable hasta su revocación en Discord. Las invitaciones de un uso reducen la difusión, pero pueden ser usadas por otra persona si se comparten primero.
 
 ## Usarlo en el ordenador
 
@@ -36,7 +44,7 @@ npm run admin:check
 npm run admin:deploy
 ```
 
-El último comando despliega el Worker y carga mediante entrada estándar únicamente `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `GITHUB_TOKEN` como secretos, sin imprimir sus valores ni crear archivos temporales con ellos. La configuración pública está en `wrangler.jsonc`; el código del Worker está en `admin/worker.mjs`. Solo `admin/ui/` se sube como recursos del administrador, nunca la raíz del proyecto ni `.env`. Hasta tener los secretos configurados, la API devuelve «pendiente de configurar».
+El último comando despliega el Worker y carga mediante entrada estándar las credenciales del administrador, GitHub y Discord como secretos, sin imprimir sus valores ni crear archivos temporales con ellos. La configuración pública está en `wrangler.jsonc`; el código del Worker está en `admin/worker.mjs`. Solo `admin/ui/` se sube como recursos del administrador, nunca la raíz del proyecto ni `.env`. Hasta tener los secretos configurados, la API devuelve «pendiente de configurar».
 
 El comando muestra la dirección real de `workers.dev` devuelta por Cloudflare. Comprueba allí `/admin/`. Después completa `site.adminUrl` en `src/data/portal.json` con esa URL HTTPS verificada y publica los cambios del portal en GitHub. Su ruta `/KiroshiRP/admin/` ofrecerá el acceso al administrador privado. La ruta no puede ejecutar el servicio dentro de GitHub Pages; abre el servicio de Cloudflare, que valida el acceso en su propio origen. Un dominio personalizado requeriría configurar y verificar su ruta por separado.
 

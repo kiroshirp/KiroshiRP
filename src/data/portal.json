@@ -1,8 +1,7 @@
 {
   "site": {
     "name": "KIROSHIRP",
-    "discord": "https://discord.gg/YkKv6X6gQB",
-    "contact": "",
+    "contact": "mailto:kiroshirp@gmail.com",
     "description": "El archivo público de KiroshiRP. Lore, mecánicas y manual de rol para construir tu historia en Night City.",
     "adminUrl": "https://kiroshirp-admin.kiroshirp.workers.dev/admin/"
   },

@@ -1,10 +1,8 @@
 ---
-import {site,url} from '../config';
-interface Props { direct?: boolean; }
-const {direct=false}=Astro.props;
-const href=direct ? site.discord : url('discord/');
+import {url} from '../config';
+const href=url('discord/');
 ---
-{href&&<a class="discord-access" href={href} target={direct?'_blank':undefined} rel={direct?'noopener noreferrer':undefined} aria-label={direct?'Acceder al Discord oficial de KiroshiRP':'Ver el acceso al Discord oficial de KiroshiRP'}>
+<a class="discord-access" href={href} aria-label="Ver el acceso al Discord oficial de KiroshiRP">
   <span class="discord-access-art" aria-hidden="true"><img src={url('images/landing-project.webp')} alt="" width="1280" height="720" loading="lazy"/></span>
-  <span class="discord-access-content"><span class="mono">CANAL OFICIAL / DISCORD</span><span class="discord-access-brand"><img src={url('images/kiroshi-logo.webp')} alt="" width="64" height="64" loading="lazy"/><strong>KIROSHI<span>RP</span></strong></span><span class="discord-access-caption">Sigue las comunicaciones del equipo y entra en la comunidad.</span><span class="discord-access-action">{direct?'Acceder al servidor':'Ir al acceso'} <span aria-hidden="true">↗</span></span></span>
-</a>}
+  <span class="discord-access-content"><span class="mono">CANAL OFICIAL / DISCORD</span><span class="discord-access-brand"><img src={url('images/kiroshi-logo.webp')} alt="" width="64" height="64" loading="lazy"/><strong>KIROSHI<span>RP</span></strong></span><span class="discord-access-caption">Identifícate y solicita una invitación a la comunidad.</span><span class="discord-access-action">Ir al acceso <span aria-hidden="true">↗</span></span></span>
+</a>

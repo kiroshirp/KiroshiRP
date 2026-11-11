@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import {site,url} from '../config';
+import {url} from '../config';
 ---
 
 <Base active="studio" title="Kiroshi Studio · Próximamente" description="Kiroshi Studio: el futuro espacio de recursos creados por KiroshiRP. Sección en preparación.">
@@ -14,7 +14,7 @@ import {site,url} from '../config';
           <h1 id="studio-title">KIROSHI<br/><em>STUDIO.</em></h1>
           <p class="studio-lead">Un espacio para los recursos creados por KiroshiRP.</p>
           <p class="studio-description">Estamos preparando esta sección. El catálogo todavía no está disponible.</p>
-          {site.discord && <a class="studio-cta" href={url('discord/')}>Seguir novedades en Discord <span aria-hidden="true">↗</span></a>}
+          <a class="studio-cta" href={url('discord/')}>Solicitar acceso a Discord <span aria-hidden="true">↗</span></a>
         </div>
         <div class="studio-preview" aria-label="Kiroshi Studio, próximamente">
           <div class="studio-preview-top mono"><span>KIROSHI / STUDIO</span><span aria-hidden="true">◌ ◌ ◌</span></div>
