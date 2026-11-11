@@ -11,14 +11,13 @@ const news=(await getCollection('actualizaciones')).filter(e=>e.data.published).
 <Base active="inicio">
   <section class="clean-hero" aria-labelledby="home-title">
     <div class="clean-hero-copy">
-      <div class="clean-hero-brand"><img src={url('images/kiroshi-logo.webp')} alt="" width="72" height="72"/><span class="eyebrow">{home.texts.bienvenida}</span></div>
-      <h1 id="home-title" class="discord-intro" aria-label={`${home.texts.titularCiudad} ${home.texts.titularHistorias}`}><span class="discord-glitch-line" data-text={home.texts.titularCiudad} aria-hidden="true">{home.texts.titularCiudad}</span><em class="discord-glitch-line" data-text={home.texts.titularHistorias} aria-hidden="true">{home.texts.titularHistorias}</em></h1>
+      <h1 id="home-title">Roleplay <em>KiroshiRP</em>,<br/>Cyberpunk 2077<br/>en Night City.</h1>
       <p class="clean-hero-lead">{home.texts.subtitulo}</p>
       <p>{home.texts.descripcion}</p>
-      <div class="actions"><a class="button primary" href={url('guias/primeros-pasos/')}>Empieza aquí <span aria-hidden="true">↗</span></a><a class="button" href={url('explorar/')}>Explorar Night City</a></div>
-      <span class="clean-status mono">{home.texts.estadoUniverso}</span>
+      <span class="clean-status mono">{home.texts.estadoUniverso} · OPEN//77</span>
+      <div class="actions"><a class="button primary" href={url('discord/')}>Entrar a Discord <span aria-hidden="true">→</span></a><a class="hero-guide" href={url('guias/primeros-pasos/')}>Consulta los primeros pasos →</a></div>
     </div>
-    <div class="clean-hero-media"><img src={url('images/kiroshi-background.svg')} alt="Vista azul de Night City con el emblema de Kiroshi Roleplay" width="1024" height="571" fetchpriority="high"/></div>
+    <div class="clean-hero-media"><img src={url('images/landing-project.webp')} alt="Calles de Night City iluminadas en azul y amarillo" width="1280" height="720" fetchpriority="high"/></div>
   </section>
 
   <section class="clean-section clean-intro clean-reveal" aria-labelledby="project-title">
