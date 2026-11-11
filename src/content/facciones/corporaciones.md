@@ -73,7 +73,7 @@ Recursos
 
 ## Organizaciones del archivo
 
-- [Arasaka](/KiroshiRP/lore/arasaka/): seguridad, banca y manufacturas.
-- [Militech](/KiroshiRP/lore/militech/): fabricación y distribución de armas.
-- [Trauma Team](/KiroshiRP/lore/trauma-team/): servicios médicos y ambulancias.
-- [Otras corporaciones](/KiroshiRP/lore/otras-corporaciones/): Biotechnica, Night Corp y Orbital Air.
+- [Arasaka](https://kiroshirp.pages.dev/lore/arasaka/): seguridad, banca y manufacturas.
+- [Militech](https://kiroshirp.pages.dev/lore/militech/): fabricación y distribución de armas.
+- [Trauma Team](https://kiroshirp.pages.dev/lore/trauma-team/): servicios médicos y ambulancias.
+- [Otras corporaciones](https://kiroshirp.pages.dev/lore/otras-corporaciones/): Biotechnica, Night Corp y Orbital Air.

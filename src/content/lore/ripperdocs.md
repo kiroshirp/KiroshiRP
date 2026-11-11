@@ -24,4 +24,4 @@ La definición anterior pertenece a la jerga de Cyberpunk 2020. Describe la espe
 
 El catálogo de Cyberpunk 2077 permite instalar, intercambiar y mejorar ciberequipo en los matasanos de Night City. Los implantes se organizan por partes del cuerpo y sistemas. Esta descripción corresponde al videojuego, no a un servicio ya implementado en el servidor.
 
-Consulta [ciberware e implantes](/KiroshiRP/mecanicas/ciberware/) para las categorías y su relación con el diseño de KiroshiRP.
+Consulta [ciberware e implantes](https://kiroshirp.pages.dev/mecanicas/ciberware/) para las categorías y su relación con el diseño de KiroshiRP.
