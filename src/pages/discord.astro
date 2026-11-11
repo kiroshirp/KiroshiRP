@@ -3,37 +3,11 @@ import Base from '../layouts/Base.astro';
 import {site,url} from '../config';
 const accessUrl=site.adminUrl ? new URL('/acceso/',site.adminUrl).href : '';
 ---
-<Base title="Acceso a la comunidad" description="Entra en el Discord oficial de KiroshiRP y descubre el proyecto antes de participar.">
-  <section class="discord-gate" aria-labelledby="discord-title">
-
-    <div class="discord-gate-top mono"><span>KIROSHIRP <b>/</b> COMUNIDAD</span><span>ACCESO OFICIAL · DISCORD</span></div>
-    <div class="discord-gate-content">
-      <div class="discord-gate-identity"><img src={url('images/kiroshi-logo.webp')} alt="" width="86" height="86"/><span class="mono">KIROSHI<br/>ROLEPLAY</span></div>
-      <span class="discord-gate-kicker mono">TU PUNTO DE ENTRADA</span>
-      <h1 id="discord-title" class="discord-intro" aria-label="Night City. Más historias."><span class="discord-glitch-line" data-text="NIGHT CITY." aria-hidden="true">NIGHT CITY.</span><em class="discord-glitch-line" data-text="MÁS HISTORIAS." aria-hidden="true">MÁS HISTORIAS.</em></h1>
-      <p class="discord-gate-lead">La ciudad es la misma. Tu historia no.</p>
-      {accessUrl ? <><a class="discord-gate-cta" href={accessUrl}><span>Solicitar acceso con Discord</span><span aria-hidden="true">↗</span></a><p class="discord-gate-note">Identifícate con Discord, declara tu SteamID y recibe una invitación individual.</p></> : <p class="discord-gate-unavailable">El acceso al Discord aún no está disponible.</p>}
-    </div>
-    <div class="discord-gate-bottom mono"><span>KIROSHIRP / NIGHT CITY</span><a href="#antes-de-entrar">CONOCE EL PROYECTO <span aria-hidden="true">↓</span></a></div>
-  </section>
-  <section class="discord-gate-next" id="antes-de-entrar" aria-labelledby="discord-next-title"><div><span class="eyebrow">ANTES DE ENTRAR</span><h2 id="discord-next-title">Conoce KiroshiRP.</h2><p>Explora la guía de inicio y consulta las normativas publicadas como borradores.</p></div><nav aria-label="Lecturas recomendadas"><a href={url('guias/primeros-pasos/')}>Guía de inicio <span aria-hidden="true">↗</span></a><a href={url('normativas/')}>Normativas <span aria-hidden="true">↗</span></a></nav></section>
+<Base title="Acceso a la comunidad" description="Identifícate con Discord y declara tu SteamID para solicitar una invitación a KiroshiRP.">
+ <section class="access-layout" aria-labelledby="access-title">
+  <div class="access-copy"><span class="eyebrow">LA COMUNIDAD DE KIROSHIRP</span><h1 id="access-title">Tu próxima historia<br/>empieza <em>con otros.</em></h1><p>Conoce el proyecto, sigue sus novedades y encuentra a las personas con las que compartirás Night City.</p><span class="access-state"><span aria-hidden="true"></span> Proyecto en construcción · sin fecha de apertura confirmada</span></div>
+  <div class="access-panel"><span class="mono">ACCESO / DISCORD</span><h2>Entra en la comunidad.</h2><p>Inicia sesión con tu cuenta de Discord y declara tu SteamID64 para recibir una invitación individual.</p><ul><li>Tu identificador de Discord se obtiene automáticamente.</li><li>El SteamID lo declaras tú; no verificamos su titularidad.</li><li>El proceso no asigna roles adicionales.</li></ul>{accessUrl?<a class="button primary" href={accessUrl}>Continuar con Discord <span aria-hidden="true">→</span></a>:<p>El acceso todavía no está disponible.</p>}<a class="access-privacy" href={url('privacidad/')}>Cómo tratamos los datos de tu solicitud ↗</a></div>
+ </section>
+ <section class="access-steps" aria-label="Pasos para acceder"><div><span class="mono">01 / IDENTIFÍCATE</span><h2>Conecta tu cuenta.</h2><p>Discord confirma tu identidad y nos facilita tu identificador y nombre de usuario.</p></div><div><span class="mono">02 / COMPLETA</span><h2>Declara tu SteamID.</h2><p>Introduce el SteamID64 de 17 cifras y acepta el tratamiento de datos para gestionar el acceso.</p></div><div><span class="mono">03 / PARTICIPA</span><h2>Abre tu invitación.</h2><p>Al completar el formulario recibirás un enlace individual de corta duración para entrar en Discord.</p></div></section>
+ <section class="discord-gate-next"><div><span class="eyebrow">ANTES DE ENTRAR</span><h2>Conoce KiroshiRP.</h2><p>Empieza por la guía y consulta el estado de los documentos publicados.</p></div><nav aria-label="Lecturas recomendadas"><a href={url('guias/primeros-pasos/')}>Guía de inicio <span aria-hidden="true">↗</span></a><a href={url('normativas/')}>Normativas <span aria-hidden="true">↗</span></a></nav></section>
 </Base>
-
-<script>
-  const title=document.querySelector<HTMLElement>('#discord-title');
-  title?.addEventListener('animationend',event=>{
-    if (event.animationName==='discord-text-skew') title.classList.remove('discord-intro');
-  });
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const lines=title?.querySelectorAll<HTMLElement>('.discord-glitch-line');
-    title?.addEventListener('pointermove',event=>{
-      lines?.forEach(line=>{
-        const bounds=line.getBoundingClientRect();
-        line.style.setProperty('--glitch-x',`${event.clientX-bounds.left}px`);
-        line.style.setProperty('--glitch-y',`${event.clientY-bounds.top}px`);
-      });
-      title.classList.add('has-pointer');
-    });
-    title?.addEventListener('pointerleave',()=>title.classList.remove('has-pointer'));
-  }
-</script>

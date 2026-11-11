@@ -1,0 +1,9 @@
+---
+import {url} from '../config';
+interface Props { title:string; description:string; eyebrow:string; image?:string; imageAlt?:string; count?:number; }
+const {title,description,eyebrow,image,imageAlt='',count}=Astro.props;
+---
+<header class:list={['section-intro',{'section-intro-visual':image}]}>
+  <div class="section-intro-copy"><span class="eyebrow">{eyebrow}</span><h1>{title}<span class="accent">.</span></h1><p>{description}</p><div class="section-intro-bottom">{count!==undefined&&<span><strong>{String(count).padStart(2,'0')}</strong> archivos para consultar</span>}<a href="#biblioteca">Explorar el contenido <span aria-hidden="true">↓</span></a></div></div>
+  {image&&<div class="section-intro-image"><img src={url(image)} alt={imageAlt} width="1000" height="700" fetchpriority="high"/><span class="section-image-mark" aria-hidden="true">KRP / ARCHIVO</span></div>}
+</header>
