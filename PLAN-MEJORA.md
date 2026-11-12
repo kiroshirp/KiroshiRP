@@ -105,3 +105,12 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 - No se reordenaron reglas entre bloques: eso puede cambiar la cascada y necesita revisión visual. Queda como mejora opcional.
 - Los 29 `!important` restantes se conservan: cada uno compensa una regla de otro bloque o de una media query.
 - `scripts/css-snapshot.mjs` guarda los estilos calculados de todas las páginas en escritorio y móvil y los compara entre dos versiones (`npm run css:snapshot -- <carpeta> dist`, y `-- --compare <a> <b>`). Resultado: 154 de 156 archivos idénticos; los otros dos (portada) solo difieren en cómo se escribe un degradado, con el mismo resultado visual.
+
+## Notas de la fase 4
+
+- `admin/service.mjs` (279 líneas) quedó como enrutador. La lógica pasó a `admin/http.mjs` (respuestas y cabeceras de seguridad, lectura del cuerpo con límite), `admin/api/session.mjs` (sesión, login, cierre, límite de intentos), `admin/api/solicitudes.mjs`, `admin/api/files.mjs` y `admin/config.mjs`.
+- `admin/ui/app.js` (913 líneas) se dividió en `main.js`, `state.js` (estado compartido), `dom.js`, `api.js`, `catalog.js`, `session.js`, `editor-view.js` y cuatro módulos de eventos. Todas las variables compartidas pasaron a `state.*`.
+- Se mantuvo la política de cabeceras (CSP) y el orden exacto de los atributos de la cookie; las 24 pruebas de seguridad pasan sin cambios.
+- Nueva prueba `tests/admin-ui.test.mjs` con navegador real: entrar, abrir artículo, guardar borrador, validar, eliminar borrador, crear artículo, abrir configuración e imágenes, salir. Pasa igual contra el panel original y el refactorizado. Se omite si Playwright no está instalado; la CI lo instala.
+- La CI ahora también ejecuta `npm run admin:check` (compilación del Worker en seco).
+- `scripts/publish-admin-source.mjs` mantiene una lista fija de archivos que ya estaba desactualizada (no incluye `editorial.mjs`, `local-store.mjs` ni `sections.json`). Se añadieron los archivos nuevos, pero conviene decidir en la fase 5 si sigue haciendo falta.

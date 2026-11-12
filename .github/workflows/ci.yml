@@ -23,6 +23,11 @@ jobs:
       - run: npm run format:check
       - run: npm run build
       - run: npm run admin:test
+      - run: npm run admin:check
+      - name: Instalar navegador para la prueba del panel
+        run: |
+          npm i --no-save playwright
+          npx playwright install --with-deps chromium
       - run: node --test tests/*.test.mjs
       - run: node scripts/verify.mjs
       - name: Auditoría de dependencias (informativa)
