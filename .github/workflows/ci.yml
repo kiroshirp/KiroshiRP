@@ -34,7 +34,7 @@ jobs:
         run: npm audit --audit-level=high
         continue-on-error: true
       - name: Guardar vista previa compilada
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: portal-${{ github.sha }}
           path: dist
