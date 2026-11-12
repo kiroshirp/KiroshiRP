@@ -62,7 +62,6 @@ La comprobación local revisa enlaces internos, anclas, recursos y ausencia de l
 
 El fondo original facilitado se conserva en `public/images/kiroshi-original.jpg`. No se edita el material sincronizado del proyecto. El símbolo de navegación es tipográfico; el emblema oficial aparece dentro de la imagen original del hero. El resto de las fichas evita imágenes genéricas y usa detalles técnicos propios.
 
-El script `scripts/seed-content.mjs` sirvió para preparar las fichas iniciales. No forma parte de la compilación ni sobrescribe archivos existentes.
 Las imágenes opcionales se declaran como image: {path: images/archivo.jpg, alt: Descripción}. El historial admite history: [{date: 2026-10-16, description: Resumen del cambio}]. Guarda las imágenes en public/images/.
 
 Los artículos Documentado contienen información incorporada de la wiki; no anuncian funciones implementadas. universeScope identifica su época y licensedText activa la atribución CC BY-SA 3.0. Consulta CONTENT-LICENSE.md para distinguir la licencia del texto y la del código.

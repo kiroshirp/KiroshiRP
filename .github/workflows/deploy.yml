@@ -1,3 +1,5 @@
+# Solo mantiene la redirección desde la dirección antigua de GitHub Pages hacia Cloudflare Pages.
+# La web oficial se publica desde Cloudflare Pages al cambiar `main`.
 name: Publicar portal KiroshiRP
 on:
   push:

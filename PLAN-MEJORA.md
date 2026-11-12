@@ -114,3 +114,12 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 - Nueva prueba `tests/admin-ui.test.mjs` con navegador real: entrar, abrir artículo, guardar borrador, validar, eliminar borrador, crear artículo, abrir configuración e imágenes, salir. Pasa igual contra el panel original y el refactorizado. Se omite si Playwright no está instalado; la CI lo instala.
 - La CI ahora también ejecuta `npm run admin:check` (compilación del Worker en seco).
 - `scripts/publish-admin-source.mjs` mantiene una lista fija de archivos que ya estaba desactualizada (no incluye `editorial.mjs`, `local-store.mjs` ni `sections.json`). Se añadieron los archivos nuevos, pero conviene decidir en la fase 5 si sigue haciendo falta.
+
+## Notas de la fase 5
+
+- `npm audit` pasó de 3 vulnerabilidades (una alta) a 0: `npm audit fix` y `wrangler` 4.151.1 → 4.161.0 (dependencia de desarrollo; el build del Worker en seco sigue funcionando).
+- `.github/dependabot.yml` propone actualizaciones semanales de npm y mensuales de GitHub Actions hacia `pruebas`, nunca hacia `main`.
+- `package.json` declara `engines.node >= 22.12`, como ya decía el README.
+- `deploy.yml` queda documentado como redirección heredada (solo `main`).
+- Se eliminó `scripts/seed-content.mjs`: no formaba parte de la compilación y sigue disponible en el historial de git.
+- Pendiente de decisión: `scripts/publish-admin-source.mjs` (lista fija de archivos ya desactualizada).
