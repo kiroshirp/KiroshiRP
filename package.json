@@ -31,7 +31,7 @@
     "pagefind": "^1.4.0",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
-    "typescript": "^5.9.0",
+    "typescript": "^7.0.2",
     "wrangler": "4.161.0"
   },
   "engines": {
