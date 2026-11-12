@@ -1,6 +1,6 @@
 # Administración privada de KiroshiRP
 
-La web pública permanece en GitHub Pages. El administrador se ejecuta de forma independiente: en Cloudflare Workers para usarlo desde Internet, o en el ordenador para edición local. No existen cuentas de jugadores.
+La web pública se publica en Cloudflare Pages desde `main`. El administrador se ejecuta de forma independiente: en Cloudflare Workers para usarlo desde Internet, o en el ordenador para edición local. No existen cuentas de jugadores.
 
 ## Configurar el archivo privado
 
@@ -95,3 +95,11 @@ El resumen muestra artículos, imágenes y contenido pendiente de revisión. El 
 Las fuentes, los artículos relacionados y la imagen se gestionan con formularios. La configuración de portada, fases, enlaces y avisos dispone de formularios y mantiene una alternativa avanzada en JSON. La vista previa es orientativa y no ejecuta HTML. Las imágenes y las eliminaciones de archivos requieren confirmación porque modifican los recursos publicados.
 
 Los borradores se protegen frente a escrituras concurrentes. Si cambia la versión publicada, la publicación se bloquea hasta revisar el conflicto. Los borradores no caducan automáticamente; pueden eliminarse explícitamente desde el panel. La publicación conserva el historial de GitHub o las copias locales.
+
+## Estructura del código
+
+El Worker arranca en `admin/worker.mjs`. `admin/service.mjs` recibe cada petición y la reparte a `admin/api/` (sesión, solicitudes de acceso y archivos). `admin/http.mjs` reúne las respuestas JSON, las cabeceras de seguridad y la lectura del cuerpo con límite de tamaño. `admin/config.mjs` lista los archivos estáticos que se sirven; al añadir un módulo a `admin/ui/` hay que añadirlo también ahí.
+
+La interfaz carga `admin/ui/main.js`. El estado compartido está en `state.js` y el resto se divide por tarea: `dom.js`, `api.js`, `catalog.js`, `session.js`, `editor-view.js` y los cuatro módulos `events-*.js`.
+
+Las pruebas de seguridad y acceso están en `admin/tests/` (`npm run admin:test`). `tests/admin-ui.test.mjs` recorre el panel en un navegador real; se omite si Playwright no está instalado.

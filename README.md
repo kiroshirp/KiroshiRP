@@ -1,8 +1,8 @@
-# KiroshiRP — portal público
+# KiroshiRP: portal público
 
-Portal estático en español con Astro, TypeScript, contenido Markdown validado y Pagefind. El portal público no requiere backend, registro ni cuentas de jugadores. La administración privada del equipo utiliza un servicio separado; consulta ADMIN.md. La búsqueda no utiliza servicios de pago. Las fuentes se alojan localmente. CSS propio con la paleta de KiroshiRP.
+Portal estático en español hecho con Astro, TypeScript, contenido Markdown validado y Pagefind. No necesita backend, registro ni cuentas de jugadores. La búsqueda no usa servicios de pago, las fuentes se alojan en el propio sitio y el CSS es propio, con la paleta de KiroshiRP. El equipo gestiona el contenido desde un panel privado que corre como servicio aparte (ver [ADMIN.md](ADMIN.md)).
 
-## Instalación
+## Primeros pasos
 
 Requiere Node.js 22.12 o superior y npm.
 
@@ -11,71 +11,78 @@ npm ci
 npm run dev
 ```
 
-Desarrollo: `http://127.0.0.1:4321/`. La búsqueda requiere el índice de producción:
+El servidor de desarrollo escucha en `http://127.0.0.1:4321/`. La búsqueda necesita el índice de producción, así que para probarla hay que compilar:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-`build` valida TypeScript y los artículos, genera las páginas y crea el índice Pagefind. La vista previa usa el puerto indicado en la terminal (normalmente 4321).
+`build` valida TypeScript y los artículos, genera las páginas y crea el índice Pagefind. La vista previa usa el puerto que indique la terminal, normalmente 4321.
 
-## Contenido y mantenimiento
+## Scripts
 
-Los archivos de `src/content/{lore,mecanicas,normativas,facciones,guias,actualizaciones}` son Markdown. Las rutas se obtienen del nombre del archivo. El esquema está en `src/content.config.ts`. Copia una ficha existente para crear otra.
+| Comando                                   | Qué hace                                                                    |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| `npm run dev`                             | Servidor de desarrollo                                                      |
+| `npm run build`                           | Comprueba tipos y contenido, genera `dist/` y el índice de búsqueda         |
+| `npm run preview`                         | Sirve `dist/` en local                                                      |
+| `npm run check`                           | Solo comprobación de tipos y contenido                                      |
+| `npm run format` / `npm run format:check` | Aplica o comprueba el formato con Prettier                                  |
+| `npm run admin`                           | Panel privado en local                                                      |
+| `npm run admin:test`                      | Pruebas del panel (seguridad y acceso)                                      |
+| `npm run admin:check`                     | Compila el Worker del panel sin desplegarlo                                 |
+| `npm run css:snapshot -- <carpeta> dist`  | Guarda los estilos calculados de todas las páginas para compararlos después |
+| `node --test tests/*.test.mjs`            | Pruebas del portal; la del panel en navegador necesita Playwright           |
+| `node scripts/verify.mjs`                 | Revisa enlaces internos, anclas y recursos en `dist/`                       |
 
-Campos: `title`, `description`, `category`, `status` (Borrador, Propuesta, Por documentar o Confirmado), `origin` (CANON CYBERPUNK, LORE KIROSHIRP o GUÍA DEL PORTAL), `updated` (YYYY-MM-DD), `related` (rutas sin dominio), `order`. Facciones admite `factionStatus`: Activa, Prevista o En desarrollo. `sources` admite pares `label`/`url`.
+## Estructura
 
-Los borradores de documentación son visibles con aviso explícito. Las actualizaciones requieren `published: true` para generar página, aparecer en el inicio e indexarse. No actives la plantilla hasta reemplazar título, cuerpo y fecha por un anuncio real. Categorías de anuncios: Noticias, Desarrollo, Mecánicas, Normativas, Eventos y Mantenimiento.
+```
+src/content/      Fichas en Markdown (lore, mecanicas, normativas, facciones, guias, actualizaciones)
+src/data/         Textos y parámetros en JSON (portal, home, legal, sections, regulation-documents)
+src/pages/        Rutas de Astro
+src/components/   Componentes
+src/styles/       tokens.css (variables) y portal.css (hoja principal)
+src/scripts/      JavaScript del navegador
+admin/            Panel privado: API (api/), interfaz (ui/) y pruebas (tests/)
+scripts/          Utilidades de mantenimiento
+tests/            Pruebas del portal
+```
 
-Los títulos `##` generan índice y anclas estables; Pagefind indexa apartados. El historial inicial registra la preparación editorial; añade revisiones reales al cuerpo de cada ficha al modificarla.
+La edición de fichas y datos se explica en [CONTENIDO.md](CONTENIDO.md).
 
-`src/data/portal.json` centraliza navegación, Discord, contacto, fases de cyberpsicosis y parámetros de liderazgo; `src/config.ts` valida y expone esos datos. `src/data/home.json` contiene los textos y tarjetas de la portada; `src/data/legal.json`, las páginas de contacto y avisos. No copies umbrales en artículos: las páginas de mecánicas y normativas leen la misma tabla. Valores `null` significan pendiente, nunca cero. Los campos de enlace vacíos muestran un estado informativo, sin URLs inventadas.
+## Flujo de trabajo
 
-`src/components/Notice.astro` ofrece bloques `warning`, `lore`, `rule`, `development`, `example` y `tip` reutilizables en plantillas. En Markdown, utiliza citas para ejemplos y negrita para advertencias. No conviertas propuestas en reglas vigentes sin revisión del equipo.
+Los cambios se preparan en la rama `pruebas`. En cada push a una rama distinta de `main` y en cada pull request, GitHub Actions (`.github/workflows/ci.yml`) comprueba el formato, compila, ejecuta las pruebas y guarda la web compilada como artefacto durante siete días. Se descarga y se abre con `npm run preview`.
+
+Lo aprobado pasa a `main` con un pull request. Solo `main` se publica.
 
 ## Publicar en Cloudflare Pages
 
-La web oficial es `https://kiroshirp.pages.dev/`. Cloudflare Pages está conectado a `kiroshirp/KiroshiRP`: cada cambio en `main` compila con `npm run build` y publica `dist` automáticamente. Usa Node 22.
+La web oficial es `https://kiroshirp.pages.dev/`. Cloudflare Pages está conectado a `kiroshirp/KiroshiRP`: cada cambio en `main` se compila con `npm run build` (Node 22) y se publica `dist`.
 
-La dirección antigua de GitHub Pages redirige a Cloudflare Pages mediante `.github/workflows/deploy.yml`. Para un futuro dominio propio, actualiza `SITE_URL`, la configuración del proyecto Pages y sus DNS tras verificar el dominio.
+La dirección antigua de GitHub Pages redirige a Cloudflare Pages mediante `.github/workflows/deploy.yml`. Para un dominio propio, actualiza `SITE_URL`, la configuración del proyecto Pages y sus DNS cuando el dominio esté verificado.
 
-Los recursos y enlaces internos respetan `BASE_PATH`. El sitemap y Open Graph utilizan `SITE_URL`. Para volver atrás, revierte el commit correspondiente y comprueba el nuevo despliegue en Cloudflare Pages. Nunca guardes tokens o credenciales en el repositorio.
+Los recursos y enlaces internos respetan `BASE_PATH`. El sitemap y Open Graph usan `SITE_URL`. Para volver atrás, revierte el commit en `main` y comprueba el nuevo despliegue. No guardes tokens ni credenciales en el repositorio.
 
 ## Comprobaciones
 
 ```sh
+npm run format:check
 npm run build
 node scripts/verify.mjs
+node --test tests/*.test.mjs
+npm run admin:test
 npm audit
 ```
 
-La comprobación local revisa enlaces internos, anclas, recursos y ausencia de la plantilla de noticias en la salida. Prueba también búsqueda, filtro de categorías, menú móvil y teclado en la vista previa.
+`verify.mjs` revisa enlaces internos, anclas, recursos y que la plantilla de noticias no aparezca en la salida. En la vista previa conviene probar a mano la búsqueda, el filtro de categorías, el menú móvil y el teclado.
 
-## Datos pendientes del equipo
+## Otros documentos
 
-- URL oficial de Discord y canal de contacto.
-- Requisitos y conexión de OPEN//77 verificados, sin fecha de apertura inventada.
-- Síntesis canónica respaldada por fuentes, historia propia aprobada y disponibilidad de facciones.
-- Normas definitivas, parámetros de liderazgo y mecánicas efectivamente implementadas.
-- Identificación del responsable y revisión de avisos legales y atribuciones de imágenes.
-
-El fondo original facilitado se conserva en `public/images/kiroshi-original.jpg`. No se edita el material sincronizado del proyecto. El símbolo de navegación es tipográfico; el emblema oficial aparece dentro de la imagen original del hero. El resto de las fichas evita imágenes genéricas y usa detalles técnicos propios.
-
-El script `scripts/seed-content.mjs` sirvió para preparar las fichas iniciales. No forma parte de la compilación ni sobrescribe archivos existentes.
-Las imágenes opcionales se declaran como image: {path: images/archivo.jpg, alt: Descripción}. El historial admite history: [{date: 2026-10-16, description: Resumen del cambio}]. Guarda las imágenes en public/images/.
-
-Los artículos Documentado contienen información incorporada de la wiki; no anuncian funciones implementadas. universeScope identifica su época y licensedText activa la atribución CC BY-SA 3.0. Consulta CONTENT-LICENSE.md para distinguir la licencia del texto y la del código.
-
-
-## Panel privado del equipo
-
-Consulta [ADMIN.md](ADMIN.md) para configurar el .env privado, usar /admin localmente o desplegar el administrador en Cloudflare Workers. El panel gestiona los artículos, las imágenes y los archivos de datos del portal sin publicar credenciales.
-
-## Explorador visual de zonas
-
-La página /explorar/ reúne los seis distritos y las Badlands. No utiliza cuentas, servicios de mapas ni imágenes de Piggyback; sus dos recursos se enlazan como consultas externas.
-
-Los datos se editan en las fichas originales de src/content/lore, dentro de «## Vista rápida», conservando los subtítulos «### Ambiente», «### Lugares de referencia» y «### Organizaciones relacionadas». Los lugares usan listas con el formato **Nombre:** descripción; las organizaciones, un enlace relativo a su ficha seguido de una raya y su contexto. Si no hay relaciones verificadas, se conserva una explicación sin atribuir territorios. No añadas fórmulas internas, localizaciones privadas ni estados de apertura supuestos. El aviso de disponibilidad remite al Protocolo Umbral.
-
-La extracción compartida está en src/lib/explorer.mjs y las comprobaciones se ejecutan con node --test tests/explorer.test.mjs. El explorador admite enlaces como /explorar/?zona=watson#explorador; sin JavaScript muestra las siete fichas y sus enlaces. El texto adaptado de la wiki conserva sus fuentes y CC BY-SA 3.0.
+- [CONTENIDO.md](CONTENIDO.md): campos de las fichas, datos del portal, imágenes y explorador de zonas.
+- [ADMIN.md](ADMIN.md): configuración y despliegue del panel privado.
+- [CONTENIDO-PENDIENTE.md](CONTENIDO-PENDIENTE.md): decisiones y datos que faltan por parte del equipo.
+- [CONTENT-LICENSE.md](CONTENT-LICENSE.md): licencia del texto y del código.
+- [PLAN-MEJORA.md](PLAN-MEJORA.md): plan y notas de la reorganización del código.

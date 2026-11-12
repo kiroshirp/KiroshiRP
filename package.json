@@ -12,7 +12,10 @@
     "admin:test": "node --test admin/tests/*.test.mjs",
     "admin:deploy": "node scripts/deploy-admin.mjs",
     "admin:check": "wrangler deploy --dry-run --outdir .admin-build",
-    "admin:publish-source": "node scripts/publish-admin-source.mjs"
+    "admin:publish-source": "node scripts/publish-admin-source.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "css:snapshot": "node scripts/css-snapshot.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -26,7 +29,12 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "pagefind": "^1.4.0",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
     "typescript": "^5.9.0",
-    "wrangler": "4.151.1"
+    "wrangler": "4.161.0"
+  },
+  "engines": {
+    "node": ">=22.12"
   }
 }

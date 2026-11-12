@@ -1,0 +1,17 @@
+/* Variables de diseño del portal. Cambia aquí colores y medidas compartidas. */
+:root {
+  --blue: #246a9a;
+  --yellow: #e8c96c;
+  --bg: #09090b;
+  --panel: #121214;
+  --text: #f5f5f6;
+  --muted: #a5a5af;
+  --line: #ffffff16;
+  --ice: #f5f5f6;
+  --page-width: 1320px;
+  --gutter: clamp(22px, 4.2vw, 72px);
+  --navy: #071525;
+  --ink-2: #111113;
+  --ink-3: #151517;
+  --navy-2: #0a1c30;
+}

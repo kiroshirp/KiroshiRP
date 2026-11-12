@@ -41,35 +41,13 @@
     "botonGuia": "CONSULTAR LA GUÍA ↗"
   },
   "principles": [
-    [
-      "01",
-      "Progresión por méritos",
-      "Gana oportunidades a través de tus acciones dentro del rol."
-    ],
-    [
-      "02",
-      "Facciones vivas",
-      "Construye vínculos, confianza y una identidad compartida."
-    ],
-    [
-      "03",
-      "Rol inmersivo",
-      "Sistemas diseñados para acompañar la interpretación."
-    ],
-    [
-      "04",
-      "Historias de jugadores",
-      "Cada encuentro puede cambiar el rumbo de tu personaje."
-    ]
+    ["01", "Progresión por méritos", "Gana oportunidades a través de tus acciones dentro del rol."],
+    ["02", "Facciones vivas", "Construye vínculos, confianza y una identidad compartida."],
+    ["03", "Rol inmersivo", "Sistemas diseñados para acompañar la interpretación."],
+    ["04", "Historias de jugadores", "Cada encuentro puede cambiar el rumbo de tu personaje."]
   ],
   "discovery": [
-    [
-      "lore/",
-      "01",
-      "Lore de Night City",
-      "La ciudad más allá de sus luces.",
-      "ARCHIVO NARRATIVO"
-    ],
+    ["lore/", "01", "Lore de Night City", "La ciudad más allá de sus luces.", "ARCHIVO NARRATIVO"],
     [
       "facciones/",
       "02",
@@ -92,13 +70,7 @@
       "PROGRESIÓN"
     ]
   ],
-  "journey": [
-    "Ciudadano",
-    "Contactos",
-    "Reputación",
-    "Oportunidades",
-    "Tu propia historia"
-  ],
+  "journey": ["Ciudadano", "Contactos", "Reputación", "Oportunidades", "Tu propia historia"],
   "opening": {
     "label": "LORE KIROSHIRP / PROTOCOLO UMBRAL",
     "title": "Tu historia comienza en el este.",

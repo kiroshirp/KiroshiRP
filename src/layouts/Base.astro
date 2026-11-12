@@ -5,34 +5,163 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/800.css';
 import '@fontsource/share-tech-mono';
-import '../styles/global.css';
-import '../styles/visual.css';
-import '../styles/explorer.css';
-import '../styles/refinement.css';
-import '../styles/optics.css';
-import '../styles/clean.css';
-import '../styles/reference.css';
+import '../styles/tokens.css';
+import '../styles/portal.css';
 import OpticalShell from '../components/OpticalShell.astro';
-import {site,url,brand} from '../config';
+import { site, url, brand } from '../config';
 import Discord from '../components/Discord.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-interface Props { title?:string; description?:string; active?:string; noindex?:boolean; }
-const {title=brand.primary,description=site.description,active='',noindex=false}=Astro.props;
-const canonical=new URL(Astro.url.pathname,Astro.site);
-const shareImage=new URL(url('images/krp-share-v2.jpg'),Astro.site);
+interface Props {
+  title?: string;
+  description?: string;
+  active?: string;
+  noindex?: boolean;
+}
+const {
+  title = brand.primary,
+  description = site.description,
+  active = '',
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
 ---
-<!doctype html><html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#071525"/><title>{title} | KiroshiRP</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/>{noindex && <meta name="robots" content="noindex"/>}<meta property="og:type" content="website"/><meta property="og:title" content={`${title} | KiroshiRP`}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={shareImage}/><meta property="og:image:type" content="image/jpeg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="675"/><meta property="og:image:alt" content="Un viajero contempla Night City: ilustración de KiroshiRP"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content={shareImage}/><meta name="twitter:image:alt" content="Un viajero contempla Night City: ilustración de KiroshiRP"/><link rel="icon" type="image/png" href={url('favicon.png')}/></head>
-<body class:list={{'optic-home':active==='inicio','studio-home':active==='studio'}}><OpticalShell/><a class="skip" href="#contenido">Saltar al contenido</a><header class="site-header"><a class="wordmark" href={url()} aria-label="KiroshiRP, inicio"><img class="brand-logo" src={url('images/kiroshi-logo.webp')} alt="" width="46" height="46"/><span>KIROSHI<small>ROLEPLAY</small></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">MENÚ ☰</button><nav id="navigation" aria-label="Principal"><a href={url()} aria-current={active==='inicio'?'page':undefined}>Inicio</a><details class="nav-group"><summary>Universo Kiroshi <span>⌄</span></summary><div><a href={url('lore/')}>Lore de Night City</a><a href={url('facciones/')}>Facciones</a><a href={url('mecanicas/')}>Mecánicas</a><a href={url('explorar/')}>Explorar la ciudad</a></div></details><details class="nav-group"><summary>Cómo empezar <span>⌄</span></summary><div><a href={url('guias/primeros-pasos/')}>Primeros pasos</a><a href={url('guias/')}>Todas las guías</a><a href={url('normativas/')}>Normativas</a></div></details><details class="nav-group"><summary>El proyecto <span>⌄</span></summary><div><a href={url('actualizaciones/')}>Actualizaciones</a><a href={url('studio/')}>Kiroshi Studio</a><a href={url('contacto/')}>Contacto</a></div></details><a class="nav-search" href={url('buscar/')}>Buscar</a><Discord/></nav></header>
-<main id="contenido"><slot/></main>
-<SiteFooter/>
-<script>
- const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle'); const nav=document.querySelector('#navigation');
- toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav?.classList.toggle('open',open)});
- const groups=Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
- if(matchMedia('(max-width:760px)').matches)document.querySelector('.toc details')?.removeAttribute('open');
- const closeGroups=()=>groups.forEach(group=>group.open=false);
- groups.forEach(group=>group.addEventListener('toggle',()=>{if(group.open)groups.filter(other=>other!==group).forEach(other=>other.open=false);}));
- document.addEventListener('click',event=>{if(event.target instanceof Node&&!nav?.contains(event.target))closeGroups();});
- document.addEventListener('keydown',e=>{if(e.key==='Escape'){const opened=groups.find(group=>group.open);closeGroups();opened?.querySelector('summary')?.focus();if(toggle?.getAttribute('aria-expanded')==='true'){toggle.setAttribute('aria-expanded','false');nav?.classList.remove('open');toggle.focus();}}});
- window.addEventListener('scroll',()=>document.querySelector('.site-header')?.classList.toggle('scrolled',window.scrollY>30),{passive:true});
-</script></body></html>
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071525" />
+    <title>{title} | KiroshiRP</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} | KiroshiRP`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta
+      property="og:image:alt"
+      content="Un viajero contempla Night City: ilustración de KiroshiRP"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={shareImage} />
+    <meta
+      name="twitter:image:alt"
+      content="Un viajero contempla Night City: ilustración de KiroshiRP"
+    />
+    <link rel="icon" type="image/png" href={url('favicon.png')} />
+  </head>
+  <body class:list={{ 'optic-home': active === 'inicio', 'studio-home': active === 'studio' }}>
+    <OpticalShell />
+    <a class="skip" href="#contenido">
+      Saltar al contenido
+    </a>
+    <header class="site-header">
+      <a class="wordmark" href={url()} aria-label="KiroshiRP, inicio">
+        <img
+          class="brand-logo"
+          src={url('images/kiroshi-logo.webp')}
+          alt=""
+          width="46"
+          height="46"
+        />
+        <span>
+          KIROSHI<small>ROLEPLAY</small>
+        </span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">
+        MENÚ ☰
+      </button>
+      <nav id="navigation" aria-label="Principal">
+        <a href={url()} aria-current={active === 'inicio' ? 'page' : undefined}>
+          Inicio
+        </a>
+        <details class="nav-group">
+          <summary>
+            Universo Kiroshi <span>⌄</span>
+          </summary>
+          <div>
+            <a href={url('lore/')}>Lore de Night City</a>
+            <a href={url('facciones/')}>Facciones</a>
+            <a href={url('mecanicas/')}>Mecánicas</a>
+            <a href={url('explorar/')}>Explorar la ciudad</a>
+          </div>
+        </details>
+        <details class="nav-group">
+          <summary>
+            Cómo empezar <span>⌄</span>
+          </summary>
+          <div>
+            <a href={url('guias/primeros-pasos/')}>Primeros pasos</a>
+            <a href={url('guias/')}>Todas las guías</a>
+            <a href={url('normativas/')}>Normativas</a>
+          </div>
+        </details>
+        <details class="nav-group">
+          <summary>
+            El proyecto <span>⌄</span>
+          </summary>
+          <div>
+            <a href={url('actualizaciones/')}>Actualizaciones</a>
+            <a href={url('studio/')}>Kiroshi Studio</a>
+            <a href={url('contacto/')}>Contacto</a>
+          </div>
+        </details>
+        <a class="nav-search" href={url('buscar/')}>
+          Buscar
+        </a>
+        <Discord />
+      </nav>
+    </header>
+    <main id="contenido">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector('#navigation');
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        nav?.classList.toggle('open', open);
+      });
+      const groups = Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
+      if (matchMedia('(max-width:760px)').matches)
+        document.querySelector('.toc details')?.removeAttribute('open');
+      const closeGroups = () => groups.forEach((group) => (group.open = false));
+      groups.forEach((group) =>
+        group.addEventListener('toggle', () => {
+          if (group.open)
+            groups.filter((other) => other !== group).forEach((other) => (other.open = false));
+        }),
+      );
+      document.addEventListener('click', (event) => {
+        if (event.target instanceof Node && !nav?.contains(event.target)) closeGroups();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const opened = groups.find((group) => group.open);
+          closeGroups();
+          opened?.querySelector('summary')?.focus();
+          if (toggle?.getAttribute('aria-expanded') === 'true') {
+            toggle.setAttribute('aria-expanded', 'false');
+            nav?.classList.remove('open');
+            toggle.focus();
+          }
+        }
+      });
+      window.addEventListener(
+        'scroll',
+        () =>
+          document.querySelector('.site-header')?.classList.toggle('scrolled', window.scrollY > 30),
+        { passive: true },
+      );
+    </script>
+  </body>
+</html>

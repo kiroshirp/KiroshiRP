@@ -1,0 +1,39 @@
+---
+import { url } from '../config';
+
+interface Entry {
+  id: string;
+  data: { category: string; title: string };
+}
+interface Props {
+  section: { id: string };
+  entries: Entry[];
+  ids: string[];
+}
+const { section, entries, ids } = Astro.props;
+const selected = ids.flatMap((id) => {
+  const entry = entries.find((e) => e.id === id);
+  if (!entry) console.warn(`Destacado omitido en ${section.id}: no existe ${id}`);
+  return entry ? [entry] : [];
+});
+---
+
+{selected.length > 0 && (
+  <section class="section section-picks">
+    <span class="eyebrow">
+      {section.id === 'guias' ? 'ANTES DE EMPEZAR' : 'UN BUEN PUNTO DE PARTIDA'}
+    </span>
+    <div class="pick-links">
+      {selected.map((e, i) => (
+        <a href={url(section.id + '/' + e.id + '/')}>
+          <span class="mono">0{i + 1}</span>
+          <div>
+            <small>{e.data.category}</small>
+            <strong>{e.data.title}</strong>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

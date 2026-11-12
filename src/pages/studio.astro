@@ -1,11 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
-import {url} from '../config';
+import { url } from '../config';
 ---
-<Base active="studio" title="Kiroshi Studio · Próximamente" description="El futuro espacio de recursos creados por KiroshiRP. Sección en preparación.">
- <section class="studio-page" aria-labelledby="studio-title">
-  <div><span class="eyebrow">CREACIONES DE KIROSHIRP</span><h1 id="studio-title">Kiroshi<br/><em>Studio.</em></h1><p class="studio-page-lead">Un espacio para los recursos creados por KiroshiRP.</p><p>Estamos preparando esta sección. El catálogo todavía no está disponible.</p><a class="button primary" href={url('discord/')}>Seguir el proyecto en Discord <span aria-hidden="true">→</span></a></div>
-  <div class="studio-notice"><span class="mono">KIROSHIRP / STUDIO</span><strong aria-hidden="true">KRP<span>STUDIO</span></strong><div><span class="studio-notice-status">En preparación</span><p>Próximamente</p></div></div>
- </section>
- <div class="studio-page-bottom"><p>Las novedades se publicarán cuando estén confirmadas.</p><a class="text-link" href={url('actualizaciones/')}>Ver las actualizaciones ↗</a></div>
+
+<Base
+  active="studio"
+  title="Kiroshi Studio · Próximamente"
+  description="El futuro espacio de recursos creados por KiroshiRP. Sección en preparación."
+>
+  <section class="studio-page" aria-labelledby="studio-title">
+    <div>
+      <span class="eyebrow">CREACIONES DE KIROSHIRP</span>
+      <h1 id="studio-title">
+        Kiroshi
+        <br />
+        <em>Studio.</em>
+      </h1>
+      <p class="studio-page-lead">Un espacio para los recursos creados por KiroshiRP.</p>
+      <p>Estamos preparando esta sección. El catálogo todavía no está disponible.</p>
+      <a class="button primary" href={url('discord/')}>
+        Seguir el proyecto en Discord <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="studio-notice">
+      <span class="mono">KIROSHIRP / STUDIO</span>
+      <strong aria-hidden="true">
+        KRP<span>STUDIO</span>
+      </strong>
+      <div>
+        <span class="studio-notice-status">En preparación</span>
+        <p>Próximamente</p>
+      </div>
+    </div>
+  </section>
+  <div class="studio-page-bottom">
+    <p>Las novedades se publicarán cuando estén confirmadas.</p>
+    <a class="text-link" href={url('actualizaciones/')}>
+      Ver las actualizaciones ↗
+    </a>
+  </div>
 </Base>

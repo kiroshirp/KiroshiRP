@@ -1,13 +1,89 @@
 ---
 import Base from '../layouts/Base.astro';
-import {site,url} from '../config';
-const accessUrl=site.adminUrl ? new URL('/acceso/',site.adminUrl).href : '';
+import { site, url } from '../config';
+const accessUrl = site.adminUrl ? new URL('/acceso/', site.adminUrl).href : '';
 ---
-<Base title="Acceso a la comunidad" description="Identifícate con Discord y declara tu SteamID para solicitar una invitación a KiroshiRP.">
- <section class="access-layout" aria-labelledby="access-title">
-  <div class="access-copy"><span class="eyebrow">LA COMUNIDAD DE KIROSHIRP</span><h1 id="access-title">Tu próxima historia<br/>empieza <em>con otros.</em></h1><p>Conoce el proyecto, sigue sus novedades y encuentra a las personas con las que compartirás Night City.</p><span class="access-state"><span aria-hidden="true"></span> Proyecto en construcción · sin fecha de apertura confirmada</span></div>
-  <div class="access-panel"><span class="mono">ACCESO / DISCORD</span><h2>Entra en la comunidad.</h2><p>Inicia sesión con tu cuenta de Discord y declara tu SteamID64 para recibir una invitación individual.</p><ul><li>Tu identificador de Discord se obtiene automáticamente.</li><li>El SteamID lo declaras tú; no verificamos su titularidad.</li><li>El proceso no asigna roles adicionales.</li></ul>{accessUrl?<a class="button primary" href={accessUrl}>Continuar con Discord <span aria-hidden="true">→</span></a>:<p>El acceso todavía no está disponible.</p>}<a class="access-privacy" href={url('privacidad/')}>Cómo tratamos los datos de tu solicitud ↗</a></div>
- </section>
- <section class="access-steps" aria-label="Pasos para acceder"><div><span class="mono">01 / IDENTIFÍCATE</span><h2>Conecta tu cuenta.</h2><p>Discord confirma tu identidad y nos facilita tu identificador y nombre de usuario.</p></div><div><span class="mono">02 / COMPLETA</span><h2>Declara tu SteamID.</h2><p>Introduce el SteamID64 de 17 cifras y acepta el tratamiento de datos para gestionar el acceso.</p></div><div><span class="mono">03 / PARTICIPA</span><h2>Abre tu invitación.</h2><p>Al completar el formulario recibirás un enlace individual de corta duración para entrar en Discord.</p></div></section>
- <section class="discord-gate-next"><div><span class="eyebrow">ANTES DE ENTRAR</span><h2>Conoce KiroshiRP.</h2><p>Empieza por la guía y consulta el estado de los documentos publicados.</p></div><nav aria-label="Lecturas recomendadas"><a href={url('guias/primeros-pasos/')}>Guía de inicio <span aria-hidden="true">↗</span></a><a href={url('normativas/')}>Normativas <span aria-hidden="true">↗</span></a></nav></section>
+
+<Base
+  title="Acceso a la comunidad"
+  description="Identifícate con Discord y declara tu SteamID para solicitar una invitación a KiroshiRP."
+>
+  <section class="access-layout" aria-labelledby="access-title">
+    <div class="access-copy">
+      <span class="eyebrow">LA COMUNIDAD DE KIROSHIRP</span>
+      <h1 id="access-title">
+        Tu próxima historia
+        <br />
+        empieza <em>con otros.</em>
+      </h1>
+      <p>
+        Conoce el proyecto, sigue sus novedades y encuentra a las personas con las que compartirás
+        Night City.
+      </p>
+      <span class="access-state">
+        <span aria-hidden="true"></span> Proyecto en construcción · sin fecha de apertura confirmada
+      </span>
+    </div>
+    <div class="access-panel">
+      <span class="mono">ACCESO / DISCORD</span>
+      <h2>Entra en la comunidad.</h2>
+      <p>
+        Inicia sesión con tu cuenta de Discord y declara tu SteamID64 para recibir una invitación
+        individual.
+      </p>
+      <ul>
+        <li>Tu identificador de Discord se obtiene automáticamente.</li>
+        <li>El SteamID lo declaras tú; no verificamos su titularidad.</li>
+        <li>El proceso no asigna roles adicionales.</li>
+      </ul>
+      {accessUrl ? (
+        <a class="button primary" href={accessUrl}>
+          Continuar con Discord <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <p>El acceso todavía no está disponible.</p>
+      )}
+      <a class="access-privacy" href={url('privacidad/')}>
+        Cómo tratamos los datos de tu solicitud ↗
+      </a>
+    </div>
+  </section>
+  <section class="access-steps" aria-label="Pasos para acceder">
+    <div>
+      <span class="mono">01 / IDENTIFÍCATE</span>
+      <h2>Conecta tu cuenta.</h2>
+      <p>Discord confirma tu identidad y nos facilita tu identificador y nombre de usuario.</p>
+    </div>
+    <div>
+      <span class="mono">02 / COMPLETA</span>
+      <h2>Declara tu SteamID.</h2>
+      <p>
+        Introduce el SteamID64 de 17 cifras y acepta el tratamiento de datos para gestionar el
+        acceso.
+      </p>
+    </div>
+    <div>
+      <span class="mono">03 / PARTICIPA</span>
+      <h2>Abre tu invitación.</h2>
+      <p>
+        Al completar el formulario recibirás un enlace individual de corta duración para entrar en
+        Discord.
+      </p>
+    </div>
+  </section>
+  <section class="discord-gate-next">
+    <div>
+      <span class="eyebrow">ANTES DE ENTRAR</span>
+      <h2>Conoce KiroshiRP.</h2>
+      <p>Empieza por la guía y consulta el estado de los documentos publicados.</p>
+    </div>
+    <nav aria-label="Lecturas recomendadas">
+      <a href={url('guias/primeros-pasos/')}>
+        Guía de inicio <span aria-hidden="true">↗</span>
+      </a>
+      <a href={url('normativas/')}>
+        Normativas <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+  </section>
 </Base>

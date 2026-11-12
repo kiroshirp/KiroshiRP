@@ -57,26 +57,11 @@
     "challengeCooldown": null,
     "inactivityDays": null,
     "rules": [
-      [
-        "Méritos mínimos",
-        "Pendiente de validación."
-      ],
-      [
-        "Veteranos habilitados",
-        "Criterios de antigüedad y participación pendientes."
-      ],
-      [
-        "Quórum y respaldo",
-        "Umbrales y resolución de empates pendientes."
-      ],
-      [
-        "Límites de desafíos",
-        "Intervalo y condiciones de repetición pendientes."
-      ],
-      [
-        "Inactividad y sucesión",
-        "Plazos, revisión y sustitución pendientes."
-      ],
+      ["Méritos mínimos", "Pendiente de validación."],
+      ["Veteranos habilitados", "Criterios de antigüedad y participación pendientes."],
+      ["Quórum y respaldo", "Umbrales y resolución de empates pendientes."],
+      ["Límites de desafíos", "Intervalo y condiciones de repetición pendientes."],
+      ["Inactividad y sucesión", "Plazos, revisión y sustitución pendientes."],
       [
         "Protección frente a abusos",
         "Propuesta: un respaldo por persona habilitada; registro revisable por administración. Sin cifras definitivas."
@@ -84,10 +69,7 @@
     ]
   },
   "phases": [
-    [
-      "Fase inicial",
-      "Propuesta del documento: tics visuales y alteraciones de interfaz."
-    ],
+    ["Fase inicial", "Propuesta del documento: tics visuales y alteraciones de interfaz."],
     [
       "Fase crítica",
       "Propuesta del documento: desorientación y alucinaciones mediante scripts, sin implementación confirmada."
