@@ -48,7 +48,7 @@ El último comando despliega el Worker y carga mediante entrada estándar las cr
 
 El comando muestra la dirección real de `workers.dev` devuelta por Cloudflare. Comprueba allí `/admin/`. `site.adminUrl` en `src/data/portal.json` debe contener esa URL HTTPS verificada. La ruta `/admin/` de la web oficial abre el Worker privado de Cloudflare, que valida el acceso en su propio origen.
 
-El contenido inicial, los esquemas compartidos y la configuración JSON deben estar también en `main` antes de editar mediante el Worker. `npm run admin:publish-source` publica exclusivamente una lista revisada de los archivos de esta implementación, en un único commit sin forzar la rama; incluye una comprobación para impedir subir valores privados. No publiques únicamente el Worker sin publicar estos archivos del proyecto.
+El contenido inicial, los esquemas compartidos y la configuración JSON deben estar también en `main` antes de editar mediante el Worker. Los archivos de esta implementación ya están en `main`. No publiques únicamente el Worker sin publicar estos archivos del proyecto.
 
 ## Gestionar el portal
 

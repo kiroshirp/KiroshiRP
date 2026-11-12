@@ -12,7 +12,6 @@
     "admin:test": "node --test admin/tests/*.test.mjs",
     "admin:deploy": "node scripts/deploy-admin.mjs",
     "admin:check": "wrangler deploy --dry-run --outdir .admin-build",
-    "admin:publish-source": "node scripts/publish-admin-source.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "css:snapshot": "node scripts/css-snapshot.mjs"

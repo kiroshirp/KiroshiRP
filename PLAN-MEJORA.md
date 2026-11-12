@@ -122,7 +122,7 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 - `package.json` declara `engines.node >= 22.12`, como ya decía el README.
 - `deploy.yml` queda documentado como redirección heredada (solo `main`).
 - Se eliminó `scripts/seed-content.mjs`: no formaba parte de la compilación y sigue disponible en el historial de git.
-- Pendiente de decisión: `scripts/publish-admin-source.mjs` (lista fija de archivos ya desactualizada).
+- `scripts/publish-admin-source.mjs` y `npm run admin:publish-source` se eliminaron después de la fusión: eran un paso de puesta en marcha con una lista fija de archivos, y el repositorio ya contiene todo.
 
 ## Notas de la fase 6
 
