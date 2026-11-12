@@ -22,7 +22,7 @@
     "@fontsource/inter": "^5.2.0",
     "@fontsource/rajdhani": "^5.2.0",
     "@fontsource/share-tech-mono": "^5.2.0",
-    "astro": "^7.4.0",
+    "astro": "^7.4.8",
     "yaml": "2.9.1",
     "zod": "4.6.7"
   },
