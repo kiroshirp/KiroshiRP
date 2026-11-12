@@ -48,7 +48,7 @@ Cada fase es un conjunto de commits pequeños en `pruebas`. Al terminar cada fas
 - Validar esos datos con `zod` en `src/config.ts`.
 - Dividir `[section].astro` en componentes pequeños (lista, destacados, estado de normativas).
 
-### Fase 3: consolidar el CSS
+### Fase 3: consolidar el CSS (hecha, ver notas)
 
 - Definir variables de diseño (color, espacio, tipografía) en un único `tokens.css`.
 - Fusionar las siete hojas en capas con propósito: `base`, `layout`, `components`, `pages`.
@@ -97,3 +97,11 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 ## Prioridad (decidida)
 
 1. Código. 2. Aspecto visual. 3. Documentación. Las fases 1 a 5 son de código; la fase 3 (CSS) cubre lo visual; la documentación va al final.
+
+## Notas de la fase 3
+
+- Las siete hojas (136 KB) pasaron a `tokens.css` (variables) y `portal.css` (124 KB). El orden de la cascada se conserva y cada bloque lleva un comentario con su origen.
+- Se eliminaron 429 declaraciones que una regla posterior con el mismo selector ya sobrescribía, y 84 reglas que quedaron vacías. Se tokenizaron los colores más repetidos.
+- No se reordenaron reglas entre bloques: eso puede cambiar la cascada y necesita revisión visual. Queda como mejora opcional.
+- Los 29 `!important` restantes se conservan: cada uno compensa una regla de otro bloque o de una media query.
+- `scripts/css-snapshot.mjs` guarda los estilos calculados de todas las páginas en escritorio y móvil y los compara entre dos versiones (`npm run css:snapshot -- <carpeta> dist`, y `-- --compare <a> <b>`). Resultado: 154 de 156 archivos idénticos; los otros dos (portada) solo difieren en cómo se escribe un degradado, con el mismo resultado visual.

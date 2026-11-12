@@ -14,7 +14,8 @@
     "admin:check": "wrangler deploy --dry-run --outdir .admin-build",
     "admin:publish-source": "node scripts/publish-admin-source.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "css:snapshot": "node scripts/css-snapshot.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
