@@ -123,3 +123,10 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 - `deploy.yml` queda documentado como redirección heredada (solo `main`).
 - Se eliminó `scripts/seed-content.mjs`: no formaba parte de la compilación y sigue disponible en el historial de git.
 - Pendiente de decisión: `scripts/publish-admin-source.mjs` (lista fija de archivos ya desactualizada).
+
+## Notas de la fase 6
+
+- El README quedó con instalación, scripts, estructura, flujo `pruebas` → `main`, despliegue y comprobaciones. La edición de fichas y datos pasó a `CONTENIDO.md`, que también documenta `sections.json`.
+- `CONTENIDO-PENDIENTE.md` absorbió la lista de datos que faltan que estaba en el README.
+- `ADMIN.md` ya no dice que la web pública está en GitHub Pages y describe la estructura del código del panel.
+- La skill `humanizer` se aplicó a los textos nuevos: sin rayas largas, sin negritas decorativas y sin cierres que repitan. Los textos de las fichas del portal (`src/content`) no se tocaron; revisarlos es decisión del equipo, porque cambian el contenido público.

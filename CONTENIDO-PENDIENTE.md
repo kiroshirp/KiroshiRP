@@ -1,4 +1,4 @@
-# Revisión editorial de KiroshiRP — 20 de octubre de 2026
+# Revisión editorial de KiroshiRP, 20 de octubre de 2026
 
 El portal sigue siendo público y no incorpora registro, perfiles ni cuentas de jugadores. El panel editorial privado existente se conserva.
 
@@ -32,3 +32,11 @@ Estas lagunas no se rellenan con reglas, funciones o fechas supuestas. Las ficha
 Los textos de portada y las fases se mantienen en src/data/home.json; los artículos, en src/content. PortalArt.astro contiene ilustraciones decorativas originales en SVG; los emblemas de dos letras en facciones son abreviaturas tipográficas, no logotipos oficiales. CityExplorer.astro utiliza la imagen original de KiroshiRP como ambientación, sin atribuirla a un distrito concreto.
 
 Comprobación de lectura: con JavaScript desactivado se conserva el texto completo. Con JavaScript activo, «Leer por apartados» permite reducir la lectura; los enlaces del índice abren el capítulo enlazado. Los filtros incluyen las fichas en preparación y las despliegan cuando coinciden.
+
+## Datos que faltan
+
+- URL oficial de Discord y canal de contacto.
+- Requisitos y conexión de OPEN//77 verificados, sin fecha de apertura inventada.
+- Síntesis canónica respaldada por fuentes, historia propia aprobada y disponibilidad de facciones.
+- Normas definitivas, parámetros de liderazgo y mecánicas realmente implementadas.
+- Responsable identificado, y revisión de los avisos legales y de las atribuciones de imágenes.
