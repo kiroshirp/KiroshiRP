@@ -1,0 +1,31 @@
+{
+  "lore": {
+    "cover": "images/landing-threshold.webp",
+    "picks": ["protocolo-umbral", "badlands", "historia-night-city"],
+    "note": "El canon del universo y las historias originales de KiroshiRP están identificados en cada ficha."
+  },
+  "mecanicas": {
+    "cover": "images/krp-workshop.webp",
+    "picks": ["reputacion", "cyberpsicosis", "liderazgo"],
+    "note": "Explora el diseño de los sistemas. Las propuestas no confirman funciones disponibles en el servidor."
+  },
+  "facciones": {
+    "cover": "images/landing-project.webp",
+    "picks": ["nomadas", "valentinos", "ncpd"],
+    "note": "Conoce las organizaciones del universo. Su presencia en el servidor se indica por separado."
+  },
+  "normativas": {
+    "cover": "images/landing-regulations.webp",
+    "picks": [],
+    "note": "12 apartados. Las normativas 01, 02 y 03 son borradores en versión 0.2. Los demás apartados continúan en desarrollo."
+  },
+  "guias": {
+    "cover": "images/landing-first-steps.webp",
+    "picks": ["primeros-pasos", "preguntas-frecuentes", "glosario"],
+    "note": "Empieza por lo esencial y amplía la lectura a tu ritmo."
+  },
+  "actualizaciones": {
+    "picks": [],
+    "note": "Aquí solo se publican anuncios confirmados."
+  }
+}

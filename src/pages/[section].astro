@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Card from '../components/Card.astro';
 import SectionIntro from '../components/SectionIntro.astro';
-import { sections, url } from '../config';
+import SectionPicks from '../components/SectionPicks.astro';
+import { sections, sectionExtras, url } from '../config';
 import { getCollection } from 'astro:content';
 import documents from '../data/regulation-documents.json';
 export function getStaticPaths() {
@@ -19,35 +20,7 @@ const regulationDrafts =
 const regulationInProgress =
   section.id === 'normativas' ? available.filter((e) => !(e.id in documents)) : [];
 const categories = [...new Set(entries.map((e) => e.data.category))];
-const picks: Record<string, string[]> = {
-  lore: ['protocolo-umbral', 'badlands', 'historia-night-city'],
-  mecanicas: ['reputacion', 'cyberpsicosis', 'liderazgo'],
-  facciones: ['nomadas', 'valentinos', 'ncpd'],
-  normativas: [],
-  guias: ['primeros-pasos', 'preguntas-frecuentes', 'glosario'],
-  actualizaciones: [],
-};
-const selected = (picks[section.id] || [])
-  .map((id) => entries.find((e) => e.id === id))
-  .filter(Boolean);
-const notes: Record<string, string> = {
-  lore: 'El canon del universo y las historias originales de KiroshiRP están identificados en cada ficha.',
-  mecanicas:
-    'Explora el diseño de los sistemas. Las propuestas no confirman funciones disponibles en el servidor.',
-  facciones:
-    'Conoce las organizaciones del universo. Su presencia en el servidor se indica por separado.',
-  normativas:
-    '12 apartados. Las normativas 01, 02 y 03 son borradores en versión 0.2. Los demás apartados continúan en desarrollo.',
-  guias: 'Empieza por lo esencial y amplía la lectura a tu ritmo.',
-  actualizaciones: 'Aquí solo se publican anuncios confirmados.',
-};
-const covers: Record<string, string> = {
-  lore: 'images/landing-threshold.webp',
-  mecanicas: 'images/krp-workshop.webp',
-  facciones: 'images/landing-project.webp',
-  guias: 'images/landing-first-steps.webp',
-  normativas: 'images/landing-regulations.webp',
-};
+const extras = sectionExtras[section.id];
 ---
 
 <Base title={section.title} active={section.id}>
@@ -55,7 +28,7 @@ const covers: Record<string, string> = {
     title={section.title}
     description={section.subtitle}
     eyebrow={`${section.code} / ${section.label}`}
-    image={covers[section.id]}
+    image={extras.cover}
     count={entries.length}
   />
   {section.id === 'lore' && (
@@ -65,28 +38,7 @@ const covers: Record<string, string> = {
       <span>ABRIR EXPLORADOR ↗</span>
     </a>
   )}
-  {selected.length > 0 && (
-    <section class="section section-picks">
-      <span class="eyebrow">
-        {section.id === 'guias' ? 'ANTES DE EMPEZAR' : 'UN BUEN PUNTO DE PARTIDA'}
-      </span>
-      <div class="pick-links">
-        {selected.map(
-          (e, i) =>
-            e && (
-              <a href={url(section.id + '/' + e.id + '/')}>
-                <span class="mono">0{i + 1}</span>
-                <div>
-                  <small>{e.data.category}</small>
-                  <strong>{e.data.title}</strong>
-                </div>
-                <span aria-hidden="true">↗</span>
-              </a>
-            ),
-        )}
-      </div>
-    </section>
-  )}
+  <SectionPicks section={section} entries={entries} ids={extras.picks} />
   <section id="biblioteca" class="section library" data-library={section.id}>
     <div class="library-heading">
       <div>
@@ -95,7 +47,7 @@ const covers: Record<string, string> = {
         </span>
         <h2>{section.id === 'normativas' ? 'Documentos' : 'Todas las fichas'}</h2>
       </div>
-      {section.id !== 'normativas' && <p>{notes[section.id]}</p>}
+      {section.id !== 'normativas' && <p>{extras.note}</p>}
     </div>
     <div class="filter-bar">
       <label>
@@ -174,49 +126,6 @@ const covers: Record<string, string> = {
     )}
   </section>
   <script>
-    const input = document.querySelector<HTMLInputElement>('#filter-search')!;
-    const select = document.querySelector<HTMLSelectElement>('#filter-category');
-    const cards = [...document.querySelectorAll<HTMLElement>('[data-card]')];
-    const resultCount = document.querySelector<HTMLElement>('#result-count')!;
-    const initialCount = resultCount.textContent;
-    const normalize = (s: string) =>
-      s
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase();
-    const pending = document.querySelector<HTMLDetailsElement>('#pending-library');
-    const more = document.querySelector<HTMLDetailsElement>('#regulation-more');
-    function filter() {
-      let count = 0;
-      cards.forEach((c) => {
-        const visible =
-          normalize(c.dataset.search || '').includes(normalize(input.value)) &&
-          (!select?.value || c.dataset.category === select.value);
-        c.hidden = !visible;
-        if (visible) count++;
-      });
-      const filtering = !!(input.value || select?.value);
-      resultCount.textContent = filtering
-        ? `${count} ${count === 1 ? 'ficha encontrada' : 'fichas encontradas'}`
-        : initialCount;
-      document.querySelector<HTMLElement>('#no-results')!.hidden =
-        count !== 0 || cards.length === 0;
-      if (more) {
-        const matches = more.querySelectorAll('[data-card]:not([hidden])').length;
-        more.hidden = filtering && !matches;
-        more.open = filtering && !!matches;
-        more.querySelector<HTMLElement>('summary .mono')!.textContent = filtering
-          ? `${matches} ${matches === 1 ? 'resultado' : 'resultados'}`
-          : `${more.querySelectorAll('[data-card]').length} apartados`;
-      }
-      if (pending) {
-        const hasMatch = !!pending.querySelector('[data-card]:not([hidden])');
-        pending.hidden = !hasMatch;
-        if (filtering) pending.open = hasMatch;
-        else pending.open = false;
-      }
-    }
-    input.addEventListener('input', filter);
-    select?.addEventListener('change', filter);
+    import '../scripts/library-filter.ts';
   </script>
 </Base>
