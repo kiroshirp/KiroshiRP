@@ -1,161 +1,1281 @@
 /* Clearer entry points and calmer surfaces, using KiroshiRP's existing palette. */
-html{scroll-padding-top:90px}
-body{padding-bottom:0;background:#071525}
-.optic-world{opacity:.12;background-position:center;background-size:cover}
-.optic-world:after{background:#07152599}
-.site-header,.site-header.scrolled{inset:0 0 auto;height:76px;padding:0 max(4%,calc((100vw - 1320px)/2));border:0;border-bottom:1px solid #ddf8f326;border-radius:0;background:#071525f2;box-shadow:none;backdrop-filter:blur(16px)}
-.site-header nav{gap:clamp(12px,2vw,30px)}
-.site-header nav>a{padding:24px 0;font-size:.94rem}
-.site-header nav>a[aria-current=page]:after{bottom:17px}
-.site-header nav .button{font-size:.74rem;padding:10px 14px}
-.site-header nav .button.primary{background:transparent;border-color:transparent;clip-path:none;color:var(--ice);box-shadow:none}
-.site-header nav .button.primary:hover{color:var(--yellow);transform:none}
-.brand-logo{display:block;flex:none;width:46px;height:46px;object-fit:contain}
-body:not(.optic-home)>main{width:min(100% - 48px,1240px);margin:102px auto 44px;border:0;border-radius:0;background:#071525ed;box-shadow:none;overflow:visible}
-body:not(.optic-home) .page-heading{display:block;padding:42px 5% 32px;background:#0a1c30;border-bottom:1px solid var(--line)}
-body:not(.optic-home) .page-heading h1{font-size:clamp(2.6rem,4.5vw,4rem);margin:0 0 14px}
-body:not(.optic-home) .page-heading p{font-size:1rem;line-height:1.6;margin:0}
-body:not(.optic-home) .page-heading .eyebrow{margin-bottom:14px}
-body:not(.optic-home) .page-heading .cover-art{display:none}
-body:not(.optic-home) .article-shell{padding-top:52px}
-.library{padding-top:32px}
-.regulation-list{border-top:1px solid var(--line)}
-.regulation-card{display:grid;grid-template-columns:42px minmax(0,1fr) auto 20px;align-items:center;gap:18px;padding:18px 10px;border-bottom:1px solid var(--line)}
-.regulation-card:hover{background:#102c4970}
-.regulation-card-number,.regulation-card-arrow{color:var(--yellow)}
-.regulation-card-content strong{display:block;font:700 1.45rem Rajdhani,sans-serif;line-height:1.2}
-.regulation-card-content small{display:block;margin-top:4px;color:var(--muted);font-size:.83rem;line-height:1.5}
-.regulation-card-status{color:var(--ice);font-family:'Share Tech Mono',monospace;font-size:.7rem;white-space:nowrap}
-.regulation-more{margin-top:24px}
-.regulation-more>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:54px;padding:12px 10px;cursor:pointer;color:var(--text);font:700 1.35rem Rajdhani,sans-serif;border-bottom:1px solid var(--line)}
-.regulation-more>summary .mono{font-size:.7rem;color:var(--muted)}
-.regulation-more .regulation-list{border-top:0}
-.atlas{padding-top:24px}
-.atlas-advanced{margin:0 0 24px;border-bottom:1px solid var(--line)}
-.atlas-advanced>summary{min-height:48px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--ice);font:700 1.15rem Rajdhani,sans-serif}
-.atlas-advanced>summary>span{color:var(--yellow)}
-.atlas-advanced[open]>summary>span{transform:rotate(180deg)}
-.atlas-advanced .atlas-controls{padding:12px 0 24px;margin:0;border:0}
-.atlas-index{top:90px}
-.optic-home main{max-width:none;margin:0}
-.clean-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:min(820px,100svh);overflow:hidden;background:#071525;padding:120px max(5%,calc((100vw - 1320px)/2)) 70px}
-.clean-hero-copy{position:relative;z-index:1;width:min(48%,600px)}
-.clean-hero-brand{display:flex;align-items:center;gap:18px;margin-bottom:25px}
-.clean-hero-brand img{display:block;width:72px;height:72px;object-fit:contain}
-.clean-hero-brand .eyebrow{margin:0}
-.clean-hero h1{font-size:clamp(3.8rem,6.2vw,6.6rem);line-height:.94;margin-bottom:24px}
-.clean-hero-lead{font-family:Rajdhani,sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:.04em;color:var(--text);line-height:1.3;margin-bottom:18px}
-.clean-hero-copy>p:not(.clean-hero-lead){max-width:460px;line-height:1.75;margin-bottom:28px}
-.clean-hero .actions{gap:12px}
-.clean-hero .button{font-size:.93rem}
-.clean-status{display:block;margin-top:30px;color:var(--ice);font-size:.7rem;letter-spacing:.08em}
-.clean-hero-media{position:absolute;inset:76px 0 0 31%;z-index:-1;overflow:hidden;background:#102c49}
-.clean-hero-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.06) translate3d(var(--pan-x,0px),var(--pan-y,0px),0);transition:transform .35s ease-out}
-.clean-hero-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#071525 0%,#071525a8 22%,transparent 60%),linear-gradient(0deg,#071525 0%,transparent 24%,transparent 80%,#07152555 100%)}
-.clean-hero-copy{animation:optic-enter .8s both}
-.clean-section{padding:70px max(5%,calc((100vw - 1320px)/2));border-top:1px solid var(--line)}
-.clean-section h2{font-size:clamp(2.3rem,3.8vw,3.8rem);margin-bottom:0}
-.clean-intro{position:relative;isolation:isolate;display:flex;align-items:center;min-height:640px;overflow:hidden;background:#091a2c}
-.clean-intro-media{position:absolute;inset:0;z-index:-1}
-.clean-intro-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
-.clean-intro-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#071525 0%,#071525e8 31%,#07152565 65%,transparent 100%),linear-gradient(0deg,#07152599,transparent 35%)}
-.clean-intro-content{max-width:650px;padding-block:50px}
-.clean-intro h2{font-size:clamp(3.4rem,6vw,6rem);line-height:.95;margin:0 0 38px}
-.clean-intro .lead{font-size:1.35rem;line-height:1.4;color:var(--text)}
-.clean-intro p{max-width:550px;line-height:1.7}
-.clean-intro p:last-child{margin-bottom:0}
-.clean-section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:32px}
-.clean-section-head>p{max-width:250px;margin:0;font-size:.9rem}
-.clean-path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.clean-path-card{position:relative;display:flex;flex-direction:column;min-height:390px;padding:0 24px 26px;border:1px solid var(--line);background:#0b2034;overflow:hidden;transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:border-color .2s,transform .25s ease-out,box-shadow .25s}
-.clean-path-card:hover,.clean-path-card:focus-visible{border-color:var(--yellow);box-shadow:0 22px 48px #0008,0 0 32px #246a9a30;transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-5px)}
-.clean-path-art{position:relative;display:block;height:225px;margin:0 -24px 24px;overflow:hidden;border-bottom:1px solid var(--line);background:#102c49}
-.clean-path-art:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#0b2034 0%,transparent 50%)}
-.clean-path-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 43%;transition:transform .55s ease}
-.clean-path-card:hover .clean-path-art img,.clean-path-card:focus-visible .clean-path-art img{transform:scale(1.07)}
-.clean-path-card .mono{color:var(--yellow);font-size:.7rem;letter-spacing:.08em}
-.clean-path-card strong{display:block;margin:12px 0 8px;font:700 2rem Rajdhani,sans-serif;line-height:1.1}
-.clean-path-card small{display:block;max-width:290px;padding-right:15px;color:var(--muted);font-size:.86rem;line-height:1.6}
-.clean-path-arrow{position:absolute;right:24px;bottom:22px;color:var(--yellow)}
-.clean-path-search{margin-top:26px}
-.clean-news>a{display:grid;grid-template-columns:1fr 28px;gap:20px;align-items:center;min-height:90px;padding:16px 12px;border-bottom:1px solid var(--line)}
-.clean-news strong{display:block;font:700 1.6rem Rajdhani,sans-serif}
-.clean-news>a>span{color:var(--yellow)}
-.clean-news>a{grid-template-columns:1fr 28px}
-.discord-home{padding-block:52px}
-.discord-page{padding-top:50px}
-.discord-access{position:relative;isolation:isolate;display:block;min-height:300px;overflow:hidden;border:1px solid #e8c96c80;background:#06111d;transition:border-color .2s,transform .2s}
-.discord-access:hover,.discord-access:focus-visible{border-color:var(--yellow);transform:translateY(-3px)}
-.discord-access-art{position:absolute;inset:0;z-index:-1}
-.discord-access-art img{width:100%;height:100%;object-fit:cover;object-position:center 45%;opacity:.55}
-.discord-access-art:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#06111dfc 0%,#06111de6 48%,#06111d55 100%),linear-gradient(0deg,#06111ddd,transparent 60%)}
-.discord-access:after{content:'';position:absolute;right:-30px;bottom:16px;width:40%;height:3px;background:var(--yellow);transform:rotate(-18deg);transform-origin:right;box-shadow:0 10px 0 var(--blue);pointer-events:none}
-.discord-access-content{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:300px;padding:34px clamp(24px,5vw,72px)}
-.discord-access-content>.mono{color:var(--yellow);font-size:.73rem;letter-spacing:.16em}
-.discord-access-brand{display:flex;align-items:center;gap:15px;margin:10px 0 2px}
-.discord-access-brand img{width:64px;height:64px;object-fit:contain}
-.discord-access-brand strong{font:700 clamp(3.1rem,7vw,6rem)/.9 Rajdhani,sans-serif;letter-spacing:-.04em;color:var(--yellow);text-shadow:0 4px 25px #000b}
-.discord-access-brand strong span{color:var(--ice)}
-.discord-access-caption{max-width:470px;margin:10px 0 22px;color:var(--text);line-height:1.5}
-.discord-access-action{display:inline-flex;align-items:center;gap:22px;padding:10px 0;border-bottom:2px solid var(--yellow);color:var(--yellow);font:700 1.1rem Rajdhani,sans-serif;letter-spacing:.06em}
-.discord-access:hover .discord-access-action,.discord-access:focus-visible .discord-access-action{color:var(--ice);border-color:var(--ice)}
-.clean-close{display:flex;justify-content:space-between;align-items:center;gap:30px;padding-bottom:90px}
-.clean-close .button{flex-shrink:0}
-body>footer{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:#040e19;padding:48px max(4%,calc((100vw - 1240px)/2)) 30px}
-.footer-top .wordmark{display:flex;align-items:center}
-.footer-links{gap:12px 25px}
-@keyframes optic-enter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:no-preference){.clean-reveal.will-reveal{opacity:0;translate:0 28px;transition:opacity .65s ease,translate .65s ease}.clean-reveal.will-reveal.is-visible{opacity:1;translate:0 0}.clean-path-card.will-reveal:nth-child(2){transition-delay:.09s}.clean-path-card.will-reveal:nth-child(3){transition-delay:.18s}}
-@media(prefers-reduced-motion:reduce){.clean-hero-copy{animation:none}.clean-hero-media img,.clean-path-card,.clean-path-art img,.discord-access{transition:none}.clean-path-card:hover,.clean-path-card:focus-visible,.discord-access:hover,.discord-access:focus-visible{transform:none}.clean-path-card:hover .clean-path-art img,.clean-path-card:focus-visible .clean-path-art img{transform:none}}
-@media(max-width:980px){.site-header{padding-inline:4%}.site-header nav{top:76px;left:4%;right:4%;padding:20px 24px;border:1px solid var(--line);border-radius:0;background:#071525fa}.site-header nav>a{padding:12px 0}.site-header nav>a[aria-current=page]:after{bottom:5px}.site-header nav .button{align-self:start;margin:12px 0 0}.clean-hero{min-height:700px}.clean-hero h1{font-size:clamp(3rem,6vw,4.7rem)}}
-@media(max-width:760px){.clean-hero{display:block;min-height:0;padding:76px 6% 55px}.clean-hero-copy{width:100%;max-width:650px;padding-top:330px}.clean-hero-media{inset:76px 0 auto;height:390px}.clean-hero-media:after{background:linear-gradient(0deg,#071525 0%,transparent 58%)}.clean-intro{min-height:600px}.clean-intro-media img{object-position:65% center}.clean-intro-media:after{background:linear-gradient(90deg,#071525eb,#071525aa 70%,#07152555),linear-gradient(0deg,#071525bb,transparent 50%)}.clean-intro-content{padding-block:40px}.clean-section{padding:54px 6%}.clean-section-head{display:block}.clean-section-head>p{margin-top:18px;max-width:none}.clean-path-grid{grid-template-columns:1fr}.clean-path-card{min-height:365px}.clean-close{display:block}.clean-close .button{margin-top:30px}body:not(.optic-home)>main{width:calc(100% - 24px);margin-top:88px}body:not(.optic-home) .page-heading{padding:30px 6% 25px}body:not(.optic-home) .article-shell{padding-top:36px}.regulation-card{grid-template-columns:30px minmax(0,1fr) 18px;gap:10px}.regulation-card-status{grid-column:2;white-space:normal}.regulation-card-arrow{grid-column:3;grid-row:1}.regulation-card-content small{font-size:.78rem}}
-@media(max-width:640px){.site-header{height:68px;padding-inline:5%}.site-header nav{top:68px;left:0;right:0}.clean-hero{padding:68px 6% 45px}.clean-hero-copy{padding-top:320px}.clean-hero-media{inset:68px 0 auto;height:370px}.clean-hero h1{font-size:clamp(3.15rem,12vw,4.7rem)}.clean-hero .actions{flex-direction:row;align-items:stretch}.clean-hero .button{font-size:.82rem;padding:13px}.clean-intro h2{font-size:clamp(3rem,11vw,4.4rem)}.clean-intro .lead{font-size:1.15rem}.clean-path-art{height:195px}.clean-path-card{min-height:360px}.clean-status{margin-top:22px}body>footer{margin:0;padding:42px 6% 30px}}
-@media(max-width:640px){.discord-access,.discord-access-content{min-height:290px}.discord-access-content{padding:26px 22px}.discord-access-brand{gap:8px}.discord-access-brand img{width:44px;height:44px}.discord-access-brand strong{font-size:clamp(2.8rem,13vw,4.4rem)}.discord-access:after{width:30%;opacity:.5}.discord-access-art:after{background:linear-gradient(90deg,#06111df2,#06111d9e),linear-gradient(0deg,#06111de6,transparent 80%)}}
-@media(max-width:380px){.clean-hero .actions{flex-direction:column}}
-@media(max-width:640px){.atlas-index{grid-template-columns:1fr}.atlas-index>a:not(.atlas-plan-link){min-height:52px}}
-@media print{.optic-world{display:none}.clean-hero{min-height:0;padding-top:0}}
+html {
+  scroll-padding-top: 90px;
+}
+body {
+  padding-bottom: 0;
+  background: #071525;
+}
+.optic-world {
+  opacity: 0.12;
+  background-position: center;
+  background-size: cover;
+}
+.optic-world:after {
+  background: #07152599;
+}
+.site-header,
+.site-header.scrolled {
+  inset: 0 0 auto;
+  height: 76px;
+  padding: 0 max(4%, calc((100vw - 1320px) / 2));
+  border: 0;
+  border-bottom: 1px solid #ddf8f326;
+  border-radius: 0;
+  background: #071525f2;
+  box-shadow: none;
+  backdrop-filter: blur(16px);
+}
+.site-header nav {
+  gap: clamp(12px, 2vw, 30px);
+}
+.site-header nav > a {
+  padding: 24px 0;
+  font-size: 0.94rem;
+}
+.site-header nav > a[aria-current='page']:after {
+  bottom: 17px;
+}
+.site-header nav .button {
+  font-size: 0.74rem;
+  padding: 10px 14px;
+}
+.site-header nav .button.primary {
+  background: transparent;
+  border-color: transparent;
+  clip-path: none;
+  color: var(--ice);
+  box-shadow: none;
+}
+.site-header nav .button.primary:hover {
+  color: var(--yellow);
+  transform: none;
+}
+.brand-logo {
+  display: block;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+body:not(.optic-home) > main {
+  width: min(100% - 48px, 1240px);
+  margin: 102px auto 44px;
+  border: 0;
+  border-radius: 0;
+  background: #071525ed;
+  box-shadow: none;
+  overflow: visible;
+}
+body:not(.optic-home) .page-heading {
+  display: block;
+  padding: 42px 5% 32px;
+  background: #0a1c30;
+  border-bottom: 1px solid var(--line);
+}
+body:not(.optic-home) .page-heading h1 {
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  margin: 0 0 14px;
+}
+body:not(.optic-home) .page-heading p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+body:not(.optic-home) .page-heading .eyebrow {
+  margin-bottom: 14px;
+}
+body:not(.optic-home) .page-heading .cover-art {
+  display: none;
+}
+body:not(.optic-home) .article-shell {
+  padding-top: 52px;
+}
+.library {
+  padding-top: 32px;
+}
+.regulation-list {
+  border-top: 1px solid var(--line);
+}
+.regulation-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto 20px;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.regulation-card:hover {
+  background: #102c4970;
+}
+.regulation-card-number,
+.regulation-card-arrow {
+  color: var(--yellow);
+}
+.regulation-card-content strong {
+  display: block;
+  font:
+    700 1.45rem Rajdhani,
+    sans-serif;
+  line-height: 1.2;
+}
+.regulation-card-content small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+.regulation-card-status {
+  color: var(--ice);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+.regulation-more {
+  margin-top: 24px;
+}
+.regulation-more > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 54px;
+  padding: 12px 10px;
+  cursor: pointer;
+  color: var(--text);
+  font:
+    700 1.35rem Rajdhani,
+    sans-serif;
+  border-bottom: 1px solid var(--line);
+}
+.regulation-more > summary .mono {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.regulation-more .regulation-list {
+  border-top: 0;
+}
+.atlas {
+  padding-top: 24px;
+}
+.atlas-advanced {
+  margin: 0 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+.atlas-advanced > summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: var(--ice);
+  font:
+    700 1.15rem Rajdhani,
+    sans-serif;
+}
+.atlas-advanced > summary > span {
+  color: var(--yellow);
+}
+.atlas-advanced[open] > summary > span {
+  transform: rotate(180deg);
+}
+.atlas-advanced .atlas-controls {
+  padding: 12px 0 24px;
+  margin: 0;
+  border: 0;
+}
+.atlas-index {
+  top: 90px;
+}
+.optic-home main {
+  max-width: none;
+  margin: 0;
+}
+.clean-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: min(820px, 100svh);
+  overflow: hidden;
+  background: #071525;
+  padding: 120px max(5%, calc((100vw - 1320px) / 2)) 70px;
+}
+.clean-hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(48%, 600px);
+}
+.clean-hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+.clean-hero-brand img {
+  display: block;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+.clean-hero-brand .eyebrow {
+  margin: 0;
+}
+.clean-hero h1 {
+  font-size: clamp(3.8rem, 6.2vw, 6.6rem);
+  line-height: 0.94;
+  margin-bottom: 24px;
+}
+.clean-hero-lead {
+  font-family: Rajdhani, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+.clean-hero-copy > p:not(.clean-hero-lead) {
+  max-width: 460px;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+.clean-hero .actions {
+  gap: 12px;
+}
+.clean-hero .button {
+  font-size: 0.93rem;
+}
+.clean-status {
+  display: block;
+  margin-top: 30px;
+  color: var(--ice);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+.clean-hero-media {
+  position: absolute;
+  inset: 76px 0 0 31%;
+  z-index: -1;
+  overflow: hidden;
+  background: #102c49;
+}
+.clean-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.06) translate3d(var(--pan-x, 0px), var(--pan-y, 0px), 0);
+  transition: transform 0.35s ease-out;
+}
+.clean-hero-media:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #071525 0%, #071525a8 22%, transparent 60%),
+    linear-gradient(0deg, #071525 0%, transparent 24%, transparent 80%, #07152555 100%);
+}
+.clean-hero-copy {
+  animation: optic-enter 0.8s both;
+}
+.clean-section {
+  padding: 70px max(5%, calc((100vw - 1320px) / 2));
+  border-top: 1px solid var(--line);
+}
+.clean-section h2 {
+  font-size: clamp(2.3rem, 3.8vw, 3.8rem);
+  margin-bottom: 0;
+}
+.clean-intro {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 640px;
+  overflow: hidden;
+  background: #091a2c;
+}
+.clean-intro-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.clean-intro-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.clean-intro-media:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #071525 0%, #071525e8 31%, #07152565 65%, transparent 100%),
+    linear-gradient(0deg, #07152599, transparent 35%);
+}
+.clean-intro-content {
+  max-width: 650px;
+  padding-block: 50px;
+}
+.clean-intro h2 {
+  font-size: clamp(3.4rem, 6vw, 6rem);
+  line-height: 0.95;
+  margin: 0 0 38px;
+}
+.clean-intro .lead {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.clean-intro p {
+  max-width: 550px;
+  line-height: 1.7;
+}
+.clean-intro p:last-child {
+  margin-bottom: 0;
+}
+.clean-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  margin-bottom: 32px;
+}
+.clean-section-head > p {
+  max-width: 250px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.clean-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.clean-path-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 390px;
+  padding: 0 24px 26px;
+  border: 1px solid var(--line);
+  background: #0b2034;
+  overflow: hidden;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition:
+    border-color 0.2s,
+    transform 0.25s ease-out,
+    box-shadow 0.25s;
+}
+.clean-path-card:hover,
+.clean-path-card:focus-visible {
+  border-color: var(--yellow);
+  box-shadow:
+    0 22px 48px #0008,
+    0 0 32px #246a9a30;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+    translateY(-5px);
+}
+.clean-path-art {
+  position: relative;
+  display: block;
+  height: 225px;
+  margin: 0 -24px 24px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #102c49;
+}
+.clean-path-art:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #0b2034 0%, transparent 50%);
+}
+.clean-path-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 43%;
+  transition: transform 0.55s ease;
+}
+.clean-path-card:hover .clean-path-art img,
+.clean-path-card:focus-visible .clean-path-art img {
+  transform: scale(1.07);
+}
+.clean-path-card .mono {
+  color: var(--yellow);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+.clean-path-card strong {
+  display: block;
+  margin: 12px 0 8px;
+  font:
+    700 2rem Rajdhani,
+    sans-serif;
+  line-height: 1.1;
+}
+.clean-path-card small {
+  display: block;
+  max-width: 290px;
+  padding-right: 15px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.clean-path-arrow {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  color: var(--yellow);
+}
+.clean-path-search {
+  margin-top: 26px;
+}
+.clean-news > a {
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  gap: 20px;
+  align-items: center;
+  min-height: 90px;
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.clean-news strong {
+  display: block;
+  font:
+    700 1.6rem Rajdhani,
+    sans-serif;
+}
+.clean-news > a > span {
+  color: var(--yellow);
+}
+.clean-news > a {
+  grid-template-columns: 1fr 28px;
+}
+.discord-home {
+  padding-block: 52px;
+}
+.discord-page {
+  padding-top: 50px;
+}
+.discord-access {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  min-height: 300px;
+  overflow: hidden;
+  border: 1px solid #e8c96c80;
+  background: #06111d;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.discord-access:hover,
+.discord-access:focus-visible {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+}
+.discord-access-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.discord-access-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  opacity: 0.55;
+}
+.discord-access-art:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #06111dfc 0%, #06111de6 48%, #06111d55 100%),
+    linear-gradient(0deg, #06111ddd, transparent 60%);
+}
+.discord-access:after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  bottom: 16px;
+  width: 40%;
+  height: 3px;
+  background: var(--yellow);
+  transform: rotate(-18deg);
+  transform-origin: right;
+  box-shadow: 0 10px 0 var(--blue);
+  pointer-events: none;
+}
+.discord-access-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 300px;
+  padding: 34px clamp(24px, 5vw, 72px);
+}
+.discord-access-content > .mono {
+  color: var(--yellow);
+  font-size: 0.73rem;
+  letter-spacing: 0.16em;
+}
+.discord-access-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0 2px;
+}
+.discord-access-brand img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.discord-access-brand strong {
+  font:
+    700 clamp(3.1rem, 7vw, 6rem)/0.9 Rajdhani,
+    sans-serif;
+  letter-spacing: -0.04em;
+  color: var(--yellow);
+  text-shadow: 0 4px 25px #000b;
+}
+.discord-access-brand strong span {
+  color: var(--ice);
+}
+.discord-access-caption {
+  max-width: 470px;
+  margin: 10px 0 22px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.discord-access-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--yellow);
+  color: var(--yellow);
+  font:
+    700 1.1rem Rajdhani,
+    sans-serif;
+  letter-spacing: 0.06em;
+}
+.discord-access:hover .discord-access-action,
+.discord-access:focus-visible .discord-access-action {
+  color: var(--ice);
+  border-color: var(--ice);
+}
+.clean-close {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 90px;
+}
+.clean-close .button {
+  flex-shrink: 0;
+}
+body > footer {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: #040e19;
+  padding: 48px max(4%, calc((100vw - 1240px) / 2)) 30px;
+}
+.footer-top .wordmark {
+  display: flex;
+  align-items: center;
+}
+.footer-links {
+  gap: 12px 25px;
+}
+@keyframes optic-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .clean-reveal.will-reveal {
+    opacity: 0;
+    translate: 0 28px;
+    transition:
+      opacity 0.65s ease,
+      translate 0.65s ease;
+  }
+  .clean-reveal.will-reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .clean-path-card.will-reveal:nth-child(2) {
+    transition-delay: 0.09s;
+  }
+  .clean-path-card.will-reveal:nth-child(3) {
+    transition-delay: 0.18s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clean-hero-copy {
+    animation: none;
+  }
+  .clean-hero-media img,
+  .clean-path-card,
+  .clean-path-art img,
+  .discord-access {
+    transition: none;
+  }
+  .clean-path-card:hover,
+  .clean-path-card:focus-visible,
+  .discord-access:hover,
+  .discord-access:focus-visible {
+    transform: none;
+  }
+  .clean-path-card:hover .clean-path-art img,
+  .clean-path-card:focus-visible .clean-path-art img {
+    transform: none;
+  }
+}
+@media (max-width: 980px) {
+  .site-header {
+    padding-inline: 4%;
+  }
+  .site-header nav {
+    top: 76px;
+    left: 4%;
+    right: 4%;
+    padding: 20px 24px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: #071525fa;
+  }
+  .site-header nav > a {
+    padding: 12px 0;
+  }
+  .site-header nav > a[aria-current='page']:after {
+    bottom: 5px;
+  }
+  .site-header nav .button {
+    align-self: start;
+    margin: 12px 0 0;
+  }
+  .clean-hero {
+    min-height: 700px;
+  }
+  .clean-hero h1 {
+    font-size: clamp(3rem, 6vw, 4.7rem);
+  }
+}
+@media (max-width: 760px) {
+  .clean-hero {
+    display: block;
+    min-height: 0;
+    padding: 76px 6% 55px;
+  }
+  .clean-hero-copy {
+    width: 100%;
+    max-width: 650px;
+    padding-top: 330px;
+  }
+  .clean-hero-media {
+    inset: 76px 0 auto;
+    height: 390px;
+  }
+  .clean-hero-media:after {
+    background: linear-gradient(0deg, #071525 0%, transparent 58%);
+  }
+  .clean-intro {
+    min-height: 600px;
+  }
+  .clean-intro-media img {
+    object-position: 65% center;
+  }
+  .clean-intro-media:after {
+    background:
+      linear-gradient(90deg, #071525eb, #071525aa 70%, #07152555),
+      linear-gradient(0deg, #071525bb, transparent 50%);
+  }
+  .clean-intro-content {
+    padding-block: 40px;
+  }
+  .clean-section {
+    padding: 54px 6%;
+  }
+  .clean-section-head {
+    display: block;
+  }
+  .clean-section-head > p {
+    margin-top: 18px;
+    max-width: none;
+  }
+  .clean-path-grid {
+    grid-template-columns: 1fr;
+  }
+  .clean-path-card {
+    min-height: 365px;
+  }
+  .clean-close {
+    display: block;
+  }
+  .clean-close .button {
+    margin-top: 30px;
+  }
+  body:not(.optic-home) > main {
+    width: calc(100% - 24px);
+    margin-top: 88px;
+  }
+  body:not(.optic-home) .page-heading {
+    padding: 30px 6% 25px;
+  }
+  body:not(.optic-home) .article-shell {
+    padding-top: 36px;
+  }
+  .regulation-card {
+    grid-template-columns: 30px minmax(0, 1fr) 18px;
+    gap: 10px;
+  }
+  .regulation-card-status {
+    grid-column: 2;
+    white-space: normal;
+  }
+  .regulation-card-arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .regulation-card-content small {
+    font-size: 0.78rem;
+  }
+}
+@media (max-width: 640px) {
+  .site-header {
+    height: 68px;
+    padding-inline: 5%;
+  }
+  .site-header nav {
+    top: 68px;
+    left: 0;
+    right: 0;
+  }
+  .clean-hero {
+    padding: 68px 6% 45px;
+  }
+  .clean-hero-copy {
+    padding-top: 320px;
+  }
+  .clean-hero-media {
+    inset: 68px 0 auto;
+    height: 370px;
+  }
+  .clean-hero h1 {
+    font-size: clamp(3.15rem, 12vw, 4.7rem);
+  }
+  .clean-hero .actions {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .clean-hero .button {
+    font-size: 0.82rem;
+    padding: 13px;
+  }
+  .clean-intro h2 {
+    font-size: clamp(3rem, 11vw, 4.4rem);
+  }
+  .clean-intro .lead {
+    font-size: 1.15rem;
+  }
+  .clean-path-art {
+    height: 195px;
+  }
+  .clean-path-card {
+    min-height: 360px;
+  }
+  .clean-status {
+    margin-top: 22px;
+  }
+  body > footer {
+    margin: 0;
+    padding: 42px 6% 30px;
+  }
+}
+@media (max-width: 640px) {
+  .discord-access,
+  .discord-access-content {
+    min-height: 290px;
+  }
+  .discord-access-content {
+    padding: 26px 22px;
+  }
+  .discord-access-brand {
+    gap: 8px;
+  }
+  .discord-access-brand img {
+    width: 44px;
+    height: 44px;
+  }
+  .discord-access-brand strong {
+    font-size: clamp(2.8rem, 13vw, 4.4rem);
+  }
+  .discord-access:after {
+    width: 30%;
+    opacity: 0.5;
+  }
+  .discord-access-art:after {
+    background:
+      linear-gradient(90deg, #06111df2, #06111d9e),
+      linear-gradient(0deg, #06111de6, transparent 80%);
+  }
+}
+@media (max-width: 380px) {
+  .clean-hero .actions {
+    flex-direction: column;
+  }
+}
+@media (max-width: 640px) {
+  .atlas-index {
+    grid-template-columns: 1fr;
+  }
+  .atlas-index > a:not(.atlas-plan-link) {
+    min-height: 52px;
+  }
+}
+@media print {
+  .optic-world {
+    display: none;
+  }
+  .clean-hero {
+    min-height: 0;
+    padding-top: 0;
+  }
+}
 
 /* Discord is a full-screen entry, while the rest of the archive keeps its compact layout. */
-body:has(.discord-gate)>main{width:100%;max-width:none;margin:0;border:0;border-radius:0;background:#071525;box-shadow:none;overflow:visible}
-.discord-gate{position:relative;isolation:isolate;display:grid;grid-template-rows:auto 1fr auto;min-height:100svh;padding:118px max(6%,calc((100vw - 1420px)/2)) 36px;overflow:hidden;background:#06111d}
-.discord-gate-scene{position:absolute;inset:0;z-index:-1;overflow:hidden}
-.discord-gate-scene img{display:block;width:100%;height:100%;object-fit:cover;object-position:65% center;transform:scale(1.04)}
-.discord-gate-scene:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#06111df9 0%,#06111de8 29%,#06111d75 59%,#06111d1a 100%),linear-gradient(0deg,#06111df5,transparent 27%,transparent 68%,#06111d88)}
-.discord-gate-top,.discord-gate-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;color:var(--ice);font-size:.72rem;letter-spacing:.17em}
-.discord-gate-top b{color:var(--yellow);font-weight:400}
-.discord-gate-content{align-self:center;max-width:930px;padding:40px 0 62px;animation:discord-arrive .9s both}
-.discord-gate-identity{display:flex;align-items:center;gap:16px;margin-bottom:32px;color:var(--ice);font-size:.82rem;line-height:1.3;letter-spacing:.2em}
-.discord-gate-identity img{width:86px;height:86px;object-fit:contain}
-.discord-gate-kicker{display:block;margin-bottom:18px;color:var(--yellow);font-size:.78rem;letter-spacing:.2em}
-.discord-gate h1{margin:0;font-size:clamp(4.5rem,8.8vw,9rem);line-height:.84;letter-spacing:-.045em;text-transform:uppercase;text-shadow:0 8px 40px #0008}
-.discord-gate h1.discord-intro,.clean-hero h1.discord-intro{animation:discord-text-skew .85s steps(1,end) .35s 1 both}
-.discord-gate h1 em{display:block;color:var(--yellow)}
-.discord-glitch-line{position:relative;display:block;width:max-content;max-width:100%;white-space:nowrap}
-.discord-glitch-line:before,.discord-glitch-line:after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;opacity:0;white-space:nowrap;color:inherit}
-.discord-glitch-line:before{text-shadow:-4px 0 #62dfff}
-.discord-glitch-line:after{text-shadow:4px 0 var(--yellow)}
-.discord-intro .discord-glitch-line:before{animation:discord-text-left .85s steps(1,end) .35s 1 both}
-.discord-intro .discord-glitch-line:after{animation:discord-text-right .85s steps(1,end) .35s 1 both}
-@media(hover:hover) and (pointer:fine){.discord-gate h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:before,.clean-hero h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:before{animation:discord-text-left .55s steps(1,end) infinite;mask-image:radial-gradient(circle 75px at var(--glitch-x,50%) var(--glitch-y,50%),#000 0 50%,transparent 100%)}.discord-gate h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:after,.clean-hero h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:after{animation:discord-text-right .68s steps(1,end) infinite;mask-image:radial-gradient(circle 75px at var(--glitch-x,50%) var(--glitch-y,50%),#000 0 50%,transparent 100%)}}
-.discord-gate-lead{margin:28px 0 30px;color:var(--ice);font:500 clamp(1.15rem,1.8vw,1.55rem)/1.35 Rajdhani,sans-serif;letter-spacing:.045em}
-.discord-gate-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:65px;min-width:min(100%,360px);min-height:66px;padding:15px 20px 15px 28px;background:var(--yellow);color:#071525;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);font:700 1.32rem Rajdhani,sans-serif;letter-spacing:.04em;transition:background .2s,transform .2s}
-.discord-gate-cta span:last-child{font-size:1.5rem}
-.discord-gate-cta:hover{background:var(--ice);transform:translateY(-3px)}
-.discord-gate-note,.discord-gate-unavailable{margin:12px 0 0;color:var(--muted);font-size:.78rem;line-height:1.5}
-.discord-gate-bottom{padding-top:20px;border-top:1px solid #ddf8f345}
-.discord-gate-bottom a{color:var(--yellow)}
-.discord-gate-bottom a:hover{text-decoration:underline}
-.discord-gate-next{display:flex;align-items:center;justify-content:space-between;gap:45px;padding:66px max(6%,calc((100vw - 1420px)/2));border-top:1px solid var(--line);background:#071525}
-.discord-gate-next .eyebrow{margin-bottom:12px}
-.discord-gate-next h2{margin:0 0 12px;font-size:clamp(2rem,3vw,3.2rem)}
-.discord-gate-next p{margin:0;max-width:580px}
-.discord-gate-next nav{display:flex;gap:24px;flex-wrap:wrap}
-.discord-gate-next nav a{display:flex;justify-content:space-between;gap:30px;min-width:170px;padding:17px 0;border-bottom:1px solid var(--yellow);color:var(--ice);font:700 1.1rem Rajdhani,sans-serif}
-.discord-gate-next nav a:hover{color:var(--yellow)}
-@keyframes discord-arrive{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes discord-text-skew{0%,100%{transform:skewX(0)}15%{transform:skewX(-2deg)}18%{transform:skewX(0)}42%{transform:skewX(1deg)}46%{transform:skewX(0)}67%{transform:skewX(-1deg)}70%{transform:skewX(0)}}
-@keyframes discord-text-left{0%,100%{opacity:0;clip-path:inset(0)}12%{opacity:1;clip-path:inset(15% 0 72% 0);transform:translateX(-6px)}20%{opacity:0}38%{opacity:1;clip-path:inset(52% 0 35% 0);transform:translateX(5px)}46%{opacity:0}68%{opacity:1;clip-path:inset(77% 0 10% 0);transform:translateX(-4px)}76%{opacity:0}}
-@keyframes discord-text-right{0%,100%{opacity:0;clip-path:inset(0)}16%{opacity:1;clip-path:inset(26% 0 62% 0);transform:translateX(6px)}24%{opacity:0}43%{opacity:1;clip-path:inset(61% 0 27% 0);transform:translateX(-5px)}51%{opacity:0}72%{opacity:1;clip-path:inset(8% 0 79% 0);transform:translateX(4px)}80%{opacity:0}}
-@media(max-width:900px){.discord-gate{padding-inline:6%}.discord-gate h1{font-size:clamp(3.8rem,10vw,6.5rem)}.discord-gate-next{display:block}.discord-gate-next nav{margin-top:20px}}
-@media(max-width:640px){.discord-gate{min-height:100svh;padding:96px 6% 26px}.discord-gate-top span:last-child,.discord-gate-bottom>span{display:none}.discord-gate-content{padding:46px 0 54px}.discord-gate-identity{margin-bottom:28px}.discord-gate-identity img{width:64px;height:64px}.discord-gate h1{font-size:clamp(3.25rem,12vw,5rem);line-height:.9}.discord-gate-lead{margin:24px 0}.discord-gate-cta{width:100%;min-width:0;gap:15px}.discord-gate-scene img{object-position:64% center}.discord-gate-scene:before{background:linear-gradient(0deg,#06111dfc 0%,#06111ddc 44%,#06111d66 100%)}.discord-gate-next{padding:52px 6%}.discord-gate-next nav{display:block}.discord-gate-next nav a{min-width:0}}
-@media(prefers-reduced-motion:reduce){.discord-gate-content,.discord-gate h1,.clean-hero h1{animation:none}.discord-glitch-line:before,.discord-glitch-line:after{display:none}.discord-gate-scene img{transform:none}.discord-gate-cta{transition:none}.discord-gate-cta:hover{transform:none}}
+body:has(.discord-gate) > main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #071525;
+  box-shadow: none;
+  overflow: visible;
+}
+.discord-gate {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  padding: 118px max(6%, calc((100vw - 1420px) / 2)) 36px;
+  overflow: hidden;
+  background: #06111d;
+}
+.discord-gate-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.discord-gate-scene img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% center;
+  transform: scale(1.04);
+}
+.discord-gate-scene:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, #06111df9 0%, #06111de8 29%, #06111d75 59%, #06111d1a 100%),
+    linear-gradient(0deg, #06111df5, transparent 27%, transparent 68%, #06111d88);
+}
+.discord-gate-top,
+.discord-gate-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  color: var(--ice);
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
+}
+.discord-gate-top b {
+  color: var(--yellow);
+  font-weight: 400;
+}
+.discord-gate-content {
+  align-self: center;
+  max-width: 930px;
+  padding: 40px 0 62px;
+  animation: discord-arrive 0.9s both;
+}
+.discord-gate-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  color: var(--ice);
+  font-size: 0.82rem;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+}
+.discord-gate-identity img {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+}
+.discord-gate-kicker {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--yellow);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+}
+.discord-gate h1 {
+  margin: 0;
+  font-size: clamp(4.5rem, 8.8vw, 9rem);
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-shadow: 0 8px 40px #0008;
+}
+.discord-gate h1.discord-intro,
+.clean-hero h1.discord-intro {
+  animation: discord-text-skew 0.85s steps(1, end) 0.35s 1 both;
+}
+.discord-gate h1 em {
+  display: block;
+  color: var(--yellow);
+}
+.discord-glitch-line {
+  position: relative;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+}
+.discord-glitch-line:before,
+.discord-glitch-line:after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+  color: inherit;
+}
+.discord-glitch-line:before {
+  text-shadow: -4px 0 #62dfff;
+}
+.discord-glitch-line:after {
+  text-shadow: 4px 0 var(--yellow);
+}
+.discord-intro .discord-glitch-line:before {
+  animation: discord-text-left 0.85s steps(1, end) 0.35s 1 both;
+}
+.discord-intro .discord-glitch-line:after {
+  animation: discord-text-right 0.85s steps(1, end) 0.35s 1 both;
+}
+@media (hover: hover) and (pointer: fine) {
+  .discord-gate h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:before,
+  .clean-hero h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:before {
+    animation: discord-text-left 0.55s steps(1, end) infinite;
+    mask-image: radial-gradient(
+      circle 75px at var(--glitch-x, 50%) var(--glitch-y, 50%),
+      #000 0 50%,
+      transparent 100%
+    );
+  }
+  .discord-gate h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:after,
+  .clean-hero h1.has-pointer:not(.discord-intro):hover .discord-glitch-line:after {
+    animation: discord-text-right 0.68s steps(1, end) infinite;
+    mask-image: radial-gradient(
+      circle 75px at var(--glitch-x, 50%) var(--glitch-y, 50%),
+      #000 0 50%,
+      transparent 100%
+    );
+  }
+}
+.discord-gate-lead {
+  margin: 28px 0 30px;
+  color: var(--ice);
+  font:
+    500 clamp(1.15rem, 1.8vw, 1.55rem)/1.35 Rajdhani,
+    sans-serif;
+  letter-spacing: 0.045em;
+}
+.discord-gate-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 65px;
+  min-width: min(100%, 360px);
+  min-height: 66px;
+  padding: 15px 20px 15px 28px;
+  background: var(--yellow);
+  color: #071525;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  font:
+    700 1.32rem Rajdhani,
+    sans-serif;
+  letter-spacing: 0.04em;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.discord-gate-cta span:last-child {
+  font-size: 1.5rem;
+}
+.discord-gate-cta:hover {
+  background: var(--ice);
+  transform: translateY(-3px);
+}
+.discord-gate-note,
+.discord-gate-unavailable {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.discord-gate-bottom {
+  padding-top: 20px;
+  border-top: 1px solid #ddf8f345;
+}
+.discord-gate-bottom a {
+  color: var(--yellow);
+}
+.discord-gate-bottom a:hover {
+  text-decoration: underline;
+}
+.discord-gate-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+  padding: 66px max(6%, calc((100vw - 1420px) / 2));
+  border-top: 1px solid var(--line);
+  background: #071525;
+}
+.discord-gate-next .eyebrow {
+  margin-bottom: 12px;
+}
+.discord-gate-next h2 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+}
+.discord-gate-next p {
+  margin: 0;
+  max-width: 580px;
+}
+.discord-gate-next nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.discord-gate-next nav a {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  min-width: 170px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--yellow);
+  color: var(--ice);
+  font:
+    700 1.1rem Rajdhani,
+    sans-serif;
+}
+.discord-gate-next nav a:hover {
+  color: var(--yellow);
+}
+@keyframes discord-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes discord-text-skew {
+  0%,
+  100% {
+    transform: skewX(0);
+  }
+  15% {
+    transform: skewX(-2deg);
+  }
+  18% {
+    transform: skewX(0);
+  }
+  42% {
+    transform: skewX(1deg);
+  }
+  46% {
+    transform: skewX(0);
+  }
+  67% {
+    transform: skewX(-1deg);
+  }
+  70% {
+    transform: skewX(0);
+  }
+}
+@keyframes discord-text-left {
+  0%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0);
+  }
+  12% {
+    opacity: 1;
+    clip-path: inset(15% 0 72% 0);
+    transform: translateX(-6px);
+  }
+  20% {
+    opacity: 0;
+  }
+  38% {
+    opacity: 1;
+    clip-path: inset(52% 0 35% 0);
+    transform: translateX(5px);
+  }
+  46% {
+    opacity: 0;
+  }
+  68% {
+    opacity: 1;
+    clip-path: inset(77% 0 10% 0);
+    transform: translateX(-4px);
+  }
+  76% {
+    opacity: 0;
+  }
+}
+@keyframes discord-text-right {
+  0%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0);
+  }
+  16% {
+    opacity: 1;
+    clip-path: inset(26% 0 62% 0);
+    transform: translateX(6px);
+  }
+  24% {
+    opacity: 0;
+  }
+  43% {
+    opacity: 1;
+    clip-path: inset(61% 0 27% 0);
+    transform: translateX(-5px);
+  }
+  51% {
+    opacity: 0;
+  }
+  72% {
+    opacity: 1;
+    clip-path: inset(8% 0 79% 0);
+    transform: translateX(4px);
+  }
+  80% {
+    opacity: 0;
+  }
+}
+@media (max-width: 900px) {
+  .discord-gate {
+    padding-inline: 6%;
+  }
+  .discord-gate h1 {
+    font-size: clamp(3.8rem, 10vw, 6.5rem);
+  }
+  .discord-gate-next {
+    display: block;
+  }
+  .discord-gate-next nav {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 640px) {
+  .discord-gate {
+    min-height: 100svh;
+    padding: 96px 6% 26px;
+  }
+  .discord-gate-top span:last-child,
+  .discord-gate-bottom > span {
+    display: none;
+  }
+  .discord-gate-content {
+    padding: 46px 0 54px;
+  }
+  .discord-gate-identity {
+    margin-bottom: 28px;
+  }
+  .discord-gate-identity img {
+    width: 64px;
+    height: 64px;
+  }
+  .discord-gate h1 {
+    font-size: clamp(3.25rem, 12vw, 5rem);
+    line-height: 0.9;
+  }
+  .discord-gate-lead {
+    margin: 24px 0;
+  }
+  .discord-gate-cta {
+    width: 100%;
+    min-width: 0;
+    gap: 15px;
+  }
+  .discord-gate-scene img {
+    object-position: 64% center;
+  }
+  .discord-gate-scene:before {
+    background: linear-gradient(0deg, #06111dfc 0%, #06111ddc 44%, #06111d66 100%);
+  }
+  .discord-gate-next {
+    padding: 52px 6%;
+  }
+  .discord-gate-next nav {
+    display: block;
+  }
+  .discord-gate-next nav a {
+    min-width: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .discord-gate-content,
+  .discord-gate h1,
+  .clean-hero h1 {
+    animation: none;
+  }
+  .discord-glitch-line:before,
+  .discord-glitch-line:after {
+    display: none;
+  }
+  .discord-gate-scene img {
+    transform: none;
+  }
+  .discord-gate-cta {
+    transition: none;
+  }
+  .discord-gate-cta:hover {
+    transform: none;
+  }
+}

@@ -67,7 +67,6 @@ Las imágenes opcionales se declaran como image: {path: images/archivo.jpg, alt:
 
 Los artículos Documentado contienen información incorporada de la wiki; no anuncian funciones implementadas. universeScope identifica su época y licensedText activa la atribución CC BY-SA 3.0. Consulta CONTENT-LICENSE.md para distinguir la licencia del texto y la del código.
 
-
 ## Panel privado del equipo
 
 Consulta [ADMIN.md](ADMIN.md) para configurar el .env privado, usar /admin localmente o desplegar el administrador en Cloudflare Workers. El panel gestiona los artículos, las imágenes y los archivos de datos del portal sin publicar credenciales.

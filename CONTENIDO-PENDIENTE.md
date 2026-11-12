@@ -12,18 +12,18 @@ El portal sigue siendo público y no incorpora registro, perfiles ni cuentas de 
 
 ## Contenido que requiere decisiones del equipo
 
-| Área | Estado actual | Información necesaria |
-| --- | --- | --- |
-| Netrunning | Por documentar | Alcance y acciones, límites, resolución e interacción con otros sistemas. |
-| Trabajos | Por documentar | Empleos disponibles, requisitos, procedimientos y recompensas aprobadas. |
-| Mercado negro | Por documentar | Alcance público y límites; los contactos o procedimientos privados no se publican. |
-| Vehículos y carreras | Por documentar | Sistemas implementados y reglas aplicables. |
-| Viviendas | Por documentar | Disponibilidad, acceso, uso y condiciones aprobadas. |
-| Territorios | Por documentar | Alcance, acceso, disputas y límites aprobados. |
-| Normativas (6 documentos) | Borradores | Revisión y aprobación del equipo; procedimientos, límites y consecuencias. |
-| Otras mecánicas (9 fichas) | Propuestas | Confirmación de implementación y parámetros públicos. |
-| Acceso a KiroshiRP | Sin apertura confirmada | Pasos probados de conexión y servicios disponibles. |
-| Noticias y eventos | Sin anuncios oficiales | Publicaciones reales del equipo; la plantilla permanece sin publicar. |
+| Área                       | Estado actual           | Información necesaria                                                              |
+| -------------------------- | ----------------------- | ---------------------------------------------------------------------------------- |
+| Netrunning                 | Por documentar          | Alcance y acciones, límites, resolución e interacción con otros sistemas.          |
+| Trabajos                   | Por documentar          | Empleos disponibles, requisitos, procedimientos y recompensas aprobadas.           |
+| Mercado negro              | Por documentar          | Alcance público y límites; los contactos o procedimientos privados no se publican. |
+| Vehículos y carreras       | Por documentar          | Sistemas implementados y reglas aplicables.                                        |
+| Viviendas                  | Por documentar          | Disponibilidad, acceso, uso y condiciones aprobadas.                               |
+| Territorios                | Por documentar          | Alcance, acceso, disputas y límites aprobados.                                     |
+| Normativas (6 documentos)  | Borradores              | Revisión y aprobación del equipo; procedimientos, límites y consecuencias.         |
+| Otras mecánicas (9 fichas) | Propuestas              | Confirmación de implementación y parámetros públicos.                              |
+| Acceso a KiroshiRP         | Sin apertura confirmada | Pasos probados de conexión y servicios disponibles.                                |
+| Noticias y eventos         | Sin anuncios oficiales  | Publicaciones reales del equipo; la plantilla permanece sin publicar.              |
 
 Estas lagunas no se rellenan con reglas, funciones o fechas supuestas. Las fichas existentes continúan editables en el administrador y conservan su estado editorial.
 

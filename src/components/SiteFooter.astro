@@ -1,12 +1,61 @@
 ---
-import {url,site} from '../config';
+import { url, site } from '../config';
 ---
+
 <footer>
- <div class="footer-grid">
-  <div class="footer-brand"><a class="wordmark" href={url()} aria-label="KiroshiRP, inicio"><img class="brand-logo" src={url('images/kiroshi-logo.webp')} alt="" width="42" height="42"/><span>KIROSHI<small>ROLEPLAY</small></span></a><p>Una ciudad compartida.<br/>Historias que se construyen jugando.</p><a class="text-link" href={url('discord/')}>Conoce la comunidad ↗</a></div>
-  <div class="footer-column"><h2>EL UNIVERSO</h2><a href={url('lore/')}>Lore de Night City</a><a href={url('facciones/')}>Facciones</a><a href={url('mecanicas/')}>Mecánicas de rol</a><a href={url('explorar/')}>Explorar la ciudad</a></div>
-  <div class="footer-column"><h2>EMPIEZA AQUÍ</h2><a href={url('guias/primeros-pasos/')}>Primeros pasos</a><a href={url('normativas/')}>Normativas</a><a href={url('guias/preguntas-frecuentes/')}>Preguntas frecuentes</a><a href={url('buscar/')}>Buscar en el archivo</a></div>
-  <div class="footer-column"><h2>KIROSHIRP</h2><a href={url('actualizaciones/')}>Actualizaciones</a><a href={url('studio/')}>Kiroshi Studio</a><a href={url('contacto/')}>Contacto</a>{site.contact&&<a href={site.contact}>Escribir al equipo ↗</a>}<a href={url('aviso-legal/')}>Aviso legal</a><a href={url('privacidad/')}>Privacidad</a></div>
- </div>
- <div class="footer-legal"><p>KiroshiRP es un proyecto independiente de la comunidad, ambientado en Cyberpunk 2077. No está afiliado a CD PROJEKT RED ni a OPEN//77. Las marcas pertenecen a sus respectivos titulares. Las ilustraciones ambientales del portal no representan funciones jugables confirmadas.</p><span>KIROSHIRP / ARCHIVO PÚBLICO</span></div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="wordmark" href={url()} aria-label="KiroshiRP, inicio">
+        <img
+          class="brand-logo"
+          src={url('images/kiroshi-logo.webp')}
+          alt=""
+          width="42"
+          height="42"
+        />
+        <span>
+          KIROSHI<small>ROLEPLAY</small>
+        </span>
+      </a>
+      <p>
+        Una ciudad compartida.
+        <br />
+        Historias que se construyen jugando.
+      </p>
+      <a class="text-link" href={url('discord/')}>
+        Conoce la comunidad ↗
+      </a>
+    </div>
+    <div class="footer-column">
+      <h2>EL UNIVERSO</h2>
+      <a href={url('lore/')}>Lore de Night City</a>
+      <a href={url('facciones/')}>Facciones</a>
+      <a href={url('mecanicas/')}>Mecánicas de rol</a>
+      <a href={url('explorar/')}>Explorar la ciudad</a>
+    </div>
+    <div class="footer-column">
+      <h2>EMPIEZA AQUÍ</h2>
+      <a href={url('guias/primeros-pasos/')}>Primeros pasos</a>
+      <a href={url('normativas/')}>Normativas</a>
+      <a href={url('guias/preguntas-frecuentes/')}>Preguntas frecuentes</a>
+      <a href={url('buscar/')}>Buscar en el archivo</a>
+    </div>
+    <div class="footer-column">
+      <h2>KIROSHIRP</h2>
+      <a href={url('actualizaciones/')}>Actualizaciones</a>
+      <a href={url('studio/')}>Kiroshi Studio</a>
+      <a href={url('contacto/')}>Contacto</a>
+      {site.contact && <a href={site.contact}>Escribir al equipo ↗</a>}
+      <a href={url('aviso-legal/')}>Aviso legal</a>
+      <a href={url('privacidad/')}>Privacidad</a>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <p>
+      KiroshiRP es un proyecto independiente de la comunidad, ambientado en Cyberpunk 2077. No está
+      afiliado a CD PROJEKT RED ni a OPEN//77. Las marcas pertenecen a sus respectivos titulares.
+      Las ilustraciones ambientales del portal no representan funciones jugables confirmadas.
+    </p>
+    <span>KIROSHIRP / ARCHIVO PÚBLICO</span>
+  </div>
 </footer>

@@ -1,5 +1,66 @@
 export {};
-const status=document.getElementById('status'),rows=document.getElementById('rows');let csrf='';
-async function api(path,method='GET',body){const response=await fetch('/admin/api/'+path,{method,credentials:'same-origin',headers:method==='GET'?{}:{'Content-Type':'application/json','X-CSRF-Token':csrf},...(body?{body:JSON.stringify(body)}:{})});const data=await response.json();if(response.status===401){location.href='/admin/';return null;}if(!response.ok)throw new Error(data.error||'No se pudo consultar las solicitudes.');return data;}
-async function load(){try{csrf=(await api('session'))?.csrf||'';if(!csrf)return;const data=await api('solicitudes');if(!data)return;rows.replaceChildren();for(const item of data.items){const tr=document.createElement('tr');for(const value of [item.discordName+' ('+item.discordId+')',item.steamId,new Intl.DateTimeFormat('es-ES',{dateStyle:'medium',timeStyle:'short'}).format(new Date(item.createdAt)),item.result]){const td=document.createElement('td');td.textContent=value;tr.append(td);}const td=document.createElement('td'),button=document.createElement('button');button.textContent='Eliminar';button.type='button';button.className='small danger';button.addEventListener('click',async()=>{if(!confirm('¿Eliminar esta solicitud y permitir un nuevo registro?'))return;try{await api('solicitudes','DELETE',{discordId:item.discordId});await load();}catch(error){status.textContent=error.message;}});td.append(button);tr.append(td);rows.append(tr);}status.textContent=data.items.length?`${data.items.length} solicitudes registradas.`:'Todavía no hay solicitudes.';}catch(error){status.textContent=error.message;}}
+const status = document.getElementById('status'),
+  rows = document.getElementById('rows');
+let csrf = '';
+async function api(path, method = 'GET', body) {
+  const response = await fetch('/admin/api/' + path, {
+    method,
+    credentials: 'same-origin',
+    headers: method === 'GET' ? {} : { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  const data = await response.json();
+  if (response.status === 401) {
+    location.href = '/admin/';
+    return null;
+  }
+  if (!response.ok) throw new Error(data.error || 'No se pudo consultar las solicitudes.');
+  return data;
+}
+async function load() {
+  try {
+    csrf = (await api('session'))?.csrf || '';
+    if (!csrf) return;
+    const data = await api('solicitudes');
+    if (!data) return;
+    rows.replaceChildren();
+    for (const item of data.items) {
+      const tr = document.createElement('tr');
+      for (const value of [
+        item.discordName + ' (' + item.discordId + ')',
+        item.steamId,
+        new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short' }).format(
+          new Date(item.createdAt),
+        ),
+        item.result,
+      ]) {
+        const td = document.createElement('td');
+        td.textContent = value;
+        tr.append(td);
+      }
+      const td = document.createElement('td'),
+        button = document.createElement('button');
+      button.textContent = 'Eliminar';
+      button.type = 'button';
+      button.className = 'small danger';
+      button.addEventListener('click', async () => {
+        if (!confirm('¿Eliminar esta solicitud y permitir un nuevo registro?')) return;
+        try {
+          await api('solicitudes', 'DELETE', { discordId: item.discordId });
+          await load();
+        } catch (error) {
+          status.textContent = error.message;
+        }
+      });
+      td.append(button);
+      tr.append(td);
+      rows.append(tr);
+    }
+    status.textContent = data.items.length
+      ? `${data.items.length} solicitudes registradas.`
+      : 'Todavía no hay solicitudes.';
+  } catch (error) {
+    status.textContent = error.message;
+  }
+}
 load();

@@ -1,10 +1,16 @@
 import data from './data/portal.json';
-import {settingsSchema,homeSchema} from '../admin/schema.mjs';
+import { settingsSchema, homeSchema } from '../admin/schema.mjs';
 import homeData from './data/home.json';
-const home=homeSchema.parse(homeData);
-export const brand={primary:home.texts.titularCiudad+' '+home.texts.titularHistorias,secondary:home.texts.lemaSecundario};
+const home = homeSchema.parse(homeData);
+export const brand = {
+  primary: home.texts.titularCiudad + ' ' + home.texts.titularHistorias,
+  secondary: home.texts.lemaSecundario,
+};
 const validated = settingsSchema.parse(data);
-export const {site, leadership, phases} = validated;
-type SectionID = 'lore'|'mecanicas'|'normativas'|'facciones'|'guias'|'actualizaciones';
-export const sections = validated.sections as (Omit<typeof data.sections[number], 'id'> & {id:SectionID})[];
-export const url = (path = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+export const { site, leadership, phases } = validated;
+type SectionID = 'lore' | 'mecanicas' | 'normativas' | 'facciones' | 'guias' | 'actualizaciones';
+export const sections = validated.sections as (Omit<(typeof data.sections)[number], 'id'> & {
+  id: SectionID;
+})[];
+export const url = (path = '') =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
