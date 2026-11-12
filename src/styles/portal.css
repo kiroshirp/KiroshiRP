@@ -4795,8 +4795,8 @@ p {
   margin-top: 9px;
 }
 .brand-logo {
-  width: 42px;
-  height: 42px;
+  width: auto;
+  height: 26px;
 }
 .site-header nav {
   gap: clamp(16px, 2.3vw, 36px);

@@ -875,16 +875,16 @@ header {
 }
 .brand {
   position: relative;
-  min-height: 46px;
-  padding-left: 58px;
+  min-height: 30px;
+  padding-left: 96px;
 }
 .brand:before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
-  width: 46px;
-  height: 46px;
+  width: 87px;
+  height: 29px;
   background: url('/admin/brand.webp') center/contain no-repeat;
 }
 .login {
