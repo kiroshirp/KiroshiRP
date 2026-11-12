@@ -31,7 +31,7 @@ El proyecto funciona y tiene buenas pruebas de seguridad en el panel. Los proble
 Cada fase es un conjunto de commits pequeños en `pruebas`. Al terminar cada fase se ejecuta la batería completa (`npm run build`, `npm run admin:test`, `node --test tests/*.test.mjs`, `node scripts/verify.mjs`) y se compara la salida de `dist/` antes y después: en las fases de refactor, el HTML generado debe ser idéntico salvo diferencias deliberadas.
 
 ### Fase 0: red de seguridad (primero)
-- Añadir CI (`.github/workflows/ci.yml`) que ejecute build, tests y `verify` en `pruebas` y en pull requests.
+- ~~Añadir CI (`.github/workflows/ci.yml`)~~ Hecho: build, tests y `verify` en ramas y pull requests.
 - Guardar una instantánea de `dist/` de `main` para comparar después de cada refactor.
 - Añadir pruebas del esquema de contenido (`content.config.ts`) y de `config.ts`.
 
@@ -58,7 +58,7 @@ Cada fase es un conjunto de commits pequeños en `pruebas`. Al terminar cada fas
 - Revisar la política de cabeceras (CSP) y la caducidad de sesión.
 
 ### Fase 5: despliegue y dependencias
-- Decidir el destino de `deploy.yml` (ver preguntas abajo).
+- Mantener `deploy.yml` solo como redirección heredada.
 - Ejecutar `npm audit fix` y subir dependencias en un commit aparte; repetir build y pruebas.
 - Documentar el flujo `pruebas` → revisión → `main`.
 - Mover o eliminar `scripts/seed-content.mjs` si ya no se usa.
@@ -68,11 +68,18 @@ Cada fase es un conjunto de commits pequeños en `pruebas`. Al terminar cada fas
 - Unificar `CONTENIDO-PENDIENTE.md` con la lista de datos pendientes del README.
 - Revisar con la skill `humanizer` los textos largos en español que suenen a plantilla (introducciones, avisos, FAQ). La skill está pensada para inglés, así que sirve como guía de patrones y se corrige a mano el resultado.
 
-## Flujo de trabajo propuesto
+## Flujo de trabajo (decidido)
 
-1. Todo cambio se hace en `pruebas`.
-2. Se prueba en la vista previa de Cloudflare Pages de esa rama (`pruebas.kiroshirp.pages.dev`, si las vistas previas de ramas están activas en el proyecto).
-3. Lo aprobado se lleva a `main` con un pull request o con cherry-pick, para publicar solo lo revisado.
+1. Todo cambio se hace en `pruebas` (o en ramas que salgan de ella).
+2. GitHub Actions (`ci.yml`) compila y ejecuta build, tests y `verify` en cada push a una rama distinta de `main` y en cada pull request. Guarda `dist/` como artefacto descargable para revisarlo en local con `npm run preview`.
+3. Lo aprobado se lleva a `main` con un pull request.
+4. Cloudflare Pages detecta el cambio en `main` y publica. `main` es la única rama que despliega.
+
+Las ramas de GitHub no sirven una web de prueba por sí solas: eso lo da la vista previa de Cloudflare, que no se usará. La prueba se hace con la CI y el artefacto.
+
+## Redirección de GitHub Pages (decidido)
+
+Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como único trabajo de `deploy.yml` y solo se ejecuta en `main`.
 
 ## Riesgos
 
@@ -80,8 +87,6 @@ Cada fase es un conjunto de commits pequeños en `pruebas`. Al terminar cada fas
 - El formato masivo ensucia el historial. Mitigación: commit propio y `.git-blame-ignore-revs`.
 - El panel tiene credenciales y pruebas de seguridad. Mitigación: no tocar lógica de autenticación sin pruebas verdes.
 
-## Preguntas abiertas
+## Prioridad (decidida)
 
-1. ¿El proyecto de Cloudflare Pages tiene activadas las vistas previas para ramas distintas de `main`?
-2. ¿Sigue haciendo falta la redirección desde GitHub Pages (`kiroshirp.github.io`)?
-3. ¿Hay un orden de prioridad entre código, aspecto visual y documentación?
+1. Código. 2. Aspecto visual. 3. Documentación. Las fases 1 a 5 son de código; la fase 3 (CSS) cubre lo visual; la documentación va al final.
