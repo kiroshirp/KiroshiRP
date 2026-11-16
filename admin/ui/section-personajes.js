@@ -168,7 +168,11 @@ export async function mount(root, ctx) {
   actions.append(save, del);
   form.append(
     counter,
-    el('p', 'char-private', 'Solo tú puedes ver y editar esta ficha desde la web.'),
+    el(
+      'p',
+      'char-private',
+      'Solo tú puedes editarla. El equipo de administración puede leerla para moderar, salvo el apartado «Secretos», que solo ves tú.',
+    ),
     savedLine,
     err,
     actions,

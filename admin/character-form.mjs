@@ -77,7 +77,10 @@ export const characterSections = [
         'Objetivos y miedos',
         'Lo que quiere conseguir y lo que le quita el sueño.',
       ),
-      long('secretos', 'Secretos', 'Lo que nadie sabe. Solo tú puedes verlo.'),
+      {
+        ...long('secretos', 'Secretos', 'Lo que nadie sabe. Solo tú puedes verlo.'),
+        private: true,
+      },
       long(
         'notas',
         'Notas de rol',

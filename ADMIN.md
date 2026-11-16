@@ -7,7 +7,7 @@ La web pública es estática y se publica en Cloudflare Pages desde `main`. Un W
 - `/cuenta/`: la persona inicia sesión con Discord (8 horas) y ve su panel: vista general, ficha de personaje privada, economía (vacía hasta conectar el juego), su cuenta y la solicitud «Únete al equipo».
 - `/acceso/`: solicitud de invitación a Discord con SteamID.
 - `/admin/`: panel del equipo con usuario y contraseña propios.
-  - **Usuarios**: cuentas, última conexión, progreso de la ficha (nunca su contenido), estado de la solicitud y SteamID. Permite eliminar una cuenta y todos sus datos.
+  - **Usuarios**: cuentas, última conexión, progreso de la ficha, y un desplegable con lo que ha rellenado (ficha y solicitud al equipo; el apartado «Secretos» de la ficha no se muestra nunca), estado de la solicitud y SteamID. Permite eliminar una cuenta y todos sus datos.
   - **Solicitudes de acceso**: SteamID declarado y resultado.
   - **Equipo**: candidaturas con sus respuestas; se marcan como pendiente, aceptada o rechazada, y la persona ve el estado en su cuenta.
 
@@ -45,4 +45,4 @@ Los datos viven en una base Turso (tabla `kv`, clave y valor JSON) a la que el W
 
 ## Seguridad
 
-Las escrituras exigen origen propio y token CSRF; las cookies son `HttpOnly` y `__Host-`; el inicio de sesión del panel limita los intentos; los datos personales solo se devuelven con sesión de Discord y el panel exige además la contraseña del equipo; la CSP solo admite recursos del propio sitio. Las fichas no se muestran en el panel.
+Las escrituras exigen origen propio y token CSRF; las cookies son `HttpOnly` y `__Host-`; el inicio de sesión del panel limita los intentos; los datos personales solo se devuelven con sesión de Discord y el panel exige además la contraseña del equipo; la CSP solo admite recursos del propio sitio. El equipo puede leer las fichas para moderar, salvo el apartado «Secretos»; el texto de la ficha lo advierte.

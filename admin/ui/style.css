@@ -1,8 +1,11 @@
 :root {
-  --y: #f4d652;
-  --bg: #07080a;
-  --panel: #101216;
-  --line: #262a31;
+  --y: #e8c96c;
+  --blue: #246a9a;
+  --mono: 'Share Tech Mono', ui-monospace, Consolas, monospace;
+  --head: Rajdhani, 'Segoe UI', sans-serif;
+  --bg: #09090b;
+  --panel: #121214;
+  --line: #2a2a30;
   --text: #e8e9ec;
   --mute: #a3a8b1;
   --err: #ffafb1;
@@ -20,7 +23,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font:
-    16px/1.5 system-ui,
+    16px/1.5 Inter,
+    system-ui,
     -apple-system,
     'Segoe UI',
     sans-serif;
@@ -316,4 +320,182 @@ dd {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+}
+
+/* Identidad del portal (tipografía, cabecera, tabla, insignias) */
+body {
+  background:
+    radial-gradient(circle at 85% -10%, rgba(36, 106, 154, 0.18), transparent 40%),
+    linear-gradient(rgba(232, 201, 108, 0.025) 1px, transparent 1px) 0 0 / 100% 48px,
+    var(--bg);
+}
+h1 {
+  font-family: var(--head);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.top {
+  border-top: 2px solid var(--y);
+}
+.brand {
+  font: 700 1.35rem var(--head);
+  letter-spacing: 0.1em;
+}
+.brand small {
+  font: 400 0.7rem var(--mono);
+  letter-spacing: 0.18em;
+}
+.eyebrow {
+  font: 400 0.75rem var(--mono);
+  letter-spacing: 0.22em;
+}
+.nav a {
+  border-color: transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: 6px 6px 0 0;
+}
+.nav a:hover {
+  border-color: transparent;
+  border-bottom-color: var(--line);
+}
+.nav a[aria-current='page'] {
+  background: rgba(232, 201, 108, 0.08);
+  border-color: transparent;
+  border-bottom-color: var(--y);
+  color: var(--y);
+  font-weight: 600;
+}
+.nav .back {
+  margin-left: 12px;
+  color: var(--mute);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.nav .back:hover {
+  color: var(--y);
+  border-color: var(--y);
+}
+.login {
+  border-top: 2px solid var(--y);
+}
+.login h1 {
+  margin: 0;
+}
+.login .back {
+  text-align: center;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+.login .back:hover {
+  color: var(--y);
+}
+.wrap {
+  border-radius: 12px;
+}
+th,
+td {
+  padding: 14px 16px;
+}
+th {
+  font: 400 0.74rem var(--mono);
+  letter-spacing: 0.14em;
+  background: rgba(255, 255, 255, 0.02);
+}
+tr.u:hover td {
+  background: rgba(232, 201, 108, 0.04);
+}
+progress {
+  width: 110px;
+  height: 10px;
+}
+.badge {
+  padding: 3px 12px;
+  font: 400 0.78rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+}
+details {
+  border-radius: 12px;
+}
+details[open] {
+  border-color: rgba(232, 201, 108, 0.4);
+}
+dt {
+  font: 400 0.78rem var(--mono);
+  letter-spacing: 0.06em;
+}
+
+/* Detalle desplegable de usuarios */
+.tog {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  min-height: 0;
+  border: 0;
+  text-align: left;
+  font-weight: 600;
+}
+.tog::before {
+  content: '▸';
+  color: var(--y);
+  transition: transform 0.15s;
+}
+.tog[aria-expanded='true']::before {
+  transform: rotate(90deg);
+}
+.tog small {
+  font-weight: 400;
+}
+tr.det > td {
+  background: #0d0d10;
+  padding: 18px 22px;
+}
+.det-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 14px 16px;
+}
+.card h2 {
+  margin: 0 0 4px;
+  font: 700 1.2rem var(--head);
+  letter-spacing: 0.04em;
+}
+.card h3 {
+  margin: 14px 0 0;
+  color: var(--y);
+  font: 400 0.75rem var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.card .meta {
+  color: var(--mute);
+  font-size: 0.85rem;
+}
+.card dt {
+  color: var(--mute);
+  font:
+    600 0.82rem Inter,
+    sans-serif;
+  letter-spacing: 0;
+}
+.card ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  overflow-wrap: anywhere;
+}
+.card a {
+  color: var(--y);
+}
+.note {
+  margin-top: 12px;
+  color: var(--mute);
+  font-size: 0.82rem;
 }

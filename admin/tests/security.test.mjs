@@ -72,6 +72,8 @@ test('Solo se sirven los recursos públicos previstos del panel', async () => {
     ['brand.webp', '/brand.webp'],
     ['favicon.png', '/favicon.png'],
     ['equipo', '/equipo.html'],
+    ['fonts.css', '/fonts.css'],
+    ['fonts/inter-latin-400-normal.woff2', '/fonts/inter-latin-400-normal.woff2'],
   ]) {
     const response = await service(new Request('http://127.0.0.1:4310/admin/' + route));
     assert.equal(response.status, 200);
@@ -194,4 +196,30 @@ test('Equipo: el administrador cambia el estado y valida los valores', async () 
   assert.equal((await s.req('equipo')).body.items[0].status, 'aceptada');
   assert.equal((await s.req('equipo', 'DELETE', { discordId: discord })).status, 200);
   assert.equal((await s.req('equipo')).body.items.length, 0);
+});
+test('Usuarios: el detalle muestra lo que rellenó la persona, salvo los campos privados', async () => {
+  const s = setup();
+  const now = new Date().toISOString();
+  s.records.set('character-sheet:' + discord, {
+    values: { alias: 'Ghost', historia: 'Nació en Heywood.', secretos: 'MUY PRIVADO' },
+    images: ['https://x.test/a.png'],
+    updatedAt: now,
+  });
+  s.records.set('team-application:' + discord, {
+    createdAt: now,
+    status: 'aceptada',
+    answers: { nombre: 'Ana' },
+  });
+  assert.equal((await s.req('usuarios?id=' + discord)).status, 401);
+  await s.login();
+  assert.equal((await s.req('usuarios?id=no-valido')).status, 400);
+  const { status, body } = await s.req('usuarios?id=' + discord);
+  assert.equal(status, 200);
+  assert.deepEqual(body.ficha.values, { alias: 'Ghost', historia: 'Nació en Heywood.' });
+  assert.deepEqual(body.ficha.images, ['https://x.test/a.png']);
+  assert.deepEqual(body.team.answers, { nombre: 'Ana' });
+  assert.equal(body.team.status, 'aceptada');
+  assert.ok(!JSON.stringify(body).includes('MUY PRIVADO'));
+  assert.ok(!body.sections.ficha.some((sec) => sec.fields.some((f) => f.id === 'secretos')));
+  assert.equal((await s.req('usuarios?id=222222222222222222')).body.ficha, null);
 });

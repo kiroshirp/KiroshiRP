@@ -63,7 +63,9 @@ export function mountNav() {
     state.csrf = '';
     location.href = '/admin/';
   });
-  nav.append(out);
+  const back = el('a', '← Volver a la web', 'back');
+  back.href = 'https://kiroshirp.pages.dev/';
+  nav.append(out, back);
   nav.hidden = false;
 }
 // Carga la sesión; en 401 se llama a onUnauth (por defecto, redirige al login).
