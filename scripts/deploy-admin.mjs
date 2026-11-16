@@ -16,6 +16,8 @@ const required = [
   'DISCORD_CLIENT_SECRET',
   'DISCORD_BOT_TOKEN',
   'DISCORD_INVITE_CHANNEL_ID',
+  'TURSO_DATABASE_URL',
+  'TURSO_AUTH_TOKEN',
 ];
 const missing = required.filter((key) => !process.env[key]?.trim());
 if (missing.length) {
@@ -68,6 +70,8 @@ if (missing.length) {
             'DISCORD_CLIENT_SECRET',
             'DISCORD_BOT_TOKEN',
             'DISCORD_INVITE_CHANNEL_ID',
+            'TURSO_DATABASE_URL',
+            'TURSO_AUTH_TOKEN',
           ].map((k) => [k, process.env[k]]),
         ),
       ),

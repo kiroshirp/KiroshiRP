@@ -17,7 +17,7 @@ Las tres rutas viven en `https://kiroshirp-admin.kiroshirp.workers.dev`. Las fun
 
 ## Archivo privado
 
-Completa `.env` (excluido de Git; nunca lo envíes por chat). Campos: `ADMIN_USERNAME`, `ADMIN_PASSWORD` (13 caracteres o más), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (solo para desplegar), `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_INVITE_CHANNEL_ID`. `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` están reservados: hoy nada los usa. `GITHUB_TOKEN` ya no hace falta; revoca el token en GitHub y bórralo del Worker con `npx wrangler secret delete GITHUB_TOKEN`.
+Completa `.env` (excluido de Git; nunca lo envíes por chat). Campos: `ADMIN_USERNAME`, `ADMIN_PASSWORD` (13 caracteres o más), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (solo para desplegar), `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_INVITE_CHANNEL_ID`. `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` (base de datos; se suben como secretos al desplegar). `GITHUB_TOKEN` ya no hace falta; revoca el token en GitHub y bórralo del Worker con `npx wrangler secret delete GITHUB_TOKEN`.
 
 ## Desplegar
 
@@ -29,7 +29,9 @@ npm run admin:deploy
 
 `npm run admin:check` compila el Worker sin desplegarlo. El despliegue carga los secretos por entrada estándar, sin imprimirlos.
 
-## Qué se guarda (Durable Object del Worker)
+## Qué se guarda (Turso)
+
+Los datos viven en una base Turso (tabla `kv`, clave y valor JSON) a la que el Worker accede por HTTP con `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN`. El Durable Object solo serializa las peticiones y programa la limpieza horaria de lo caducado. Al primer arranque con Turso, copia a la base lo que hubiera en el Durable Object y lo borra de allí. Si Turso no responde, el panel contesta 503.
 
 | Dato                                                | Caducidad                                    |
 | --------------------------------------------------- | -------------------------------------------- |
