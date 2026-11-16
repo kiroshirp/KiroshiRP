@@ -11,23 +11,40 @@
   </head>
   <body>
     <a class="skip" href="#main">Saltar al contenido</a>
-    <header>
+    <header class="top">
       <a class="brand" href="/admin/"
-        >KIROSHI<span>RP</span><small>ESTUDIO EDITORIAL / ACCESO PRIVADO</small></a
+        ><img src="/admin/brand.webp" alt="" width="87" height="29" />KIROSHIRP<small
+          >ADMINISTRACIÓN</small
+        ></a
       >
+      <nav id="nav" class="nav" aria-label="Principal" hidden></nav>
     </header>
     <main id="main">
-      <section class="workspace-heading">
+      <div class="head">
         <div>
           <span class="eyebrow">EQUIPO</span>
-          <h1>Solicitudes del equipo</h1>
-          <p>Respuestas enviadas desde Mi cuenta.</p>
+          <h1>Equipo</h1>
+          <p>Candidaturas enviadas desde Mi cuenta.</p>
         </div>
-        <a class="button" href="/admin/">← Volver al panel</a>
-        <a class="button" href="/admin/solicitudes/">Solicitudes de acceso</a>
-      </section>
-      <p id="status" role="status">Cargando solicitudes…</p>
-      <div id="list"></div>
+        <div class="tools">
+          <label for="fs"
+            >Estado<select id="fs">
+              <option value="">Todos</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="aceptada">Aceptada</option>
+              <option value="rechazada">Rechazada</option>
+            </select></label
+          >
+          <label for="ord"
+            >Fecha<select id="ord">
+              <option value="desc">Más recientes primero</option>
+              <option value="asc">Más antiguas primero</option>
+            </select></label
+          >
+        </div>
+      </div>
+      <p id="status" class="status" role="status">Cargando…</p>
+      <div id="list" class="cands"></div>
     </main>
   </body>
 </html>

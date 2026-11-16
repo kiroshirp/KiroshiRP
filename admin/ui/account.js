@@ -14,6 +14,8 @@ const mounted = {};
 let session = null;
 let user = null;
 let team = null;
+const stateName = () =>
+  ({ aceptada: 'aceptada', rechazada: 'rechazada' })[team?.status] || 'pendiente de revisión';
 let form = null;
 let draftKey = '';
 
@@ -65,7 +67,7 @@ function stat(label, value) {
 
 function teamText() {
   return team
-    ? 'Solicitud enviada el ' + formatDate(team.createdAt) + '.'
+    ? 'Solicitud ' + stateName() + ', enviada el ' + formatDate(team.createdAt) + '.'
     : 'Sin enviar. Solicitudes abiertas.';
 }
 
@@ -252,7 +254,8 @@ function renderTeamState() {
   $('sent').hidden = !team;
   $('team-box').hidden = !!team;
   if (team)
-    $('sent-text').textContent = 'Tu solicitud fue enviada el ' + formatDate(team.createdAt) + '.';
+    $('sent-text').textContent =
+      'Tu solicitud está ' + stateName() + ' (enviada el ' + formatDate(team.createdAt) + ').';
   if (session) renderGeneral();
 }
 
@@ -330,7 +333,7 @@ $('team-form').addEventListener('submit', async (event) => {
       answers: readAnswers(),
       consent: $('consent').checked,
     });
-    team = { createdAt: data.createdAt };
+    team = { createdAt: data.createdAt, status: 'pendiente' };
     session.team = team;
     try {
       localStorage.removeItem(draftKey);

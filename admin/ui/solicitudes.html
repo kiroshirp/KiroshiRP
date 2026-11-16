@@ -4,30 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>Solicitudes — KiroshiRP</title>
+    <title>Solicitudes de acceso — KiroshiRP</title>
     <link rel="icon" type="image/png" href="/admin/favicon.png" />
     <link rel="stylesheet" href="/admin/style.css" />
     <script type="module" src="/admin/solicitudes.js"></script>
   </head>
   <body>
     <a class="skip" href="#main">Saltar al contenido</a>
-    <header>
+    <header class="top">
       <a class="brand" href="/admin/"
-        >KIROSHI<span>RP</span><small>ESTUDIO EDITORIAL / ACCESO PRIVADO</small></a
+        ><img src="/admin/brand.webp" alt="" width="87" height="29" />KIROSHIRP<small
+          >ADMINISTRACIÓN</small
+        ></a
       >
+      <nav id="nav" class="nav" aria-label="Principal" hidden></nav>
     </header>
     <main id="main">
-      <section class="workspace-heading">
+      <div class="head">
         <div>
           <span class="eyebrow">ACCESO A LA COMUNIDAD</span>
-          <h1>Solicitudes</h1>
+          <h1>Solicitudes de acceso</h1>
           <p>Identidades declaradas al solicitar la invitación a Discord.</p>
         </div>
-        <a class="button" href="/admin/">← Volver al panel</a>
-        <a class="button" href="/admin/equipo/">Solicitudes del equipo</a>
-      </section>
-      <p id="status" role="status">Cargando solicitudes…</p>
-      <div class="requests">
+      </div>
+      <p id="status" class="status" role="status">Cargando…</p>
+      <div class="wrap" tabindex="0" role="region" aria-label="Tabla de solicitudes">
         <table>
           <thead>
             <tr>
@@ -35,7 +36,7 @@
               <th>SteamID declarado</th>
               <th>Fecha</th>
               <th>Resultado</th>
-              <th></th>
+              <th><span class="sr">Acciones</span></th>
             </tr>
           </thead>
           <tbody id="rows"></tbody>

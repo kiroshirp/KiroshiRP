@@ -1,11 +1,10 @@
 // Punto de entrada del panel: reparte cada petición a su módulo en admin/api/.
-import { editorialOperation } from './editorial.mjs';
 import { STATIC_ROUTES } from './config.mjs';
 import { json, finish, equal, readJson } from './http.mjs';
 import { findSession, login, logout } from './api/session.mjs';
 import { solicitudes } from './api/solicitudes.mjs';
 import { equipo } from './api/equipo.mjs';
-import { files } from './api/files.mjs';
+import { usuarios } from './api/usuarios.mjs';
 
 const METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
 
@@ -21,7 +20,7 @@ function genericError(error) {
   );
 }
 
-export function createService({ env, store, repo, assets, local = false }) {
+export function createService({ env, store, assets, local = false }) {
   return async function handle(request) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '');
@@ -80,27 +79,12 @@ export function createService({ env, store, repo, assets, local = false }) {
       if (path === '/admin/api/solicitudes')
         return finish(await solicitudes({ request, data, store }));
       if (path === '/admin/api/equipo') return finish(await equipo({ request, data, store }));
-
-      const editorial = await editorialOperation({
-        route: path,
-        url,
-        method: request.method,
-        data,
-        repo,
-        store,
-      });
-      if (editorial !== null) return finish(json(editorial));
+      if (path === '/admin/api/usuarios') return finish(await usuarios({ request, data, store }));
 
       const get = request.method === 'GET';
       if (path === '/admin/api/logout' && request.method === 'POST')
         return finish(await logout({ store, local, cookie }));
-      if (path === '/admin/api/session' && get)
-        return finish(json({ csrf: session.csrf, mode: local ? 'local' : 'github' }));
-      if (path === '/admin/api/publication' && get)
-        return finish(json(local ? { mode: 'local' } : await repo.publication()));
-      if (path === '/admin/api/files' && get) return finish(json({ files: await repo.list() }));
-      if (path === '/admin/api/file')
-        return finish(await files({ request, url, data, repo, store }));
+      if (path === '/admin/api/session' && get) return finish(json({ csrf: session.csrf }));
       return finish(json({ error: 'No encontrado.' }, 404));
     } catch (error) {
       return finish(json({ error: genericError(error) }, error.status || 400));

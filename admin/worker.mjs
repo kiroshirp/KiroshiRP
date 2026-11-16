@@ -1,5 +1,4 @@
 import { createService } from './service.mjs';
-import { githubRepository } from './github.mjs';
 import { createAccessService } from './access.mjs';
 
 export default {
@@ -9,7 +8,7 @@ export default {
       url.protocol = 'https:';
       return Response.redirect(url.toString(), 308);
     }
-    if (!env.ADMIN_STATE || !env.GITHUB_TOKEN)
+    if (!env.ADMIN_STATE)
       return new Response('Administrador pendiente de configurar.', {
         status: 503,
         headers: { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' },
@@ -25,7 +24,7 @@ export class AdminState {
     this.state = state;
     const assets = async (path) => env.ASSETS.fetch(new Request('https://assets.internal' + path));
     const access = createAccessService({ env, store: state.storage, assets });
-    const admin = createService({ env, store: state.storage, repo: githubRepository(env), assets });
+    const admin = createService({ env, store: state.storage, assets });
     this.handle = async (request) => (await access(request)) || admin(request);
   }
   async fetch(request) {

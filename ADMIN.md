@@ -1,111 +1,46 @@
-# Administración privada de KiroshiRP
+# Panel privado y cuentas de KiroshiRP
 
-La web pública se publica en Cloudflare Pages desde `main`. El administrador se ejecuta de forma independiente: en Cloudflare Workers para usarlo desde Internet, o en el ordenador para edición local. No existen cuentas de jugadores.
+La web pública es estática y se publica en Cloudflare Pages desde `main`. Un Worker de Cloudflare aparte (`kiroshirp-admin`) gestiona las cuentas de Discord y el panel del equipo. **El panel ya no edita el contenido de la web**: los artículos se cambian en el repositorio.
 
-## Configurar el archivo privado
+## Qué hace
 
-Completa `.env` en la raíz de este proyecto. Está excluido de Git; nunca lo subas mediante el formulario de archivos de GitHub ni lo copies a `public/`. `.env.example` es solo una plantilla vacía y sí puede publicarse. No uses prefijos `PUBLIC_` o `VITE_` en secretos.
+- `/cuenta/`: la persona inicia sesión con Discord (8 horas) y ve su panel: vista general, ficha de personaje privada, economía (vacía hasta conectar el juego), su cuenta y la solicitud «Únete al equipo».
+- `/acceso/`: solicitud de invitación a Discord con SteamID.
+- `/admin/`: panel del equipo con usuario y contraseña propios.
+  - **Usuarios**: cuentas, última conexión, progreso de la ficha (nunca su contenido), estado de la solicitud y SteamID. Permite eliminar una cuenta y todos sus datos.
+  - **Solicitudes de acceso**: SteamID declarado y resultado.
+  - **Equipo**: candidaturas con sus respuestas; se marcan como pendiente, aceptada o rechazada, y la persona ve el estado en su cuenta.
 
-Campos:
+## Direcciones
 
-- `ADMIN_USERNAME`: usuario del equipo.
-- `ADMIN_PASSWORD`: contraseña propia de este administrador, de al menos 13 caracteres. No reutilices la de GitHub o Cloudflare. Para valores con espacios o `#`, utiliza comillas dobles.
-- `ADMIN_PORT`: puerto local, por defecto 4310.
-- `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta que alojará el Worker.
-- `CLOUDFLARE_API_TOKEN`: token limitado a esa cuenta para desplegar Workers y sus recursos Durable Objects. El despliegue utiliza autenticación mediante token; no requiere compartir la contraseña de Cloudflare.
-- `GITHUB_TOKEN`: token granular con acceso exclusivamente a `kiroshirp/KiroshiRP`, permiso **Contents: read and write**. El administrador no necesita permisos para gestionar otros repositorios ni modificar workflows. Respeta las restricciones de rama de GitHub; no las desactives para el panel.
-- `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` y `DISCORD_BOT_TOKEN`: identificadores y secretos de una aplicación Discord del proyecto. Configura `https://kiroshirp-admin.kiroshirp.workers.dev/acceso/callback` como URL de retorno OAuth2 y añade el bot al servidor con permiso para crear invitaciones.
-- `DISCORD_INVITE_CHANNEL_ID`: identificador del canal del servidor donde el bot puede crear invitaciones.
+Las tres rutas viven en `https://kiroshirp-admin.kiroshirp.workers.dev`. Las funciones de `functions/` las reenvían desde `https://kiroshirp.pages.dev` cuando el proyecto Pages tiene el enlace de servicio `PANEL` hacia `kiroshirp-admin`; sin él, redirigen al Worker. La redirección `https://kiroshirp.pages.dev/acceso/callback` debe estar añadida en la aplicación de Discord (la de workers.dev debe seguir).
 
-No envíes estos valores por chat. No se incluyen en el HTML, los recursos estáticos ni las respuestas del administrador. Las credenciales de acceso, el token de GitHub y los datos privados de la aplicación Discord se cargan como secretos de Cloudflare al desplegar; el token de despliegue de Cloudflare se queda en el entorno local.
+## Archivo privado
 
-## Solicitudes de acceso a Discord
+Completa `.env` (excluido de Git; nunca lo envíes por chat). Campos: `ADMIN_USERNAME`, `ADMIN_PASSWORD` (13 caracteres o más), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (solo para desplegar), `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_INVITE_CHANNEL_ID`. `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` están reservados: hoy nada los usa. `GITHUB_TOKEN` ya no hace falta; revoca el token en GitHub y bórralo del Worker con `npx wrangler secret delete GITHUB_TOKEN`.
 
-La ruta pública `/acceso/` del Worker identifica al visitante mediante Discord OAuth2 (`identify`), recibe un SteamID64 **declarado** y crea una invitación individual de un uso y 15 minutos. El formulario requiere una aceptación expresa del tratamiento de esos identificadores, verifica formato y duplicados; no verifica la titularidad de Steam ni evalúa normativas. Las solicitudes aparecen en `/admin/solicitudes/` con Discord, SteamID, fecha y resultado. El solicitante puede eliminarlas tras volver a iniciar sesión con Discord; el panel también puede eliminarlas y caducan automáticamente a los 90 días. El bot no asigna roles.
+## Desplegar
 
-Antes de activar este flujo, retira y revoca la invitación pública anterior en Discord, configura la aplicación y el bot, completa los secretos en `.env` y publica conjuntamente el Worker y la web. El enlace que hoy figura en el historial público del repositorio seguirá siendo utilizable hasta su revocación en Discord. Las invitaciones de un uso reducen la difusión, pero pueden ser usadas por otra persona si se comparten primero.
-
-## Usarlo en el ordenador
-
-```sh
+```bash
 npm ci
-npm run admin
-```
-
-Abre `http://127.0.0.1:4310/admin/`. Solo escucha en la interfaz local. Requiere usuario y contraseña; las credenciales de Cloudflare y GitHub no son necesarias para este modo. Los cambios afectan al proyecto local, no al portal publicado. Reinicia el servicio si modificas `.env`.
-
-## Publicar en Cloudflare Workers
-
-Primero completa todos los campos privados y verifica que la cuenta permite Workers y Durable Objects. No se presupone ningún dominio ni configuración DNS existente.
-
-```sh
 npm run admin:test
-npm run admin:check
 npm run admin:deploy
 ```
 
-El último comando despliega el Worker y carga mediante entrada estándar las credenciales del administrador, GitHub y Discord como secretos, sin imprimir sus valores ni crear archivos temporales con ellos. La configuración pública está en `wrangler.jsonc`; el código del Worker está en `admin/worker.mjs`. Solo `admin/ui/` se sube como recursos del administrador, nunca la raíz del proyecto ni `.env`. Hasta tener los secretos configurados, la API devuelve «pendiente de configurar».
+`npm run admin:check` compila el Worker sin desplegarlo. El despliegue carga los secretos por entrada estándar, sin imprimirlos.
 
-El comando muestra la dirección real de `workers.dev` devuelta por Cloudflare. Comprueba allí `/admin/`. `site.adminUrl` en `src/data/portal.json` debe contener esa URL HTTPS verificada. La ruta `/admin/` de la web oficial abre el Worker privado de Cloudflare, que valida el acceso en su propio origen.
+## Qué se guarda (Durable Object del Worker)
 
-El contenido inicial, los esquemas compartidos y la configuración JSON deben estar también en `main` antes de editar mediante el Worker. Los archivos de esta implementación ya están en `main`. No publiques únicamente el Worker sin publicar estos archivos del proyecto.
+| Dato                                                | Caducidad                                    |
+| --------------------------------------------------- | -------------------------------------------- |
+| Cuenta: ID, nombre de Discord, alta y último acceso | hasta que la persona o el equipo la eliminen |
+| Ficha de personaje (hasta 50.000 caracteres)        | hasta que se elimine                         |
+| Solicitud del equipo (una por cuenta)               | 90 días                                      |
+| Solicitud de acceso (SteamID)                       | 90 días                                      |
+| Sesiones                                            | 8 horas (15 minutos en `/acceso/`)           |
 
-## Gestionar el portal
+«Eliminar mis datos», en Mi cuenta, y «Eliminar cuenta», en el panel, borran todo lo anterior.
 
-El panel permite buscar, crear, editar y eliminar artículos de Lore, Mecánicas, Normativas, Facciones, Guías y Actualizaciones; gestionar imágenes PNG/JPEG/WebP/AVIF (máximo 4 MB); y editar la configuración central del portal. Los campos habituales del artículo tienen formulario; el contenido se escribe en Markdown. Las fuentes, licencia, relaciones, imagen, historial y opciones adicionales se editan como JSON estructurado. No ejecuta código de los artículos dentro del panel.
+## Seguridad
 
-`src/data/portal.json` centraliza enlaces públicos, navegación, fases y parámetros compartidos. `src/data/home.json` permite editar los textos y tarjetas de la portada; `src/data/legal.json`, las páginas de contacto y avisos. Los archivos necesarios de configuración no se pueden eliminar; se modifican mediante su editor. Las plantillas y el código de la web se mantienen en el proyecto, fuera del editor de contenidos. El administrador nunca ofrece acceso a `.env`, workflows ni archivos fuera de la lista permitida.
-
-**Los borradores de documentación son visibles en el portal** con su aviso editorial. Solo las noticias con `published: false` están excluidas de la generación pública. Cambiar «Borrador» por «Confirmado» no demuestra que una mecánica esté implementada: requiere revisión del equipo. Se rechaza retirar la marca de licencia a un artículo previamente adaptado; conserva siempre sus fuentes y atribuciones.
-
-En Cloudflare, cada guardado o eliminación crea un commit real en `main`. Cloudflare Pages compila y publica automáticamente `https://kiroshirp.pages.dev/`; comprueba el despliegue en el panel de Pages. Un guardado correcto significa que GitHub recibió el contenido, no que el despliegue haya terminado. Las ediciones que parten de una versión antigua se rechazan para evitar sobrescribir cambios ajenos. Evita ediciones simultáneas desde el modo local y Cloudflare sin sincronizar primero el repositorio.
-
-Antes de eliminar, revisa enlaces e imágenes relacionados. La eliminación exige escribir la ruta exacta. Si una referencia queda rota, corrígela antes de publicar. El panel no inventa nuevos destinos para sustituir contenidos eliminados.
-
-## Recuperación y seguridad
-
-- En local, cada sustitución o eliminación conserva la versión anterior en `.admin-backups/`, excluida de Git. Copia el archivo conservado a su ruta original para recuperarlo; esta carpeta no se publica.
-- En Cloudflare, recupera una versión anterior desde el historial Git del archivo y publica una nueva revisión. No se purga el historial al eliminar un documento.
-- Las sesiones duran dos horas, usan cookie HttpOnly y SameSite Strict; en Cloudflare llevan además Secure y prefijo `__Host-`. La sesión se invalida al cerrar sesión, caducar o cambiar las credenciales.
-- Las escrituras requieren origen propio y token CSRF. Se limitan a cinco intentos de acceso fallidos por dirección en quince minutos. Las sesiones y los intentos se guardan en un Durable Object; se eliminan registros caducados periódicamente.
-- Los secretos no se pueden consultar ni editar desde el panel. Para rotarlos, modifica `.env` y vuelve a desplegar el administrador. Nunca abras el servicio local a todas las interfaces como sustitución del despliegue HTTPS.
-
-## Comprobaciones
-
-```sh
-npm run admin:test
-npm run check
-npm run build
-node scripts/verify.mjs
-npm run admin:check
-```
-
-Las pruebas cubren acceso anónimo, límite de intentos, sesiones, CSRF, rutas, validación, conflictos de versión, copias de seguridad, eliminación confirmada, atribución y peticiones a GitHub. `admin:check` empaqueta el Worker sin publicarlo ni transmitir credenciales.
-
-Referencias de la arquitectura: [GitHub Pages estático](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [API de contenidos de GitHub](https://docs.github.com/en/rest/repos/contents), [recursos estáticos de Workers](https://developers.cloudflare.com/workers/static-assets/binding/).
-
-## Estudio editorial y borradores privados
-
-El resumen muestra artículos, imágenes y contenido pendiente de revisión. El catálogo se carga por lotes y permite buscar por título, categoría y ruta; los estados editoriales y los borradores privados se filtran por separado.
-
-«Guardar borrador privado» conserva el contenido en el servicio sin modificar GitHub ni la web. En Cloudflare se guarda en el Durable Object; en local, en .admin-drafts/, excluido de Git. Al volver a abrir el archivo se recupera el borrador guardado. Las sesiones y las credenciales no se guardan en el navegador. Ctrl+S guarda el borrador privado.
-
-«Validar» comprueba estructura y conflictos. «Revisar publicación» abre un resumen y requiere confirmar el envío. En modo GitHub, la confirmación actualiza el repositorio e inicia la publicación; en local, solo modifica los archivos del ordenador con copia de seguridad. El estado editorial Borrador de documentación no oculta un artículo publicado; las noticias dependen además de su opción de visibilidad.
-
-Las fuentes, los artículos relacionados y la imagen se gestionan con formularios. La configuración de portada, fases, enlaces y avisos dispone de formularios y mantiene una alternativa avanzada en JSON. La vista previa es orientativa y no ejecuta HTML. Las imágenes y las eliminaciones de archivos requieren confirmación porque modifican los recursos publicados.
-
-Los borradores se protegen frente a escrituras concurrentes. Si cambia la versión publicada, la publicación se bloquea hasta revisar el conflicto. Los borradores no caducan automáticamente; pueden eliminarse explícitamente desde el panel. La publicación conserva el historial de GitHub o las copias locales.
-
-## Mi cuenta y solicitudes del equipo
-
-La página `/cuenta/` del Worker permite iniciar sesión con Discord. Reutiliza la aplicación Discord y la redirección `/acceso/callback` ya configuradas; no hay que registrar otra URL en Discord. La sesión dura 8 horas.
-
-El formulario «Únete al equipo» guarda las respuestas en el Worker durante 90 días, con una solicitud por cuenta. Cada persona puede eliminarla desde Mi cuenta. El equipo las revisa en `/admin/equipo/`.
-
-## Estructura del código
-
-El Worker arranca en `admin/worker.mjs`. `admin/service.mjs` recibe cada petición y la reparte a `admin/api/` (sesión, solicitudes de acceso y archivos). `admin/http.mjs` reúne las respuestas JSON, las cabeceras de seguridad y la lectura del cuerpo con límite de tamaño. `admin/config.mjs` lista los archivos estáticos que se sirven; al añadir un módulo a `admin/ui/` hay que añadirlo también ahí.
-
-La interfaz carga `admin/ui/main.js`. El estado compartido está en `state.js` y el resto se divide por tarea: `dom.js`, `api.js`, `catalog.js`, `session.js`, `editor-view.js` y los cuatro módulos `events-*.js`.
-
-Las pruebas de seguridad y acceso están en `admin/tests/` (`npm run admin:test`). `tests/admin-ui.test.mjs` recorre el panel en un navegador real; se omite si Playwright no está instalado.
+Las escrituras exigen origen propio y token CSRF; las cookies son `HttpOnly` y `__Host-`; el inicio de sesión del panel limita los intentos; los datos personales solo se devuelven con sesión de Discord y el panel exige además la contraseña del equipo; la CSP solo admite recursos del propio sitio. Las fichas no se muestran en el panel.

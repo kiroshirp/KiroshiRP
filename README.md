@@ -1,6 +1,6 @@
 # KiroshiRP: portal público
 
-Portal estático en español hecho con Astro, TypeScript, contenido Markdown validado y Pagefind. No necesita backend, registro ni cuentas de jugadores. La búsqueda no usa servicios de pago, las fuentes se alojan en el propio sitio y el CSS es propio, con la paleta de KiroshiRP. El equipo gestiona el contenido desde un panel privado que corre como servicio aparte (ver [ADMIN.md](ADMIN.md)).
+Portal estático en español hecho con Astro, TypeScript, contenido Markdown validado y Pagefind. La web no necesita backend; las cuentas de Discord y el panel del equipo viven en un Worker aparte (ver ADMIN.md). La búsqueda no usa servicios de pago, las fuentes se alojan en el propio sitio y el CSS es propio, con la paleta de KiroshiRP. El equipo gestiona el contenido desde un panel privado que corre como servicio aparte (ver [ADMIN.md](ADMIN.md)).
 
 ## Primeros pasos
 
@@ -29,7 +29,6 @@ npm run preview
 | `npm run preview`                         | Sirve `dist/` en local                                                      |
 | `npm run check`                           | Solo comprobación de tipos y contenido                                      |
 | `npm run format` / `npm run format:check` | Aplica o comprueba el formato con Prettier                                  |
-| `npm run admin`                           | Panel privado en local                                                      |
 | `npm run admin:test`                      | Pruebas del panel (seguridad y acceso)                                      |
 | `npm run admin:check`                     | Compila el Worker del panel sin desplegarlo                                 |
 | `npm run css:snapshot -- <carpeta> dist`  | Guarda los estilos calculados de todas las páginas para compararlos después |

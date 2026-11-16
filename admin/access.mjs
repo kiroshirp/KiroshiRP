@@ -1,5 +1,6 @@
 import { randomBytes, createHash } from 'node:crypto';
 import { teamRole, teamSections, validateTeam } from './team-form.mjs';
+import { wipeAccount } from './accounts.mjs';
 import {
   characterSections,
   validateCharacter,
@@ -147,8 +148,13 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         username: user.global_name || user.username,
         expires: Date.now() + lifetime,
       });
-      if (!(await store.get('account:' + user.id)))
-        await store.put('account:' + user.id, { since: new Date().toISOString() });
+      const now = new Date().toISOString();
+      const known = await store.get('account:' + user.id);
+      await store.put('account:' + user.id, {
+        since: known?.since || now,
+        name: user.global_name || user.username,
+        lastLogin: now,
+      });
       const sessionList = (await store.get('account-sessions:' + user.id)) || [];
       await store.put('account-sessions:' + user.id, [...sessionList.slice(-9), digest(id)]);
       const response = redirect(pending.account ? '/cuenta/' : '/acceso/');
@@ -318,7 +324,7 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
             since: account?.since || null,
             expiresAt: session.expires,
             others: live.filter((id) => id !== current).length,
-            team: team ? { createdAt: team.createdAt } : null,
+            team: team ? { createdAt: team.createdAt, status: team.status || 'pendiente' } : null,
             character: sheet
               ? { progress: progress(sheet.values), updatedAt: sheet.updatedAt }
               : null,
@@ -367,15 +373,7 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         return finish(json({ ok: true }));
       }
       if (path === '/cuenta/api/account-delete') {
-        for (const id of await liveSessions()) await store.delete('access-session:' + id);
-        await store.delete('account-sessions:' + mine);
-        await store.delete('account:' + mine);
-        await store.delete('character-sheet:' + mine);
-        await store.delete(key);
-        await store.put(
-          'team-index',
-          index.filter((id) => id !== mine),
-        );
+        await wipeAccount(store, mine);
         return clearCookie(json({ ok: true }));
       }
       if (path === '/cuenta/api/team-delete') {

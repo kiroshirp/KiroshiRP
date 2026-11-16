@@ -1,21 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs/promises';
-import os from 'node:os';
-import path from 'node:path';
 import { createService } from '../service.mjs';
-import { localRepository } from '../local.mjs';
-import { githubRepository } from '../github.mjs';
-const article =
-  '---\ntitle: Prueba\ndescription: Documento de prueba\ncategory: Pruebas\nstatus: Borrador\norigin: LORE KIROSHIRP\nupdated: 2026-10-17\n---\n## Inicio\nTexto de prueba.\n';
-const target = 'src/content/guias/prueba.md';
-async function setup(t, local = true) {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'kiroshi-admin-'));
-  t.after(() => fs.rm(root, { recursive: true, force: true }));
-  await fs.mkdir(path.join(root, 'src/content/guias'), { recursive: true });
-  await fs.mkdir(path.join(root, 'src/data'), { recursive: true });
-  await fs.mkdir(path.join(root, 'public/images'), { recursive: true });
-  await fs.writeFile(path.join(root, target), article);
+
+const discord = '123456789012345678';
+function setup(local = true) {
   const records = new Map();
   const store = {
     async get(k) {
@@ -27,13 +15,15 @@ async function setup(t, local = true) {
     async delete(k) {
       records.delete(k);
     },
+    async list({ prefix }) {
+      return new Map([...records].filter(([k]) => k.startsWith(prefix)));
+    },
   };
   const env = { ADMIN_USERNAME: 'test-editor', ADMIN_PASSWORD: 'test-only-password-very-long' };
   const service = createService({
     env,
     store,
-    repo: localRepository(root),
-    assets: async () => new Response('Sin datos privados'),
+    assets: async (path) => new Response(path),
     local,
   });
   let cookie = '',
@@ -64,31 +54,34 @@ async function setup(t, local = true) {
     csrf = result.body.csrf;
     return result;
   };
-  return { root, records, req, login, env };
+  return { records, req, login, env, origin };
 }
-test('La API niega el acceso anónimo, incluso a los archivos privados', async (t) => {
-  const s = await setup(t);
-  for (const endpoint of ['files', 'session', 'file?path=.env'])
+test('La API niega el acceso anónimo', async () => {
+  const s = setup();
+  for (const endpoint of ['session', 'usuarios', 'equipo', 'solicitudes'])
     assert.equal((await s.req(endpoint)).status, 401);
 });
-test('Solo se sirven los recursos públicos previstos del panel', async (t) => {
-  const s = await setup(t);
+test('Solo se sirven los recursos públicos previstos del panel', async () => {
   const service = createService({
-    env: s.env,
+    env: {},
     store: {},
-    repo: {},
     assets: async (path) => new Response(path),
     local: true,
   });
-  for (const file of ['brand.webp', 'city.webp', 'favicon.png']) {
-    const response = await service(new Request('http://127.0.0.1:4310/admin/' + file));
+  for (const [route, asset] of [
+    ['brand.webp', '/brand.webp'],
+    ['favicon.png', '/favicon.png'],
+    ['equipo', '/equipo.html'],
+  ]) {
+    const response = await service(new Request('http://127.0.0.1:4310/admin/' + route));
     assert.equal(response.status, 200);
-    assert.equal(await response.text(), '/' + file);
+    assert.equal(await response.text(), asset);
   }
-  assert.equal((await service(new Request('http://127.0.0.1:4310/admin/private.txt'))).status, 404);
+  for (const route of ['private.txt', 'editor.js'])
+    assert.equal((await service(new Request('http://127.0.0.1:4310/admin/' + route))).status, 404);
 });
-test('Inicio de sesión: error genérico, límite de intentos y contraseña mínima', async (t) => {
-  const s = await setup(t);
+test('Inicio de sesión: error genérico, límite de intentos y contraseña mínima', async () => {
+  const s = setup();
   for (let i = 0; i < 5; i++)
     assert.equal(
       (await s.req('login', 'POST', { username: 'otro', password: 'mala' })).status,
@@ -106,8 +99,8 @@ test('Inicio de sesión: error genérico, límite de intentos y contraseña mín
   s.env.ADMIN_PASSWORD = 'corta';
   assert.equal((await s.req('session')).status, 503);
 });
-test('Cookies de producción privadas y sin almacenamiento del token en la respuesta', async (t) => {
-  const s = await setup(t, false);
+test('Cookies de producción privadas y sin almacenamiento del token en la respuesta', async () => {
+  const s = setup(false);
   const r = await s.login();
   assert.match(
     r.headers.get('set-cookie'),
@@ -117,271 +110,88 @@ test('Cookies de producción privadas y sin almacenamiento del token en la respu
   assert.equal(r.headers.get('cache-control'), 'no-store');
   assert.match(r.headers.get('content-security-policy'), /frame-ancestors 'none'/);
 });
-test('Cambio de credenciales, caducidad y cierre de sesión invalidan la sesión', async (t) => {
-  const s = await setup(t);
+test('Cambio de credenciales, caducidad y cierre de sesión invalidan la sesión', async () => {
+  const s = setup();
   await s.login();
   s.env.ADMIN_PASSWORD += 'nuevo';
-  assert.equal((await s.req('files')).status, 401);
+  assert.equal((await s.req('usuarios')).status, 401);
   await s.login();
   for (const value of s.records.values()) if (value.csrf) value.expires = 0;
-  assert.equal((await s.req('files')).status, 401);
+  assert.equal((await s.req('usuarios')).status, 401);
   await s.login();
   assert.equal((await s.req('logout', 'POST', {})).status, 200);
-  assert.equal((await s.req('files')).status, 401);
+  assert.equal((await s.req('usuarios')).status, 401);
 });
-test('Escrituras requieren origen propio y token CSRF', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const file = (await s.req('file?path=' + target)).body;
-  for (const headers of [{ Origin: 'https://evil.example' }, { 'X-CSRF-Token': 'incorrecto' }])
-    assert.equal(
-      (
-        await s.req(
-          'file',
-          'PUT',
-          { path: target, version: file.version, content: article },
-          headers,
-        )
-      ).status,
-      403,
-    );
-});
-test('No se puede leer ni modificar .env, código, rutas relativas o configuración de despliegue', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  for (const p of [
-    '.env',
-    'src/config.ts',
-    'src/content/guias/../../config.ts',
-    'public/images/a.svg',
-    '.github/workflows/deploy.yml',
-    'src/content/guias/../guias/prueba.md',
-  ]) {
-    assert.equal((await s.req('file?path=' + encodeURIComponent(p))).status, 400);
-    assert.equal((await s.req('file', 'PUT', { path: p, content: 'secreto' })).status, 400);
-  }
-});
-test('Crear, editar y eliminar conserva versiones y copias recuperables', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const file = (await s.req('file?path=' + target)).body;
-  assert.equal(file.document.metadata.title, 'Prueba');
-  const modified = article.replace('Texto de prueba.', 'Texto actualizado.');
-  assert.equal(
-    (await s.req('file', 'PUT', { path: target, version: file.version, content: modified })).status,
-    200,
-  );
-  assert.equal(
-    (await s.req('file', 'PUT', { path: target, version: file.version, content: article })).status,
-    409,
-  );
-  const updated = (await s.req('file?path=' + target)).body;
-  assert.equal(
-    (await s.req('file', 'DELETE', { path: target, version: updated.version })).status,
-    400,
-  );
-  assert.equal(
-    (await s.req('file', 'DELETE', { path: target, version: updated.version, confirm: target }))
-      .status,
-    200,
-  );
-  assert.equal((await s.req('file?path=' + target)).status, 404);
-  assert.equal((await fs.readdir(path.join(s.root, '.admin-backups'))).length, 2);
-  assert.equal((await s.req('file', 'PUT', { path: target, content: article })).status, 200);
-});
-test('Rechaza metadatos incorrectos, HTML ejecutable y falsas imágenes', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  for (const content of [
-    article.replace('Borrador', 'Activo'),
-    article.replace('title: Prueba', 'title: []'),
-    article + '<script>alert(1)</script>',
-  ])
-    assert.equal(
-      (await s.req('file', 'PUT', { path: 'src/content/guias/nuevo.md', content })).status,
-      400,
-    );
-  assert.equal(
-    (
-      await s.req('file', 'PUT', {
-        path: 'public/images/prueba.png',
-        content: Buffer.from('<script>x</script>').toString('base64'),
-      })
-    ).status,
-    400,
-  );
-});
-test('El editor mantiene la licencia de los artículos adaptados', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const licensed = article.replace(
-    'title: Prueba',
-    'title: Prueba\nlicensedText: true\nsources:\n  - label: Wiki\n    url: https://cyberpunk.fandom.com/es/wiki/Watson',
-  );
-  const r = await s.req('file', 'PUT', { path: 'src/content/lore/licencia.md', content: licensed });
-  assert.equal(r.status, 200);
-  assert.equal(
-    (
-      await s.req('file', 'PUT', {
-        path: 'src/content/lore/licencia.md',
-        version: r.body.version,
-        content: licensed.replace('licensedText: true', 'licensedText: false'),
-      })
-    ).status,
-    400,
-  );
-});
-test('Repositorio GitHub guarda con versión, rama y credenciales solo en el servidor', async () => {
-  const calls = [];
-  const repo = githubRepository({ GITHUB_TOKEN: 'test-token' }, async (url, options) => {
-    calls.push({ url, options });
-    return new Response(
-      JSON.stringify({ content: { sha: 'new-sha' }, commit: { sha: 'commit-sha' } }),
-      { status: 200 },
-    );
-  });
-  const result = await repo.write(target, Buffer.from(article), 'old-sha');
-  assert.equal(result.version, 'new-sha');
-  const body = JSON.parse(calls[0].options.body);
-  assert.equal(body.sha, 'old-sha');
-  assert.equal(body.branch, 'main');
-  assert.equal(Buffer.from(body.content, 'base64').toString(), article);
-  assert.equal(calls[0].options.headers.Authorization, 'Bearer test-token');
-});
-test('El editor admite documentos estructurados y protege los archivos centrales', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const file = (await s.req('file?path=' + target)).body;
-  file.document.metadata.title = 'Título editado';
-  assert.equal(
-    (await s.req('file', 'PUT', { path: target, version: file.version, document: file.document }))
-      .status,
-    200,
-  );
-  assert.equal((await s.req('file?path=' + target)).body.document.metadata.title, 'Título editado');
-  assert.equal(
-    (await s.req('file', 'PUT', { path: 'src/data/portal.json', content: '{}' })).status,
-    400,
-  );
-  assert.equal(
-    (await s.req('file', 'DELETE', { path: 'src/data/home.json', confirm: 'src/data/home.json' }))
-      .status,
-    400,
-  );
-});
-test('Admite la longitud de trece caracteres autorizada sin omitir la autenticación', async (t) => {
-  const s = await setup(t);
+test('Admite la longitud de trece caracteres autorizada sin omitir la autenticación', async () => {
+  const s = setup();
   s.env.ADMIN_PASSWORD = 'prueba-13-xxx';
-  assert.equal(s.env.ADMIN_PASSWORD.length, 13);
   await s.login();
-  assert.equal((await s.req('files')).status, 200);
+  assert.equal((await s.req('usuarios')).status, 200);
 });
-test('Las imágenes grandes se leen desde la API raw de GitHub, sin enviar secretos a otros destinos', async () => {
-  const image = Buffer.alloc(1100000, 1);
-  const calls = [];
-  const repo = githubRepository({ GITHUB_TOKEN: 'test-token' }, async (url, options) => {
-    calls.push({ url, options });
-    return options.headers.Accept === 'application/vnd.github.raw+json'
-      ? new Response(image)
-      : new Response(JSON.stringify({ type: 'file', encoding: 'none', sha: 'image-sha' }));
+test('Las escrituras requieren origen propio y token CSRF', async () => {
+  const s = setup();
+  await s.login();
+  for (const headers of [{ Origin: 'https://evil.example' }, { 'X-CSRF-Token': 'incorrecto' }])
+    assert.equal((await s.req('usuarios', 'DELETE', { discordId: discord }, headers)).status, 403);
+});
+test('Usuarios: lista cuentas sin exponer la ficha y las borra por completo', async () => {
+  const s = setup();
+  const now = new Date().toISOString();
+  s.records.set('account:' + discord, { since: now, name: 'Jugador', lastLogin: now });
+  s.records.set('account-sessions:' + discord, ['abc']);
+  s.records.set('access-session:abc', { discordId: discord, expires: Date.now() + 1000 });
+  s.records.set('character-sheet:' + discord, {
+    values: { alias: 'Ghost', secretos: 'MUY PRIVADO' },
+    images: [],
+    updatedAt: now,
   });
-  const read = await repo.read('public/images/grande.png');
-  assert.equal(read.bytes.length, image.length);
-  assert.equal(calls.length, 2);
-  for (const call of calls)
-    assert.match(call.url, /^https:\/\/api.github.com\/repos\/kiroshirp\/KiroshiRP\/contents\//);
-});
-
-test('Borradores: privados, persistentes en el servicio y sin modificar archivos publicados', async (t) => {
-  const s = await setup(t);
-  assert.equal((await s.req('drafts')).status, 401);
+  s.records.set('team-application:' + discord, { createdAt: now, answers: {} });
+  s.records.set('team-index', [discord]);
+  s.records.set('access-application:' + discord, { steamId: '76561198000000000', createdAt: now });
+  s.records.set('access-steam:76561198000000000', discord);
+  s.records.set('access-index', [discord]);
   await s.login();
-  const file = (await s.req('file?path=' + target)).body;
-  const content = article.replace('Texto de prueba.', 'Texto en borrador.');
-  const saved = await s.req('draft', 'PUT', { path: target, version: file.version, content });
-  assert.equal(saved.status, 200);
-  assert.equal(await fs.readFile(path.join(s.root, target), 'utf8'), article);
-  assert.equal((await s.req('drafts')).body.drafts.length, 1);
-  assert.equal((await s.req('draft?path=' + target)).body.content, content);
+  const list = await s.req('usuarios');
+  assert.equal(list.status, 200);
+  const [user] = list.body.items;
+  assert.equal(user.name, 'Jugador');
+  assert.ok(user.character.progress > 0);
+  assert.equal(user.team.status, 'pendiente');
+  assert.equal(user.access.steamId, '76561198000000000');
+  assert.ok(!JSON.stringify(list.body).includes('MUY PRIVADO'));
+  assert.equal((await s.req('usuarios', 'DELETE', { discordId: 'no-valido' })).status, 400);
+  assert.equal((await s.req('usuarios', 'DELETE', { discordId: discord })).status, 200);
+  for (const key of [
+    'account:',
+    'account-sessions:',
+    'character-sheet:',
+    'team-application:',
+    'access-application:',
+  ])
+    assert.equal(s.records.has(key + discord), false, key);
+  assert.equal(s.records.has('access-session:abc'), false);
+  assert.equal(s.records.has('access-steam:76561198000000000'), false);
+  assert.deepEqual(s.records.get('team-index'), []);
+  assert.deepEqual(s.records.get('access-index'), []);
+});
+test('Equipo: el administrador cambia el estado y valida los valores', async () => {
+  const s = setup();
+  s.records.set('team-application:' + discord, {
+    discordName: 'Jugador',
+    createdAt: new Date().toISOString(),
+    answers: { nombre: 'Ana' },
+  });
+  s.records.set('team-index', [discord]);
+  await s.login();
+  const before = (await s.req('equipo')).body;
+  assert.equal(before.items[0].status, 'pendiente');
+  assert.ok(before.labels.nombre);
+  assert.equal((await s.req('equipo', 'PUT', { discordId: discord, status: 'quizá' })).status, 400);
   assert.equal(
-    (await s.req('draft', 'PUT', { path: target, version: file.version, content })).status,
-    409,
-  );
-  assert.equal(
-    (await s.req('draft', 'DELETE', { path: target, draftRevision: 'incorrecta' })).status,
-    409,
-  );
-  assert.equal(
-    (
-      await s.req('file', 'PUT', {
-        path: target,
-        version: file.version,
-        content,
-        draftRevision: saved.body.revision,
-      })
-    ).status,
+    (await s.req('equipo', 'PUT', { discordId: discord, status: 'aceptada' })).status,
     200,
   );
-  assert.equal((await s.req('drafts')).body.drafts.length, 0);
-});
-test('La validación no escribe y los borradores respetan CSRF, rutas y contenido seguro', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const file = (await s.req('file?path=' + target)).body;
-  assert.equal(
-    (await s.req('validate', 'POST', { path: target, version: 'antigua', content: article })).body
-      .conflict,
-    true,
-  );
-  assert.equal(await fs.readFile(path.join(s.root, target), 'utf8'), article);
-  assert.equal(
-    (
-      await s.req(
-        'draft',
-        'PUT',
-        { path: target, version: file.version, content: article },
-        { 'X-CSRF-Token': 'incorrecto' },
-      )
-    ).status,
-    403,
-  );
-  for (const p of ['.env', 'public/images/a.png'])
-    assert.equal((await s.req('draft', 'PUT', { path: p, content: article })).status, 400);
-  assert.equal(
-    (
-      await s.req('draft', 'PUT', {
-        path: target,
-        version: file.version,
-        content: article + '<script>x</script>',
-      })
-    ).status,
-    400,
-  );
-});
-test('El catálogo solo incluye metadatos públicos, sin cuerpo ni secretos', async (t) => {
-  const s = await setup(t);
-  await s.login();
-  const result = await s.req('catalog');
-  assert.equal(result.status, 200);
-  assert.equal(result.body.items[0].metadata.title, 'Prueba');
-  assert.equal(result.body.items[0].content, undefined);
-  assert.equal(result.body.items[0].metadata.body, undefined);
-  assert.equal((await s.req('catalog?offset=-1')).status, 400);
-});
-test('Los borradores locales sobreviven a reiniciar el almacén y las sesiones no', async (t) => {
-  const { localStore } = await import('../local-store.mjs');
-  const s = await setup(t);
-  const one = localStore(s.root);
-  const key = 'draft:' + 'a'.repeat(64);
-  await one.put(key, { content: 'Borrador público pendiente' });
-  await one.put('session:prueba', { secret: 'solo-en-memoria' });
-  const two = localStore(s.root);
-  assert.equal((await two.get(key)).content, 'Borrador público pendiente');
-  assert.equal(await two.get('session:prueba'), undefined);
-});
-test('La vista previa rechaza protocolos ejecutables', async () => {
-  const { safeLink } = await import('../ui/preview.js');
-  for (const value of ['javascript:alert(1)', 'data:text/html,x', 'vbscript:x'])
-    assert.equal(safeLink(value), null);
-  assert.equal(safeLink('https://example.com/'), 'https://example.com/');
+  assert.equal((await s.req('equipo')).body.items[0].status, 'aceptada');
+  assert.equal((await s.req('equipo', 'DELETE', { discordId: discord })).status, 200);
+  assert.equal((await s.req('equipo')).body.items.length, 0);
 });

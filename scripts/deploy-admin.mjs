@@ -10,7 +10,6 @@ try {
 const required = [
   'ADMIN_USERNAME',
   'ADMIN_PASSWORD',
-  'GITHUB_TOKEN',
   'CLOUDFLARE_ACCOUNT_ID',
   'CLOUDFLARE_API_TOKEN',
   'DISCORD_CLIENT_ID',
@@ -65,7 +64,6 @@ if (missing.length) {
           [
             'ADMIN_USERNAME',
             'ADMIN_PASSWORD',
-            'GITHUB_TOKEN',
             'DISCORD_CLIENT_ID',
             'DISCORD_CLIENT_SECRET',
             'DISCORD_BOT_TOKEN',

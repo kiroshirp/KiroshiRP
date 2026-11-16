@@ -10,7 +10,7 @@ related: ["lore/protocolo-umbral","guias/primeros-pasos","guias/glosario"]
 ---
 
 ## ¿Necesito una cuenta en esta web?
-No necesitas una cuenta de jugador para leer el portal. Su contenido es público; el acceso editorial del equipo utiliza un administrador privado.
+No necesitas una cuenta para leer el portal: su contenido es público. Iniciar sesión con Discord solo es necesario para tu cuenta y para solicitar el acceso o unirte al equipo.
 
 ## ¿Está abierto el servidor?
 Este portal no confirma una fecha de apertura ni disponibilidad de conexión. Los anuncios oficiales aparecerán en Actualizaciones.
