@@ -96,6 +96,12 @@ Las fuentes, los artículos relacionados y la imagen se gestionan con formulario
 
 Los borradores se protegen frente a escrituras concurrentes. Si cambia la versión publicada, la publicación se bloquea hasta revisar el conflicto. Los borradores no caducan automáticamente; pueden eliminarse explícitamente desde el panel. La publicación conserva el historial de GitHub o las copias locales.
 
+## Mi cuenta y solicitudes del equipo
+
+La página `/cuenta/` del Worker permite iniciar sesión con Discord. Reutiliza la aplicación Discord y la redirección `/acceso/callback` ya configuradas; no hay que registrar otra URL en Discord. La sesión dura 8 horas.
+
+El formulario «Únete al equipo» guarda las respuestas en el Worker durante 90 días, con una solicitud por cuenta. Cada persona puede eliminarla desde Mi cuenta. El equipo las revisa en `/admin/equipo/`.
+
 ## Estructura del código
 
 El Worker arranca en `admin/worker.mjs`. `admin/service.mjs` recibe cada petición y la reparte a `admin/api/` (sesión, solicitudes de acceso y archivos). `admin/http.mjs` reúne las respuestas JSON, las cabeceras de seguridad y la lectura del cuerpo con límite de tamaño. `admin/config.mjs` lista los archivos estáticos que se sirven; al añadir un módulo a `admin/ui/` hay que añadirlo también ahí.

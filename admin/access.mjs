@@ -1,4 +1,12 @@
 import { randomBytes, createHash } from 'node:crypto';
+import { teamRole, teamSections, validateTeam } from './team-form.mjs';
+import {
+  characterSections,
+  validateCharacter,
+  progress,
+  MAX_TOTAL,
+  MAX_IMAGES,
+} from './character-form.mjs';
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -24,12 +32,24 @@ const required = [
   'DISCORD_INVITE_CHANNEL_ID',
 ];
 const steamId = (value) => typeof value === 'string' && /^7656119\d{10}$/.test(value);
+const pages = {
+  '/acceso': '/access.html',
+  '/acceso/app.js': '/access.js',
+  '/acceso/style.css': '/access.css',
+  '/cuenta': '/account.html',
+  '/cuenta/app.js': '/account.js',
+  '/cuenta/style.css': '/account.css',
+};
+// Módulos de cada sección de /cuenta/ (JS y CSS propios).
+const sectionFile = /^\/cuenta\/(section-[a-z]+\.(?:js|css))$/;
+const ACCOUNT_SESSION = 8 * 3600000; // el formulario del equipo es largo: 15 min no bastan
+const TEAM_RETENTION = 90 * 86400000;
 
 export function createAccessService({ env, store, assets, fetcher = fetch, local = false }) {
   return async (request) => {
     const url = new URL(request.url),
       path = url.pathname.replace(/\/$/, '');
-    if (path !== '/acceso' && !path.startsWith('/acceso/')) return null;
+    if (!/^\/(acceso|cuenta)(\/|$)/.test(path)) return null;
     const finish = (response) => {
       const headers = new Headers(response.headers);
       headers.set('Cache-Control', 'no-store');
@@ -45,17 +65,10 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
     };
     if (request.method !== 'GET' && request.method !== 'POST')
       return finish(json({ error: 'Método no permitido.' }, 405));
-    if (path === '/acceso' || path === '/acceso/app.js' || path === '/acceso/style.css') {
+    const page = pages[path] || (sectionFile.test(path) && '/' + path.match(sectionFile)[1]);
+    if (page) {
       if (request.method !== 'GET') return finish(json({ error: 'Método no permitido.' }, 405));
-      return finish(
-        await assets(
-          path === '/acceso'
-            ? '/access.html'
-            : path === '/acceso/app.js'
-              ? '/access.js'
-              : '/access.css',
-        ),
-      );
+      return finish(await assets(page));
     }
     if (required.some((key) => !env[key]))
       return finish(json({ error: 'El acceso todavía no está configurado.' }, 503));
@@ -68,7 +81,10 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
     const valid = session?.expires > Date.now();
     if (path === '/acceso/login' && request.method === 'GET') {
       const state = random();
-      await store.put('access-state:' + digest(state), { expires: Date.now() + 600000 });
+      await store.put('access-state:' + digest(state), {
+        expires: Date.now() + 600000,
+        account: url.searchParams.get('next') === 'cuenta',
+      });
       const redirectUri = url.origin + '/acceso/callback';
       const auth = new URL('https://discord.com/oauth2/authorize');
       auth.search = new URLSearchParams({
@@ -125,14 +141,19 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       if (!/^\d{17,20}$/.test(user.id || ''))
         return finish(json({ error: 'Discord devolvió una identidad no válida.' }, 502));
       const id = random();
+      const lifetime = pending.account ? ACCOUNT_SESSION : 900000;
       await store.put('access-session:' + digest(id), {
         discordId: user.id,
         username: user.global_name || user.username,
-        expires: Date.now() + 900000,
+        expires: Date.now() + lifetime,
       });
-      const response = redirect('/acceso/');
+      if (!(await store.get('account:' + user.id)))
+        await store.put('account:' + user.id, { since: new Date().toISOString() });
+      const sessionList = (await store.get('account-sessions:' + user.id)) || [];
+      await store.put('account-sessions:' + user.id, [...sessionList.slice(-9), digest(id)]);
+      const response = redirect(pending.account ? '/cuenta/' : '/acceso/');
       response.headers.append('Set-Cookie', cookie('krp_oauth', '', 0, local));
-      response.headers.append('Set-Cookie', cookie('krp_access', id, 900, local));
+      response.headers.append('Set-Cookie', cookie('krp_access', id, lifetime / 1000, local));
       return finish(response);
     }
     if (path === '/acceso/api/session' && request.method === 'GET')
@@ -253,6 +274,137 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       session.invite = 'https://discord.gg/' + invite.code;
       await store.put('access-session:' + digest(sessionToken), session);
       return finish(json({ invite: session.invite }));
+    }
+    if (path.startsWith('/cuenta/api/')) {
+      const get = request.method === 'GET';
+      if (
+        !get &&
+        (request.headers.get('origin') !== url.origin ||
+          !request.headers.get('content-type')?.startsWith('application/json'))
+      )
+        return finish(json({ error: 'Solicitud no autorizada.' }, 403));
+      if (path === '/cuenta/api/form' && get)
+        return finish(json({ role: teamRole, sections: teamSections }));
+      const mine = valid ? session.discordId : null;
+      const current = digest(sessionToken || '');
+      // Sesiones vigentes de esta cuenta; descarta de la lista las caducadas.
+      const liveSessions = async () => {
+        const ids = (await store.get('account-sessions:' + mine)) || [];
+        const live = [];
+        for (const id of ids)
+          if ((await store.get('access-session:' + id))?.expires > Date.now()) live.push(id);
+        if (live.length !== ids.length) await store.put('account-sessions:' + mine, live);
+        return live;
+      };
+      const readBody = async (limit) => {
+        try {
+          const text = await request.text();
+          return text.length > limit ? null : JSON.parse(text);
+        } catch {
+          return null;
+        }
+      };
+      if (path === '/cuenta/api/session' && get) {
+        if (!valid) return finish(json({ user: null }));
+        const [team, account, sheet, live] = await Promise.all([
+          store.get('team-application:' + mine),
+          store.get('account:' + mine),
+          store.get('character-sheet:' + mine),
+          liveSessions(),
+        ]);
+        return finish(
+          json({
+            user: { id: mine, name: session.username },
+            since: account?.since || null,
+            expiresAt: session.expires,
+            others: live.filter((id) => id !== current).length,
+            team: team ? { createdAt: team.createdAt } : null,
+            character: sheet
+              ? { progress: progress(sheet.values), updatedAt: sheet.updatedAt }
+              : null,
+          }),
+        );
+      }
+      if (!valid) return finish(json({ error: 'Inicia sesión con Discord.' }, 401));
+      if (path === '/cuenta/api/character' && get) {
+        const sheet = await store.get('character-sheet:' + mine);
+        return finish(
+          json({
+            sections: characterSections,
+            maxTotal: MAX_TOTAL,
+            maxImages: MAX_IMAGES,
+            sheet: sheet ? { ...sheet, progress: progress(sheet.values) } : null,
+          }),
+        );
+      }
+      if (get) return finish(json({ error: 'No encontrado.' }, 404));
+      const key = 'team-application:' + mine;
+      const index = (await store.get('team-index')) || [];
+      const clearCookie = (response) => {
+        response.headers.append('Set-Cookie', cookie('krp_access', '', 0, local));
+        return finish(response);
+      };
+      if (path === '/cuenta/api/logout') {
+        await store.delete('access-session:' + current);
+        return clearCookie(json({ ok: true }));
+      }
+      if (path === '/cuenta/api/sessions-close-others') {
+        const others = (await liveSessions()).filter((id) => id !== current);
+        for (const id of others) await store.delete('access-session:' + id);
+        await store.put('account-sessions:' + mine, [current]);
+        return finish(json({ ok: true, closed: others.length }));
+      }
+      if (path === '/cuenta/api/character') {
+        const data = await readBody(70000);
+        const { values, images, error } = validateCharacter(data);
+        if (error || !data) return finish(json({ error: error || 'Formulario no válido.' }, 400));
+        const updatedAt = new Date().toISOString();
+        await store.put('character-sheet:' + mine, { values, images, updatedAt });
+        return finish(json({ ok: true, updatedAt, progress: progress(values) }));
+      }
+      if (path === '/cuenta/api/character-delete') {
+        await store.delete('character-sheet:' + mine);
+        return finish(json({ ok: true }));
+      }
+      if (path === '/cuenta/api/account-delete') {
+        for (const id of await liveSessions()) await store.delete('access-session:' + id);
+        await store.delete('account-sessions:' + mine);
+        await store.delete('account:' + mine);
+        await store.delete('character-sheet:' + mine);
+        await store.delete(key);
+        await store.put(
+          'team-index',
+          index.filter((id) => id !== mine),
+        );
+        return clearCookie(json({ ok: true }));
+      }
+      if (path === '/cuenta/api/team-delete') {
+        await store.delete(key);
+        await store.put(
+          'team-index',
+          index.filter((id) => id !== session.discordId),
+        );
+        return finish(json({ ok: true }));
+      }
+      if (path === '/cuenta/api/team') {
+        const data = await readBody(65536);
+        const { answers, error } = validateTeam(data);
+        if (error || !data) return finish(json({ error: error || 'Formulario no válido.' }, 400));
+        if (await store.get(key))
+          return finish(
+            json({ error: 'Ya has enviado una solicitud. Elimínala si quieres enviar otra.' }, 409),
+          );
+        const createdAt = new Date().toISOString();
+        await store.put(key, {
+          discordId: session.discordId,
+          discordName: session.username,
+          answers,
+          createdAt,
+          expires: Date.now() + TEAM_RETENTION,
+        });
+        await store.put('team-index', [session.discordId, ...index]);
+        return finish(json({ ok: true, createdAt }));
+      }
     }
     return finish(json({ error: 'No encontrado.' }, 404));
   };

@@ -25,6 +25,7 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
+const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
 ---
 
 <!doctype html>
@@ -116,6 +117,7 @@ const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
         <a class="nav-search" href={url('buscar/')}>
           Buscar
         </a>
+        {accountUrl && <a class="nav-account" href={accountUrl}>Mi cuenta</a>}
         <Discord />
       </nav>
     </header>

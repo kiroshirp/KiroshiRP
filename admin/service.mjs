@@ -4,6 +4,7 @@ import { STATIC_ROUTES } from './config.mjs';
 import { json, finish, equal, readJson } from './http.mjs';
 import { findSession, login, logout } from './api/session.mjs';
 import { solicitudes } from './api/solicitudes.mjs';
+import { equipo } from './api/equipo.mjs';
 import { files } from './api/files.mjs';
 
 const METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
@@ -78,6 +79,7 @@ export function createService({ env, store, repo, assets, local = false }) {
 
       if (path === '/admin/api/solicitudes')
         return finish(await solicitudes({ request, data, store }));
+      if (path === '/admin/api/equipo') return finish(await equipo({ request, data, store }));
 
       const editorial = await editorialOperation({
         route: path,

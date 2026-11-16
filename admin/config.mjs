@@ -4,6 +4,7 @@ export const MAX_AGE = 7200;
 export const STATIC_ROUTES = new Map([
   ['/admin', '/index.html'],
   ['/admin/solicitudes', '/solicitudes.html'],
+  ['/admin/equipo', '/equipo.html'],
   ...[
     'main.js',
     'state.js',
@@ -23,5 +24,6 @@ export const STATIC_ROUTES = new Map([
     'city.webp',
     'favicon.png',
     'solicitudes.js',
+    'equipo.js',
   ].map((f) => ['/admin/' + f, '/' + f]),
 ]);

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Mi cuenta — KiroshiRP</title>
+    <link rel="icon" type="image/png" href="/admin/favicon.png" />
+    <link rel="stylesheet" href="/cuenta/style.css" />
+    <script type="module" src="/cuenta/app.js"></script>
+  </head>
+  <body>
+    <p id="loading" class="center" role="status">Cargando…</p>
+    <main id="login" class="center" hidden>
+      <img src="/admin/brand.webp" alt="KiroshiRP" width="87" height="29" />
+      <h1>Mi cuenta</h1>
+      <p>Inicia sesión con Discord para acceder a tu cuenta.</p>
+      <a class="btn primary" href="/acceso/login?next=cuenta">Iniciar sesión con Discord</a>
+    </main>
+    <div id="app" class="layout" hidden>
+      <aside class="side">
+        <img src="/admin/brand.webp" alt="KiroshiRP" width="87" height="29" />
+        <nav aria-label="Mi cuenta">
+          <span class="label">TU CONEXIÓN</span>
+          <a href="#general" data-s="general">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z" />
+            </svg>
+            <span>Vista general</span><b>01</b>
+          </a>
+          <a href="#personajes" data-s="personajes">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="7" r="3.5" />
+              <path d="M5 21v-3a5 5 0 015-5h4a5 5 0 015 5v3z" />
+            </svg>
+            <span>Mis personajes</span><b>02</b>
+          </a>
+          <a href="#economia" data-s="economia">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <ellipse cx="12" cy="6" rx="8" ry="3" />
+              <path
+                d="M4 6v6c0 1.7 3.6 3 8 3s8-1.300 8-3V6M4 12v6c0 1.700 3.600 3 8 3s8-1.300 8-3v-6"
+              />
+            </svg>
+            <span>Economía</span><b>03</b>
+          </a>
+          <a href="#cuenta" data-s="cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3l8 3v6c0 4.500-3.300 8-8 9-4.700-1-8-4.500-8-9V6z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+            <span>Mi cuenta</span><b>04</b>
+          </a>
+          <a href="#equipo" data-s="equipo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="9" cy="8" r="3.5" />
+              <path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5z" />
+              <path d="M17 5a3.5 3.5 0 010 7M19 15c2 .8 3 2.4 3 5h-3" />
+            </svg>
+            <span>Únete al equipo</span><b>05</b>
+          </a>
+        </nav>
+      </aside>
+      <div class="content">
+        <header class="topbar">
+          <span id="title" class="topbar-title"></span>
+          <span class="chip"
+            ><span id="chip-initial" class="chip-initial" aria-hidden="true"></span
+            ><span id="chip-name"></span
+          ></span>
+        </header>
+        <main class="main" id="main">
+          <p id="error" class="notice error" role="alert" hidden></p>
+          <section id="general" data-s="general" aria-label="Vista general" hidden></section>
+          <section id="cuenta" data-s="cuenta" aria-label="Mi cuenta" hidden></section>
+          <section id="equipo" data-s="equipo" aria-label="Únete al equipo" hidden>
+            <div class="view-head">
+              <p class="eyebrow">SOLICITUDES ABIERTAS</p>
+              <h1>Únete al equipo.</h1>
+              <p class="lead">
+                Solicitudes abiertas para formar parte del equipo. Te contactaremos por Discord.
+              </p>
+            </div>
+            <div id="sent" class="card" hidden>
+              <p id="sent-text"></p>
+              <button id="team-delete" class="btn danger" type="button">
+                Eliminar mi solicitud
+              </button>
+            </div>
+            <div id="team-box" hidden>
+              <div class="card">
+                <h2 id="role-title"></h2>
+                <p id="role-summary"></p>
+              </div>
+              <p class="hint">Los campos marcados con * son obligatorios.</p>
+              <label class="hint" for="progress">Progreso: <span id="progress-text"></span></label>
+              <progress class="progress" id="progress" value="0" max="1"></progress>
+              <form id="team-form" class="card" novalidate>
+                <div id="fields"></div>
+                <label class="check"
+                  ><input id="consent" type="checkbox" required /><span
+                    >Acepto que KiroshiRP guarde estas respuestas durante 90 días para revisar mi
+                    solicitud, y puedo eliminarlas desde aquí.</span
+                  ></label
+                >
+                <button class="btn primary" type="submit">Enviar solicitud</button>
+              </form>
+              <p class="hint">
+                Lo escrito se guarda en este navegador mientras rellenas el formulario. Solo puedes
+                enviar una solicitud: revísala antes. Revisaremos las solicitudes y contactaremos
+                por Discord con los candidatos seleccionados.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
