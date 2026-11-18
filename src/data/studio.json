@@ -1,0 +1,59 @@
+{
+  "estado": "En preparación",
+  "eyebrow": "KIROSHIRP / STUDIO",
+  "titulo": "Kiroshi Studio",
+  "lead": "El espacio de la comunidad para los recursos creados por KiroshiRP.",
+  "descripcion": "Mods, arte y sonido pensados para Night City y para quienes la viven. Todo pasará por la revisión del equipo antes de publicarse. Esto es un adelanto de hacia dónde vamos.",
+  "aviso": "Todavía no hay catálogo ni fechas. Las novedades se publicarán en Actualizaciones cuando estén confirmadas.",
+  "lineasTitulo": "Líneas previstas",
+  "lineas": [
+    {
+      "id": "mods",
+      "titulo": "Mods y scripts",
+      "descripcion": "Mods para Cyberpunk 2077 y para KiroshiRP, revisados por el equipo antes de aparecer aquí.",
+      "estado": "Próximamente"
+    },
+    {
+      "id": "arte",
+      "titulo": "Arte y diseño",
+      "descripcion": "Ilustraciones, retratos y piezas visuales hechas para el universo de KiroshiRP.",
+      "estado": "Próximamente"
+    },
+    {
+      "id": "sonido",
+      "titulo": "Música y sonido",
+      "descripcion": "Pistas y ambientes originales para acompañar la ciudad.",
+      "estado": "Próximamente"
+    },
+    {
+      "id": "creadores",
+      "titulo": "Creadores",
+      "descripcion": "Un lugar para dar a conocer el trabajo de quienes crean contenido alrededor de KiroshiRP.",
+      "estado": "Próximamente"
+    }
+  ],
+  "principiosTitulo": "Cómo lo planteamos",
+  "principios": [
+    {
+      "titulo": "Los mods serán gratuitos",
+      "texto": "Sin acceso de pago ni versiones exclusivas. Como mucho, enlaces de donación voluntaria, siguiendo las pautas de CD PROJEKT RED para el contenido de fans."
+    },
+    {
+      "titulo": "Solo trabajo propio",
+      "texto": "Contenido original. Sin reutilizar la banda sonora, el arte ni los logotipos oficiales del juego."
+    },
+    {
+      "titulo": "Todo se revisa",
+      "texto": "El equipo revisará cada recurso antes de publicarlo y podrá retirarlo si incumple estas normas."
+    },
+    {
+      "titulo": "Proyecto de fans",
+      "texto": "KiroshiRP es un proyecto de fans, sin relación oficial con CD PROJEKT RED."
+    }
+  ],
+  "cta": {
+    "titulo": "¿Creas mods, arte o música?",
+    "texto": "Entra en el Discord y cuéntanos qué haces. Las novedades del Studio se publicarán en Actualizaciones cuando estén confirmadas.",
+    "boton": "Entrar a Discord"
+  }
+}

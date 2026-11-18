@@ -1,0 +1,263 @@
+/* Página /studio/. Prefijo kst- para no chocar con las reglas heredadas .studio-*. */
+.kst {
+  display: grid;
+  gap: clamp(40px, 6vw, 80px);
+  padding-block: clamp(28px, 5vw, 64px) clamp(40px, 6vw, 80px);
+}
+.kst h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+.kst h2,
+.kst h3 {
+  margin: 0;
+}
+.kst-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+.kst-hero-copy > p:not(.kst-route) {
+  max-width: 56ch;
+}
+.kst-route {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.kst-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  padding: 6px 12px;
+  letter-spacing: 0.14em;
+}
+.kst-chip > span {
+  width: 7px;
+  height: 7px;
+  background: var(--yellow);
+  animation: kst-pulse 2.4s ease-in-out infinite;
+}
+.kst-lead {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+.kst-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 28px;
+  margin-top: 30px;
+}
+.kst-more,
+.kst-chips a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+.kst-more {
+  color: var(--yellow);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.06em;
+}
+.kst-more:hover {
+  text-decoration: underline;
+}
+.kst-hero-media {
+  position: relative;
+  border: 1px solid var(--line);
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+}
+.kst-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.kst-hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #09090bcc, #09090b33 55%, #09090b66);
+}
+.kst-notice {
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px dashed var(--line);
+  border-left: 2px solid var(--yellow);
+  font-size: 0.95rem;
+}
+.kst-kicker {
+  display: block;
+  margin: 0 0 20px;
+  color: var(--yellow);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kst-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+.kst-chips a {
+  border: 1px solid var(--line);
+  padding: 0 14px;
+  font-weight: 600;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.kst-chips a:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+.kst-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  border: 1px solid #e8c96c55;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.kst-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.kst-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.kst-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(20px, 2.4vw, 32px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  scroll-margin-top: 110px;
+  animation: kst-in 0.6s ease both;
+}
+.kst-card:target {
+  border-color: var(--yellow);
+}
+.kst-card p {
+  margin: 0;
+}
+.kst-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--yellow);
+}
+.kst-card-top svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.kst-soon {
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.kst-num {
+  color: var(--yellow);
+  letter-spacing: 0.14em;
+}
+.kst-rule {
+  border-top: 2px solid var(--yellow);
+}
+.kst-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--yellow);
+  background: var(--panel);
+}
+.kst-cta > div {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+.kst-cta p {
+  margin: 0;
+  max-width: 60ch;
+}
+.kst-cta h2 {
+  margin-bottom: 12px;
+}
+.kst-bottom {
+  text-align: center;
+}
+@keyframes kst-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes kst-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@media (max-width: 1100px) {
+  .kst-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 820px) {
+  .kst-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kst-hero-media {
+    order: -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+@media (max-width: 640px) {
+  .kst-grid,
+  .kst-grid-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kst-actions .button {
+    width: 100%;
+  }
+  .kst-cta .button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kst-chip > span,
+  .kst-card {
+    animation: none;
+  }
+}

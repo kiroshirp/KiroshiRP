@@ -15,6 +15,10 @@ const news = (await getCollection('actualizaciones'))
 <Base active="inicio">
   <section class="clean-hero" aria-labelledby="home-title">
     <div class="clean-hero-copy">
+      <p class="hero-era mono">
+        <span class="hero-era-year">2078</span>
+        <span class="hero-era-text">Un año después de los sucesos de Cyberpunk 2077</span>
+      </p>
       <h1 id="home-title">
         <span class="hero-kicker mono">KiroshiRP · Roleplay de Cyberpunk 2077</span>
         Hazte un nombre
@@ -241,6 +245,41 @@ const news = (await getCollection('actualizaciones'))
 </Base>
 
 <style>
+  .hero-era {
+    display: inline-flex;
+    align-items: stretch;
+    margin: 0 0 22px;
+    border: 1px solid var(--line);
+    background: rgb(9 9 11 / 0.55);
+    font-size: 0.74rem;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .hero-era-year {
+    display: flex;
+    align-items: center;
+    padding: 9px 12px;
+    background: var(--yellow);
+    color: #09090b;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+  .hero-era-text {
+    display: flex;
+    align-items: center;
+    padding: 9px 14px;
+    color: var(--text);
+  }
+  @media (max-width: 520px) {
+    .hero-era {
+      flex-direction: column;
+    }
+    .hero-era-text {
+      letter-spacing: 0.14em;
+      line-height: 1.5;
+    }
+  }
   .hero-kicker {
     display: block;
     margin-bottom: 18px;

@@ -1,42 +1,128 @@
 ---
+import '../styles/studio.css';
 import Base from '../layouts/Base.astro';
 import { url } from '../config';
+import studio from '../data/studio.json';
+
+// Iconos vectoriales por línea (trazo, sin imágenes incrustadas).
+const icons: Record<string, string> = {
+  mods: '<path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/>',
+  arte: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 16l-5-5-8 8"/>',
+  sonido: '<path d="M4 14v-4M8 18V6M12 15V9M16 20V4M20 14v-4"/>',
+  creadores:
+    '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-4 3-6 6.5-6s6 2 6.5 6M17 4.5a3.5 3.5 0 010 7M18 14c2 .6 3.2 2.5 3.5 6"/>',
+};
 ---
 
 <Base
   active="studio"
-  title="Kiroshi Studio · Próximamente"
-  description="El futuro espacio de recursos creados por KiroshiRP. Sección en preparación."
+  title="Kiroshi Studio · Recursos de la comunidad en preparación"
+  description="Kiroshi Studio reunirá mods, arte, música y sonido creados por KiroshiRP para Night City. Un adelanto de las líneas previstas y de sus normas."
 >
-  <section class="studio-page" aria-labelledby="studio-title">
-    <div>
-      <span class="eyebrow">CREACIONES DE KIROSHIRP</span>
-      <h1 id="studio-title">
-        Kiroshi
-        <br />
-        <em>Studio.</em>
-      </h1>
-      <p class="studio-page-lead">Un espacio para los recursos creados por KiroshiRP.</p>
-      <p>Estamos preparando esta sección. El catálogo todavía no está disponible.</p>
+  <div class="kst" data-pagefind-body>
+    <header class="kst-hero" aria-labelledby="studio-title">
+      <div class="kst-hero-copy">
+        <p class="kst-route">
+          <span class="kst-chip kst-chip-live">
+            <span aria-hidden="true"></span>
+            {studio.estado}
+          </span>
+          <span class="mono">{studio.eyebrow}</span>
+        </p>
+        <h1 id="studio-title">
+          {studio.titulo}
+          <span class="accent">.</span>
+        </h1>
+        <p class="kst-lead">{studio.lead}</p>
+        <p>{studio.descripcion}</p>
+        <div class="kst-actions">
+          <a class="button primary" href={url('discord/')}>
+            Seguir el proyecto en Discord <span aria-hidden="true">→</span>
+          </a>
+          <a class="kst-more" href="#lineas">
+            Ver las líneas previstas <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+      <div class="kst-hero-media">
+        <img
+          src={url('images/krp-workshop.webp')}
+          alt="Banco de trabajo de un taller en penumbra con herramientas colgadas y un brazo cibernético sobre la mesa, bajo una lámpara cálida"
+          width="1200"
+          height="675"
+          fetchpriority="high"
+        />
+      </div>
+    </header>
+
+    <p class="kst-notice" role="note">
+      {studio.aviso}
+    </p>
+
+    <section class="kst-section" id="lineas" aria-labelledby="kst-lineas-title">
+      <h2 id="kst-lineas-title" class="mono kst-kicker">
+        {studio.lineasTitulo}
+      </h2>
+      <ul class="kst-chips" aria-label={studio.lineasTitulo}>
+        {studio.lineas.map((l) => (
+          <li>
+            <a href={`#${l.id}`}>
+              {l.titulo} <span class="kst-badge">{l.estado}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="kst-grid">
+        {studio.lineas.map((l) => (
+          <article class="kst-card" id={l.id}>
+            <div class="kst-card-top">
+              <svg
+                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                aria-hidden="true"
+                focusable="false"
+                set:html={icons[l.id]}
+              />
+              <span class="kst-badge">{l.estado}</span>
+            </div>
+            <h3>{l.titulo}</h3>
+            <p>{l.descripcion}</p>
+            <span class="mono kst-soon">Abre pronto</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="kst-section" aria-labelledby="kst-principios-title">
+      <h2 id="kst-principios-title" class="mono kst-kicker">
+        {studio.principiosTitulo}
+      </h2>
+      <div class="kst-grid kst-grid-4">
+        {studio.principios.map((p, i) => (
+          <article class="kst-card kst-rule">
+            <span class="mono kst-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.titulo}</h3>
+            <p>{p.texto}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="kst-cta" aria-labelledby="kst-cta-title">
+      <div>
+        <h2 id="kst-cta-title">{studio.cta.titulo}</h2>
+        <p>{studio.cta.texto}</p>
+      </div>
       <a class="button primary" href={url('discord/')}>
-        Seguir el proyecto en Discord <span aria-hidden="true">→</span>
+        {studio.cta.boton} <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <div class="kst-bottom">
+      <a class="text-link" href={url('actualizaciones/')}>
+        Ver las actualizaciones ↗
       </a>
     </div>
-    <div class="studio-notice">
-      <span class="mono">KIROSHIRP / STUDIO</span>
-      <strong aria-hidden="true">
-        KRP<span>STUDIO</span>
-      </strong>
-      <div>
-        <span class="studio-notice-status">En preparación</span>
-        <p>Próximamente</p>
-      </div>
-    </div>
-  </section>
-  <div class="studio-page-bottom">
-    <p>Las novedades se publicarán cuando estén confirmadas.</p>
-    <a class="text-link" href={url('actualizaciones/')}>
-      Ver las actualizaciones ↗
-    </a>
   </div>
 </Base>
