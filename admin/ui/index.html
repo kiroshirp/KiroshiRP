@@ -23,10 +23,14 @@
     <main id="main">
       <form id="login-form" class="login">
         <h1>Administración</h1>
-        <label for="u"
+        <a id="discord-login" class="primary" href="/admin/entrar" hidden>Entrar con Discord</a>
+        <p id="auth-sep" hidden>o con usuario y contraseña</p>
+        <p id="auth-off" hidden>El acceso al panel no está configurado.</p>
+        <p id="login-error" class="error" role="alert" hidden></p>
+        <label id="f-user" for="u" hidden
           >Usuario<input id="u" name="username" autocomplete="username" required maxlength="200"
         /></label>
-        <label for="p"
+        <label id="f-pass" for="p" hidden
           >Contraseña<input
             id="p"
             name="password"
@@ -35,8 +39,7 @@
             required
             maxlength="1024"
         /></label>
-        <p id="login-error" class="error" role="alert" hidden></p>
-        <button class="primary" type="submit">Acceder</button>
+        <button id="login-submit" class="primary" type="submit" hidden>Acceder</button>
         <a class="back" href="https://kiroshirp.pages.dev/">← Volver a la web</a>
       </form>
       <section id="app" hidden>

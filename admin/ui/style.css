@@ -120,11 +120,31 @@ button:hover {
   color: #111;
   font-weight: 700;
 }
-button.primary {
+button.primary,
+a.primary {
   background: var(--y);
   border-color: var(--y);
   color: #111;
   font-weight: 700;
+}
+a.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--y);
+  border-radius: 8px;
+  padding: 7px 12px;
+  text-decoration: none;
+}
+#auth-sep {
+  margin: 16px 0 8px;
+  color: var(--mute);
+  font-size: 0.82rem;
+  text-align: center;
+}
+#auth-off {
+  color: var(--mute);
 }
 button.danger {
   color: var(--err);

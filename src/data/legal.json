@@ -78,6 +78,13 @@
         ]
       },
       {
+        "title": "Registro de acciones del equipo",
+        "paragraphs": [
+          "Cuando alguien del equipo usa el panel de administración (entrar, cambiar el estado de una candidatura, eliminar una cuenta, una candidatura o una solicitud de acceso) se anota quién lo hizo (su nombre e identificador de Discord, o el usuario compartido del panel), qué hizo, sobre qué cuenta (su identificador y su nombre de Discord) y cuándo.",
+          "Solo lo ve el equipo de administración y se conserva 180 días. Sirve para saber quién hizo cada cambio y poder corregir errores o abusos."
+        ]
+      },
+      {
         "title": "Dónde se guardan los datos",
         "paragraphs": [
           "Los datos se procesan en un servicio privado de Cloudflare Workers y se guardan en una base de datos de Turso. La identificación con Discord se hace mediante la propia plataforma de Discord. Estos proveedores tratan datos técnicos conforme a sus propias políticas. No se publican en el repositorio ni se comparten con terceros para publicidad."

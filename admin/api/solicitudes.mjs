@@ -1,7 +1,8 @@
 // Solicitudes de acceso por Discord: listado y eliminación.
 import { json } from '../http.mjs';
+import { audit } from '../audit.mjs';
 
-export async function solicitudes({ request, data, store }) {
+export async function solicitudes({ request, data, store, actor }) {
   if (request.method === 'GET') {
     const ids = (await store.get('access-index')) || [];
     const items = [];
@@ -16,6 +17,10 @@ export async function solicitudes({ request, data, store }) {
     if (!record) return json({ error: 'Solicitud no encontrada.' }, 404);
     await store.delete('access-application:' + data.discordId);
     await store.delete('access-steam:' + record.steamId);
+    await audit(store, actor, 'solicitud-acceso-eliminada', {
+      id: data.discordId,
+      name: record.discordName,
+    });
     const ids = (await store.get('access-index')) || [];
     await store.put(
       'access-index',

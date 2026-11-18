@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Registro de acciones — KiroshiRP</title>
+    <link rel="icon" type="image/png" href="/admin/favicon.png" />
+    <link rel="stylesheet" href="/admin/fonts.css" />
+    <link rel="stylesheet" href="/admin/style.css" />
+    <script type="module" src="/admin/registro.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header class="top">
+      <a class="brand" href="/admin/"
+        ><img src="/admin/brand.webp" alt="" width="87" height="29" />KIROSHIRP<small
+          >ADMINISTRACIÓN</small
+        ></a
+      >
+      <nav id="nav" class="nav" aria-label="Principal" hidden></nav>
+    </header>
+    <main id="main">
+      <div class="head">
+        <div>
+          <h1>Registro de acciones</h1>
+          <p>Quién hizo qué en el panel. Se conserva 180 días.</p>
+        </div>
+        <div class="tools">
+          <button id="refresh" type="button">Actualizar</button>
+        </div>
+      </div>
+      <p id="status" class="status" role="status">Cargando…</p>
+      <div class="wrap" tabindex="0" role="region" aria-label="Tabla del registro">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Quién</th>
+              <th>Acción</th>
+              <th>Afectado</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

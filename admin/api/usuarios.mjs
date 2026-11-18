@@ -4,6 +4,7 @@ import { json } from '../http.mjs';
 import { characterSections, progress } from '../character-form.mjs';
 import { teamSections } from '../team-form.mjs';
 import { wipeAccount } from '../accounts.mjs';
+import { audit } from '../audit.mjs';
 
 // Secciones con solo id y pregunta, sin los campos privados de la ficha (p. ej. «Secretos»).
 const outline = (sections) =>
@@ -15,7 +16,7 @@ const fichaOutline = outline(characterSections);
 const teamOutline = outline(teamSections);
 const isId = (value) => /^[0-9]{17,20}$/.test(value || '');
 
-export async function usuarios({ request, data, store }) {
+export async function usuarios({ request, data, store, actor }) {
   const detail = new URL(request.url).searchParams.get('id');
   if (request.method === 'GET' && detail !== null) {
     if (!isId(detail)) return json({ error: 'Cuenta no válida.' }, 400);
@@ -65,7 +66,9 @@ export async function usuarios({ request, data, store }) {
     return json({ items });
   }
   if (request.method === 'DELETE' && isId(data.discordId)) {
+    const name = (await store.get('account:' + data.discordId))?.name || null;
     await wipeAccount(store, data.discordId);
+    await audit(store, actor, 'cuenta-eliminada', { id: data.discordId, name });
     return json({ ok: true });
   }
   return json({ error: 'Solicitud no válida.' }, 400);

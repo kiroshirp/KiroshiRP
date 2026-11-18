@@ -8,8 +8,6 @@ try {
   if (e.code !== 'ENOENT') throw e;
 }
 const required = [
-  'ADMIN_USERNAME',
-  'ADMIN_PASSWORD',
   'CLOUDFLARE_ACCOUNT_ID',
   'CLOUDFLARE_API_TOKEN',
   'DISCORD_CLIENT_ID',
@@ -20,11 +18,25 @@ const required = [
   'TURSO_AUTH_TOKEN',
 ];
 const missing = required.filter((key) => !process.env[key]?.trim());
+// Formas de entrar al panel: usuario y contraseña (apagable con ADMIN_PASSWORD_LOGIN=off) y/o Discord.
+const password = process.env.ADMIN_PASSWORD || '';
+const discordIds = (process.env.ADMIN_DISCORD_IDS || '')
+  .split(/[,\s]+/)
+  .filter((id) => /^[0-9]{17,20}$/.test(id));
+const passwordLogin =
+  Boolean(process.env.ADMIN_USERNAME?.trim()) &&
+  password.length >= 13 &&
+  process.env.ADMIN_PASSWORD_LOGIN !== 'off';
 if (missing.length) {
   console.error('Completa estos campos del .env privado: ' + missing.join(', '));
   process.exitCode = 1;
-} else if (process.env.ADMIN_PASSWORD.length < 13) {
+} else if (password && password.length < 13) {
   console.error('ADMIN_PASSWORD necesita al menos 13 caracteres.');
+  process.exitCode = 1;
+} else if (!passwordLogin && !discordIds.length) {
+  console.error(
+    'Define una forma de entrar al panel: ADMIN_DISCORD_IDS (IDs de Discord del equipo) o ADMIN_USERNAME y ADMIN_PASSWORD.',
+  );
   process.exitCode = 1;
 } else {
   const cli = path.join(root, 'node_modules/wrangler/bin/wrangler.js');
@@ -59,22 +71,32 @@ if (missing.length) {
   try {
     console.log('Publicando el servicio privado…');
     const output = await run(['deploy']);
-    await run(
-      ['secret', 'bulk'],
-      JSON.stringify(
-        Object.fromEntries(
-          [
-            'ADMIN_USERNAME',
-            'ADMIN_PASSWORD',
-            'DISCORD_CLIENT_ID',
-            'DISCORD_CLIENT_SECRET',
-            'DISCORD_BOT_TOKEN',
-            'DISCORD_INVITE_CHANNEL_ID',
-            'TURSO_DATABASE_URL',
-            'TURSO_AUTH_TOKEN',
-          ].map((k) => [k, process.env[k]]),
-        ),
-      ),
+    // Los marcadores 'off' y 'none' apagan lo que ya no está en el .env (los secretos antiguos no se borran).
+    const secrets = Object.fromEntries(
+      [
+        'DISCORD_CLIENT_ID',
+        'DISCORD_CLIENT_SECRET',
+        'DISCORD_BOT_TOKEN',
+        'DISCORD_INVITE_CHANNEL_ID',
+        'TURSO_DATABASE_URL',
+        'TURSO_AUTH_TOKEN',
+      ].map((k) => [k, process.env[k]]),
+    );
+    if (process.env.ADMIN_USERNAME?.trim() && password) {
+      secrets.ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+      secrets.ADMIN_PASSWORD = password;
+    }
+    secrets.ADMIN_PASSWORD_LOGIN = passwordLogin ? 'on' : 'off';
+    secrets.ADMIN_DISCORD_IDS = discordIds.length ? discordIds.join(',') : 'none';
+    await run(['secret', 'bulk'], JSON.stringify(secrets));
+    console.log(
+      'Acceso al panel: ' +
+        [
+          passwordLogin && 'usuario y contraseña',
+          discordIds.length && 'Discord (' + discordIds.length + ' ID)',
+        ]
+          .filter(Boolean)
+          .join(' y '),
     );
     const address = output.match(/https:\/\/[a-z0-9.-]+\.workers\.dev/gi)?.at(-1);
     console.log(

@@ -1,6 +1,8 @@
 import { randomBytes, createHash } from 'node:crypto';
 import { teamRole, teamSections, validateTeam } from './team-form.mjs';
 import { wipeAccount } from './accounts.mjs';
+import { adminIds, discordEnabled } from './auth.mjs';
+import { createAdminSession } from './api/session.mjs';
 import {
   characterSections,
   validateCharacter,
@@ -54,7 +56,7 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
   return async (request) => {
     const url = new URL(request.url),
       path = url.pathname.replace(/\/$/, '');
-    if (!/^\/(acceso|cuenta)(\/|$)/.test(path)) return null;
+    if (!/^\/(acceso|cuenta)(\/|$)/.test(path) && path !== '/admin/entrar') return null;
     const finish = (response) => {
       const headers = new Headers(response.headers);
       headers.set('Cache-Control', 'no-store');
@@ -84,11 +86,17 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       ? await store.get('access-session:' + digest(sessionToken))
       : null;
     const valid = session?.expires > Date.now();
-    if ((path === '/acceso/login' || path === '/cuenta/login') && request.method === 'GET') {
+    if (
+      (path === '/acceso/login' || path === '/cuenta/login' || path === '/admin/entrar') &&
+      request.method === 'GET'
+    ) {
+      const admin = path === '/admin/entrar';
+      if (admin && !discordEnabled(env)) return finish(redirect('/admin/'));
       const state = random();
       await store.put('access-state:' + digest(state), {
         expires: Date.now() + 600000,
-        account: path === '/cuenta/login' || url.searchParams.get('next') === 'cuenta',
+        admin,
+        account: !admin && (path === '/cuenta/login' || url.searchParams.get('next') === 'cuenta'),
       });
       const redirectUri = url.origin + '/acceso/callback';
       const auth = new URL('https://discord.com/oauth2/authorize');
@@ -145,6 +153,20 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       const user = await userResponse.json();
       if (!/^\d{17,20}$/.test(user.id || ''))
         return finish(json({ error: 'Discord devolvió una identidad no válida.' }, 502));
+      if (pending.admin) {
+        // Panel del equipo: solo entran los identificadores de ADMIN_DISCORD_IDS.
+        if (!adminIds(env).includes(user.id)) {
+          const denied = redirect('/admin/?error=denegado');
+          denied.headers.append('Set-Cookie', cookie('krp_oauth', '', 0, local));
+          return finish(denied);
+        }
+        const actor = { id: user.id, name: user.global_name || user.username, method: 'discord' };
+        const admin = await createAdminSession({ store, env, local, actor });
+        const welcome = redirect('/admin/');
+        welcome.headers.append('Set-Cookie', cookie('krp_oauth', '', 0, local));
+        welcome.headers.append('Set-Cookie', admin.cookie);
+        return finish(welcome);
+      }
       const id = random();
       const lifetime = pending.account ? ACCOUNT_SESSION : 900000;
       await store.put('access-session:' + digest(id), {

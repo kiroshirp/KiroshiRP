@@ -13,6 +13,7 @@ export const STATIC_ROUTES = new Map([
   ['/admin', '/index.html'],
   ['/admin/solicitudes', '/solicitudes.html'],
   ['/admin/equipo', '/equipo.html'],
+  ['/admin/registro', '/registro.html'],
   ['/admin/fonts.css', '/fonts.css'],
   ...faces.map((f) => ['/admin/fonts/' + f, '/fonts/' + f]),
   ...[
@@ -20,6 +21,7 @@ export const STATIC_ROUTES = new Map([
     'usuarios.js',
     'solicitudes.js',
     'equipo.js',
+    'registro.js',
     'style.css',
     'brand.webp',
     'favicon.png',

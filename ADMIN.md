@@ -11,13 +11,20 @@ La web pública es estática y se publica en Cloudflare Pages desde `main`. Un W
   - **Solicitudes de acceso**: SteamID declarado y resultado.
   - **Equipo**: candidaturas con sus respuestas; se marcan como pendiente, aceptada o rechazada, y la persona ve el estado en su cuenta.
 
+## Acceso del equipo y registro
+
+- **Con Discord (recomendado):** el panel muestra «Entrar con Discord». Solo entran los identificadores de `ADMIN_DISCORD_IDS` (IDs de Discord separados por comas). Quitar un ID del `.env` y volver a desplegar cierra sus sesiones al instante. Reutiliza la aplicación de Discord y la redirección `/acceso/callback` que ya existen.
+- **Con usuario y contraseña (alternativa):** `ADMIN_USERNAME` y `ADMIN_PASSWORD`. Para apagarla sin borrarla, `ADMIN_PASSWORD_LOGIN=off` y volver a desplegar.
+- **Orden recomendado:** 1) añade tu ID de Discord a `ADMIN_DISCORD_IDS`; 2) `npm run admin:deploy`; 3) comprueba que entras con Discord; 4) pon `ADMIN_PASSWORD_LOGIN=off`, vuelve a desplegar y comprueba que la contraseña ya no funciona.
+- **Registro** (`/admin/registro/`): quién entró y quién cambió el estado de una candidatura o eliminó una cuenta, candidatura o solicitud, con fecha. Se conserva 180 días y lo ve solo el equipo.
+
 ## Direcciones
 
 Las tres rutas viven en `https://kiroshirp-admin.kiroshirp.workers.dev`. Las funciones de `functions/` las reenvían desde `https://kiroshirp.pages.dev` cuando el proyecto Pages tiene el enlace de servicio `PANEL` hacia `kiroshirp-admin`; sin él, redirigen al Worker. La redirección `https://kiroshirp.pages.dev/acceso/callback` debe estar añadida en la aplicación de Discord (la de workers.dev debe seguir).
 
 ## Archivo privado
 
-Completa `.env` (excluido de Git; nunca lo envíes por chat). Campos: `ADMIN_USERNAME`, `ADMIN_PASSWORD` (13 caracteres o más), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (solo para desplegar), `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_INVITE_CHANNEL_ID`. `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` (base de datos; se suben como secretos al desplegar). `GITHUB_TOKEN` ya no hace falta; revoca el token en GitHub y bórralo del Worker con `npx wrangler secret delete GITHUB_TOKEN`.
+Completa `.env` (excluido de Git; nunca lo envíes por chat). Campos: `ADMIN_DISCORD_IDS` y/o `ADMIN_USERNAME` y `ADMIN_PASSWORD` (13 caracteres o más) con `ADMIN_PASSWORD_LOGIN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (solo para desplegar), `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_INVITE_CHANNEL_ID`. `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN` (base de datos; se suben como secretos al desplegar). `GITHUB_TOKEN` ya no hace falta; revoca el token en GitHub y bórralo del Worker con `npx wrangler secret delete GITHUB_TOKEN`.
 
 ## Desplegar
 
@@ -40,6 +47,7 @@ Los datos viven en una base Turso (tabla `kv`, clave y valor JSON) a la que el W
 | Solicitud del equipo (una por cuenta)               | 90 días                                      |
 | Solicitud de acceso (SteamID)                       | 90 días                                      |
 | Sesiones                                            | 8 horas (15 minutos en `/acceso/`)           |
+| Registro de acciones del equipo                     | 180 días                                     |
 
 «Eliminar mis datos», en Mi cuenta, y «Eliminar cuenta», en el panel, borran todo lo anterior.
 
