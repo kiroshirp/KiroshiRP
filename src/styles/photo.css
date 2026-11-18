@@ -1,0 +1,28 @@
+/* Franja cinematográfica sobre el contenido de la página (sin texto encima, para no tapar la escena). */
+.photo-strip {
+  position: relative;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.photo-strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+.photo-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(5 7 10 / 0.55), transparent 45%);
+  pointer-events: none;
+}
+@media (max-width: 720px) {
+  .photo-strip {
+    aspect-ratio: 16 / 9;
+  }
+}

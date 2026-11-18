@@ -4,6 +4,18 @@ import { url } from '../config';
 ---
 
 <Base title="404 · Archivo no encontrado" noindex>
+  <figure class="photo-strip">
+    <img
+      src={url('images/krp-ridge.webp')}
+      srcset={`${url('images/krp-ridge-960.webp')} 960w, ${url('images/krp-ridge.webp')} 1672w`}
+      sizes="(max-width: 1200px) 100vw, 1200px"
+      alt="Una figura sentada a oscuras ante una ciudad lejana."
+      width="1672"
+      height="941"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
   <section class="section page-heading">
     <span class="eyebrow">ERROR DE CONSULTA / 404</span>
     <h1>

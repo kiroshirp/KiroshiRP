@@ -194,6 +194,22 @@ export async function mount(root, ctx) {
   del.type = 'button';
   const actions = el('div', 'char-actions');
   actions.append(del);
+  // Versiones anteriores (hasta 5): al elegir una se carga en el formulario y solo se guarda si pulsas Guardar.
+  const versions = el('select');
+  versions.setAttribute('aria-label', 'Cargar una versión anterior');
+  const versionBox = el('label', 'char-versions', 'Versiones anteriores ');
+  versionBox.append(versions);
+  versionBox.hidden = true;
+  const renderVersions = (history) => {
+    versions.replaceChildren(new Option('Elegir…', ''));
+    history.forEach((h, i) =>
+      versions.append(
+        new Option(new Date(h.updatedAt).toLocaleString('es-ES', { dateStyle: 'medium', timeStyle: 'short' }), i),
+      ),
+    );
+    versionBox.hidden = !history.length;
+    versionBox.history = history;
+  };
   const kbd = el('kbd', 'char-kbd', 'Ctrl+S');
   kbd.setAttribute('aria-hidden', 'true');
   const bar = el('div', 'char-savebar');
@@ -205,6 +221,7 @@ export async function mount(root, ctx) {
       'Solo tú puedes editarla. El equipo de administración puede leerla para moderar, salvo el apartado «Secretos», que solo ves tú.',
     ),
     savedLine,
+    versionBox,
     err,
     actions,
     bar,
@@ -281,6 +298,16 @@ export async function mount(root, ctx) {
     save.disabled = total > maxTotal;
   };
 
+  renderVersions(sheet?.history || []);
+  versions.addEventListener('change', () => {
+    const h = versionBox.history[Number(versions.value)];
+    if (!h) return;
+    fill(h.values, h.images);
+    refresh();
+    store.set(current());
+    ui.toast('Versión cargada. Pulsa Guardar para conservarla.');
+    versions.value = '';
+  });
   fill(sheet?.values, sheet?.images);
   baseline = snap(current());
   const draft = store.get();
@@ -291,10 +318,20 @@ export async function mount(root, ctx) {
   renderSaved();
   refresh();
 
+  // Autoguardado en el servidor 30 s después del último cambio (además del borrador local).
+  let autoTimer;
+  let auto = false;
   form.addEventListener('input', () => {
     refresh();
     if (dirty()) store.set(current());
     else store.del();
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      if (root.isConnected && dirty() && !save.disabled) {
+        auto = true;
+        form.requestSubmit();
+      }
+    }, 30000);
   });
   window.addEventListener('beforeunload', (e) => {
     if (root.isConnected && dirty()) {
@@ -337,6 +374,9 @@ export async function mount(root, ctx) {
   };
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const quiet = auto;
+    auto = false;
+    clearTimeout(autoTimer);
     err.hidden = true;
     save.disabled = true;
     state.textContent = 'Guardando…';
@@ -349,11 +389,13 @@ export async function mount(root, ctx) {
           .filter(([, v]) => v),
       );
       sheet = { values: clean, images: body.images, updatedAt: r.updatedAt, progress: r.progress };
-      fill(clean, body.images);
-      baseline = snap(current());
-      store.del();
+      // En el autoguardado no se reescribe el formulario: la persona puede haber seguido escribiendo.
+      if (!quiet) fill(clean, body.images);
+      baseline = quiet ? snap(body) : snap(current());
+      if (!dirty()) store.del();
       renderSaved();
-      ui.toast('Historia guardada.');
+      ctx.api('character').then((d) => renderVersions(d.sheet?.history || [])).catch(() => {});
+      ui.toast(quiet ? 'Guardado automático.' : 'Historia guardada.');
     } catch (x) {
       fail(x.message || 'No se pudo guardar.');
     }
@@ -368,6 +410,7 @@ export async function mount(root, ctx) {
     try {
       await ctx.api('character-delete', 'POST', {});
       sheet = null;
+      renderVersions([]);
       fill();
       baseline = snap(current());
       store.del();

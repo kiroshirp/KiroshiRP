@@ -520,6 +520,21 @@ tr.det > td > .det-grid {
 .card a {
   color: var(--y);
 }
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 18px 0;
+}
+.note-box textarea {
+  width: 100%;
+  min-height: 90px;
+  font: inherit;
+}
+.note-box .meta {
+  margin: 4px 0 8px;
+}
 .note {
   margin-top: 12px;
   color: var(--mute);

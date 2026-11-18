@@ -50,6 +50,15 @@
             <p id="count" role="status">Cargando…</p>
           </div>
           <div class="tools">
+            <label for="sort"
+              >Ordenar<select id="sort">
+                <option value="lastLogin">Último acceso</option>
+                <option value="since">Alta (más reciente)</option>
+                <option value="name">Nombre</option>
+                <option value="character">Ficha completada</option>
+              </select></label
+            >
+            <button type="button" id="csv">Exportar CSV</button>
             <label for="q"
               >Buscar por nombre o id<input id="q" type="search" autocomplete="off"
             /></label>
@@ -72,6 +81,11 @@
             <tbody id="rows"></tbody>
           </table>
         </div>
+        <nav id="pager" class="pager" aria-label="Paginación" hidden>
+          <button type="button" id="prev">← Anterior</button>
+          <span id="page" role="status"></span>
+          <button type="button" id="next">Siguiente →</button>
+        </nav>
       </section>
     </main>
   </body>

@@ -10,6 +10,7 @@ export async function wipeAccount(store, id) {
     'character-sheet:',
     'team-application:',
     'access-application:',
+    'admin-note:',
   ])
     await store.delete(prefix + id);
   for (const index of ['team-index', 'access-index']) {

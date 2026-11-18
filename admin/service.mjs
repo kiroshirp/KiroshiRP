@@ -7,6 +7,7 @@ import { equipo } from './api/equipo.mjs';
 import { usuarios } from './api/usuarios.mjs';
 import { registro } from './api/registro.mjs';
 import { authMethods } from './auth.mjs';
+import { notifyStatus } from './notify.mjs';
 
 const METHODS = ['GET', 'POST', 'PUT', 'DELETE'];
 
@@ -22,7 +23,7 @@ function genericError(error) {
   );
 }
 
-export function createService({ env, store, assets, local = false }) {
+export function createService({ env, store, assets, local = false, fetcher = fetch }) {
   return async function handle(request) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, '');
@@ -91,7 +92,15 @@ export function createService({ env, store, assets, local = false }) {
       if (path === '/admin/api/solicitudes')
         return finish(await solicitudes({ request, data, store, actor }));
       if (path === '/admin/api/equipo')
-        return finish(await equipo({ request, data, store, actor }));
+        return finish(
+          await equipo({
+            request,
+            data,
+            store,
+            actor,
+            notify: (id, status) => notifyStatus({ env, fetcher }, id, status),
+          }),
+        );
       if (path === '/admin/api/usuarios')
         return finish(await usuarios({ request, data, store, actor }));
       if (path === '/admin/api/registro' && request.method === 'GET')

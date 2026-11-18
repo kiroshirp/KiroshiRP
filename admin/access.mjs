@@ -365,9 +365,29 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
             sections: characterSections,
             maxTotal: MAX_TOTAL,
             maxImages: MAX_IMAGES,
-            sheet: sheet ? { ...sheet, progress: progress(sheet.values) } : null,
+            sheet: sheet ? { ...sheet, progress: progress(sheet.values) } : null, // incluye history
           }),
         );
+      }
+      // Descarga de todos los datos propios (derecho de acceso). No incluye notas internas del equipo.
+      if (path === '/cuenta/api/export' && get) {
+        const [account, sheet, team, access] = await Promise.all([
+          store.get('account:' + mine),
+          store.get('character-sheet:' + mine),
+          store.get('team-application:' + mine),
+          store.get('access-application:' + mine),
+        ]);
+        const strip = ({ expires, ...rest }) => rest;
+        const response = json({
+          exportadoEn: new Date().toISOString(),
+          cuenta: { id: mine, ...account },
+          ficha: sheet || null,
+          solicitudEquipo: team ? strip(team) : null,
+          solicitudAcceso: access ? strip(access) : null,
+        });
+        response.headers.set('Content-Disposition', 'attachment; filename="mis-datos-kiroshirp.json"');
+        response.headers.set('Cache-Control', 'no-store');
+        return finish(response);
       }
       if (get) return finish(json({ error: 'No encontrado.' }, 404));
       const key = 'team-application:' + mine;
@@ -390,8 +410,30 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         const data = await readBody(70000);
         const { values, images, error } = validateCharacter(data);
         if (error || !data) return finish(json({ error: error || 'Formulario no válido.' }, 400));
+        // Máximo 40 guardados por hora (el autoguardado cuenta).
+        const limitKey = 'access-limit:sheet:' + mine;
+        const limit = await store.get(limitKey);
+        const live = limit?.expires > Date.now();
+        if (live && limit.count >= 40)
+          return finish(json({ error: 'Demasiados guardados seguidos. Espera unos minutos.' }, 429));
+        await store.put(limitKey, {
+          count: (live ? limit.count : 0) + 1,
+          expires: live ? limit.expires : Date.now() + 3600000,
+        });
         const updatedAt = new Date().toISOString();
-        await store.put('character-sheet:' + mine, { values, images, updatedAt });
+        // Historial: la versión anterior se conserva si tiene más de 10 minutos de la última guardada (5 como máximo).
+        const previous = await store.get('character-sheet:' + mine);
+        let history = previous?.history || [];
+        if (
+          previous &&
+          JSON.stringify(previous.values) !== JSON.stringify(values) &&
+          (!history[0] || Date.parse(previous.updatedAt) - Date.parse(history[0].updatedAt) > 600000)
+        )
+          history = [
+            { values: previous.values, images: previous.images, updatedAt: previous.updatedAt },
+            ...history,
+          ].slice(0, 5);
+        await store.put('character-sheet:' + mine, { values, images, updatedAt, history });
         return finish(json({ ok: true, updatedAt, progress: progress(values) }));
       }
       if (path === '/cuenta/api/character-delete') {

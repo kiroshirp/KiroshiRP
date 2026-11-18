@@ -1,6 +1,7 @@
 import { createService } from './service.mjs';
 import { createAccessService } from './access.mjs';
 import { tursoStore } from './turso-store.mjs';
+import { snapshot } from './backup.mjs';
 
 export default {
   async fetch(request, env) {
@@ -88,6 +89,11 @@ export class AdminState {
       }
     } catch (error) {
       console.error('Limpieza de caducados fallida:', error.message);
+    }
+    try {
+      if (this.store !== this.state.storage) await snapshot(this.store);
+    } catch (error) {
+      console.error('Copia diaria fallida:', error.message);
     }
     // Pase lo que pase, la limpieza se vuelve a programar.
     await this.state.storage.setAlarm(Date.now() + 3600000);

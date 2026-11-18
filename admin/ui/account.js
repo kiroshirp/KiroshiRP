@@ -19,6 +19,7 @@ const sectionOf = (path) =>
 const MODULES = {
   personajes: '/cuenta/section-personajes.js',
   economia: '/cuenta/section-economia.js',
+  cuenta: '/cuenta/section-cuenta.js',
 };
 const mounted = {};
 let session = null;
@@ -140,10 +141,6 @@ function formatDate(value) {
   const date = new Date(value);
   return isNaN(date) ? '' : date.toLocaleDateString('es-ES', { dateStyle: 'long' });
 }
-function formatDateTime(value) {
-  const date = new Date(value);
-  return isNaN(date) ? '' : date.toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' });
-}
 function head(eyebrow, title, lead) {
   return el(
     'div',
@@ -153,15 +150,6 @@ function head(eyebrow, title, lead) {
     el('p', { className: 'lead', textContent: lead }),
   );
 }
-function stat(label, value) {
-  return el(
-    'div',
-    { className: 'stat' },
-    el('span', { className: 'stat-label', textContent: label }),
-    el('span', { className: 'stat-value', textContent: value }),
-  );
-}
-
 function teamText() {
   return team
     ? 'Solicitud ' + stateName() + ', enviada el ' + formatDate(team.createdAt) + '.'
@@ -230,121 +218,11 @@ function renderGeneral() {
   );
   root.replaceChildren(hero, grid);
   reveal([hero, ...grid.children]);
-}
-
-function renderAccount() {
-  const root = $('cuenta');
-  const others = session.others || 0;
-  const closeOthers = el('button', {
-    className: 'btn',
-    type: 'button',
-    textContent: 'Cerrar las otras sesiones',
-    disabled: others === 0,
-  });
-  const logout = el('button', {
-    className: 'btn',
-    type: 'button',
-    textContent: 'Cerrar esta sesión',
-  });
-  const del = el('button', {
-    className: 'btn danger',
-    type: 'button',
-    textContent: 'Eliminar mis datos',
-  });
-  logout.addEventListener('click', async () => {
-    try {
-      await api('logout', 'POST');
-      location.reload();
-    } catch (error) {
-      showError(error.message);
-      toast(error.message, 'error');
-    }
-  });
-  closeOthers.addEventListener('click', async () => {
-    closeOthers.disabled = true;
-    try {
-      await api('sessions-close-others', 'POST');
-      session.others = 0;
-      renderAccount();
-      toast('Otras sesiones cerradas.');
-    } catch (error) {
-      closeOthers.disabled = false;
-      showError(error.message);
-      toast(error.message, 'error');
-    }
-  });
-  del.addEventListener('click', async () => {
-    if (
-      !confirm(
-        'Se borrarán tu ficha de personaje, tu solicitud al equipo y todas tus sesiones. Esta acción no se puede deshacer. ¿Continuar?',
-      )
-    )
-      return;
-    try {
-      await api('account-delete', 'POST');
-      location.reload();
-    } catch (error) {
-      showError(error.message);
-      toast(error.message, 'error');
-    }
-  });
-  const grid = el(
-    'div',
-    { className: 'card-grid' },
-    el(
-      'div',
-      { className: 'card' },
-      el(
-        'div',
-        { className: 'id-head' },
-        avatar(initialsOf(user.name)),
-        el('h2', { textContent: 'Identidad de la cuenta' }),
-      ),
-      el(
-        'div',
-        { className: 'stats' },
-        stat('Usuario', user.name),
-        stat('Miembro desde', session.since ? formatDate(session.since) : '—'),
-        stat('Discord', 'Vinculado'),
-        stat('Vínculo con el juego', 'Todavía no disponible'),
-      ),
-    ),
-    el(
-      'div',
-      { className: 'card' },
-      el('h2', { textContent: 'Sesiones de la web' }),
-      el(
-        'p',
-        {},
-        'Esta sesión · ' +
-          (session.expiresAt ? 'Caduca el ' + formatDateTime(session.expiresAt) + ' · ' : ''),
-        el('span', { className: 'badge pulse', textContent: 'ACTUAL' }),
-      ),
-      el('p', {
-        className: 'hint',
-        textContent: others
-          ? 'Otras sesiones abiertas: ' + others + '.'
-          : 'No hay otras sesiones abiertas.',
-      }),
-      el('div', { className: 'actions' }, logout, closeOthers),
-    ),
-    el(
-      'div',
-      { className: 'card' },
-      el('h2', { textContent: 'Tus datos' }),
-      el('p', { className: 'hint', textContent: 'Borra tu ficha, tu solicitud y tus sesiones.' }),
-      el('div', { className: 'actions' }, del),
-    ),
-  );
-  root.replaceChildren(
-    head(
-      'IDENTIDAD Y SEGURIDAD',
-      'Tu cuenta.',
-      'Controla tu acceso a la web desde un mismo lugar.',
-    ),
-    grid,
-  );
-  reveal([...grid.children]);
+  import('/cuenta/section-camino.js')
+    .then(({ buildCamino }) => {
+      if (hero.isConnected) hero.after(buildCamino({ session, paths: PATHS }));
+    })
+    .catch(() => {});
 }
 
 async function mountModule(name) {
@@ -577,7 +455,6 @@ async function load() {
     $('chip-name').textContent = user.name;
     $('chip-initial').textContent = (user.name.trim()[0] || '?').toUpperCase();
     renderGeneral();
-    renderAccount();
     renderTeamState();
     $('app').hidden = false;
     route();

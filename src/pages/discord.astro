@@ -8,7 +8,20 @@ const accessUrl = site.adminUrl ? new URL('/acceso/', site.adminUrl).href : '';
   title="Acceso a la comunidad"
   description="Identifícate con Discord y declara tu SteamID para solicitar una invitación a KiroshiRP."
 >
+  <figure class="photo-strip">
+    <img
+      src={url('images/krp-overlook.webp')}
+      srcset={`${url('images/krp-overlook-960.webp')} 960w, ${url('images/krp-overlook.webp')} 1672w`}
+      sizes="(max-width: 1200px) 100vw, 1200px"
+      alt="Un viajero sentado en una cornisa mira una Night City iluminada en ámbar bajo la luna."
+      width="1672"
+      height="941"
+      loading="eager"
+      decoding="async"
+    />
+  </figure>
   <section class="access-layout" aria-labelledby="access-title" data-pagefind-body>
+    <span hidden data-pagefind-weight="10">cómo entrar, unirme, acceso, invitación, entrar a la comunidad</span>
     <div class="access-copy">
       <span class="eyebrow">LA COMUNIDAD DE KIROSHIRP</span>
       <h1 id="access-title">

@@ -85,6 +85,15 @@
         ]
       },
       {
+        "title": "Avisos, copias y tus datos",
+        "paragraphs": [
+          "Si envías una solicitud al equipo, cuando cambie su estado (aceptada o no aceptada) recibirás un mensaje directo de Discord. Si tienes los mensajes directos cerrados, no se envía.",
+          "El equipo puede anotar notas internas sobre una cuenta para organizar su trabajo; no se incluyen en la descarga de tus datos, pero se borran cuando eliminas la cuenta.",
+          "Cada día se guarda una copia de seguridad de los datos dentro del mismo servicio, y se conservan las 7 últimas. Al eliminar tu cuenta desaparece de los datos activos, y de las copias a más tardar a los 7 días.",
+          "Desde Mi cuenta puedes descargar todos tus datos en un archivo o eliminarlos cuando quieras."
+        ]
+      },
+      {
         "title": "Dónde se guardan los datos",
         "paragraphs": [
           "Los datos se procesan en un servicio privado de Cloudflare Workers y se guardan en una base de datos de Turso. La identificación con Discord se hace mediante la propia plataforma de Discord. Estos proveedores tratan datos técnicos conforme a sus propias políticas. No se publican en el repositorio ni se comparten con terceros para publicidad."

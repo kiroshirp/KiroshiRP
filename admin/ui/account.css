@@ -1109,3 +1109,60 @@ section[data-s].enter {
     left: 16px;
   }
 }
+
+/* Tu camino */
+.camino {
+  margin-bottom: 18px;
+}
+.camino-steps {
+  list-style: none;
+  margin: 14px 0 18px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.camino-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--mute);
+}
+.camino-step small {
+  grid-column: 2;
+}
+.camino-dot {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  font: 600 0.85rem var(--f-mono);
+}
+.camino-step.done {
+  color: var(--text);
+}
+.camino-step.done .camino-dot {
+  background: var(--y);
+  border-color: var(--y);
+  color: #09090b;
+}
+.camino-step.now {
+  color: var(--text);
+  border-color: var(--y);
+}
+.camino-step.now .camino-dot {
+  border-color: var(--y);
+  color: var(--y);
+}
+@media (max-width: 760px) {
+  .camino-steps {
+    grid-template-columns: 1fr;
+  }
+}

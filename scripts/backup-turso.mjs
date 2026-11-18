@@ -7,12 +7,8 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { tursoStore } from '../admin/turso-store.mjs';
 
-// Sesiones, estados de OAuth y contadores de abuso son efímeros: no se guardan ni se restauran.
-const EPHEMERAL = ['access-session:', 'access-state:', 'access-limit:'];
-export const exportable = (entries) =>
-  Object.fromEntries(
-    [...entries].filter(([key]) => !EPHEMERAL.some((prefix) => key.startsWith(prefix))),
-  );
+import { exportable } from '../admin/backup.mjs';
+export { exportable };
 
 async function main() {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -39,6 +35,17 @@ async function main() {
     )
       .map(([type, n]) => `${type}: ${n}`)
       .join(', ') || 'sin datos';
+  const snap = process.argv.indexOf('--snapshot');
+  if (snap > -1) {
+    // Restaura la copia diaria que guarda el propio servicio: --snapshot <AAAA-MM-DD> (sin fecha, lista las disponibles)
+    const day = process.argv[snap + 1];
+    const all = await store.list({ prefix: 'backup:' });
+    if (!day) return console.log('Copias diarias: ' + ([...all.keys()].map((k) => k.slice(7)).sort().join(', ') || 'ninguna'));
+    const copy = all.get('backup:' + day);
+    if (!copy) throw new Error('No hay copia de ese día.');
+    await store.putMany(Object.entries(copy.data));
+    return console.log(`Restauradas ${Object.keys(copy.data).length} claves de ${day} (${counts(copy.data)}).`);
+  }
   if (restore > -1) {
     const file = process.argv[restore + 1];
     if (!file) throw new Error('Indica el archivo: --restore <archivo>');

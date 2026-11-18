@@ -46,6 +46,7 @@ const relatedEntries = await Promise.all(
   title={`${entry.data.title} · ${section.title}`}
   description={entry.data.description}
   active={section.id}
+  noindex={!['Documentado', 'Confirmado'].includes(entry.data.status)}
 >
   <div
     class="section article-shell"
@@ -60,7 +61,10 @@ const relatedEntries = await Promise.all(
       <span class="eyebrow origin-label" data-origin={entry.data.origin}>
         {entry.data.origin} / {entry.data.category}
       </span>
-      <h1 data-pagefind-meta="title">{entry.data.title}</h1>
+      <h1 data-pagefind-meta="title" data-pagefind-weight="8">{entry.data.title}</h1>
+      {entry.data.keywords?.length > 0 && (
+        <span hidden data-pagefind-weight="10">{entry.data.keywords?.join(', ')}</span>
+      )}
       <p>{entry.data.description}</p>
       <div class="article-meta" data-pagefind-ignore>
         <span class="reading-time mono">{readingMinutes} MIN DE LECTURA</span>

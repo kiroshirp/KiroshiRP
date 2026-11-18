@@ -20,6 +20,8 @@ export const articleSchema = z
     origin: z.enum(['CANON CYBERPUNK', 'LORE KIROSHIRP', 'GUÍA DEL PORTAL']),
     updated: z.coerce.date(),
     universeScope: z.string().optional(),
+    // Términos con los que la gente busca este archivo (solo mejoran la búsqueda, no se muestran).
+    keywords: z.array(z.string().max(60)).max(12).default([]),
     licensedText: z.boolean().default(false),
     image: z
       .object({

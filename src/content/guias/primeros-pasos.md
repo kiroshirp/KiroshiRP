@@ -3,6 +3,7 @@ title: "Tu primera noche en Night City"
 description: "Una guía para empezar a construir un personaje, una red de contactos y una historia propia."
 category: "Primeros pasos"
 status: "Borrador"
+keywords: ["cómo entrar", "cómo empezar", "unirme", "acceso", "empezar a jugar"]
 origin: "LORE KIROSHIRP"
 updated: "2026-10-20"
 order: 0

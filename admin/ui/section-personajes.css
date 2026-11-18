@@ -294,3 +294,11 @@
     flex: 1 1 100%;
   }
 }
+.char-versions {
+  display: block;
+  margin: 8px 0;
+  font-size: 0.85rem;
+}
+.char-versions select {
+  margin-left: 6px;
+}

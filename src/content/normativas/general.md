@@ -4,6 +4,7 @@ description: Respeto, comportamiento OOC, metagaming, powergaming, exploits y
   principios generales.
 category: Convivencia
 status: Borrador
+keywords: ["normas", "reglas", "reglamento", "normas básicas"]
 origin: LORE KIROSHIRP
 updated: 2026-10-23
 order: 1

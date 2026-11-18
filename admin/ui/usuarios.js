@@ -1,8 +1,11 @@
 import { api, el, fmtDate, state, setOnUnauth, start, mountNav, delButton } from './panel.js';
 const $ = (id) => document.getElementById(id);
 let items = [];
+let filtered = [];
 const cache = new Map();
 const COLS = 7;
+const PAGE = 25;
+let page = 0;
 function showLogin() {
   state.csrf = '';
   $('nav').hidden = true;
@@ -23,6 +26,29 @@ function block(sections, values) {
     if (dl.children.length) out.push(el('h3', s.title), dl);
   }
   return out;
+}
+// Nota interna del equipo (no la ve la persona).
+function noteBox(d) {
+  const box = el('section', null, 'card note-box');
+  box.append(el('h2', 'Nota interna'));
+  const area = el('textarea');
+  area.maxLength = 2000;
+  area.value = d.note?.text || '';
+  area.setAttribute('aria-label', 'Nota interna');
+  const meta = el('p', d.note ? 'Última edición: ' + d.note.by + ', ' + fmtDate(d.note.at) : 'Sin nota.', 'meta');
+  const save = el('button', 'Guardar nota');
+  save.type = 'button';
+  save.addEventListener('click', async () => {
+    try {
+      await api('usuarios', 'PUT', { discordId: d.id, note: area.value });
+      cache.delete(d.id);
+      meta.textContent = 'Nota guardada.';
+    } catch (e) {
+      meta.textContent = e.message;
+    }
+  });
+  box.append(area, meta, save, el('p', 'Solo la ve el equipo. No se incluye en la descarga de datos de la persona.', 'note'));
+  return box;
 }
 function detail(d) {
   const wrap = el('div', null, 'det-grid');
@@ -57,7 +83,7 @@ function detail(d) {
     m.append(el('span', d.team.status, 'badge ' + d.team.status), ' ' + fmtDate(d.team.createdAt));
     tc.append(m, ...block(d.sections.team, d.team.answers));
   } else tc.append(el('p', 'Sin solicitud', 'meta'));
-  wrap.append(fc, tc);
+  wrap.append(fc, tc, noteBox(d));
   return wrap;
 }
 async function toggle(btn, cell, id) {
@@ -67,7 +93,7 @@ async function toggle(btn, cell, id) {
   if (!open || cell.dataset.loaded) return;
   cell.replaceChildren(el('p', 'Cargando…', 'meta'));
   try {
-    if (!cache.has(id)) cache.set(id, await api('usuarios?id=' + encodeURIComponent(id)));
+    if (!cache.has(id)) cache.set(id, { ...(await api('usuarios?id=' + encodeURIComponent(id))), id });
     cell.replaceChildren(detail(cache.get(id)));
     cell.dataset.loaded = '1';
   } catch (e) {
@@ -76,12 +102,25 @@ async function toggle(btn, cell, id) {
 }
 function render() {
   const q = $('q').value.trim().toLowerCase();
-  const list = items.filter(
-    (u) => !q || (u.name || '').toLowerCase().includes(q) || String(u.discordId).includes(q),
-  );
+  const sorters = {
+    lastLogin: (a, b) => (b.lastLogin || b.since || '').localeCompare(a.lastLogin || a.since || ''),
+    since: (a, b) => (b.since || '').localeCompare(a.since || ''),
+    name: (a, b) => (a.name || '~').localeCompare(b.name || '~', 'es'),
+    character: (a, b) => (b.character?.progress || 0) - (a.character?.progress || 0),
+  };
+  filtered = items
+    .filter((u) => !q || (u.name || '').toLowerCase().includes(q) || String(u.discordId).includes(q))
+    .sort(sorters[$('sort').value] || sorters.lastLogin);
+  const pages = Math.max(1, Math.ceil(filtered.length / PAGE));
+  page = Math.min(page, pages - 1);
+  const list = filtered.slice(page * PAGE, page * PAGE + PAGE);
+  $('pager').hidden = pages === 1;
+  $('page').textContent = `Página ${page + 1} de ${pages}`;
+  $('prev').disabled = page === 0;
+  $('next').disabled = page >= pages - 1;
   $('count').textContent =
     `${items.length} cuenta${items.length === 1 ? '' : 's'}` +
-    (q ? ` · ${list.length} coinciden` : '');
+    (q ? ` · ${filtered.length} coinciden` : '');
   $('rows').replaceChildren(
     ...list.flatMap((u) => {
       const d = el('td');
@@ -89,7 +128,7 @@ function render() {
       tog.type = 'button';
       tog.setAttribute('aria-expanded', 'false');
       const nm = el('span', u.name || '—');
-      nm.append(el('small', u.discordId));
+      nm.append(el('small', u.discordId + (u.hasNote ? ' · con nota' : '')));
       tog.append(nm);
       d.append(tog);
       const f = el('td');
@@ -154,7 +193,26 @@ async function enter() {
   $('app').hidden = false;
   await load();
 }
-$('q').addEventListener('input', render);
+$('q').addEventListener('input', () => ((page = 0), render()));
+$('sort').addEventListener('change', () => ((page = 0), render()));
+$('prev').addEventListener('click', () => (page--, render()));
+$('next').addEventListener('click', () => (page++, render()));
+// CSV de lo que se ve en la lista (con filtro y orden). Las celdas que empiezan por = + - @ se neutralizan contra inyección en hojas de cálculo.
+const cell = (v) => {
+  const t = String(v ?? '').replace(/^[=+\-@\t\r]/, "'$&");
+  return '"' + t.replace(/"/g, '""') + '"';
+};
+$('csv').addEventListener('click', () => {
+  const rows = [['Discord', 'Nombre', 'Alta', 'Último acceso', 'Ficha %', 'Solicitud', 'SteamID']].concat(
+    filtered.map((u) => [u.discordId, u.name, u.since, u.lastLogin, u.character?.progress, u.team?.status, u.access?.steamId]),
+  );
+  const a = document.createElement('a');
+  const csv = rows.map((r) => r.map(cell).join(',')).join('\n');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' }));
+  a.download = 'usuarios-kiroshirp.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
 $('login-form').addEventListener('submit', async (ev) => {
   ev.preventDefault();
   const err = $('login-error');

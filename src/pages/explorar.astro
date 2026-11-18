@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { url } from '../config';
 import DistrictAtlas from '../components/DistrictAtlas.astro';
 ---
 
@@ -8,6 +9,18 @@ import DistrictAtlas from '../components/DistrictAtlas.astro';
   description="Consulta los seis distritos y las Badlands: ambiente, lugares y organizaciones documentadas, con una navegación visual sin cuentas."
   active="explorar"
 >
+  <figure class="photo-strip">
+    <img
+      src={url('images/krp-ridge.webp')}
+      srcset={`${url('images/krp-ridge-960.webp')} 960w, ${url('images/krp-ridge.webp')} 1672w`}
+      sizes="(max-width: 1200px) 100vw, 1200px"
+      alt="Una figura observa desde un risco la ciudad, sus puentes y torres iluminadas de noche."
+      width="1672"
+      height="941"
+      loading="eager"
+      decoding="async"
+    />
+  </figure>
   <section class="section page-heading section-cover atlas-cover">
     <div class="cover-copy">
       <span class="eyebrow">NIGHT CITY / EXPLORACIÓN</span>

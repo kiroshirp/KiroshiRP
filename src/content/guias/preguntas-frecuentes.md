@@ -3,6 +3,7 @@ title: "Preguntas frecuentes"
 description: "Las primeras respuestas antes de entrar en la ciudad."
 category: "Ayuda"
 status: "Borrador"
+keywords: ["cómo entrar", "dudas", "ayuda"]
 origin: "LORE KIROSHIRP"
 updated: "2026-10-17"
 order: 1

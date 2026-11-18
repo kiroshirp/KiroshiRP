@@ -9,7 +9,7 @@ const labels = Object.fromEntries(
 const STATUSES = ['pendiente', 'aceptada', 'rechazada'];
 const isId = (value) => /^\d{17,20}$/.test(value || '');
 
-export async function equipo({ request, data, store, actor }) {
+export async function equipo({ request, data, store, actor, notify }) {
   if (request.method === 'GET') {
     const ids = (await store.get('team-index')) || [];
     const items = [];
@@ -38,7 +38,10 @@ export async function equipo({ request, data, store, actor }) {
       name: record.discordName,
       detail: data.status,
     });
-    return json({ ok: true });
+    // Solo avisa si el estado cambia de verdad.
+    const changed = (record.status || 'pendiente') !== data.status;
+    const notified = changed && notify ? await notify(data.discordId, data.status) : false;
+    return json({ ok: true, notified });
   }
   if (request.method === 'DELETE' && isId(data.discordId)) {
     if (!record) return json({ error: 'Solicitud no encontrada.' }, 404);
