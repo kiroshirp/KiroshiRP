@@ -7,6 +7,9 @@ import {
   characterSections,
   validateCharacter,
   progress,
+  slotOf,
+  sheetKey,
+  sheetKeys,
   MAX_TOTAL,
   MAX_IMAGES,
 } from './character-form.mjs';
@@ -338,12 +341,13 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       };
       if (path === '/cuenta/api/session' && get) {
         if (!valid) return finish(json({ user: null }));
-        const [team, account, sheet, live] = await Promise.all([
+        const [team, account, sheets, live] = await Promise.all([
           store.get('team-application:' + mine),
           store.get('account:' + mine),
-          store.get('character-sheet:' + mine),
+          Promise.all(sheetKeys(mine).map((k) => store.get(k))),
           liveSessions(),
         ]);
+        const sheet = sheets[0];
         return finish(
           json({
             user: { id: mine, name: session.username },
@@ -354,12 +358,20 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
             character: sheet
               ? { progress: progress(sheet.values), updatedAt: sheet.updatedAt }
               : null,
+            characters: sheets.map((s, i) => ({
+              slot: i + 1,
+              progress: s ? progress(s.values) : null,
+              updatedAt: s?.updatedAt || null,
+              alias: s?.values?.alias || null,
+            })),
           }),
         );
       }
       if (!valid) return finish(json({ error: 'Inicia sesión con Discord.' }, 401));
       if (path === '/cuenta/api/character' && get) {
-        const sheet = await store.get('character-sheet:' + mine);
+        const slot = slotOf(url.searchParams.get('slot'));
+        if (!slot) return finish(json({ error: 'Personaje no válido.' }, 400));
+        const sheet = await store.get(sheetKey(mine, slot));
         return finish(
           json({
             sections: characterSections,
@@ -371,9 +383,9 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       }
       // Descarga de todos los datos propios (derecho de acceso). No incluye notas internas del equipo.
       if (path === '/cuenta/api/export' && get) {
-        const [account, sheet, team, access] = await Promise.all([
+        const [account, sheets, team, access] = await Promise.all([
           store.get('account:' + mine),
-          store.get('character-sheet:' + mine),
+          Promise.all(sheetKeys(mine).map((k) => store.get(k))),
           store.get('team-application:' + mine),
           store.get('access-application:' + mine),
         ]);
@@ -381,7 +393,7 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         const response = json({
           exportadoEn: new Date().toISOString(),
           cuenta: { id: mine, ...account },
-          ficha: sheet || null,
+          fichas: sheets.map((s, i) => (s ? { personaje: i + 1, ...s } : null)).filter(Boolean),
           solicitudEquipo: team ? strip(team) : null,
           solicitudAcceso: access ? strip(access) : null,
         });
@@ -410,6 +422,8 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         const data = await readBody(70000);
         const { values, images, error } = validateCharacter(data);
         if (error || !data) return finish(json({ error: error || 'Formulario no válido.' }, 400));
+        const slot = slotOf(data.slot);
+        if (!slot) return finish(json({ error: 'Personaje no válido.' }, 400));
         // Máximo 40 guardados por hora (el autoguardado cuenta).
         const limitKey = 'access-limit:sheet:' + mine;
         const limit = await store.get(limitKey);
@@ -422,7 +436,7 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         });
         const updatedAt = new Date().toISOString();
         // Historial: la versión anterior se conserva si tiene más de 10 minutos de la última guardada (5 como máximo).
-        const previous = await store.get('character-sheet:' + mine);
+        const previous = await store.get(sheetKey(mine, slot));
         let history = previous?.history || [];
         if (
           previous &&
@@ -433,11 +447,13 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
             { values: previous.values, images: previous.images, updatedAt: previous.updatedAt },
             ...history,
           ].slice(0, 5);
-        await store.put('character-sheet:' + mine, { values, images, updatedAt, history });
+        await store.put(sheetKey(mine, slot), { values, images, updatedAt, history });
         return finish(json({ ok: true, updatedAt, progress: progress(values) }));
       }
       if (path === '/cuenta/api/character-delete') {
-        await store.delete('character-sheet:' + mine);
+        const slot = slotOf((await readBody(1000))?.slot);
+        if (!slot) return finish(json({ error: 'Personaje no válido.' }, 400));
+        await store.delete(sheetKey(mine, slot));
         return finish(json({ ok: true }));
       }
       if (path === '/cuenta/api/account-delete') {

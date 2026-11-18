@@ -1,7 +1,7 @@
 // Cuentas de Discord con sesión iniciada alguna vez: listado y borrado total. Las fichas son privadas:
 // solo se informa de su progreso, nunca de su contenido.
 import { json } from '../http.mjs';
-import { characterSections, progress } from '../character-form.mjs';
+import { characterSections, progress, sheetKeys } from '../character-form.mjs';
 import { teamSections } from '../team-form.mjs';
 import { wipeAccount } from '../accounts.mjs';
 import { audit } from '../audit.mjs';
@@ -20,23 +20,28 @@ export async function usuarios({ request, data, store, actor }) {
   const detail = new URL(request.url).searchParams.get('id');
   if (request.method === 'GET' && detail !== null) {
     if (!isId(detail)) return json({ error: 'Cuenta no válida.' }, 400);
-    const [sheet, team, note] = await Promise.all([
-      store.get('character-sheet:' + detail),
+    const [sheets, team, note] = await Promise.all([
+      Promise.all(sheetKeys(detail).map((k) => store.get(k))),
       store.get('team-application:' + detail),
       store.get('admin-note:' + detail),
     ]);
     const visible = new Set(fichaOutline.flatMap((s) => s.fields.map((f) => f.id)));
     return json({
       note: note ? { text: note.text, by: note.by, at: note.at } : null,
-      ficha: sheet
-        ? {
-            values: Object.fromEntries(
-              Object.entries(sheet.values).filter(([id]) => visible.has(id)),
-            ),
-            images: sheet.images,
-            updatedAt: sheet.updatedAt,
-          }
-        : null,
+      fichas: sheets
+        .map((sheet, i) =>
+          sheet
+            ? {
+                slot: i + 1,
+                values: Object.fromEntries(
+                  Object.entries(sheet.values).filter(([id]) => visible.has(id)),
+                ),
+                images: sheet.images,
+                updatedAt: sheet.updatedAt,
+              }
+            : null,
+        )
+        .filter(Boolean),
       team: team
         ? { status: team.status || 'pendiente', createdAt: team.createdAt, answers: team.answers }
         : null,
@@ -47,13 +52,15 @@ export async function usuarios({ request, data, store, actor }) {
     const items = [];
     for (const [key, account] of await store.list({ prefix: 'account:' })) {
       const id = key.slice('account:'.length);
-      const [sheet, team, access] = await Promise.all([
-        store.get('character-sheet:' + id),
+      const [sheets, team, access] = await Promise.all([
+        Promise.all(sheetKeys(id).map((k) => store.get(k))),
         store.get('team-application:' + id),
         store.get('access-application:' + id),
       ]);
+      const sheet = sheets[0];
       items.push({
         discordId: id,
+        characters: sheets.filter(Boolean).length,
         name: account.name || null,
         since: account.since,
         lastLogin: account.lastLogin || null,

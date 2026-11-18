@@ -67,7 +67,7 @@ test('Descargar mis datos incluye la ficha y no las notas del equipo', async () 
   const text = await res.text();
   const data = JSON.parse(text);
   assert.equal(data.cuenta.id, player);
-  assert.equal(data.ficha.values.secretos, 'oculto');
+  assert.equal(data.fichas[0].values.secretos, 'oculto');
   assert.ok(!text.includes('nota del equipo'));
   assert.equal((await s.call('/cuenta/api/export')).status, 401);
 });
@@ -144,4 +144,27 @@ test('Si Discord falla el aviso no rompe nada', async () => {
   assert.equal(await notifyStatus({ env: { DISCORD_BOT_TOKEN: 'b' }, fetcher: failing }, player, 'aceptada'), false);
   assert.equal(await notifyStatus({ env: {}, fetcher: failing }, player, 'aceptada'), false);
   assert.equal(await notifyStatus({ env: { DISCORD_BOT_TOKEN: 'b' }, fetcher: failing }, player, 'pendiente'), false);
+});
+
+test('Una cuenta puede tener hasta 3 personajes independientes y se borran juntos', async () => {
+  const s = setup();
+  s.as({ id: player, global_name: 'Jugador', username: 'j' });
+  const cookie = cookieOf(await login(s, '/cuenta/login'), 'krp_access');
+  for (const slot of [1, 2, 3])
+    assert.equal((await post(s, cookie, '/cuenta/api/character', { slot, values: { alias: 'P' + slot } })).status, 200);
+  assert.equal((await post(s, cookie, '/cuenta/api/character', { slot: 4, values: {} })).status, 400);
+  const get = async (slot) =>
+    (await (await s.call('/cuenta/api/character?slot=' + slot, { headers: { Cookie: cookie } })).json()).sheet;
+  assert.equal((await get(2)).values.alias, 'P2');
+  assert.equal((await get(1)).values.alias, 'P1');
+  assert.equal((await s.call('/cuenta/api/character?slot=9', { headers: { Cookie: cookie } })).status, 400);
+  const info = await (await s.call('/cuenta/api/session', { headers: { Cookie: cookie } })).json();
+  assert.deepEqual(info.characters.map((c) => c.alias), ['P1', 'P2', 'P3']);
+  await post(s, cookie, '/cuenta/api/character-delete', { slot: 2 });
+  assert.equal(await get(2), null);
+  assert.equal((await get(3)).values.alias, 'P3');
+  const data = await (await s.call('/cuenta/api/export', { headers: { Cookie: cookie } })).json();
+  assert.deepEqual(data.fichas.map((f) => f.personaje), [1, 3]);
+  await post(s, cookie, '/cuenta/api/account-delete', {});
+  assert.deepEqual([...s.records.keys()].filter((k) => k.startsWith('character-sheet:')), []);
 });

@@ -302,3 +302,23 @@
 .char-versions select {
   margin-left: 6px;
 }
+
+.char-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+.char-tab {
+  padding: 8px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: none;
+  color: var(--mute);
+  font: inherit;
+  cursor: pointer;
+}
+.char-tab[aria-current='true'] {
+  border-color: var(--y);
+  color: var(--text);
+}

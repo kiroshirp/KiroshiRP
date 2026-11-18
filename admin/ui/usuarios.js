@@ -53,13 +53,14 @@ function noteBox(d) {
 function detail(d) {
   const wrap = el('div', null, 'det-grid');
   const fc = el('section', null, 'card');
-  fc.append(el('h2', 'Ficha de personaje'));
-  if (d.ficha) {
-    fc.append(el('p', 'Actualizada: ' + fmtDate(d.ficha.updatedAt), 'meta'));
-    const body = block(d.sections.ficha, d.ficha.values);
+  fc.append(el('h2', d.fichas.length > 1 ? 'Fichas de personaje (' + d.fichas.length + ')' : 'Ficha de personaje'));
+  for (const ficha of d.fichas) {
+    if (d.fichas.length > 1) fc.append(el('h3', 'Personaje ' + ficha.slot));
+    fc.append(el('p', 'Actualizada: ' + fmtDate(ficha.updatedAt), 'meta'));
+    const body = block(d.sections.ficha, ficha.values);
     fc.append(...body);
     if (!body.length) fc.append(el('p', 'Sin campos rellenados.', 'meta'));
-    const imgs = d.ficha.images || [];
+    const imgs = ficha.images || [];
     if (imgs.length) {
       fc.append(el('h3', 'Imágenes'));
       const ul = el('ul');
@@ -74,7 +75,8 @@ function detail(d) {
       }
       fc.append(ul);
     }
-  } else fc.append(el('p', 'Sin ficha', 'meta'));
+  }
+  if (!d.fichas.length) fc.append(el('p', 'Sin ficha', 'meta'));
   fc.append(el('p', 'El apartado Secretos no se muestra: solo lo ve su autor.', 'note'));
   const tc = el('section', null, 'card');
   tc.append(el('h2', 'Solicitud al equipo'));
@@ -138,7 +140,7 @@ function render() {
         bar.max = 100;
         bar.value = p;
         bar.setAttribute('aria-label', 'Ficha completada al ' + p + '%');
-        f.append(bar, ' ' + p + '%');
+        f.append(bar, ' ' + p + '%' + (u.characters > 1 ? ' · ' + u.characters + ' personajes' : ''));
       } else f.textContent = '—';
       const t = el('td');
       if (u.team) t.append(el('span', u.team.status, 'badge ' + u.team.status));

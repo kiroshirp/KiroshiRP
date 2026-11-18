@@ -1,3 +1,5 @@
+import { sheetKeys } from './character-form.mjs';
+
 // Borra todo lo que el sistema guarda de una cuenta de Discord (la usan el panel y la propia persona).
 export async function wipeAccount(store, id) {
   for (const digest of (await store.get('account-sessions:' + id)) || [])
@@ -7,12 +9,12 @@ export async function wipeAccount(store, id) {
   for (const prefix of [
     'account-sessions:',
     'account:',
-    'character-sheet:',
     'team-application:',
     'access-application:',
     'admin-note:',
   ])
     await store.delete(prefix + id);
+  for (const key of sheetKeys(id)) await store.delete(key);
   for (const index of ['team-index', 'access-index']) {
     const ids = (await store.get(index)) || [];
     await store.put(

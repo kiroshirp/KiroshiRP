@@ -92,6 +92,15 @@ export const characterSections = [
 
 const fields = characterSections.flatMap((section) => section.fields);
 
+// Cada cuenta puede tener hasta 3 personajes (huecos 1 a 3). El 1 conserva la clave original.
+export const MAX_SLOTS = 3;
+export const slotOf = (value) => {
+  const n = Number(value ?? 1);
+  return Number.isInteger(n) && n >= 1 && n <= MAX_SLOTS ? n : null;
+};
+export const sheetKey = (id, slot = 1) => 'character-sheet:' + id + (slot > 1 ? '#' + slot : '');
+export const sheetKeys = (id) => Array.from({ length: MAX_SLOTS }, (_, i) => sheetKey(id, i + 1));
+
 // Devuelve { values, images } limpios o { error }.
 export function validateCharacter(data) {
   const values = {};

@@ -215,11 +215,11 @@ test('Usuarios: el detalle muestra lo que rellenó la persona, salvo los campos 
   assert.equal((await s.req('usuarios?id=no-valido')).status, 400);
   const { status, body } = await s.req('usuarios?id=' + discord);
   assert.equal(status, 200);
-  assert.deepEqual(body.ficha.values, { alias: 'Ghost', historia: 'Nació en Heywood.' });
-  assert.deepEqual(body.ficha.images, ['https://x.test/a.png']);
+  assert.deepEqual(body.fichas[0].values, { alias: 'Ghost', historia: 'Nació en Heywood.' });
+  assert.deepEqual(body.fichas[0].images, ['https://x.test/a.png']);
   assert.deepEqual(body.team.answers, { nombre: 'Ana' });
   assert.equal(body.team.status, 'aceptada');
   assert.ok(!JSON.stringify(body).includes('MUY PRIVADO'));
   assert.ok(!body.sections.ficha.some((sec) => sec.fields.some((f) => f.id === 'secretos')));
-  assert.equal((await s.req('usuarios?id=222222222222222222')).body.ficha, null);
+  assert.deepEqual((await s.req('usuarios?id=222222222222222222')).body.fichas, []);
 });

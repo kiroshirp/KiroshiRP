@@ -15,8 +15,12 @@ export async function mount(root, ctx) {
   }
   root.replaceChildren();
   const { ui } = ctx;
+  const slot = ctx.slot || 1;
+  // Al cambiar de personaje se vuelve a montar: los oyentes del montaje anterior dejan de actuar.
+  const tok = (root.__tok = {});
+  const live = () => root.isConnected && root.__tok === tok;
   const reduce = ui.reduce;
-  const draftKey = `krp-ficha-${ctx.user.id}`;
+  const draftKey = `krp-ficha-${ctx.user.id}` + (slot > 1 ? '-' + slot : '');
   const store = {
     get() {
       try {
@@ -44,6 +48,22 @@ export async function mount(root, ctx) {
     el('p', 'lead', 'Una cuenta, distintas historias. Cada identidad conserva sus propios datos.'),
   );
   root.append(head);
+  const tabs = el('div', 'char-tabs');
+  tabs.setAttribute('role', 'group');
+  tabs.setAttribute('aria-label', 'Personajes de la cuenta');
+  for (let n = 1; n <= 3; n++) {
+    const info = ctx.session.characters?.[n - 1];
+    const tab = el('button', 'char-tab', info?.alias || (info?.progress != null ? 'Personaje ' + n : 'Nuevo personaje'));
+    tab.type = 'button';
+    if (n === slot) tab.setAttribute('aria-current', 'true');
+    tab.addEventListener('click', () => {
+      if (n === slot) return;
+      if (dirty() && !confirm('Tienes cambios sin guardar en este personaje. ¿Cambiar de todos modos?')) return;
+      mount(root, { ...ctx, slot: n });
+    });
+    tabs.append(tab);
+  }
+  root.append(tabs);
   const skeleton = el('div', 'char-skel');
   skeleton.setAttribute('aria-hidden', 'true');
   skeleton.append(
@@ -55,7 +75,7 @@ export async function mount(root, ctx) {
 
   let data;
   try {
-    data = await ctx.api('character');
+    data = await ctx.api('character?slot=' + slot);
     skeleton.remove();
   } catch (e) {
     skeleton.remove();
@@ -327,14 +347,14 @@ export async function mount(root, ctx) {
     else store.del();
     clearTimeout(autoTimer);
     autoTimer = setTimeout(() => {
-      if (root.isConnected && dirty() && !save.disabled) {
+      if (live() && dirty() && !save.disabled) {
         auto = true;
         form.requestSubmit();
       }
     }, 30000);
   });
   window.addEventListener('beforeunload', (e) => {
-    if (root.isConnected && dirty()) {
+    if (live() && dirty()) {
       e.preventDefault();
       e.returnValue = '';
     }
@@ -360,7 +380,7 @@ export async function mount(root, ctx) {
   }
   // Ctrl+S guarda solo mientras esta sección está visible.
   document.addEventListener('keydown', (e) => {
-    if (!root.isConnected || root.hidden) return;
+    if (!live() || root.hidden) return;
     if ((e.ctrlKey || e.metaKey) && !e.altKey && e.key.toLowerCase() === 's') {
       e.preventDefault();
       if (!save.disabled) form.requestSubmit();
@@ -382,19 +402,22 @@ export async function mount(root, ctx) {
     state.textContent = 'Guardando…';
     try {
       const body = current();
-      const r = await ctx.api('character', 'POST', body);
+      const r = await ctx.api('character', 'POST', { ...body, slot });
       const clean = Object.fromEntries(
         Object.entries(body.values)
           .map(([k, v]) => [k, v.trim()])
           .filter(([, v]) => v),
       );
       sheet = { values: clean, images: body.images, updatedAt: r.updatedAt, progress: r.progress };
+      if (ctx.session.characters)
+        ctx.session.characters[slot - 1] = { slot, progress: r.progress, updatedAt: r.updatedAt, alias: clean.alias || null };
+      if (slot === 1) ctx.session.character = { progress: r.progress, updatedAt: r.updatedAt };
       // En el autoguardado no se reescribe el formulario: la persona puede haber seguido escribiendo.
       if (!quiet) fill(clean, body.images);
       baseline = quiet ? snap(body) : snap(current());
       if (!dirty()) store.del();
       renderSaved();
-      ctx.api('character').then((d) => renderVersions(d.sheet?.history || [])).catch(() => {});
+      ctx.api('character?slot=' + slot).then((d) => renderVersions(d.sheet?.history || [])).catch(() => {});
       ui.toast(quiet ? 'Guardado automático.' : 'Historia guardada.');
     } catch (x) {
       fail(x.message || 'No se pudo guardar.');
@@ -408,7 +431,7 @@ export async function mount(root, ctx) {
       return;
     err.hidden = true;
     try {
-      await ctx.api('character-delete', 'POST', {});
+      await ctx.api('character-delete', 'POST', { slot });
       sheet = null;
       renderVersions([]);
       fill();
