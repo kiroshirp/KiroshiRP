@@ -1,0 +1,61 @@
+.eco-card {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.eco-art {
+  width: min(100%, 360px);
+  height: auto;
+  fill: none;
+  stroke: var(--y);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.eco-grid path {
+  stroke: var(--line-2);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+.eco-axis {
+  stroke: var(--mute);
+}
+.eco-line {
+  stroke: var(--blue);
+  stroke-dasharray: 4 6;
+  animation: eco-draw 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.eco-wallet,
+.eco-coin {
+  animation: eco-float 6s ease-in-out infinite;
+}
+.eco-coin {
+  animation-delay: -3s;
+}
+.eco-cap {
+  margin: 0;
+  color: var(--mute);
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+@keyframes eco-draw {
+  from {
+    stroke-dasharray: 0 100;
+    opacity: 0;
+  }
+}
+@keyframes eco-float {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eco-line,
+  .eco-wallet,
+  .eco-coin {
+    animation: none;
+  }
+}

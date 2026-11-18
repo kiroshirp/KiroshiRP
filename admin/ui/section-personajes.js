@@ -14,6 +14,8 @@ export async function mount(root, ctx) {
     document.head.append(link);
   }
   root.replaceChildren();
+  const { ui } = ctx;
+  const reduce = ui.reduce;
   const draftKey = `krp-ficha-${ctx.user.id}`;
   const store = {
     get() {
@@ -42,11 +44,21 @@ export async function mount(root, ctx) {
     el('p', 'lead', 'Una cuenta, distintas historias. Cada identidad conserva sus propios datos.'),
   );
   root.append(head);
+  const skeleton = el('div', 'char-skel');
+  skeleton.setAttribute('aria-hidden', 'true');
+  skeleton.append(
+    el('div', 'skel skel-hero'),
+    el('div', 'skel skel-line'),
+    el('div', 'skel skel-line short'),
+  );
+  root.append(skeleton);
 
   let data;
   try {
     data = await ctx.api('character');
+    skeleton.remove();
   } catch (e) {
+    skeleton.remove();
     const n = el('p', 'notice error', e.message || 'No se pudo cargar la ficha.');
     n.setAttribute('role', 'alert');
     root.append(n);
@@ -58,22 +70,11 @@ export async function mount(root, ctx) {
   const fields = sections.flatMap((s) => s.fields);
   const inputs = {};
 
-  // Tarjeta resumen
-  const initials =
-    (ctx.user.name || '')
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join('')
-      .toUpperCase() || 'TP';
-  const badge = el('span', 'badge char-badge', initials);
-  badge.setAttribute('aria-hidden', 'true');
+  // Tarjeta resumen: monograma vectorial + anillo de progreso
   const status = el('strong', 'char-status');
-  const pct = el('span', 'char-pct');
-  const bar = el('progress', 'progress');
-  bar.max = 100;
-  bar.setAttribute('aria-label', 'Progreso de la ficha');
+  const pct = el('span', 'ring-num');
+  const ring = ui.ring(0, pct);
+  ring.setAttribute('role', 'img');
   const summary = el('div', 'card char-summary');
   const sumText = el('div', 'char-summary-text');
   sumText.append(
@@ -86,17 +87,42 @@ export async function mount(root, ctx) {
     ),
   );
   const statRow = el('div', 'char-stat');
-  statRow.append(status, pct);
-  sumText.append(statRow, bar);
-  summary.append(badge, sumText);
+  statRow.append(status);
+  sumText.append(statRow);
+  summary.append(ui.avatar(ui.initialsOf(ctx.user.name)), sumText, ring);
   root.append(summary);
 
-  // Formulario
+  // Índice lateral (scrollspy) + formulario por pasos
+  const layout = el('div', 'char-layout');
+  const index = el('nav', 'char-index');
+  index.setAttribute('aria-label', 'Secciones de la ficha');
+  const indexList = el('ol');
+  index.append(indexList);
+  const steps = [];
+  const addStep = (card, title, fieldsOf) => {
+    const li = el('li');
+    const btn = el('button');
+    btn.type = 'button';
+    const cnt = el('span', 'c');
+    btn.append(
+      el('span', 'n', String(steps.length + 1).padStart(2, '0')),
+      el('span', 't', title),
+      cnt,
+    );
+    btn.addEventListener('click', () => {
+      card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      card.querySelector('input,textarea')?.focus({ preventScroll: true });
+    });
+    li.append(btn);
+    indexList.append(li);
+    steps.push({ card, btn, cnt, fieldsOf });
+  };
+
   const form = el('form', 'char-form');
   form.noValidate = true;
-  let n = 0;
   for (const s of sections) {
     const card = el('fieldset', 'card char-section');
+    addStep(card, s.title, s.fields);
     card.append(el('legend', 'char-legend', s.title));
     if (s.intro) card.append(el('p', 'char-intro', s.intro));
     const grid = el('div', 'char-fields');
@@ -121,7 +147,6 @@ export async function mount(root, ctx) {
       } else wrap.append(label, input);
       inputs[f.id] = input;
       grid.append(wrap);
-      n++;
     }
     card.append(grid);
     form.append(card);
@@ -152,10 +177,13 @@ export async function mount(root, ctx) {
   const imgList = el('ul', 'char-links');
   imgCard.append(imgWrap, imgList);
   form.append(imgCard);
+  addStep(imgCard, 'Imágenes', []);
 
-  // Pie
+  // Pie: barra de guardado fija
   const counter = el('p', 'char-counter');
   counter.setAttribute('aria-live', 'polite');
+  const state = el('span', 'char-state');
+  state.setAttribute('role', 'status');
   const savedLine = el('p', 'char-saved');
   const err = el('p', 'notice error');
   err.setAttribute('role', 'alert');
@@ -165,9 +193,12 @@ export async function mount(root, ctx) {
   const del = el('button', 'btn danger', 'Eliminar ficha');
   del.type = 'button';
   const actions = el('div', 'char-actions');
-  actions.append(save, del);
+  actions.append(del);
+  const kbd = el('kbd', 'char-kbd', 'Ctrl+S');
+  kbd.setAttribute('aria-hidden', 'true');
+  const bar = el('div', 'char-savebar');
+  bar.append(state, counter, kbd, save);
   form.append(
-    counter,
     el(
       'p',
       'char-private',
@@ -176,8 +207,11 @@ export async function mount(root, ctx) {
     savedLine,
     err,
     actions,
+    bar,
   );
-  root.append(form);
+  layout.append(index, form);
+  root.append(layout);
+  ui.reveal([summary, ...form.querySelectorAll('.char-section')]);
 
   const current = () => ({
     values: Object.fromEntries(fields.map((f) => [f.id, inputs[f.id].value])),
@@ -196,6 +230,7 @@ export async function mount(root, ctx) {
     imgs.value = images.join('\n');
   };
   let baseline;
+  let ringReady = false;
 
   const renderLinks = (list) => {
     imgList.replaceChildren(
@@ -222,9 +257,24 @@ export async function mount(root, ctx) {
     const c = current();
     const filled = fields.filter((f) => c.values[f.id].trim()).length;
     const p = Math.round((filled / fields.length) * 100);
-    bar.value = p;
+    const setRing = () => ring.style.setProperty('--p', p);
+    if (reduce || ringReady) setRing();
+    else {
+      ringReady = true;
+      requestAnimationFrame(() => requestAnimationFrame(setRing));
+    }
+    ring.setAttribute('aria-label', `Progreso de la ficha: ${p}%`);
     pct.textContent = `${p}%`;
     status.textContent = p === 100 ? 'Ficha completada' : 'Ficha sin completar';
+    for (const st of steps) {
+      if (!st.fieldsOf.length) continue;
+      const d = st.fieldsOf.filter((f) => c.values[f.id].trim()).length;
+      st.cnt.textContent = `${d}/${st.fieldsOf.length}`;
+      st.btn.classList.toggle('done', d === st.fieldsOf.length);
+    }
+    const isDirty = dirty();
+    state.textContent = isDirty ? 'Cambios sin guardar' : sheet ? 'Guardado' : 'Sin cambios';
+    state.classList.toggle('dirty', isDirty);
     const total = fields.reduce((s, f) => s + c.values[f.id].trim().length, 0);
     counter.textContent = `${total} / ${maxTotal} caracteres`;
     counter.classList.toggle('char-over', total > maxTotal);
@@ -253,14 +303,43 @@ export async function mount(root, ctx) {
     }
   });
 
+  // Scrollspy del índice lateral
+  const setCurrent = (i) =>
+    steps.forEach((st, k) =>
+      k === i
+        ? st.btn.setAttribute('aria-current', 'step')
+        : st.btn.removeAttribute('aria-current'),
+    );
+  setCurrent(0);
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries)
+          if (e.isIntersecting) setCurrent(steps.findIndex((st) => st.card === e.target));
+      },
+      { rootMargin: '-20% 0px -65% 0px' },
+    );
+    for (const st of steps) spy.observe(st.card);
+  }
+  // Ctrl+S guarda solo mientras esta sección está visible.
+  document.addEventListener('keydown', (e) => {
+    if (!root.isConnected || root.hidden) return;
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      if (!save.disabled) form.requestSubmit();
+    }
+  });
+
   const fail = (msg) => {
     err.textContent = msg;
     err.hidden = false;
+    ui.toast(msg, 'error');
   };
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     err.hidden = true;
     save.disabled = true;
+    state.textContent = 'Guardando…';
     try {
       const body = current();
       const r = await ctx.api('character', 'POST', body);
@@ -274,6 +353,7 @@ export async function mount(root, ctx) {
       baseline = snap(current());
       store.del();
       renderSaved();
+      ui.toast('Historia guardada.');
     } catch (x) {
       fail(x.message || 'No se pudo guardar.');
     }
@@ -293,6 +373,7 @@ export async function mount(root, ctx) {
       store.del();
       renderSaved();
       refresh();
+      ui.toast('Ficha eliminada.');
     } catch (x) {
       fail(x.message || 'No se pudo eliminar.');
     }

@@ -13,7 +13,25 @@ function stat(label, value) {
   return box;
 }
 
-export async function mount(root) {
+// Esquema vectorial estático: ejes y monedero sin datos (la línea punteada es solo guía, no un valor).
+const ART =
+  '<svg class="eco-art" viewBox="0 0 320 180" aria-hidden="true">' +
+  '<g class="eco-grid"><path d="M30 20H300M30 60H300M30 100H300M30 140H300"/></g>' +
+  '<path class="eco-axis" d="M30 14V146H304"/>' +
+  '<path class="eco-line" pathLength="100" d="M30 120H300"/>' +
+  '<g class="eco-wallet"><rect x="196" y="38" width="86" height="58" rx="8"/>' +
+  '<path d="M196 54H282M258 67h24v16h-24z"/><circle cx="268" cy="75" r="2.5"/></g>' +
+  '<g class="eco-coin"><ellipse cx="86" cy="104" rx="26" ry="8"/><path d="M60 104v10c0 4 12 8 26 8s26-4 26-8v-10"/>' +
+  '<ellipse cx="86" cy="88" rx="26" ry="8"/><path d="M60 88v10M112 88v10"/></g>' +
+  '</svg>';
+
+export async function mount(root, ctx) {
+  if (!document.querySelector('link[href="/cuenta/section-economia.css"]')) {
+    const link = el('link');
+    link.rel = 'stylesheet';
+    link.href = '/cuenta/section-economia.css';
+    document.head.append(link);
+  }
   const head = el('div', 'view-head');
   head.append(
     el('p', 'eyebrow', 'REGISTRO DE EDDIES'),
@@ -54,8 +72,12 @@ export async function mount(root) {
     ),
   );
 
-  const grid = el('div', 'card-grid');
-  grid.append(card);
+  const art = el('div', 'card eco-card');
+  art.insertAdjacentHTML('afterbegin', ART);
+  art.append(el('p', 'eco-cap', 'Sin datos todavía'));
+
+  const grid = el('div', 'card-grid eco-grid-wrap');
+  grid.append(card, art);
 
   const notice = el(
     'div',
@@ -64,4 +86,5 @@ export async function mount(root) {
   );
 
   root.append(head, stats, grid, notice);
+  ctx?.ui?.reveal([...stats.children, ...grid.children]);
 }

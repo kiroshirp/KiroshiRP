@@ -4,7 +4,7 @@ La web pública es estática y se publica en Cloudflare Pages desde `main`. Un W
 
 ## Qué hace
 
-- `/cuenta/`: la persona inicia sesión con Discord (8 horas) y ve su panel: vista general, ficha de personaje privada, economía (vacía hasta conectar el juego), su cuenta y la solicitud «Únete al equipo».
+- `/cuenta`: la persona inicia sesión con Discord (`/cuenta/login`, 8 horas) y ve su panel con direcciones limpias, sin `#`: `/cuenta` (vista general), `/cuenta/personajes` (ficha privada), `/cuenta/economia` (vacía hasta conectar el juego), `/cuenta/perfil` (su cuenta) y `/cuenta/equipo` (solicitud «Únete al equipo»). Las direcciones antiguas con `#` se redirigen solas. La redirección de Discord sigue siendo `/acceso/callback`.
 - `/acceso/`: solicitud de invitación a Discord con SteamID.
 - `/admin/`: panel del equipo con usuario y contraseña propios.
   - **Usuarios**: cuentas, última conexión, progreso de la ficha, y un desplegable con lo que ha rellenado (ficha y solicitud al equipo; el apartado «Secretos» de la ficha no se muestra nunca), estado de la solicitud y SteamID. Permite eliminar una cuenta y todos sus datos.

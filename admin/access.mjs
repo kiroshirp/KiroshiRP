@@ -38,6 +38,10 @@ const pages = {
   '/acceso/app.js': '/access.js',
   '/acceso/style.css': '/access.css',
   '/cuenta': '/account.html',
+  '/cuenta/personajes': '/account.html',
+  '/cuenta/economia': '/account.html',
+  '/cuenta/perfil': '/account.html',
+  '/cuenta/equipo': '/account.html',
   '/cuenta/app.js': '/account.js',
   '/cuenta/style.css': '/account.css',
 };
@@ -80,11 +84,11 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
       ? await store.get('access-session:' + digest(sessionToken))
       : null;
     const valid = session?.expires > Date.now();
-    if (path === '/acceso/login' && request.method === 'GET') {
+    if ((path === '/acceso/login' || path === '/cuenta/login') && request.method === 'GET') {
       const state = random();
       await store.put('access-state:' + digest(state), {
         expires: Date.now() + 600000,
-        account: url.searchParams.get('next') === 'cuenta',
+        account: path === '/cuenta/login' || url.searchParams.get('next') === 'cuenta',
       });
       const redirectUri = url.origin + '/acceso/callback';
       const auth = new URL('https://discord.com/oauth2/authorize');
@@ -404,6 +408,8 @@ export function createAccessService({ env, store, assets, fetcher = fetch, local
         return finish(json({ ok: true, createdAt }));
       }
     }
+    if (request.method === 'GET' && path.startsWith('/cuenta/') && !path.startsWith('/cuenta/api/'))
+      return finish(redirect('/cuenta'));
     return finish(json({ error: 'No encontrado.' }, 404));
   };
 }

@@ -11,33 +11,46 @@
     <script type="module" src="/cuenta/app.js"></script>
   </head>
   <body>
-    <p id="loading" class="center" role="status">Cargando…</p>
+    <div id="loading" class="center" role="status">
+      <span class="sr">Cargando…</span>
+      <div class="skel-page" aria-hidden="true">
+        <div class="skel skel-hero"></div>
+        <div class="skel-row">
+          <div class="skel skel-card"></div>
+          <div class="skel skel-card"></div>
+          <div class="skel skel-card"></div>
+        </div>
+      </div>
+    </div>
     <main id="login" class="center" hidden>
       <img src="/admin/brand.webp" alt="KiroshiRP" width="87" height="29" />
       <h1>Mi cuenta</h1>
       <p>Inicia sesión con Discord para acceder a tu cuenta.</p>
-      <a class="btn primary" href="/acceso/login?next=cuenta">Iniciar sesión con Discord</a>
+      <a class="btn primary" href="/cuenta/login">Iniciar sesión con Discord</a>
       <a class="btn" href="https://kiroshirp.pages.dev/">← Volver a la web</a>
     </main>
     <div id="app" class="layout" hidden>
+      <a id="skip" class="skip" href="#main">Saltar al contenido</a>
+      <div id="toasts" class="toasts"></div>
       <aside class="side">
         <img src="/admin/brand.webp" alt="KiroshiRP" width="87" height="29" />
         <nav aria-label="Mi cuenta">
+          <span id="nav-ind" class="nav-ind" aria-hidden="true"></span>
           <span class="label">TU CONEXIÓN</span>
-          <a href="#general" data-s="general">
+          <a href="/cuenta" data-s="general">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z" />
             </svg>
             <span>Vista general</span><b>01</b>
           </a>
-          <a href="#personajes" data-s="personajes">
+          <a href="/cuenta/personajes" data-s="personajes">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="7" r="3.5" />
               <path d="M5 21v-3a5 5 0 015-5h4a5 5 0 015 5v3z" />
             </svg>
             <span>Mis personajes</span><b>02</b>
           </a>
-          <a href="#economia" data-s="economia">
+          <a href="/cuenta/economia" data-s="economia">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <ellipse cx="12" cy="6" rx="8" ry="3" />
               <path
@@ -46,14 +59,14 @@
             </svg>
             <span>Economía</span><b>03</b>
           </a>
-          <a href="#cuenta" data-s="cuenta">
+          <a href="/cuenta/perfil" data-s="cuenta">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3l8 3v6c0 4.500-3.300 8-8 9-4.700-1-8-4.500-8-9V6z" />
               <path d="M9 12l2 2 4-4" />
             </svg>
             <span>Mi cuenta</span><b>04</b>
           </a>
-          <a href="#equipo" data-s="equipo">
+          <a href="/cuenta/equipo" data-s="equipo">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="9" cy="8" r="3.5" />
               <path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5z" />
@@ -74,6 +87,7 @@
       <div class="content">
         <header class="topbar">
           <span id="title" class="topbar-title"></span>
+          <a class="topbar-web" href="https://kiroshirp.pages.dev/">← Web</a>
           <span class="chip"
             ><span id="chip-initial" class="chip-initial" aria-hidden="true"></span
             ><span id="chip-name"></span
@@ -103,10 +117,19 @@
                 <p id="role-summary"></p>
               </div>
               <p class="hint">Los campos marcados con * son obligatorios.</p>
-              <label class="hint" for="progress">Progreso: <span id="progress-text"></span></label>
-              <progress class="progress" id="progress" value="0" max="1"></progress>
+              <div class="team-progress">
+                <label class="hint" for="progress"
+                  >Progreso: <span id="progress-text"></span
+                ></label>
+                <progress class="progress sr" id="progress" value="0" max="1"></progress>
+                <div class="bar" aria-hidden="true"><i id="bar-fill"></i></div>
+              </div>
               <form id="team-form" class="card" novalidate>
-                <div id="fields"></div>
+                <div id="fields">
+                  <div class="skel skel-line" aria-hidden="true"></div>
+                  <div class="skel skel-line short" aria-hidden="true"></div>
+                  <div class="skel skel-line" aria-hidden="true"></div>
+                </div>
                 <label class="check"
                   ><input id="consent" type="checkbox" required /><span
                     >Acepto que KiroshiRP guarde estas respuestas durante 90 días para revisar mi

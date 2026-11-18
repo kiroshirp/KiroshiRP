@@ -183,5 +183,30 @@ test('Eliminar mis datos borra ficha, solicitud, registro y sesiones', async () 
 test('Los módulos de sección solo se sirven con nombre seguro', async () => {
   const { req } = setup();
   assert.equal(await (await req('/cuenta/section-economia.js')).text(), '/section-economia.js');
-  assert.equal((await req('/cuenta/section-../x.js')).status, 404);
+  assert.equal((await req('/cuenta/section-../x.js')).status, 302);
+});
+
+test('URLs limpias: cada sección sirve el panel, /cuenta/login inicia sesión y lo desconocido vuelve a /cuenta', async () => {
+  const { req } = setup();
+  for (const path of [
+    '/cuenta',
+    '/cuenta/personajes',
+    '/cuenta/economia',
+    '/cuenta/perfil',
+    '/cuenta/equipo/',
+  ])
+    assert.equal(await (await req(path)).text(), '/account.html', path);
+  const start = await req('/cuenta/login');
+  assert.equal(start.status, 302);
+  assert.match(start.headers.get('location'), /^https:\/\/discord\.com\/oauth2\/authorize/);
+  const state = new URL(start.headers.get('location')).searchParams.get('state');
+  const oauth = /(__Host-krp_oauth=[a-f0-9]{64})/.exec(start.headers.get('set-cookie'))[1];
+  const callback = await req('/acceso/callback?code=good&state=' + state, {
+    headers: { Cookie: oauth },
+  });
+  assert.equal(callback.headers.get('location'), '/cuenta/');
+  assert.match(callback.headers.get('set-cookie'), /Max-Age=28800/);
+  const unknown = await req('/cuenta/inventado');
+  assert.equal(unknown.status, 302);
+  assert.equal(unknown.headers.get('location'), '/cuenta');
 });
