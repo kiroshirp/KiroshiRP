@@ -33,7 +33,7 @@ async function load() {
   try {
     const { items } = await api('registro');
     $('rows').replaceChildren(...items.map(fila));
-    $('status').textContent = items.length ? '' : 'Todavía no hay acciones registradas.';
+    $('status').textContent = items.length ? '' : 'Aún no hay acciones. Aquí verás quién entra al panel y qué cambia el equipo.';
   } catch (e) {
     $('status').textContent = e.message;
   }

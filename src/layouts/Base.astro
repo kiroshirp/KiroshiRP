@@ -11,6 +11,7 @@ import '../styles/polish.css';
 import '../styles/mobile-nav.css';
 import '../styles/search.css';
 import '../styles/photo.css';
+import '../styles/cursor.css';
 import OpticalShell from '../components/OpticalShell.astro';
 import { site, url, brand } from '../config';
 import Discord from '../components/Discord.astro';
@@ -20,15 +21,19 @@ interface Props {
   description?: string;
   active?: string;
   noindex?: boolean;
+  // Imagen al compartir el enlace (ruta dentro de public/); por defecto, la portada.
+  image?: string;
 }
 const {
   title = brand.primary,
   description = site.description,
   active = '',
   noindex = false,
+  image,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
+const shareImage = new URL(url(image || 'images/krp-share-v2.jpg'), Astro.site);
+const shareType = image?.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
 const path = Astro.url.pathname;
 const inSection = (names: string[]): 'true' | undefined =>
   names.some((n) => new RegExp(`/${n}(/|$)`).test(path)) ? 'true' : undefined;
@@ -88,9 +93,9 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareImage} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="675" />
+    <meta property="og:image:type" content={shareType} />
+    {!image && <meta property="og:image:width" content="1200" />}
+    {!image && <meta property="og:image:height" content="675" />}
     <meta
       property="og:image:alt"
       content="Un viajero contempla Night City: ilustración de KiroshiRP"
@@ -149,7 +154,7 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
           </details>
         ))}
         <div class="nav-actions">
-          <a class="nav-search" href={url('buscar/')}>
+          <a class="nav-search" title="Buscar (atajo: /)" href={url('buscar/')}>
             <svg
               viewBox="0 0 24 24"
               width="18"
@@ -179,6 +184,21 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
       <slot />
     </main>
     <SiteFooter />
+    <script>
+      // Atajo de búsqueda: «/» o Ctrl/Cmd+K desde cualquier página (salvo escribiendo en un campo).
+      const searchLink = document.querySelector<HTMLAnchorElement>('.nav-search');
+      document.addEventListener('keydown', (e) => {
+        const typing = (e.target as Element | null)?.closest?.('input, textarea, select, [contenteditable]');
+        const combo = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k';
+        if (!searchLink || e.altKey || (typing && !combo)) return;
+        if (combo || (e.key === '/' && !e.ctrlKey && !e.metaKey)) {
+          e.preventDefault();
+          const field = document.querySelector<HTMLInputElement>('#global-search');
+          if (field) field.focus();
+          else location.href = searchLink.href;
+        }
+      });
+    </script>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#navigation');

@@ -211,10 +211,10 @@ function renderGeneral() {
       PATHS.personajes,
       'Ficha de personaje',
       ch ? Math.round(ch.progress) + '%' : 'Sin empezar',
-      ch ? 'Actualizada el ' + formatDate(ch.updatedAt) + '.' : 'Todavía no has empezado tu ficha.',
+      ch ? 'Actualizada el ' + formatDate(ch.updatedAt) + '.' : 'Cuéntanos quién es tu personaje. Se guarda sola mientras escribes.',
       fichaRing,
     ),
-    card(PATHS.economia, 'Economía', 'Sin datos', 'Todavía no hay personajes en el juego.'),
+    card(PATHS.economia, 'Economía', 'Sin datos', 'Tu dinero y tus movimientos aparecerán aquí cuando abra el servidor.'),
   );
   root.replaceChildren(hero, grid);
   reveal([hero, ...grid.children]);

@@ -116,3 +116,38 @@
 .atlas-panel h2[id^='atlas-title-'] {
   scroll-margin-top: 84px;
 }
+
+/* Transiciones suaves entre páginas (navegadores que las admiten); la cabecera no parpadea. */
+@view-transition {
+  navigation: auto;
+}
+.site-header {
+  view-transition-name: site-header;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* Mientras cargan, las imágenes ocupan su sitio con el color de fondo (sin saltos ni destellos blancos). */
+.photo-strip,
+.photo-strip img {
+  background: #0b0b0e;
+}
+
+/* Respuesta táctil al pulsar botones. */
+.button:active,
+.nav-search:active {
+  transform: translateY(1px) scale(0.985);
+}
+@media (prefers-reduced-motion: reduce) {
+  .button:active,
+  .nav-search:active {
+    transform: none;
+  }
+}

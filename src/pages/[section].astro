@@ -23,7 +23,7 @@ const categories = [...new Set(entries.map((e) => e.data.category))];
 const extras = sectionExtras[section.id];
 ---
 
-<Base title={section.title} active={section.id}>
+<Base title={section.title} active={section.id} image={extras.cover}>
   <div class="pf-body" data-pagefind-body data-pagefind-filter={`seccion:${section.title}`}>
     <SectionIntro
       title={section.title}

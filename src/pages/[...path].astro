@@ -6,7 +6,7 @@ import Notice from '../components/Notice.astro';
 
 import ReadingTools from '../components/ReadingTools.astro';
 import RegulationContext from '../components/RegulationContext.astro';
-import { sections, url, phases, leadership } from '../config';
+import { sections, sectionExtras, url, phases, leadership } from '../config';
 export async function getStaticPaths() {
   return (
     await Promise.all(
@@ -46,6 +46,7 @@ const relatedEntries = await Promise.all(
   title={`${entry.data.title} · ${section.title}`}
   description={entry.data.description}
   active={section.id}
+  image={sectionExtras[section.id].cover}
   noindex={!['Documentado', 'Confirmado'].includes(entry.data.status)}
 >
   <div

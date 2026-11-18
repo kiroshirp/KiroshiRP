@@ -123,6 +123,11 @@ function render() {
   $('count').textContent =
     `${items.length} cuenta${items.length === 1 ? '' : 's'}` +
     (q ? ` · ${filtered.length} coinciden` : '');
+  $('status').textContent = list.length
+    ? ''
+    : items.length
+      ? 'Ninguna cuenta coincide. Prueba con otro nombre o con el ID de Discord.'
+      : 'Aún no hay cuentas. Aparecerán cuando alguien inicie sesión con Discord en «Mi cuenta».';
   $('rows').replaceChildren(
     ...list.flatMap((u) => {
       const d = el('td');

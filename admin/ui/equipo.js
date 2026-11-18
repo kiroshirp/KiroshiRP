@@ -18,7 +18,7 @@ function render() {
     .sort((a, b) => dir * (new Date(a.createdAt) - new Date(b.createdAt)));
   $('status').textContent = list.length
     ? `${list.length} candidatura${list.length === 1 ? '' : 's'}.`
-    : 'No hay candidaturas.';
+    : 'Aún no hay candidaturas. Llegan desde «Únete al equipo» en la cuenta de cada jugador.';
   $('list').replaceChildren(
     ...list.map((i) => {
       const d = el('details');

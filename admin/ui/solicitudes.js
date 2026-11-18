@@ -34,7 +34,7 @@ async function load() {
     );
     status.textContent = items.length
       ? `${items.length} solicitudes registradas.`
-      : 'Todavía no hay solicitudes.';
+      : 'Aún no hay solicitudes. Aparecen cuando alguien pide su invitación desde la página de acceso.';
   } catch (e) {
     status.textContent = e.message;
   }
