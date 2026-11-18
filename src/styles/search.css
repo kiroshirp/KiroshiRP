@@ -1,0 +1,32 @@
+/* search: estilos de esta mejora; nada más los toca. */
+
+.search-page mark {
+  background: rgba(232, 201, 108, 0.22);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.12em;
+}
+.search-empty-title {
+  margin: 1.5rem 0 0.9rem;
+  opacity: 0.8;
+}
+.search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid rgba(232, 201, 108, 0.4);
+  border-radius: 999px;
+  color: inherit;
+  text-decoration: none;
+}
+.search-chip:hover,
+.search-chip:focus-visible {
+  border-color: #e8c96c;
+  background: rgba(232, 201, 108, 0.1);
+}

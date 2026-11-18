@@ -32,7 +32,7 @@ npm run preview
 | `npm run admin:test`                      | Pruebas del panel (seguridad y acceso)                                      |
 | `npm run admin:check`                     | Compila el Worker del panel sin desplegarlo                                 |
 | `npm run css:snapshot -- <carpeta> dist`  | Guarda los estilos calculados de todas las páginas para compararlos después |
-| `node --test tests/*.test.mjs`            | Pruebas del portal; la del panel en navegador necesita Playwright           |
+| `node --test tests/*.test.mjs`            | Pruebas del portal (no requieren navegador)                                 |
 | `node scripts/verify.mjs`                 | Revisa enlaces internos, anclas y recursos en `dist/`                       |
 
 ## Estructura

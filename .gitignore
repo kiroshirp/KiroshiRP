@@ -12,3 +12,6 @@ dist/
 .dev.vars.*
 
 .admin-drafts/
+
+# Copias de seguridad de Turso: contienen datos personales.
+backups/

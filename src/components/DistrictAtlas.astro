@@ -88,7 +88,13 @@ const indexData = serializeIndex(
       </a>
     </nav>
     <div class="atlas-content">
-      <p class="atlas-result mono" role="status" aria-live="polite" data-atlas-status hidden></p>
+      <p
+        class="atlas-result mono visually-hidden"
+        role="status"
+        aria-live="polite"
+        data-atlas-status
+        hidden
+      ></p>
       <div class="atlas-empty" data-atlas-empty hidden>
         <h2>No encontramos esa referencia.</h2>
         <p>Prueba con el nombre de una zona, un lugar o una organización documentada.</p>
@@ -220,9 +226,9 @@ const indexData = serializeIndex(
     let selected =
       new URL(location.href).searchParams.get('zona') ||
       location.hash.replace('#zona-', '') ||
-      'badlands';
+      data[0].id;
     let type = 'todo';
-    if (!data.some((d: any) => d.id === selected)) selected = 'badlands';
+    if (!data.some((d: any) => d.id === selected)) selected = data[0].id;
     function render() {
       const found = data.filter((d: any) => matchesDistrict(d, input.value, type));
       const ids = new Set(found.map((d: any) => d.id));
@@ -247,9 +253,7 @@ const indexData = serializeIndex(
       );
       empty.hidden = found.length > 0;
       status.textContent = found.length
-        ? (found.length === 1 ? '1 zona encontrada' : 'Más de una zona coincide: ' + found.length) +
-          ' · ' +
-          data.find((d: any) => d.id === selected)?.title
+        ? 'Zona mostrada: ' + data.find((d: any) => d.id === selected)?.title
         : 'Ninguna zona coincide con la búsqueda.';
     }
     links.forEach((link) =>
@@ -264,7 +268,10 @@ const indexData = serializeIndex(
         const heading = root.querySelector<HTMLElement>('#atlas-title-' + selected);
         heading?.setAttribute('tabindex', '-1');
         heading?.focus({ preventScroll: true });
-        heading?.scrollIntoView({ block: 'start', behavior: 'auto' });
+        heading?.scrollIntoView({
+          block: 'start',
+          behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        });
       }),
     );
     typeButtons.forEach((button) =>
@@ -277,7 +284,7 @@ const indexData = serializeIndex(
     root.querySelector('[data-atlas-reset]')!.addEventListener('click', () => {
       input.value = '';
       type = 'todo';
-      selected = 'badlands';
+      selected = data[0].id;
       render();
       input.focus();
     });

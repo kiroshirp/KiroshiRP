@@ -1,6 +1,6 @@
 ---
 title: "Arasaka"
-description: "Arasaka es una megacorporación especializada en servicios de protección y en la distribución de sus productos de fabricación japonesa por toda Norteamérica. A lo largo de los años, ha adq…"
+description: "Arasaka es una megacorporación de protección y distribución de productos japoneses en Norteamérica, con fama de cubrir sus huellas con ciberasesinos y abogados."
 category: "Corporaciones"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

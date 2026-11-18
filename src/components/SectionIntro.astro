@@ -1,5 +1,6 @@
 ---
-import { url } from '../config';
+import { getCollection } from 'astro:content';
+import { sections, url } from '../config';
 interface Props {
   title: string;
   description: string;
@@ -9,6 +10,18 @@ interface Props {
   count?: number;
 }
 const { title, description, eyebrow, image, imageAlt = '', count } = Astro.props;
+const sectionId = sections.find((s) => Astro.url.pathname.split('/').includes(s.id))?.id;
+const entries = sectionId
+  ? (await getCollection(sectionId as any)).filter(
+      (e: any) => sectionId !== 'actualizaciones' || e.data.published,
+    )
+  : [];
+const statuses = new Set(entries.map((e: any) => e.data.status));
+const factionStatuses = new Set(entries.map((e: any) => e.data.factionStatus));
+// Estado general: solo se muestra si es el mismo en todas las fichas (las fichas lo repiten solo si difieren).
+const generalStatus = entries.length && statuses.size === 1 ? [...statuses][0] : undefined;
+const generalFaction =
+  entries.length && factionStatuses.size === 1 ? [...factionStatuses][0] : undefined;
 ---
 
 <header class:list={['section-intro', { 'section-intro-visual': image }]}>
@@ -20,14 +33,28 @@ const { title, description, eyebrow, image, imageAlt = '', count } = Astro.props
     </h1>
     <p>{description}</p>
     <div class="section-intro-bottom">
-      {count !== undefined && (
+      {count !== undefined && count > 0 && (
         <span>
           <strong>{String(count).padStart(2, '0')}</strong> archivos para consultar
         </span>
       )}
-      <a href="#biblioteca">
-        Explorar el contenido <span aria-hidden="true">↓</span>
-      </a>
+      {(generalStatus || generalFaction) && (
+        <span class="section-general-status">
+          {generalStatus && <span class="badge">{generalStatus}</span>}
+          {generalFaction && (
+            <span class="mono">KIROSHIRP: {String(generalFaction).toUpperCase()}</span>
+          )}
+        </span>
+      )}
+      {count === 0 ? (
+        <a href={url('discord/')}>
+          Entrar a Discord <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <a href="#biblioteca">
+          Explorar el contenido <span aria-hidden="true">↓</span>
+        </a>
+      )}
     </div>
   </div>
   {image && (

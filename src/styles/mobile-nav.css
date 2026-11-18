@@ -1,0 +1,126 @@
+/* mobile-nav: menú móvil, estado activo, zonas táctiles y contraste. */
+
+/* Contraste (>=4.6:1) */
+.nav-group summary span {
+  color: #80808a;
+}
+.footer-legal > span {
+  color: #80808a;
+  font-size: 0.7rem;
+}
+
+/* Estado activo del grupo */
+.nav-group summary[aria-current='true'] {
+  color: var(--yellow);
+}
+.nav-group summary[aria-current='true']::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--yellow);
+  pointer-events: none;
+}
+.nav-group summary {
+  position: relative;
+}
+.nav-scrim {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  html.menu-open,
+  html.menu-open body {
+    overflow: hidden;
+  }
+  .menu-toggle {
+    min-height: 44px;
+    min-width: 96px;
+  }
+  .nav-scrim:not([hidden]) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    background: #000000b3;
+  }
+  .site-header nav.open {
+    height: calc(100dvh - 76px);
+    max-height: none;
+    background: var(--bg);
+    padding-bottom: 32px;
+    overscroll-behavior: contain;
+  }
+  .site-header nav > a,
+  .nav-group summary {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header nav > a[aria-current='page'] {
+    border-bottom-color: var(--yellow);
+    box-shadow: 0 1px 0 var(--yellow);
+  }
+  .nav-group {
+    border-bottom: 0;
+  }
+  .nav-group[open] summary {
+    border-bottom-color: transparent;
+  }
+  .nav-group summary span {
+    font-size: 0.75rem;
+  }
+  .nav-group > div {
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-group > div a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding-block: 0;
+  }
+  /* Buscar y Mi cuenta: sin divisor, con aire */
+  .site-header nav > .nav-search,
+  .site-header nav > .nav-account {
+    border-bottom: 0;
+    margin-top: 4px;
+  }
+  .site-header nav .button.primary {
+    align-self: stretch;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+/* Zonas táctiles >=44px (solo táctil/móvil) */
+@media (max-width: 760px) {
+  .text-link,
+  .hero-guide,
+  .access-privacy,
+  .section-intro-bottom a,
+  .discord-gate-next nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .footer-column a,
+  .footer-brand .wordmark {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-scrim,
+  .site-header nav {
+    transition: none;
+    animation: none;
+  }
+}

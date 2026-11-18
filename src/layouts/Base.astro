@@ -7,6 +7,9 @@ import '@fontsource/inter/800.css';
 import '@fontsource/share-tech-mono';
 import '../styles/tokens.css';
 import '../styles/portal.css';
+import '../styles/polish.css';
+import '../styles/mobile-nav.css';
+import '../styles/search.css';
 import OpticalShell from '../components/OpticalShell.astro';
 import { site, url, brand } from '../config';
 import Discord from '../components/Discord.astro';
@@ -25,6 +28,12 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
+const path = Astro.url.pathname;
+const inSection = (names: string[]) =>
+  names.some((n) => new RegExp(`/${n}(/|$)`).test(path)) ? 'true' : undefined;
+const universe = inSection(['lore', 'facciones', 'mecanicas', 'explorar']);
+const start = inSection(['guias', 'normativas']);
+const project = inSection(['actualizaciones', 'studio', 'contacto']);
 const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
 ---
 
@@ -84,8 +93,8 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
           Inicio
         </a>
         <details class="nav-group">
-          <summary>
-            Universo Kiroshi <span>⌄</span>
+          <summary aria-current={universe}>
+            Universo Kiroshi <span aria-hidden="true">⌄</span>
           </summary>
           <div>
             <a href={url('lore/')}>Lore de Night City</a>
@@ -95,8 +104,8 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
           </div>
         </details>
         <details class="nav-group">
-          <summary>
-            Cómo empezar <span>⌄</span>
+          <summary aria-current={start}>
+            Cómo empezar <span aria-hidden="true">⌄</span>
           </summary>
           <div>
             <a href={url('guias/primeros-pasos/')}>Primeros pasos</a>
@@ -105,8 +114,8 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
           </div>
         </details>
         <details class="nav-group">
-          <summary>
-            El proyecto <span>⌄</span>
+          <summary aria-current={project}>
+            El proyecto <span aria-hidden="true">⌄</span>
           </summary>
           <div>
             <a href={url('actualizaciones/')}>Actualizaciones</a>
@@ -117,21 +126,53 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
         <a class="nav-search" href={url('buscar/')}>
           Buscar
         </a>
-        {accountUrl && <a class="nav-account" href={accountUrl}>Mi cuenta</a>}
+        {accountUrl && (
+          <a class="nav-account" href={accountUrl}>
+            Mi cuenta
+          </a>
+        )}
         <Discord />
       </nav>
     </header>
+    <div class="nav-scrim" hidden></div>
     <main id="contenido">
       <slot />
     </main>
     <SiteFooter />
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
-      const nav = document.querySelector('#navigation');
-      toggle?.addEventListener('click', () => {
-        const open = toggle.getAttribute('aria-expanded') !== 'true';
+      const nav = document.querySelector<HTMLElement>('#navigation');
+      const scrim = document.querySelector<HTMLElement>('.nav-scrim');
+      const root = document.documentElement;
+      const isOpen = () => toggle?.getAttribute('aria-expanded') === 'true';
+      const setMenu = (open: boolean, refocus = false) => {
+        if (!toggle) return;
         toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? 'CERRAR ✕' : 'MENÚ ☰';
         nav?.classList.toggle('open', open);
+        root.classList.toggle('menu-open', open);
+        if (scrim) scrim.hidden = !open;
+        if (!open && refocus) toggle.focus();
+      };
+      toggle?.addEventListener('click', () => setMenu(!isOpen()));
+      scrim?.addEventListener('click', () => setMenu(false, true));
+      nav?.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('a')) setMenu(false);
+      });
+      matchMedia('(min-width:1181px)').addEventListener('change', (e) => {
+        if (e.matches) setMenu(false);
+      });
+      // Atrapa Tab dentro del panel abierto (botón + panel).
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || !isOpen() || !nav || !toggle) return;
+        const items = [toggle, ...nav.querySelectorAll<HTMLElement>('a[href],summary')].filter(
+          (el) => el.offsetParent !== null,
+        );
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) (e.preventDefault(), last.focus());
+        else if (!e.shiftKey && document.activeElement === last)
+          (e.preventDefault(), first.focus());
       });
       const groups = Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
       if (matchMedia('(max-width:760px)').matches)
@@ -151,11 +192,7 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
           const opened = groups.find((group) => group.open);
           closeGroups();
           opened?.querySelector('summary')?.focus();
-          if (toggle?.getAttribute('aria-expanded') === 'true') {
-            toggle.setAttribute('aria-expanded', 'false');
-            nav?.classList.remove('open');
-            toggle.focus();
-          }
+          if (isOpen()) setMenu(false, true);
         }
       });
       window.addEventListener(

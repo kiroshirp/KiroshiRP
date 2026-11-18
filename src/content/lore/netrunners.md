@@ -1,6 +1,6 @@
 ---
 title: "Netrunners"
-description: "Los netrunners son piratas informáticos con un sistema de interfaz aumentado cibernéticamente implantado en su cuerpo. Utilizando sus implantes de interfaz cerebro-computacional, deambula…"
+description: "Los netrunners son piratas informáticos con interfaz cibernética implantada que recorren la Red buscando sistemas que piratear e información que vender."
 category: "Subculturas"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

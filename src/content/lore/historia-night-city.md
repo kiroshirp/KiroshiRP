@@ -1,6 +1,6 @@
 ---
 title: "Historia de Night City"
-description: "Night City (NC) es una ciudad del Estado libre de California del Norte. Está ubicada en la costa oeste de los Nuevos Estados Unidos, en la Bahía San Morro y la Bahía de Del Coronado, al s…"
+description: "Night City es una ciudad del Estado libre de California del Norte, en la costa oeste de los Nuevos Estados Unidos, cerca de la frontera con California del Sur."
 category: "Historia"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

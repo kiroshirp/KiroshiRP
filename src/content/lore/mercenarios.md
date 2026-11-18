@@ -1,6 +1,6 @@
 ---
 title: "Mercenarios"
-description: "Los mercenarios, también conocidos como mercs (Solo en inglés), son asesinos a sueldo, guardaespaldas y soldados. Debido a su profesionalismo y entrenamiento constante, tienen la capacida…"
+description: "Los mercenarios, también conocidos como mercs (Solo en inglés), son asesinos a sueldo, guardaespaldas y soldados capaces de percibir el peligro y evitar daños."
 category: "Subculturas"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

@@ -1,6 +1,6 @@
 ---
 title: "Nómadas"
-description: "Los nómadas son, en su mayoría, antiguos empleados corporativos de baja estofa que fueron despedidos y expulsados de su hogar y ahora vagan las carreteras como refugiados y expatriados. Y…"
+description: "Los nómadas son antiguos empleados corporativos despedidos que vagan por las carreteras como refugiados y expatriados, apoyados por fuertes lazos familiares."
 category: "Subculturas"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

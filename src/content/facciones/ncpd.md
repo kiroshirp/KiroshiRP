@@ -1,6 +1,6 @@
 ---
 title: "NCPD"
-description: "Los policías (Cop en inglés) pueden variar desde simples gendarmes hasta detectives privados, tropas de asalto o agentes gubernamentales. Como figuras de autoridad, tienen la capacidad de…"
+description: "Los policías (Cop en inglés) van desde gendarmes hasta detectives privados, tropas de asalto o agentes del gobierno. Su autoridad les permite intimidar."
 category: "Organizaciones"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

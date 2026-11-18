@@ -20,10 +20,12 @@ import Base from '../layouts/Base.astro';
       type="search"
       placeholder="Prueba «liderazgo», «implantes» o «Watson»…"
       autocomplete="off"
+      enterkeyhint="search"
     />
-    <p id="search-status" role="status">
+    <p id="search-status" role="status" aria-live="polite">
       Escribe para consultar el archivo público.
     </p>
+    <div id="search-empty"></div>
     <div id="search-results"></div>
     <noscript>
       Activa JavaScript para utilizar la búsqueda. Puedes navegar por las secciones desde la
@@ -31,63 +33,177 @@ import Base from '../layouts/Base.astro';
     </noscript>
   </section>
   <script>
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     const input = document.querySelector<HTMLInputElement>('#global-search')!;
     const status = document.querySelector('#search-status')!;
     const output = document.querySelector('#search-results')!;
+    const empty = document.querySelector('#search-empty')!;
+    const IDLE = 'Escribe para consultar el archivo público.';
     let generation = 0;
     let timer: ReturnType<typeof setTimeout>;
     let engine: any;
-    input.addEventListener('input', () => {
+
+    const el = (tag: string, cls?: string, text?: string) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    };
+    const chips = (items: [string, string][]) => {
+      const box = el('div', 'search-chips');
+      for (const [label, href] of items) {
+        const a = el('a', 'search-chip', label) as HTMLAnchorElement;
+        a.href = href;
+        box.append(a);
+      }
+      return box;
+    };
+    // Solo se conservan los <mark> de Pagefind; el resto se vuelca como texto.
+    const markup = (target: HTMLElement, html: string) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      for (const n of doc.body.childNodes) {
+        if (n.nodeName === 'MARK') target.append(el('mark', '', n.textContent || ''));
+        else target.append(document.createTextNode(n.textContent || ''));
+      }
+    };
+    const highlight = (target: HTMLElement, text: string, q: string) => {
+      const words = q
+        .split(/\s+/)
+        .filter((w) => w.length > 1)
+        .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      if (!words.length) return void (target.textContent = text);
+      const re = new RegExp(`(${words.join('|')})`, 'i');
+      text.split(new RegExp(re, 'gi')).forEach((part, i) => {
+        // con un único grupo de captura, los índices impares son coincidencias
+        target.append(i % 2 ? el('mark', '', part) : document.createTextNode(part));
+      });
+    };
+    const suggestions = () => {
+      const q = (t: string) => `${base}/buscar/?q=${encodeURIComponent(t)}`;
+      empty.replaceChildren(
+        el('p', 'search-empty-title', 'Prueba con uno de estos temas'),
+        chips(
+          [
+            'Watson',
+            'Maelstrom',
+            'Normativa general',
+            'Cyberpsicosis',
+            'Primeros pasos',
+            'Discord',
+          ].map((t) => [t, q(t)] as [string, string]),
+        ),
+      );
+    };
+    const noResults = (q: string) => {
+      empty.replaceChildren(
+        el(
+          'p',
+          'search-empty-title',
+          `No hay resultados para «${q}». Revisa la ortografía o prueba con una palabra más general.`,
+        ),
+        chips([
+          ['Primeros pasos', `${base}/guias/primeros-pasos/`],
+          ['Normativas', `${base}/normativas/`],
+          ['Discord', `${base}/discord/`],
+        ]),
+      );
+    };
+    // Las sugerencias lanzan la búsqueda sin recargar.
+    empty.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href*="?q="]');
+      if (!a) return;
+      e.preventDefault();
+      input.value = new URL(a.href).searchParams.get('q') || '';
+      input.focus();
+      input.dispatchEvent(new Event('input'));
+    });
+
+    const run = async (q: string, token: number) => {
+      if (!q) {
+        output.replaceChildren();
+        empty.replaceChildren();
+        status.textContent = IDLE;
+        suggestions();
+        return;
+      }
+      try {
+        engine ||= await import(/* @vite-ignore */ `${base}/pagefind/pagefind.js`);
+        const search = await engine.search(q);
+        const results = await Promise.all(search.results.slice(0, 40).map((r: any) => r.data()));
+        if (token !== generation) return;
+        output.replaceChildren();
+        empty.replaceChildren();
+        status.textContent = search.results.length
+          ? `${search.results.length} archivos encontrados`
+          : 'Sin resultados';
+        if (!search.results.length) return noResults(q);
+        const groups = new Map<string, HTMLElement>();
+        for (const r of results) {
+          const category = r.filters?.seccion?.[0] || 'Archivo';
+          if (!groups.has(category)) {
+            const section = el('section');
+            section.append(el('h2', '', category));
+            output.append(section);
+            groups.set(category, section);
+          }
+          const list = r.sub_results?.length
+            ? r.sub_results
+            : [{ title: r.meta.title, url: r.url, excerpt: r.excerpt }];
+          for (const item of list.slice(0, 4)) {
+            const link = el('a', 'search-result') as HTMLAnchorElement;
+            link.href = item.url;
+            const title = el('h3');
+            highlight(title, item.title || r.meta.title, q);
+            const snippet = el('p');
+            markup(snippet, item.excerpt || '');
+            link.append(title, snippet);
+            groups.get(category)!.append(link);
+          }
+        }
+      } catch {
+        if (token === generation)
+          status.textContent =
+            'No se ha podido cargar el índice. Recarga la página o consulta las secciones del archivo.';
+      }
+    };
+
+    const schedule = (delay: number) => {
       clearTimeout(timer);
       const token = ++generation;
-      timer = setTimeout(async () => {
-        output.replaceChildren();
-        const q = input.value.trim();
-        if (!q) {
-          status.textContent = 'Escribe para consultar el archivo público.';
-          return;
-        }
-        status.textContent = 'Consultando…';
-        try {
-          engine ||= await import(
-            /* @vite-ignore */ `${import.meta.env.BASE_URL.replace(/\/$/, '')}/pagefind/pagefind.js`
-          );
-          const search = await engine.search(q);
-          const results = await Promise.all(search.results.slice(0, 40).map((r: any) => r.data()));
-          if (token !== generation) return;
-          status.textContent = `${search.results.length} archivos encontrados`;
-          const groups = new Map<string, HTMLElement>();
-          for (const r of results) {
-            const category = r.filters?.seccion?.[0] || 'Archivo';
-            if (!groups.has(category)) {
-              const section = document.createElement('section');
-              const heading = document.createElement('h2');
-              heading.textContent = category;
-              section.append(heading);
-              output.append(section);
-              groups.set(category, section);
-            }
-            const list = r.sub_results?.length
-              ? r.sub_results
-              : [{ title: r.meta.title, url: r.url, excerpt: r.excerpt }];
-            for (const item of list.slice(0, 4)) {
-              const link = document.createElement('a');
-              link.className = 'search-result';
-              link.href = item.url;
-              const title = document.createElement('h3');
-              title.textContent = item.title || r.meta.title;
-              const snippet = document.createElement('p');
-              snippet.textContent = (item.excerpt || '').replace(/<[^>]*>/g, '');
-              link.append(title, snippet);
-              groups.get(category)!.append(link);
-            }
-          }
-        } catch {
-          if (token === generation)
-            status.textContent =
-              'No se ha podido cargar el índice. Recarga la página o consulta las secciones del archivo.';
-        }
-      }, 160);
+      timer = setTimeout(() => run(input.value.trim(), token), delay);
+    };
+    input.addEventListener('input', () => {
+      const q = input.value.trim();
+      const url = new URL(location.href);
+      if (q) url.searchParams.set('q', q);
+      else url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+      schedule(160);
     });
+    const items = () => [...output.querySelectorAll<HTMLElement>('a.search-result')];
+    document.addEventListener('keydown', (e) => {
+      const list = items();
+      const i = list.indexOf(document.activeElement as HTMLElement);
+      if (e.key === 'Escape' && document.activeElement === input && input.value) {
+        input.value = '';
+        input.dispatchEvent(new Event('input'));
+      } else if (
+        e.key === 'ArrowDown' &&
+        list.length &&
+        (i >= 0 || document.activeElement === input)
+      ) {
+        e.preventDefault();
+        list[Math.min(i + 1, list.length - 1)].focus();
+      } else if (e.key === 'ArrowUp' && i >= 0) {
+        e.preventDefault();
+        (i ? list[i - 1] : input).focus();
+      }
+    });
+
+    const initial = new URLSearchParams(location.search).get('q') || '';
+    input.value = initial;
+    schedule(0);
+    // En móvil con ?q= no se abre el teclado.
+    if (!initial || !matchMedia('(pointer: coarse)').matches) input.focus();
   </script>
 </Base>

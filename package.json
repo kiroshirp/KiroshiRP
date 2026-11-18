@@ -10,6 +10,7 @@
     "check": "astro check",
     "admin:test": "node --test admin/tests/*.test.mjs",
     "admin:deploy": "node scripts/deploy-admin.mjs",
+    "admin:backup": "node scripts/backup-turso.mjs",
     "admin:check": "wrangler deploy --dry-run --outdir .admin-build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -21,7 +22,6 @@
     "@fontsource/rajdhani": "^5.2.0",
     "@fontsource/share-tech-mono": "^5.2.0",
     "astro": "^7.4.0",
-    "yaml": "2.9.1",
     "zod": "4.6.7"
   },
   "devDependencies": {

@@ -42,7 +42,11 @@ const relatedEntries = await Promise.all(
 );
 ---
 
-<Base title={entry.data.title} description={entry.data.description} active={section.id}>
+<Base
+  title={`${entry.data.title} · ${section.title}`}
+  description={entry.data.description}
+  active={section.id}
+>
   <div
     class="section article-shell"
     data-pagefind-body

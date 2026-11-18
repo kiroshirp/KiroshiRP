@@ -1,6 +1,6 @@
 ---
 title: "Fixers"
-description: "Un arreglador (Fixer en inglés) es un traficante de poder de la Calle, un hombre cuya misión es hacer que pasen cosas en la ciénaga semilegal que es el mundo de Cyberpunk. Un arreglador n…"
+description: "Un arreglador (Fixer en inglés) es un traficante de poder de la Calle que hace que pasen cosas en la ciénaga semilegal de Cyberpunk, gracias a sus contactos."
 category: "Subculturas"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

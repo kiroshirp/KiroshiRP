@@ -18,7 +18,7 @@ El proyecto funciona y tiene buenas pruebas de seguridad en el panel. Los proble
 
 1. **Código comprimido a mano.** Unas 2.000 líneas de código reparten 323 KB, y 162 líneas pasan de 300 caracteres (`src/pages/*.astro`, `admin/*.mjs`, `admin/ui/app.js`). Es difícil de revisar, de comparar en git y de modificar sin romper algo.
 2. **CSS en siete capas superpuestas.** `global`, `visual`, `explorer`, `refinement`, `optics`, `clean` y `reference` se importan en cadena y se sobrescriben entre sí (por ejemplo `clean.css` redefine la cabecera y el `main`). Hay selectores repetidos en varios archivos y 13 usos de `!important`. Cualquier cambio visual exige adivinar qué capa gana.
-3. **Datos y textos dentro del código.** En `src/pages/[section].astro` viven las listas de destacados (`picks`) y los textos de introducción (`notes`). Deberían estar en `src/data/`, como ya ocurre con `portal.json` y `home.json`.
+3. **Datos y textos dentro del código.** Los destacados (`picks`) y los textos de introducción (`note`) ya están en `src/data/sections.json`. El resto de constantes de `[section].astro`, `index.astro` y `DistrictAtlas.astro` deberían estar en `src/data/`, como ya ocurre con `portal.json` y `home.json`.
 4. **Archivos grandes sin dividir.** `admin/ui/app.js` (25 KB, una sola línea lógica por función larga), `admin/service.mjs` y `scripts/seed-content.mjs` (28 KB, ya sin uso en la compilación).
 5. **Despliegue duplicado y confuso.** El README dice que Cloudflare Pages publica `main`, pero `.github/workflows/deploy.yml` sigue compilando y publicando en GitHub Pages en cada push a `main`. Solo debería existir para la redirección heredada, o desaparecer.
 6. **Sin integración continua en ramas.** Nada ejecuta build ni tests en `pruebas` ni en pull requests. Hoy los fallos se descubren tras publicar.
@@ -113,7 +113,7 @@ Se mantiene, porque no cuesta nada y conserva los enlaces antiguos. Queda como �
 - Se mantuvo la política de cabeceras (CSP) y el orden exacto de los atributos de la cookie; las 24 pruebas de seguridad pasan sin cambios.
 - Nueva prueba `tests/admin-ui.test.mjs` con navegador real: entrar, abrir artículo, guardar borrador, validar, eliminar borrador, crear artículo, abrir configuración e imágenes, salir. Pasa igual contra el panel original y el refactorizado. Se omite si Playwright no está instalado; la CI lo instala.
 - La CI ahora también ejecuta `npm run admin:check` (compilación del Worker en seco).
-- `scripts/publish-admin-source.mjs` mantiene una lista fija de archivos que ya estaba desactualizada (no incluye `editorial.mjs`, `local-store.mjs` ni `sections.json`). Se añadieron los archivos nuevos, pero conviene decidir en la fase 5 si sigue haciendo falta.
+- `scripts/publish-admin-source.mjs` tenía una lista fija de archivos ya desactualizada (no incluía `editorial.mjs`, `local-store.mjs` ni `sections.json`). Se eliminó tras la fusión (ver más abajo).
 
 ## Notas de la fase 5
 

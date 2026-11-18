@@ -1,10 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
 import { url } from '../config';
 import documents from '../data/regulation-documents.json';
 const { entry, section } = Astro.props;
 const document =
   section === 'normativas' ? documents[entry.id as keyof typeof documents] : undefined;
 const pending = entry.data.status === 'Por documentar';
+// El estado general de la sección se dice una vez en la cabecera; la ficha solo lo muestra si difiere.
+const siblings = (await getCollection(section as any)) as any[];
+const counts = new Map<string, number>();
+siblings.forEach((e) => counts.set(e.data.status, (counts.get(e.data.status) || 0) + 1));
+const common = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+const showStatus = counts.size > 1 && entry.data.status !== common;
 ---
 
 {section === 'normativas' ? (
@@ -43,22 +50,15 @@ const pending = entry.data.status === 'Por documentar';
     )}
     <div class="card-category">
       <span>{entry.data.category}</span>
-      <span aria-hidden="true">↗</span>
     </div>
     <div class="card-copy">
-      <div class="card-meta">
-        {section === 'normativas' && (
-          <span class="regulation-number mono">{String(entry.data.order).padStart(2, '0')}</span>
-        )}
-        <span>{entry.data.origin === 'CANON CYBERPUNK' ? 'UNIVERSO CYBERPUNK' : 'KIROSHIRP'}</span>
-        <span class="mono">
-          {pending
-            ? 'EN PREPARACIÓN'
-            : section === 'actualizaciones'
-              ? entry.data.updated.toLocaleDateString('es-ES', { timeZone: 'UTC' })
-              : 'LECTURA PÚBLICA'}
-        </span>
-      </div>
+      {section === 'actualizaciones' && (
+        <div class="card-meta">
+          <span class="mono">
+            {entry.data.updated.toLocaleDateString('es-ES', { timeZone: 'UTC' })}
+          </span>
+        </div>
+      )}
       <h3>{entry.data.title}</h3>
       {section === 'normativas' && (
         <span class="regulation-progress">
@@ -67,14 +67,8 @@ const pending = entry.data.status === 'Por documentar';
       )}
       <p>{entry.data.description}</p>
       <div class="card-foot">
-        <span class="badge">{entry.data.status}</span>
-        <span class="mono">
-          {entry.data.factionStatus
-            ? 'KIROSHIRP: ' + entry.data.factionStatus.toUpperCase()
-            : pending
-              ? 'VER QUÉ FALTA →'
-              : 'DESCUBRIR →'}
-        </span>
+        {showStatus && <span class="badge">{entry.data.status}</span>}
+        <span class="mono">{pending ? 'VER QUÉ FALTA →' : 'DESCUBRIR →'}</span>
       </div>
     </div>
   </a>

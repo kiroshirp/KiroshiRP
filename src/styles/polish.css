@@ -1,0 +1,118 @@
+/* polish: estilos de esta mejora; nada más los toca. */
+/* Envoltorio solo para el indexador de búsqueda: no debe alterar la maquetación. */
+.pf-body {
+  display: contents;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Tarjetas de índice: una fila de metadatos y un solo indicador de acción. */
+.card-category > span:only-child {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+.card-copy .card-meta {
+  margin-bottom: 12px;
+}
+.section-general-status {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-general-status .mono {
+  font-size: 0.75rem;
+  color: var(--yellow);
+}
+/* Cuatro elementos: rejilla 2x2 en vez de 3 + 1 huérfana. */
+@media (min-width: 761px) {
+  .cards:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Sin entradas publicadas: solo el aviso, sin buscador, filtros ni contador. */
+.library:has(> div.empty) :is(.filter-bar, #result-count, .library-heading) {
+  display: none;
+}
+
+/* Páginas de información: línea de lectura cómoda e índice lateral. */
+.info-prose {
+  max-width: 72ch;
+}
+.info-prose p,
+.info-prose li {
+  max-width: 72ch;
+}
+.info-page.article-grid {
+  grid-template-columns: 235px minmax(0, 72ch);
+  justify-content: start;
+}
+.info-actions {
+  margin-top: 36px;
+}
+.info-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.info-links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.info-links a:hover,
+.info-links a:focus-visible {
+  border-color: #e8c96c99;
+}
+.info-links strong {
+  font:
+    700 1.4rem Rajdhani,
+    sans-serif;
+}
+.info-links span {
+  color: var(--yellow);
+}
+@media (max-width: 900px) {
+  .info-page.article-grid {
+    display: block;
+  }
+  .info-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Portada: etiquetas mono legibles y fondo de reserva de las tarjetas de inicio. */
+.clean-hero .clean-status,
+.clean-path-grid .clean-path-card .mono,
+.clean-section .eyebrow,
+.clean-section .portal-directory a .mono,
+.clean-section .discord-access-content .mono {
+  font-size: 12px;
+}
+.clean-path-art {
+  background: linear-gradient(145deg, var(--navy-2), var(--navy) 60%, var(--bg));
+}
+
+/* Explorador: al saltar al detalle no queda tapado por la cabecera fija. */
+.atlas-panel {
+  scroll-margin-top: 84px;
+}
+.atlas-panel h2[id^='atlas-title-'] {
+  scroll-margin-top: 84px;
+}

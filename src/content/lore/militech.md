@@ -1,6 +1,6 @@
 ---
 title: "Militech"
-description: "Militech International Armaments Corporation, abreviada como Militech o MTI y fundada como Armatech-Luccessi, es una megacorporación estadounidense con sede en Washington D.C. Se especial…"
+description: "Militech, abreviada como MTI y fundada como Armatech-Luccessi, es una megacorporación estadounidense con sede en Washington D.C. que fabrica y distribuye armas."
 category: "Corporaciones"
 status: "Documentado"
 origin: "CANON CYBERPUNK"

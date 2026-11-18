@@ -67,24 +67,29 @@ export class AdminState {
     });
   }
   async alarm() {
-    await this.migrate();
-    const records = await this.store.list({ prefix: '' });
-    const expired = [];
-    for (const [key, value] of records)
-      if (value.expires < Date.now()) {
-        await this.store.delete(key);
-        if (key.startsWith('access-application:')) {
-          await this.store.delete('access-steam:' + value.steamId);
-          expired.push(value.discordId);
+    try {
+      await this.migrate();
+      const records = await this.store.list({ prefix: '' });
+      const expired = [];
+      for (const [key, value] of records)
+        if (value.expires < Date.now()) {
+          await this.store.delete(key);
+          if (key.startsWith('access-application:')) {
+            await this.store.delete('access-steam:' + value.steamId);
+            expired.push(value.discordId);
+          }
         }
+      if (expired.length) {
+        const index = (await this.store.get('access-index')) || [];
+        await this.store.put(
+          'access-index',
+          index.filter((id) => !expired.includes(id)),
+        );
       }
-    if (expired.length) {
-      const index = (await this.store.get('access-index')) || [];
-      await this.store.put(
-        'access-index',
-        index.filter((id) => !expired.includes(id)),
-      );
+    } catch (error) {
+      console.error('Limpieza de caducados fallida:', error.message);
     }
+    // Pase lo que pase, la limpieza se vuelve a programar.
     await this.state.storage.setAlarm(Date.now() + 3600000);
   }
 }

@@ -16,11 +16,10 @@ const news = (await getCollection('actualizaciones'))
   <section class="clean-hero" aria-labelledby="home-title">
     <div class="clean-hero-copy">
       <h1 id="home-title">
-        Roleplay <em>KiroshiRP</em>
+        <span class="hero-kicker mono">KiroshiRP · Roleplay de Cyberpunk 2077</span>
+        Hazte un nombre
         <br />
-        Cyberpunk 2077
-        <br />
-        en Night City.
+        en <em>Night City</em>.
       </h1>
       <p class="clean-hero-lead">{home.texts.subtitulo}</p>
       <p>{home.texts.descripcion}</p>
@@ -37,6 +36,8 @@ const news = (await getCollection('actualizaciones'))
     <div class="clean-hero-media">
       <img
         src={url('images/krp-arrival.webp')}
+        srcset={`${url('images/krp-arrival-640.webp')} 640w, ${url('images/krp-arrival-960.webp')} 960w, ${url('images/krp-arrival.webp')} 1672w`}
+        sizes="(max-width: 900px) 100vw, 60vw"
         alt="Un viajero contempla la ciudad desde una carretera en el desierto"
         width="1672"
         height="941"
@@ -238,3 +239,16 @@ const news = (await getCollection('actualizaciones'))
     </div>
   </section>
 </Base>
+
+<style>
+  .hero-kicker {
+    display: block;
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+</style>

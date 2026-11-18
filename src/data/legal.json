@@ -46,11 +46,54 @@
       {
         "title": "Un portal público",
         "paragraphs": [
-          "El acceso a Discord requiere identificarte con tu cuenta de Discord y declarar tu SteamID64. Se guardan tu identificador y nombre de Discord, el SteamID declarado, la fecha y el resultado de la solicitud en el servicio privado de Cloudflare Workers. El SteamID no se verifica con Steam. Estos datos se eliminan a los 90 días o antes si el equipo borra la solicitud desde el administrador. No se publican en el repositorio.",
-          "La base jurídica de esta solicitud voluntaria es el consentimiento que das al enviar el formulario. Puedes retirarlo y eliminar tu solicitud al volver a identificarte con Discord en la misma página de acceso, o escribir a kiroshirp@gmail.com. Retirar el consentimiento no deshace el tratamiento anterior ni elimina automáticamente tu pertenencia al servidor de Discord.",
-          "El servicio de acceso utiliza cookies temporales para completar la identificación y mantener la sesión durante 15 minutos. No incorpora analítica ni publicidad.",
-          "Responsable indicado por el proyecto: White, fundador de KiroshiRP. Para consultas sobre estos datos, escribe a kiroshirp@gmail.com.",
-          "La administración del equipo utiliza un servicio privado separado. Su cookie de sesión se emplea exclusivamente para autenticar al administrador y caduca a las dos horas. Las credenciales y los tokens se procesan en ese servicio y no se incluyen en el portal público."
+          "Puedes leer toda la web sin cuenta. El portal no incorpora analítica ni publicidad. Solo se piden datos si decides iniciar sesión con Discord, solicitar el acceso, usar tu cuenta o enviar una solicitud para unirte al equipo."
+        ]
+      },
+      {
+        "title": "Acceso a Discord y solicitud de invitación",
+        "paragraphs": [
+          "Para solicitar la invitación te identificas con tu cuenta de Discord (solo se lee tu identificador y tu nombre) y declaras tu SteamID64. Se guardan tu identificador y nombre de Discord, el SteamID declarado, la fecha y el resultado de la solicitud. El SteamID no se verifica con Steam.",
+          "Estos datos se eliminan a los 90 días, o antes si el equipo borra la solicitud o tú la eliminas al volver a identificarte en la misma página de acceso. La sesión de esta página dura 15 minutos. Para limitar abusos se guarda durante 15 minutos un resumen irreversible de tu dirección IP al enviar el formulario."
+        ]
+      },
+      {
+        "title": "Tu cuenta en la web",
+        "paragraphs": [
+          "Al iniciar sesión en «Mi cuenta» con Discord se guardan tu identificador y nombre de Discord, la fecha de alta y la de tu último acceso. La sesión dura 8 horas y se identifica con una cookie aleatoria; en el servicio solo se conserva un resumen irreversible de ese identificador. Desde «Mi cuenta» puedes cerrar tu sesión y las demás.",
+          "Los datos de la cuenta se conservan hasta que los elimines con «Eliminar mis datos» (en Mi cuenta), que borra a la vez la cuenta, la ficha, las solicitudes y las sesiones, o hasta que el equipo borre la cuenta desde la administración. También puedes pedirlo escribiendo a kiroshirp@gmail.com."
+        ]
+      },
+      {
+        "title": "Ficha de personaje",
+        "paragraphs": [
+          "Si rellenas la ficha de personaje se guarda el texto que escribes (identidad, aspecto, historia, vínculos y los enlaces a imágenes que pegues; no se suben archivos). No se publica en la web. Se conserva hasta que la elimines o elimines tu cuenta.",
+          "Solo tú puedes editarla. El equipo de administración puede leerla para moderar, salvo el apartado «Secretos», que solo ves tú."
+        ]
+      },
+      {
+        "title": "Solicitud para unirte al equipo",
+        "paragraphs": [
+          "Si envías la solicitud se guardan tus respuestas (por ejemplo nombre o apodo, edad, usuario de Discord, país y zona horaria, disponibilidad, experiencia y respuestas abiertas), la fecha y el estado de revisión (pendiente, aceptada o rechazada), que verás en tu cuenta. Solo las lee el equipo de administración.",
+          "Se conservan 90 días y solo puede haber una solicitud por cuenta. Puedes eliminarla desde «Mi cuenta» o escribiendo a kiroshirp@gmail.com."
+        ]
+      },
+      {
+        "title": "Dónde se guardan los datos",
+        "paragraphs": [
+          "Los datos se procesan en un servicio privado de Cloudflare Workers y se guardan en una base de datos de Turso. La identificación con Discord se hace mediante la propia plataforma de Discord. Estos proveedores tratan datos técnicos conforme a sus propias políticas. No se publican en el repositorio ni se comparten con terceros para publicidad."
+        ]
+      },
+      {
+        "title": "Cookies",
+        "paragraphs": [
+          "Solo se usan cookies necesarias, sin analítica ni publicidad: una cookie temporal (10 minutos) para completar la identificación con Discord, la cookie de sesión de tu cuenta (8 horas) o de la página de acceso (15 minutos), y, solo para el equipo, la cookie de la administración (2 horas)."
+        ]
+      },
+      {
+        "title": "Consentimiento, derechos y contacto",
+        "paragraphs": [
+          "La base jurídica de estos tratamientos voluntarios es el consentimiento que das al iniciar sesión o enviar un formulario. Puedes retirarlo y eliminar tus datos desde «Mi cuenta» o escribiendo a kiroshirp@gmail.com. Retirar el consentimiento no deshace el tratamiento anterior ni elimina automáticamente tu pertenencia al servidor de Discord.",
+          "Responsable indicado por el proyecto: White, fundador de KiroshiRP. Para consultas sobre estos datos, escribe a kiroshirp@gmail.com."
         ]
       },
       {
@@ -68,7 +111,7 @@
       {
         "title": "Revisión pendiente",
         "paragraphs": [
-          "La identificación legal del responsable y la base jurídica del tratamiento requieren revisión. La solicitud de acceso no verifica la titularidad de Steam."
+          "La identificación legal del responsable y la base jurídica del tratamiento requieren revisión. Las solicitudes no verifican la titularidad de Steam."
         ]
       }
     ]

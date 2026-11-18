@@ -24,13 +24,15 @@ const extras = sectionExtras[section.id];
 ---
 
 <Base title={section.title} active={section.id}>
-  <SectionIntro
-    title={section.title}
-    description={section.subtitle}
-    eyebrow={`${section.code} / ${section.label}`}
-    image={extras.cover}
-    count={entries.length}
-  />
+  <div class="pf-body" data-pagefind-body data-pagefind-filter={`seccion:${section.title}`}>
+    <SectionIntro
+      title={section.title}
+      description={section.subtitle}
+      eyebrow={`${section.code} / ${section.label}`}
+      image={extras.cover}
+      count={entries.length}
+    />
+  </div>
   {section.id === 'lore' && (
     <a class="atlas-library-entry" href={url('explorar/')}>
       <span class="mono">EXPLORACIÓN VISUAL</span>
