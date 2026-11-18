@@ -196,6 +196,7 @@ select:focus-visible {
   color: var(--err);
 }
 .wrap {
+  position: relative;
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -457,6 +458,11 @@ tr.det > td {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px;
 }
+tr.det > td > .det-grid {
+  position: sticky;
+  left: 0;
+  width: min(100%, calc(100vw - 48px));
+}
 .card {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -498,4 +504,21 @@ tr.det > td {
   margin-top: 12px;
   color: var(--mute);
   font-size: 0.82rem;
+}
+
+/* Móvil: área táctil de 44px y columna de acciones siempre visible */
+@media (max-width: 700px) {
+  button,
+  input,
+  select,
+  .nav a {
+    min-height: 44px;
+  }
+  tr:not(.det) > td:last-child,
+  th:last-child {
+    position: sticky;
+    right: 0;
+    background: var(--panel);
+    box-shadow: -8px 0 12px -8px rgba(0, 0, 0, 0.6);
+  }
 }
