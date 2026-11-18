@@ -19,6 +19,8 @@
     "texto": "Cuando haya algo confirmado aparecerá aquí, con su precio y sus beneficios."
   },
   "niveles": [],
+  "huecos": 3,
+  "huecosLeyenda": "La cantidad, los precios y los beneficios de los niveles no están decididos.",
   "destinoTitulo": "Adónde iría el dinero",
   "destinoLead": "Previsto, sujeto a cambios.",
   "destino": [
