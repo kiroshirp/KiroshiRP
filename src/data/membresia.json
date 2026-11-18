@@ -1,0 +1,43 @@
+{
+  "estado": "Próximamente",
+  "eyebrow": "KIROSHIRP / MEMBRESÍA",
+  "titulo": "Membresía",
+  "lead": "Una forma de apoyar KiroshiRP que todavía estamos definiendo.",
+  "descripcion": "KiroshiRP lo sostiene su comunidad. La membresía sería una manera voluntaria de ayudar a cubrir el servidor, la web y el tiempo que lleva construir nuevas funciones. Todavía no se puede contratar nada.",
+  "aviso": "Todo lo que ves aquí es un adelanto y está sujeto a cambios. No hay precios, niveles ni fechas confirmados.",
+  "garantiaTitulo": "Sin ventajas en el juego",
+  "garantiaLead": "Nuestra intención es que apoyar el proyecto nunca dé poder sobre los demás jugadores. Una membresía no compraría:",
+  "garantias": [
+    "Dinero del juego, objetos, armas ni vehículos",
+    "Rangos, trabajos ni saltarse la solicitud de acceso",
+    "Ninguna ventaja sobre otros jugadores"
+  ],
+  "nivelesTitulo": "Niveles de apoyo",
+  "nivelesLead": "Estamos estudiando cómo organizar el apoyo. Los niveles, los precios y los beneficios todavía no existen.",
+  "nivelesVacio": {
+    "titulo": "Por definir",
+    "texto": "Cuando haya algo confirmado aparecerá aquí, con su precio y sus beneficios."
+  },
+  "niveles": [],
+  "destinoTitulo": "Adónde iría el dinero",
+  "destinoLead": "Previsto, sujeto a cambios.",
+  "destino": [
+    {
+      "titulo": "Servidor y web",
+      "texto": "Mantener en marcha el servidor, la web y las herramientas de la comunidad."
+    },
+    {
+      "titulo": "Desarrollo",
+      "texto": "Tiempo para construir nuevas funciones y corregir errores."
+    },
+    {
+      "titulo": "Comunidad",
+      "texto": "Eventos y actividades para quienes forman parte de KiroshiRP."
+    }
+  ],
+  "cierre": "Los mods seguirán siendo gratuitos, hasta nuevo aviso. KiroshiRP es un proyecto de fans, sin relación oficial con CD PROJEKT RED.",
+  "cta": {
+    "texto": "Las novedades se publicarán en Actualizaciones cuando estén confirmadas.",
+    "boton": "Seguir el proyecto en Discord"
+  }
+}

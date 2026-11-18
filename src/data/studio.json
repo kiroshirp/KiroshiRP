@@ -4,7 +4,7 @@
   "titulo": "Kiroshi Studio",
   "lead": "El espacio de la comunidad para los recursos creados por KiroshiRP.",
   "descripcion": "Mods, arte y sonido pensados para Night City y para quienes la viven. Todo pasará por la revisión del equipo antes de publicarse. Esto es un adelanto de hacia dónde vamos.",
-  "aviso": "Todavía no hay catálogo ni fechas. Las novedades se publicarán en Actualizaciones cuando estén confirmadas.",
+  "aviso": "Todavía no hay catálogo ni fechas. Todo está sujeto a cambios; las novedades se publicarán en Actualizaciones cuando estén confirmadas.",
   "lineasTitulo": "Líneas previstas",
   "lineas": [
     {
@@ -35,7 +35,7 @@
   "principiosTitulo": "Cómo lo planteamos",
   "principios": [
     {
-      "titulo": "Los mods serán gratuitos",
+      "titulo": "Los mods serán gratuitos, hasta nuevo aviso",
       "texto": "Sin acceso de pago ni versiones exclusivas. Como mucho, enlaces de donación voluntaria, siguiendo las pautas de CD PROJEKT RED para el contenido de fans."
     },
     {

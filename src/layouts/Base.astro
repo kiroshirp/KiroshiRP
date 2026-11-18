@@ -29,11 +29,46 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const shareImage = new URL(url('images/krp-share-v2.jpg'), Astro.site);
 const path = Astro.url.pathname;
-const inSection = (names: string[]) =>
+const inSection = (names: string[]): 'true' | undefined =>
   names.some((n) => new RegExp(`/${n}(/|$)`).test(path)) ? 'true' : undefined;
 const universe = inSection(['lore', 'facciones', 'mecanicas', 'explorar']);
 const start = inSection(['guias', 'normativas']);
-const project = inSection(['actualizaciones', 'studio', 'contacto']);
+const project = inSection(['actualizaciones', 'studio', 'membresia', 'contacto']);
+const here = path.replace(/\/$/, '');
+const cur = (href: string) => (href.replace(/\/$/, '') === here ? 'page' : undefined);
+const groups = [
+  {
+    label: 'Universo Kiroshi',
+    current: universe,
+    links: [
+      ['Lore de Night City', 'lore/', 'Toda ciudad tiene una historia.'],
+      ['Facciones', 'facciones/', 'Nadie llega lejos en solitario.'],
+      ['Mecánicas', 'mecanicas/', 'Tus decisiones dejan huella.'],
+      ['Explorar la ciudad', 'explorar/', 'Distritos, lugares y organizaciones.'],
+    ],
+  },
+  {
+    label: 'Cómo empezar',
+    current: start,
+    cta: true,
+    links: [
+      ['Primeros pasos', 'guias/primeros-pasos/', 'Tu primer paso empieza aquí.'],
+      ['Normativas', 'normativas/', 'Consulta el manual de convivencia.'],
+      ['Preguntas frecuentes', 'guias/preguntas-frecuentes/', 'Las primeras respuestas.'],
+      ['Todas las guías', 'guias/', 'Amplía la lectura a tu ritmo.'],
+    ],
+  },
+  {
+    label: 'El proyecto',
+    current: project,
+    links: [
+      ['Actualizaciones', 'actualizaciones/', 'Novedades confirmadas'],
+      ['Kiroshi Studio', 'studio/', 'Recursos de la comunidad · en preparación'],
+      ['Membresía', 'membresia/', 'Apoyo al proyecto · próximamente'],
+      ['Contacto', 'contacto/', 'Cómo escribir al equipo'],
+    ],
+  },
+];
 const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
 ---
 
@@ -92,46 +127,50 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
         <a href={url()} aria-current={active === 'inicio' ? 'page' : undefined}>
           Inicio
         </a>
-        <details class="nav-group">
-          <summary aria-current={universe}>
-            Universo Kiroshi <span aria-hidden="true">⌄</span>
-          </summary>
-          <div>
-            <a href={url('lore/')}>Lore de Night City</a>
-            <a href={url('facciones/')}>Facciones</a>
-            <a href={url('mecanicas/')}>Mecánicas</a>
-            <a href={url('explorar/')}>Explorar la ciudad</a>
-          </div>
-        </details>
-        <details class="nav-group">
-          <summary aria-current={start}>
-            Cómo empezar <span aria-hidden="true">⌄</span>
-          </summary>
-          <div>
-            <a href={url('guias/primeros-pasos/')}>Primeros pasos</a>
-            <a href={url('guias/')}>Todas las guías</a>
-            <a href={url('normativas/')}>Normativas</a>
-          </div>
-        </details>
-        <details class="nav-group">
-          <summary aria-current={project}>
-            El proyecto <span aria-hidden="true">⌄</span>
-          </summary>
-          <div>
-            <a href={url('actualizaciones/')}>Actualizaciones</a>
-            <a href={url('studio/')}>Kiroshi Studio</a>
-            <a href={url('contacto/')}>Contacto</a>
-          </div>
-        </details>
-        <a class="nav-search" href={url('buscar/')}>
-          Buscar
-        </a>
-        {accountUrl && (
-          <a class="nav-account" href={accountUrl}>
-            Mi cuenta
+        {groups.map((g) => (
+          <details class="nav-group">
+            <summary aria-current={g.current}>
+              {g.label} <span aria-hidden="true">⌄</span>
+            </summary>
+            <div>
+              {g.links.map(([t, h, d]) => (
+                <a href={url(h)} aria-current={cur(url(h))}>
+                  <span class="nav-t">{t}</span>
+                  <span class="nav-d">{d}</span>
+                </a>
+              ))}
+              {g.cta && (
+                <a class="nav-cta" href={url('discord/')}>
+                  Solicitar acceso →
+                </a>
+              )}
+            </div>
+          </details>
+        ))}
+        <div class="nav-actions">
+          <a class="nav-search" href={url('buscar/')}>
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+            Buscar
           </a>
-        )}
-        <Discord />
+          {accountUrl && (
+            <a class="nav-account" href={accountUrl}>
+              Mi cuenta
+            </a>
+          )}
+          <Discord />
+        </div>
       </nav>
     </header>
     <div class="nav-scrim" hidden></div>
@@ -157,7 +196,7 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
       toggle?.addEventListener('click', () => setMenu(!isOpen()));
       scrim?.addEventListener('click', () => setMenu(false, true));
       nav?.addEventListener('click', (e) => {
-        if ((e.target as Element).closest('a')) setMenu(false);
+        if ((e.target as Element).closest('a')) (closeGroups(), setMenu(false));
       });
       matchMedia('(min-width:1181px)').addEventListener('change', (e) => {
         if (e.matches) setMenu(false);
@@ -174,14 +213,14 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
         else if (!e.shiftKey && document.activeElement === last)
           (e.preventDefault(), first.focus());
       });
-      const groups = Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
+      const groupEls = Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-group'));
       if (matchMedia('(max-width:760px)').matches)
         document.querySelector('.toc details')?.removeAttribute('open');
-      const closeGroups = () => groups.forEach((group) => (group.open = false));
-      groups.forEach((group) =>
+      const closeGroups = () => groupEls.forEach((group) => (group.open = false));
+      groupEls.forEach((group) =>
         group.addEventListener('toggle', () => {
           if (group.open)
-            groups.filter((other) => other !== group).forEach((other) => (other.open = false));
+            groupEls.filter((other) => other !== group).forEach((other) => (other.open = false));
         }),
       );
       document.addEventListener('click', (event) => {
@@ -189,7 +228,7 @@ const accountUrl = site.adminUrl ? new URL('/cuenta/', site.adminUrl).href : '';
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          const opened = groups.find((group) => group.open);
+          const opened = groupEls.find((group) => group.open);
           closeGroups();
           opened?.querySelector('summary')?.focus();
           if (isOpen()) setMenu(false, true);

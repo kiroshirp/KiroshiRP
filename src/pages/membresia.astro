@@ -1,0 +1,142 @@
+---
+import '../styles/membership.css';
+import Base from '../layouts/Base.astro';
+import { url } from '../config';
+import m from '../data/membresia.json';
+
+// Iconos vectoriales por línea (trazo, sin imágenes incrustadas).
+const icons = [
+  '<rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/>',
+  '<path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/>',
+  '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-4 3-6 6.5-6s6 2 6.5 6M17 4.5a3.5 3.5 0 010 7M18 14c2 .6 3.2 2.5 3.5 6"/>',
+];
+const niveles = m.niveles as {
+  nombre: string;
+  precio?: string;
+  beneficios?: string[];
+  estado?: string;
+}[];
+---
+
+<Base
+  active="membresia"
+  title="Membresía · Apoyar KiroshiRP, un adelanto"
+  description="Adelanto de la membresía de KiroshiRP: una forma voluntaria de apoyar el proyecto, sin ventajas en el juego. Nada está confirmado y todo puede cambiar."
+>
+  <div class="kmb" data-pagefind-body>
+    <header class="kmb-hero" aria-labelledby="kmb-title">
+      <p class="kmb-route">
+        <span class="kmb-chip">
+          <span aria-hidden="true"></span>
+          {m.estado}
+        </span>
+        <span class="mono">{m.eyebrow}</span>
+      </p>
+      <h1 id="kmb-title">
+        {m.titulo}
+        <span class="accent">.</span>
+      </h1>
+      <p class="kmb-lead">{m.lead}</p>
+      <p>{m.descripcion}</p>
+      <div class="kmb-actions">
+        <a class="button primary" href={url('discord/')}>
+          Seguir el proyecto en Discord <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </header>
+
+    <p class="kmb-notice" role="note">
+      {m.aviso}
+    </p>
+
+    <section class="kmb-guarantee" aria-labelledby="kmb-garantia-title">
+      <h2 id="kmb-garantia-title">{m.garantiaTitulo}</h2>
+      <p>{m.garantiaLead}</p>
+      <ul class="kmb-no">
+        {m.garantias.map((g) => (
+          <li>
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M6 6l12 12" />
+            </svg>
+            <span>{g}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="kmb-section" aria-labelledby="kmb-niveles-title">
+      <h2 id="kmb-niveles-title" class="mono kmb-kicker">
+        {m.nivelesTitulo}
+      </h2>
+      <p class="kmb-sub">{m.nivelesLead}</p>
+      {niveles.length === 0 ? (
+        <article class="kmb-card kmb-empty">
+          <span class="kmb-badge">{m.nivelesVacio.titulo}</span>
+          <p>{m.nivelesVacio.texto}</p>
+        </article>
+      ) : (
+        <div class="kmb-grid">
+          {niveles.map((n) => (
+            <article class="kmb-card">
+              <div class="kmb-card-top">
+                <h3>{n.nombre}</h3>
+                {n.estado && <span class="kmb-badge">{n.estado}</span>}
+              </div>
+              {n.precio && <p class="mono kmb-price">{n.precio}</p>}
+              {n.beneficios && n.beneficios.length > 0 && (
+                <ul class="kmb-list">
+                  {n.beneficios.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+
+    <section class="kmb-section" aria-labelledby="kmb-destino-title">
+      <h2 id="kmb-destino-title" class="mono kmb-kicker">
+        {m.destinoTitulo}
+      </h2>
+      <p class="kmb-sub">{m.destinoLead}</p>
+      <div class="kmb-grid kmb-grid-3">
+        {m.destino.map((d, i) => (
+          <article class="kmb-card">
+            <div class="kmb-card-top">
+              <svg
+                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                aria-hidden="true"
+                focusable="false"
+                set:html={icons[i]}
+              />
+            </div>
+            <h3>{d.titulo}</h3>
+            <p>{d.texto}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="kmb-cta" aria-labelledby="kmb-cta-title">
+      <div>
+        <h2 id="kmb-cta-title">Lo que debes saber</h2>
+        <p>{m.cierre}</p>
+        <p>{m.cta.texto}</p>
+      </div>
+      <a class="button primary" href={url('discord/')}>
+        {m.cta.boton} <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <div class="kmb-bottom">
+      <a class="text-link" href={url('actualizaciones/')}>
+        Ver las actualizaciones ↗
+      </a>
+    </div>
+  </div>
+</Base>

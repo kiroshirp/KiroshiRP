@@ -1,0 +1,226 @@
+/* Página /membresia/. Prefijo kmb- */
+.kmb {
+  display: grid;
+  gap: clamp(40px, 6vw, 80px);
+  padding-block: clamp(28px, 5vw, 64px) clamp(40px, 6vw, 80px);
+}
+.kmb h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  margin-bottom: 22px;
+}
+.kmb h2,
+.kmb h3 {
+  margin: 0;
+}
+.kmb-hero > p:not(.kmb-route) {
+  max-width: 62ch;
+}
+.kmb-route {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.kmb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  padding: 6px 12px;
+}
+.kmb-chip > span {
+  width: 7px;
+  height: 7px;
+  background: var(--yellow);
+  animation: kmb-pulse 2.4s ease-in-out infinite;
+}
+.kmb-lead {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+.kmb-actions {
+  margin-top: 30px;
+}
+.kmb-notice {
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px dashed var(--line);
+  border-left: 2px solid var(--yellow);
+  font-size: 0.95rem;
+}
+.kmb-guarantee {
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--yellow);
+  background: var(--panel);
+}
+.kmb-guarantee h2 {
+  margin-bottom: 12px;
+}
+.kmb-guarantee > p {
+  margin: 0 0 22px;
+  max-width: 62ch;
+}
+.kmb-no {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.kmb-no li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+.kmb-no svg,
+.kmb-card-top svg {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.kmb-no svg {
+  color: var(--yellow);
+}
+.kmb-kicker {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--yellow);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.kmb-sub {
+  margin: 0 0 24px;
+  max-width: 62ch;
+  color: var(--muted);
+}
+.kmb-badge {
+  align-self: flex-start;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  border: 1px solid #e8c96c55;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.kmb-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.kmb-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.kmb-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(20px, 2.4vw, 32px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  animation: kmb-in 0.6s ease both;
+}
+.kmb-card p {
+  margin: 0;
+}
+.kmb-empty {
+  border-style: dashed;
+}
+.kmb-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--yellow);
+}
+.kmb-card-top h3 {
+  color: var(--text);
+}
+.kmb-price {
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+}
+.kmb-list {
+  margin: 0;
+  padding-left: 1.2em;
+}
+.kmb-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--yellow);
+  background: var(--panel);
+}
+.kmb-cta > div {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+.kmb-cta p {
+  margin: 0 0 10px;
+  max-width: 60ch;
+}
+.kmb-cta h2 {
+  margin-bottom: 12px;
+}
+.kmb-bottom {
+  text-align: center;
+}
+.kmb-bottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+@keyframes kmb-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes kmb-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@media (max-width: 820px) {
+  .kmb-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .kmb-grid,
+  .kmb-grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .kmb-actions .button,
+  .kmb-cta .button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kmb-chip > span,
+  .kmb-card {
+    animation: none;
+  }
+}
