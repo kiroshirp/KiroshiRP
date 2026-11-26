@@ -707,3 +707,21 @@ textarea:focus-visible {
   height: 100%;
   background: var(--y);
 }
+
+/* Al cambiar de página la barra se queda fija y solo el contenido se funde. */
+@view-transition {
+  navigation: auto;
+}
+.top {
+  view-transition-name: top;
+}
+::view-transition-group(root) {
+  animation-duration: 0.12s;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

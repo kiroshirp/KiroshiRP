@@ -34,6 +34,20 @@ export function el(tag, text, cls) {
   if (cls) e.className = cls;
   return e;
 }
+// Memoria de la pestaña; si el navegador la bloquea, todo sigue funcionando sin ella.
+const recall = (k) => {
+  try {
+    return sessionStorage.getItem(k);
+  } catch {
+    return null;
+  }
+};
+const remember = (k, v) => {
+  try {
+    if (v == null || v === '') sessionStorage.removeItem(k);
+    else sessionStorage.setItem(k, String(v));
+  } catch {}
+};
 export const fmtDate = (v) =>
   v
     ? new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short' }).format(
@@ -89,20 +103,28 @@ export function mountNav() {
     } catch {}
     state.csrf = '';
     state.actor = undefined;
+    remember('krp-actor');
+    remember('krp-pend');
     location.href = '/admin/';
   });
   const back = el('a', '← Volver a la web', 'back');
   back.href = 'https://kiroshirp.pages.dev/';
   nav.append(who, out, back);
   nav.hidden = false;
-  // Insignia de candidaturas pendientes; los errores se ignoran.
+  // Insignia de pendientes: se pinta al instante con el último valor y se corrige al llegar el real.
+  const badge = (n) => {
+    nav.querySelector('.pend-badge')?.remove();
+    if (!n) return;
+    const b = el('a', n + ' pendiente' + (n === 1 ? '' : 's'), 'pend-badge');
+    b.href = '/admin/equipo/';
+    b.title = 'Candidaturas por revisar';
+    nav.prepend(b);
+  };
+  badge(Number(recall('krp-pend')) || 0);
   api('estadisticas?solo=pendientes')
     .then(({ pendientes }) => {
-      if (!pendientes) return;
-      const b = el('a', pendientes + ' pendiente' + (pendientes === 1 ? '' : 's'), 'pend-badge');
-      b.href = '/admin/equipo/';
-      b.title = 'Candidaturas por revisar';
-      nav.prepend(b);
+      remember('krp-pend', pendientes);
+      badge(pendientes);
     })
     .catch(() => {});
 }
@@ -131,15 +153,24 @@ export async function setupLogin() {
 }
 // Carga la sesión; en 401 se llama a onUnauth (por defecto, redirige al login).
 export async function start(init) {
+  // Con una sesión ya vista, la barra se pinta de inmediato y no parpadea al cambiar de página.
+  const seen = recall('krp-actor');
+  if (seen) {
+    state.actor = { name: seen };
+    mountNav();
+  }
   try {
     const s = await api('session');
     state.csrf = s.csrf;
     state.actor = s.actor ?? null;
   } catch {
+    remember('krp-actor');
+    document.getElementById('nav').hidden = true;
     if (document.getElementById('login-form')) await setupLogin();
     return false;
   }
-  mountNav();
+  remember('krp-actor', state.actor?.name);
+  if (!seen || seen !== state.actor?.name) mountNav();
   await init();
   return true;
 }
