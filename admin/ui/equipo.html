@@ -31,11 +31,17 @@
           <label for="fs"
             >Estado<select id="fs">
               <option value="">Todos</option>
-              <option value="pendiente">Pendiente</option>
+              <option value="pendiente" selected>Pendiente</option>
               <option value="aceptada">Aceptada</option>
               <option value="rechazada">Rechazada</option>
             </select></label
           >
+          <label for="fi"
+            >Estado interno<select id="fi">
+              <option value="">Todos</option>
+            </select></label
+          >
+          <label for="mine" class="chk"><input id="mine" type="checkbox" />Mías</label>
           <label for="ord"
             >Fecha<select id="ord">
               <option value="desc">Más recientes primero</option>
@@ -46,6 +52,21 @@
       </div>
       <p id="status" class="status" role="status">Cargando…</p>
       <div id="list" class="cands"></div>
+      <details class="tpl">
+        <summary>Plantillas de mensaje</summary>
+        <div class="body">
+          <p class="hint">
+            Hasta 10. Se ofrecen al aceptar o rechazar. {nombre} se sustituye por el nombre del
+            jugador.
+          </p>
+          <div id="tpl-rows"></div>
+          <div class="acts">
+            <button id="tpl-add" type="button">Añadir plantilla</button>
+            <button id="tpl-save" type="button" class="primary">Guardar plantillas</button>
+          </div>
+          <p id="tpl-status" class="status" role="status"></p>
+        </div>
+      </details>
     </main>
   </body>
 </html>

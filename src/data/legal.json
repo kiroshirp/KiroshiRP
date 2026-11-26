@@ -80,7 +80,7 @@
       {
         "title": "Registro de acciones del equipo",
         "paragraphs": [
-          "Cuando alguien del equipo usa el panel de administración (entrar, cambiar el estado de una candidatura, eliminar una cuenta, una candidatura o una solicitud de acceso) se anota quién lo hizo (su nombre e identificador de Discord, o el usuario compartido del panel), qué hizo, sobre qué cuenta (su identificador y su nombre de Discord) y cuándo.",
+          "Cuando alguien del equipo usa el panel de administración (entrar, cambiar el estado, el revisor o la nota de una candidatura, editar las plantillas de mensaje, eliminar una cuenta, una candidatura o una solicitud de acceso) se anota quién lo hizo (su nombre e identificador de Discord, o el usuario compartido del panel), qué hizo, sobre qué cuenta (su identificador y su nombre de Discord) y cuándo.",
           "Solo lo ve el equipo de administración y se conserva 180 días. Sirve para saber quién hizo cada cambio y poder corregir errores o abusos."
         ]
       },
@@ -89,6 +89,7 @@
         "paragraphs": [
           "Si envías una solicitud al equipo, cuando cambie su estado (aceptada o no aceptada) recibirás un mensaje directo de Discord. Si tienes los mensajes directos cerrados, no se envía.",
           "El equipo puede anotar notas internas sobre una cuenta para organizar su trabajo; no se incluyen en la descarga de tus datos, pero se borran cuando eliminas la cuenta.",
+          "Sobre tu solicitud para unirte al equipo, el equipo también puede asignar un revisor, un estado interno (en revisión, entrevista o en espera) y una nota. Solo los ve el equipo y se borran al eliminar la solicitud o la cuenta.",
           "Cada día se guarda una copia de seguridad de los datos dentro del mismo servicio, y se conservan las 7 últimas. Al eliminar tu cuenta desaparece de los datos activos, y de las copias a más tardar a los 7 días.",
           "Desde Mi cuenta puedes descargar todos tus datos en un archivo o eliminarlos cuando quieras."
         ]

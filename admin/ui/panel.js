@@ -44,6 +44,7 @@ const links = [
   ['/admin/', 'Usuarios'],
   ['/admin/solicitudes/', 'Solicitudes de acceso'],
   ['/admin/equipo/', 'Equipo'],
+  ['/admin/estadisticas/', 'Estadísticas'],
   ['/admin/registro/', 'Registro'],
 ];
 export function mountNav() {
@@ -94,6 +95,16 @@ export function mountNav() {
   back.href = 'https://kiroshirp.pages.dev/';
   nav.append(who, out, back);
   nav.hidden = false;
+  // Insignia de candidaturas pendientes; los errores se ignoran.
+  api('estadisticas?solo=pendientes')
+    .then(({ pendientes }) => {
+      if (!pendientes) return;
+      const b = el('a', pendientes + ' pendiente' + (pendientes === 1 ? '' : 's'), 'pend-badge');
+      b.href = '/admin/equipo/';
+      b.title = 'Candidaturas por revisar';
+      nav.prepend(b);
+    })
+    .catch(() => {});
 }
 // Pantalla de acceso: qué formas de entrar están activas y el aviso de cuenta no autorizada.
 export async function setupLogin() {

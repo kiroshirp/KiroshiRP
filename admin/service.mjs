@@ -5,6 +5,8 @@ import { findSession, login, logout } from './api/session.mjs';
 import { solicitudes } from './api/solicitudes.mjs';
 import { equipo } from './api/equipo.mjs';
 import { usuarios } from './api/usuarios.mjs';
+import { plantillas } from './api/plantillas.mjs';
+import { estadisticas } from './api/estadisticas.mjs';
 import { registro } from './api/registro.mjs';
 import { authMethods } from './auth.mjs';
 import { notifyStatus } from './notify.mjs';
@@ -98,9 +100,13 @@ export function createService({ env, store, assets, local = false, fetcher = fet
             data,
             store,
             actor,
-            notify: (id, status) => notifyStatus({ env, fetcher }, id, status),
+            notify: (id, status, text) => notifyStatus({ env, fetcher }, id, status, text),
           }),
         );
+      if (path === '/admin/api/plantillas')
+        return finish(await plantillas({ request, data, store, actor }));
+      if (path === '/admin/api/estadisticas' && request.method === 'GET')
+        return finish(await estadisticas({ request, store }));
       if (path === '/admin/api/usuarios')
         return finish(await usuarios({ request, data, store, actor }));
       if (path === '/admin/api/registro' && request.method === 'GET')

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Estadísticas — KiroshiRP</title>
+    <link rel="icon" type="image/png" href="/admin/favicon.png" />
+    <link rel="stylesheet" href="/admin/fonts.css" />
+    <link rel="stylesheet" href="/admin/style.css" />
+    <script type="module" src="/admin/estadisticas.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header class="top">
+      <a class="brand" href="/admin/"
+        ><img src="/admin/brand.webp" alt="" width="87" height="29" />KIROSHIRP<small
+          >ADMINISTRACIÓN</small
+        ></a
+      >
+      <nav id="nav" class="nav" aria-label="Principal" hidden></nav>
+    </header>
+    <main id="main">
+      <div class="head">
+        <div>
+          <span class="eyebrow">ESTADÍSTICAS</span>
+          <h1>Estadísticas</h1>
+          <p>Altas de los últimos 30 días y recorrido de «Tu camino».</p>
+        </div>
+      </div>
+      <p id="status" class="status" role="status">Cargando…</p>
+      <section aria-labelledby="h-altas" class="stat-card">
+        <h2 id="h-altas">Altas por día</h2>
+        <div
+          id="bars"
+          class="bars"
+          role="img"
+          aria-label="Gráfico de barras de altas por día"
+        ></div>
+        <details>
+          <summary>Ver como tabla</summary>
+          <div class="wrap" tabindex="0" role="region" aria-label="Altas por día">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Altas</th>
+                </tr>
+              </thead>
+              <tbody id="days"></tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+      <section aria-labelledby="h-camino" class="stat-card">
+        <h2 id="h-camino">Embudo de «Tu camino»</h2>
+        <ol id="funnel" class="funnel"></ol>
+      </section>
+    </main>
+  </body>
+</html>
